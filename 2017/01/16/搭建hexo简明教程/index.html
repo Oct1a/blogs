@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>搭建hexo简明教程 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckpks42bc006h6gdd3m3jd2gw" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      搭建hexo简明教程
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2017-01-15T23:23:25.000Z" itemprop="datePublished">2017-01-16</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><img src="http://cdn.dllca.cn/20180726230337.png"></p>
+<span id="more"></span>
+<h2 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h2><p><a target="_blank" rel="noopener" href="https://git-scm.com/download">Git</a>：版本控制器</p>
+<p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/">Node</a>：提供服务器端JavaScript开发环境</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/">GitHub</a>：需注册一个账号</p>
+<p>在这里只提供下载链接，安装过程基本就是下一步了。</p>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><h3 id="1-安装hexo"><a href="#1-安装hexo" class="headerlink" title="1 安装hexo"></a>1 安装hexo</h3><!--more-->
+<p>安装好上述工具后，我们开始安装hexo，首先打开git,鼠标右键–&gt;git bash here</p>
+<p><img src="http://cdn.dllca.cn/20180630181355.png" alt="git bush"></p>
+<p>打开效果如下图：<br><img src="http://cdn.dllca.cn/20180630181600.png" alt="打开Git.png"></p>
+<p>然后执行下面的命令<br><code>$ npm install -g hexo-cli</code>，全局安装hexo的脚手架，安装以后我们就可以全局使用hexo这个命令了。安装成功后执行下面命令<code>hexo -v</code>，就可以看见如下效果。</p>
+<p><img src="http://cdn.dllca.cn/20180630181609.png" alt="hexo安装成功.png"></p>
+<p>接着执行下面命令<code>npm install hexo --save</code></p>
+<p>然后新建一个文件夹比如hexo，在该文件夹下打开Git(即Git bash here)，执行下面命令</p>
+<pre><code>$ hexo init
+$ npm install
+</code></pre>
+<p>不出问题的话，该文件夹下面会新增这些文件。</p>
+<p><img src="http://cdn.dllca.cn/20180630181619.png" alt="hexo_init.png"></p>
+<h3 id="3-安装hexo服务器"><a href="#3-安装hexo服务器" class="headerlink" title="3 安装hexo服务器"></a>3 安装hexo服务器</h3><p>Hexo 3.0 把服务器独立成了个别模块，您必须先安装 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-server">hexo-server</a> 才能使用。<br>执行命令<code>$ npm install hexo-server --save</code>。<br>这样安装好hexo服务器以后，我们就可以启动服务器了。<br>执行命令<code>$ hexo server</code>，然后在浏览器输入网址 <strong><a target="_blank" rel="noopener" href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a></strong> ,就可以正常访问了。<br>效果图如下：</p>
+<p><img src="http://cdn.dllca.cn/20180630181624.png" alt="本地效果.png"></p>
+<p>OK！现在本地已经没问题了，接下来就是要把它部署到远程服务器上了。</p>
+<h3 id="3-建立GitHub-pages"><a href="#3-建立GitHub-pages" class="headerlink" title="3 建立GitHub pages"></a>3 建立GitHub pages</h3><p>新建一个github仓库</p>
+<p><img src="http://cdn.dllca.cn/20180630181629.png" alt="new_repository.png"></p>
+<p><img src="http://cdn.dllca.cn/20180630181637.png" alt="GitHub_pages建立.png"></p>
+<p>这个仓库比较特殊，它要按照如下格式进行命名：你的GitHub用户昵称.github.io。</p>
+<p>然后点击settings选项，向下翻到Git Pages选项</p>
+<p><img src="http://cdn.dllca.cn/20180630181652.png" alt="选择主题后.png"></p>
+<p>上面有一个提示信息</p>
+<blockquote>
+<p>GitHub Pages is currently disabled. You must first add content to your repository before you can publish a GitHub Pages site</p>
+</blockquote>
+<p>我们此时访问<a target="_blank" rel="noopener" href="https://username.github.io/">https://username.github.io/</a> 是会报404的，因为没有内容，我们可以点击下面的Choose a theme按钮，选择一个主题后，在访问<a target="_blank" rel="noopener" href="https://usernames.github.io/">https://usernames.github.io/</a> ，就可以了。此时看看GitHub Pages选项已经变成</p>
+<p><img src="http://cdn.dllca.cn/20180630181657.png" alt="img"></p>
+<p>上面有个提示信息</p>
+<blockquote>
+<p>Your GitHub Pages site is currently being built from the master<br>branch</p>
+</blockquote>
+<p>OK啦</p>
+<h3 id="4-配置SSH公钥"><a href="#4-配置SSH公钥" class="headerlink" title="4 配置SSH公钥"></a>4 配置SSH公钥</h3><p>配置Github的SSH密钥可以让本地git项目与远程的github建立联系，让我们在本地写了代码之后直接通过git操作就可以实现本地代码库与Github代码库同步。操作如下：</p>
+<p>第一步、看看是否存在SSH密钥(keys)<br>首先，我们需要看看是否看看本机是否存在SSH keys,打开Git Bash,并运行:</p>
+<pre><code>$ cd ~/. ssh
+</code></pre>
+<p>检查你本机用户home目录下是否存在.ssh目录<br>如果，不存在此目录，则进行第二步操作，否则，你本机已经存在ssh公钥和私钥，可以略过第二步，直接进入第三步操作。</p>
+<p>第二步、创建一对新的SSH密钥(keys)</p>
+<pre><code>$ssh-keygen -t rsa -C &quot;your_email@example.com&quot; #这将按照你提供的邮箱地址，创建一对密钥
+</code></pre>
+<p>直接回车，则将密钥按默认文件进行存储。此时也可以输入特定的文件名，比如<code>/c/Users/you/.ssh/github_rsa</code><br>接着，根据提示，你需要输入密码和确认密码,在这里我们直接enter，不用输入密码。</p>
+<pre><code>Enter passphrase (empty for no passphrase): [Type a passphrase]
+Enter same passphrase again: [Type passphrase again]
+</code></pre>
+<p>输入完成之后，屏幕会显示如下信息：</p>
+<pre><code>Your identification has been saved in /c/Users/you/.ssh/id_rsa.Your public key
+has been saved in /c/Users/you/.ssh/id_rsa.pub.The key fingerprint
+is:01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
+</code></pre>
+<p>第三步、在GitHub账户中添加你的公钥<br>运行如下命令，将公钥的内容复制到系统粘贴板(clipboard)中。</p>
+<pre><code>clip &lt; ~/.ssh/id_rsa.pub
+</code></pre>
+<p>接着：<br>登陆GitHub,进入你的Account Settings.</p>
+<p>第四步、测试<br>可以输入下面的命令，看看设置是否成功，<a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;</a>的部分不要修改：</p>
+<pre><code>$ ssh -T git@github.com
+</code></pre>
+<p>成功后你会看到</p>
+<pre><code>Hi username! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<p>第五步、设置用户信息<br>现在你已经可以通过SSH链接到GitHub了，还有一些个人信息需要完善的。 Git会根据用户的名字和邮箱来记录提交。GitHub也是用这些信息来做权限的处理，输入下面的代码进行个人信息的设置，把名称和邮箱替换成你自己的。</p>
+<pre><code>$ git config --global user.name &quot;username&quot;//用户名
+$ git config --global user.email &quot;useremail&quot;//填写自己的邮箱
+</code></pre>
+<h3 id="5-将本地文件同步至GitHub"><a href="#5-将本地文件同步至GitHub" class="headerlink" title="5 将本地文件同步至GitHub"></a>5 将本地文件同步至GitHub</h3><p><img src="http://cdn.dllca.cn/20180630181703.png" alt="clone_https.png"></p>
+<p>到新建的仓库下面复制HTTPS地址，然后打开本地hexo文件夹下的</p>
+<p><img src="http://cdn.dllca.cn/20180630181712.jpg" alt="_config.jpg"></p>
+<p>填入以下信息：<br><img src="http://cdn.dllca.cn/20180630182527.png" alt="img"></p>
+<p>然后在命令窗口执行下面命令,安装相关部署插件</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre>
+<p>安装完成后，执行</p>
+<pre><code>hexo g
+hexo d
+</code></pre>
+<p>或者</p>
+<pre><code>hexo d -g
+</code></pre>
+<p>此时会让你输入GitHub的账号和密码，输入后在浏览器中输入 <a target="_blank" rel="noopener" href="https://small-macro.github.io/">https://small-macro.github.io/</a> 应该就可以访问了。</p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>首先去<a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo皮肤网站</a>,选择一款进入它的GitHub地址然后将clone的文件移动到<strong>themes</strong>文件夹下。然后修改**_config.yml**文件中的theme为你所选择的主题的名称即可。然后执行</p>
+<pre><code>hexo g
+hexo s
+</code></pre>
+<p>现在本地看看主题皮肤是否已经更换过来，然后执行</p>
+<pre><code>hexo d -g
+</code></pre>
+<p>同步至GitHub，刷新即可</p>
+<h2 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h2><p>首先在万网上购买自己的域名，然后进入管理界面</p>
+<p><img src="http://cdn.dllca.cn/20180630182540.png" alt="域名解析.jpg"></p>
+<p><img src="http://cdn.dllca.cn/20180630182544.png" alt="域名解析内容.jpg"></p>
+<p>然后在source文件夹下建立一个CNAME文件(没有后缀名)</p>
+<p><img src="http://cdn.dllca.cn/20180630182548.png" alt="CNAME文件.jpg"></p>
+<p>然后执行</p>
+<p>CNAME:是提供别名解析，就是说可以从一个域名解析绑定到另一个域名。</p>
+<p>例如：<code>https://Small-Macro.github.io</code> 解析绑定到 <code>http://mini-fool.xyz</code>。<br>其中主机记录<strong>www</strong>代表一个二级域名此时输入<code>http://www.mini-fool.xyz</code>是可以正常访问的。</p>
+<p>如果主机记录是**@**代表直接输入<code>http://mini-fool.xyz</code>是可以访问的<br>一般情况下这两种方式我们都会添加，所以你在浏览器地址栏中输入<code>http://mini-fool.xyz</code>和<code>http://www.mini-fool.xyz</code>跳到是同一个页面。</p>
+<p>A:提供的是一种IP地址解析到你所买的域名的解析方式。例如：<code>151.101.24.133</code> 解析到 <code>mini-fool.xyz</code></p>
+<p>在这里我用的是阿里云自带的DNS服务器，当然你也可以使用其他第三方DNS服务器。例如：<a target="_blank" rel="noopener" href="https://www.dnspod.cn/">dnspod</a>,添加解析记录的方式一样<br>但是这里要记得在你购买域名的网站上更改默认的DNS服务商，以下以万网（域名提供商）和dnspod（域名解析服务商）为例</p>
+<p>首先进入控制台进入域名管理，找到相应域名点击<strong>管理</strong></p>
+<p>点击修<strong>改DNS</strong></p>
+<p><img src="http://cdn.dllca.cn/20180630182618.png" alt="修改DNS服务器.jpg"></p>
+<p>将以下内容复制粘贴进下图的内容框中保存，即可</p>
+<pre><code>f1g1ns1.dnspod.net
+f1g1ns2.dnspod.net
+</code></pre>
+<pre><code>hexo d -g
+</code></pre>
+<p>同步至GitHub即可，至此hexo博客搭建基本就大功告成。下面推荐一个工具<a target="_blank" rel="noopener" href="https://github.com/nihgwu/hexo-hey">hexo-hey</a></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/ryaneLee/blog/638440">小白独立搭建博客–Github Pages和Hexo简明教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/index.html">hexo中文文档</a></p>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p><img src="http://cdn.dllca.cn/20180630182627.jpg" alt="问题01.jpg"></p>
+<p>解决办法:<br><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000003734223">参考链接</a><br><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/1503">参考链接</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>如果你只是想搭建一个自己的博客，绑定自己的域名写写文章，不想自己动手添加其他功能（评论、分享、搜索），那么选择一款好的皮肤就很重要，因为有的皮肤早已经帮你集成好了，只需要动手简单的改改配置文件就行，在这里给大家推荐一款皮肤<br>可能样式有些过于花哨，不过这些都可以自己调，功能很全，文档也比较全。<a target="_blank" rel="noopener" href="https://github.com/MOxFIVE/hexo-theme-yelee">github地址</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/2017/01/17/Markdown%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Markdown语法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/15/%E9%9D%92%E6%98%A5%E4%BB%A3%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">青春代码</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=搭建hexo简明教程 - Oct1a&u=http://example.com/2017/01/16/%E6%90%AD%E5%BB%BAhexo%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=搭建hexo简明教程 - Oct1a&url=http://example.com/2017/01/16/%E6%90%AD%E5%BB%BAhexo%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Anaconda/">Anaconda</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Html/">Html</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Django/">Django</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Django/Ubuntu/">Ubuntu</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Esc/">Esc</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Esc/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Esc/Linux/Ubuntu/">Ubuntu</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Esc/Linux/Ubuntu/Python/">Python</a></li></ul></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Html/">Html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/">Javascript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Javascript/Html/">Html</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Manjaro/">Manjaro</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/Linux/Manjaro/">Manjaro</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Ubuntu/">Ubuntu</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows10/">Windows10</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Yolo/">Yolo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA/">手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/">自动化</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96/%E6%B5%8B%E8%AF%95/">测试</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BF%86%E7%82%B9%E6%BB%B4/">记忆点滴</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MusicPlayer/" rel="tag">MusicPlayer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/console-log/" rel="tag">console.log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows10/" rel="tag">windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yolov3/" rel="tag">yolov3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1/" rel="tag">今日头条</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%8D%E5%AE%89%E8%A3%85/" rel="tag">免安装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB/" rel="tag">分类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8E%E4%B8%BA/" rel="tag">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E6%A0%87/" rel="tag">图标</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B0%94/" rel="tag">天气</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%87%E7%AD%BE/" rel="tag">标签</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%A8%E5%86%8C%E8%A1%A8/" rel="tag">注册表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BF%80%E6%B4%BB%E7%B3%BB%E7%BB%9F/" rel="tag">激活系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/" rel="tag">练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/" rel="tag">编译安装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/" rel="tag">自动回复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E8%8C%83/" rel="tag">规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%A3%E9%94%81%E7%A0%81/" rel="tag">解锁码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8D%E8%A3%85/" rel="tag">重装</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA/" rel="tag">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%81%AB%E5%A2%99/" rel="tag">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%92%E6%98%A5%E4%BB%A3%E7%A0%81/" rel="tag">青春代码</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2021/06/02/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">前端知识点记录</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/02/%E5%88%9D%E8%AF%86Matplotlib/">Matplotlib 用法与介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2021/06/02/NodejsAndToken/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/22/Matplotlib-%E5%BA%93%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">Matplotlib 库常用函数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/01/Selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">Selenium自动化测试</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/Oct1a" target="_blank">Oct1a</a>
+    </div>
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>
