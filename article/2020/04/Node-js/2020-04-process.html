@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-process | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvoe009iogddasmu0zf0" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-process
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>process是node的全局模块，作用比较直观。可以通过它来获得node进程相关的信息，比如运行node程序时的命令行参数。或者设置进程相关信息，比如设置环境变量。</p>
+<span id="more"></span>
+<h2 id="环境变量：process-env"><a href="#环境变量：process-env" class="headerlink" title="环境变量：process.env"></a>环境变量：process.env</h2><p>使用频率很高，node服务运行时，时常会判断当前服务运行的环境，如下所示</p>
+<pre><code class="js">if(process.env.NODE_ENV === &#39;production&#39;)&#123;
+    console.log(&#39;生产环境&#39;);
+&#125;else&#123;
+    console.log(&#39;非生产环境&#39;);
+&#125;
+</code></pre>
+<p>运行命令 <code>NODE_ENV=production node env.js</code>，输出如下</p>
+<pre><code class="bash">非生产环境
+</code></pre>
+<h2 id="异步：process-nextTick-fn"><a href="#异步：process-nextTick-fn" class="headerlink" title="异步：process.nextTick(fn)"></a>异步：process.nextTick(fn)</h2><p>使用频率同样很高，通常用在异步的场景，来个简单的栗子：</p>
+<pre><code class="js">console.log(&#39;海贼王&#39;);
+process.nextTick(function()&#123;
+    console.log(&#39;火影忍者&#39;);
+&#125;);
+console.log(&#39;死神&#39;);
+
+// 输出如下
+// 海贼王
+// 死神
+// 火影忍者
+</code></pre>
+<p>process.nextTick(fn) 咋看跟 setTimeout(fn, 0) 很像，但实际有实现及性能上的差异，我们先记住几个点：</p>
+<ul>
+<li>process.nextTick(fn) 将 fn 放到 node 事件循环的 下一个tick 里；</li>
+<li>process.nextTick(fn) 比 setTimetout(fn, 0) 性能高；</li>
+</ul>
+<p>这里不打算深入讨论，感兴趣的可以点击<a target="_blank" rel="noopener" href="https://cnodejs.org/topic/4f16442ccae1f4aa2700109b">这里</a>进行了解。</p>
+<h2 id="获取命令行参数：process-argv"><a href="#获取命令行参数：process-argv" class="headerlink" title="获取命令行参数：process.argv"></a>获取命令行参数：process.argv</h2><p>process.argv 返回一个数组，数组元素分别如下：</p>
+<ul>
+<li>元素1：node</li>
+<li>元素2：可执行文件的绝对路径</li>
+<li>元素x：其他，比如参数等</li>
+</ul>
+<pre><code class="js">// print process.argv
+process.argv.forEach(function(val, index, array) &#123;
+  console.log(&#39;参数&#39; + index + &#39;: &#39; + val);
+&#125;);
+</code></pre>
+<p>运行命令 <code>NODE_ENV=dev node argv.js --env production</code>，输出如下。（不包含环境变量）</p>
+<pre><code class="bash">参数0: /Users/a/.nvm/versions/node/v6.1.0/bin/node
+参数1: /Users/a/Documents/git-code/nodejs-learning-guide/examples/2016.11.22-node-process/argv.js
+参数2: --env
+参数3: production
+</code></pre>
+<h2 id="获取node-specific参数：process-execArgv"><a href="#获取node-specific参数：process-execArgv" class="headerlink" title="获取node specific参数：process.execArgv"></a>获取node specific参数：process.execArgv</h2><p>跟 process.argv 看着像，但差异很大。它会返回 node specific 的参数（也就是运行node程序特有的参数啦，比如 –harmony）。这部分参数不会出现在 process.argv 里。</p>
+<p>我们来看个例子，相当直观。输入命令 <code>node --harmony execArgv.js --nick chyingp</code>， execArgv.js 代码如下：</p>
+<pre><code class="js">process.execArgv.forEach(function(val, index, array) &#123;
+  console.log(index + &#39;: &#39; + val);
+&#125;);
+// 输出：
+// 0: --harmony
+
+process.argv.forEach(function(val, index, array) &#123;
+  console.log(index + &#39;: &#39; + val);
+&#125;);
+// 输出：
+// 0: /Users/a/.nvm/versions/node/v6.1.0/bin/node
+// 1: /Users/a/Documents/git-code/nodejs-learning-guide/examples/2016.11.22-node-process/execArgv.js
+// 2: --nick
+// 3: chyingp
+</code></pre>
+<h2 id="当前工作路径：process-cwd-vs-process-chdir-directory"><a href="#当前工作路径：process-cwd-vs-process-chdir-directory" class="headerlink" title="当前工作路径：process.cwd() vs process.chdir(directory)"></a>当前工作路径：process.cwd() vs process.chdir(directory)</h2><ul>
+<li>process.cwd()：返回当前工作路径</li>
+<li>process.chdir(directory)：切换当前工作路径</li>
+</ul>
+<p>工作路径的用途不用过多解释了，直接上代码</p>
+<pre><code class="js">console.log(&#39;Starting directory: &#39; + process.cwd());
+try &#123;
+  process.chdir(&#39;/tmp&#39;);
+  console.log(&#39;New directory: &#39; + process.cwd());
+&#125;
+catch (err) &#123;
+  console.log(&#39;chdir: &#39; + err);
+&#125;
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="bash">Starting directory: /Users/a/Documents/git-code/nodejs-learning-guide/examples/2016.11.22-node-process
+New directory: /private/tmp
+</code></pre>
+<h2 id="IPC相关"><a href="#IPC相关" class="headerlink" title="IPC相关"></a>IPC相关</h2><ul>
+<li>process.connected：如果当前进程是子进程，且与父进程之间通过IPC通道连接着，则为true；</li>
+<li>process.disconnect()：断开与父进程之间的IPC通道，此时会将 process.connected 置为false；</li>
+</ul>
+<p>首先是 connected.js，通过 fork 创建子进程（父子进程之间创建了IPC通道）</p>
+<pre><code class="js">var child_process = require(&#39;child_process&#39;);
+
+child_process.fork(&#39;./connectedChild.js&#39;, &#123;
+  stdio: &#39;inherit&#39;
+&#125;);
+</code></pre>
+<p>然后，在 connectedChild.js 里面。</p>
+<pre><code class="js">console.log( &#39;process.connected: &#39; + process.connected );
+process.disconnect();
+console.log( &#39;process.connected: &#39; + process.connected );
+
+// 输出：
+// process.connected: true
+// process.connected: false
+</code></pre>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>process.config：跟node的编译配置参数有关</p>
+<h2 id="标准输入-标准输出-标准错误输出：process-stdin、process-stdout"><a href="#标准输入-标准输出-标准错误输出：process-stdin、process-stdout" class="headerlink" title="标准输入/标准输出/标准错误输出：process.stdin、process.stdout"></a>标准输入/标准输出/标准错误输出：process.stdin、process.stdout</h2><p>process.stdin、process.stdout、process.stderr 分别代表进程的标准输入、标准输出、标准错误输出。看官网的例子</p>
+<pre><code class="js">process.stdin.setEncoding(&#39;utf8&#39;);
+
+process.stdin.on(&#39;readable&#39;, () =&gt; &#123;
+  var chunk = process.stdin.read();
+  if (chunk !== null) &#123;
+    process.stdout.write(`data: $&#123;chunk&#125;`);
+  &#125;
+&#125;);
+
+process.stdin.on(&#39;end&#39;, () =&gt; &#123;
+  process.stdout.write(&#39;end&#39;);
+&#125;);
+</code></pre>
+<p>执行程序，可以看到，程序通过 process.stdin 读取用户输入的同时，通过 process.stdout 将内容输出到控制台</p>
+<pre><code class="bash">hello
+data: hello
+world
+data: world
+</code></pre>
+<p>process.stderr也差不多，读者可以自己试下。</p>
+<h2 id="用户组-用户-相关"><a href="#用户组-用户-相关" class="headerlink" title="用户组/用户 相关"></a>用户组/用户 相关</h2><p>process.seteuid(id)：<br>process.geteuid()：获得当前用户的id。（POSIX平台上才有效）</p>
+<p>process.getgid(id)<br>process.getgid()：获得当前群组的id。（POSIX平台上才有效，群组、有效群组 的区别，请自行谷歌）</p>
+<p>process.setegid(id)<br>process.getegid()：获得当前有效群组的id。（POSIX平台上才有效）</p>
+<p>process.setroups(groups)：<br>process.getgroups()：获得附加群组的id。（POSIX平台上才有效，</p>
+<p>process.setgroups(groups)：<br>process.setgroups(groups)：</p>
+<p>process.initgroups(user, extra_group)：</p>
+<h2 id="当前进程信息"><a href="#当前进程信息" class="headerlink" title="当前进程信息"></a>当前进程信息</h2><ul>
+<li>process.pid：返回进程id。</li>
+<li>process.title：可以用它来修改进程的名字，当你用<code>ps</code>命令，同时有多个node进程在跑的时候，作用就出来了。</li>
+</ul>
+<h2 id="运行情况-资源占用情况"><a href="#运行情况-资源占用情况" class="headerlink" title="运行情况/资源占用情况"></a>运行情况/资源占用情况</h2><ul>
+<li>process.uptime()：当前node进程已经运行了多长时间（单位是秒）。</li>
+<li>process.memoryUsage()：返回进程占用的内存，单位为字节。输出内容大致如下：</li>
+</ul>
+<pre><code class="js">&#123;
+    rss: 19181568,
+    heapTotal: 8384512, // V8占用的内容
+    heapUsed: 4218408 // V8实际使用了的内存
+&#125;
+</code></pre>
+<ul>
+<li>process.cpuUsage([previousValue])：CPU使用时间耗时，单位为毫秒。user表示用户程序代码运行占用的时间，system表示系统占用时间。如果当前进程占用多个内核来执行任务，那么数值会比实际感知的要大。官方例子如下：</li>
+</ul>
+<pre><code class="js">const startUsage = process.cpuUsage();
+// &#123; user: 38579, system: 6986 &#125;
+
+// spin the CPU for 500 milliseconds
+const now = Date.now();
+while (Date.now() - now &lt; 500);
+
+console.log(process.cpuUsage(startUsage));
+// &#123; user: 514883, system: 11226 &#125;
+</code></pre>
+<ul>
+<li>process.hrtime()：一般用于做性能基准测试。返回一个数组，数组里的值为 [[seconds, nanoseconds] （1秒等10的九次方毫微秒）。<br>注意，这里返回的值，是相对于过去一个随机的时间，所以本身没什么意义。仅当你将上一次调用返回的值做为参数传入，才有实际意义。</li>
+</ul>
+<p>把官网的例子稍做修改：</p>
+<pre><code class="js">var time = process.hrtime();
+
+setInterval(() =&gt; &#123;
+  var diff = process.hrtime(time);
+
+  console.log(`Benchmark took $&#123;diff[0] * 1e9 + diff[1]&#125; nanoseconds`);
+&#125;, 1000);
+</code></pre>
+<p>输出大概如下：</p>
+<pre><code class="bash">Benchmark took 1006117293 nanoseconds
+Benchmark took 2049182207 nanoseconds
+Benchmark took 3052562935 nanoseconds
+Benchmark took 4053410161 nanoseconds
+Benchmark took 5056050224 nanoseconds
+</code></pre>
+<h2 id="node可执行程序相关信息"><a href="#node可执行程序相关信息" class="headerlink" title="node可执行程序相关信息"></a>node可执行程序相关信息</h2><ol>
+<li>process.version：返回当前node的版本，比如’v6.1.0’。</li>
+<li>process.versions：返回node的版本，以及依赖库的版本，如下所示。</li>
+</ol>
+<pre><code class="js">&#123; http_parser: &#39;2.7.0&#39;,
+  node: &#39;6.1.0&#39;,
+  v8: &#39;5.0.71.35&#39;,
+  uv: &#39;1.9.0&#39;,
+  zlib: &#39;1.2.8&#39;,
+  ares: &#39;1.10.1-DEV&#39;,
+  icu: &#39;56.1&#39;,
+  modules: &#39;48&#39;,
+  openssl: &#39;1.0.2h&#39; &#125;
+</code></pre>
+<ol start="3">
+<li>process.release：返回当前node发行版本的相关信息，大部分时候不会用到。具体字段含义可以看<a target="_blank" rel="noopener" href="https://nodejs.org/api/process.html#process_process_release">这里</a>。</li>
+</ol>
+<pre><code class="js">&#123;
+  name: &#39;node&#39;,
+  lts: &#39;Argon&#39;,
+  sourceUrl: &#39;https://nodejs.org/download/release/v4.4.5/node-v4.4.5.tar.gz&#39;,
+  headersUrl: &#39;https://nodejs.org/download/release/v4.4.5/node-v4.4.5-headers.tar.gz&#39;,
+  libUrl: &#39;https://nodejs.org/download/release/v4.4.5/win-x64/node.lib&#39;
+&#125;
+</code></pre>
+<ol start="4">
+<li>process.config：返回当前 node版本 编译时的参数，同样很少会用到，一般用来查问题。</li>
+<li>process.execPath：node可执行程序的绝对路径，比如 ‘/usr/local/bin/node’</li>
+</ol>
+<h2 id="进程运行所在环境"><a href="#进程运行所在环境" class="headerlink" title="进程运行所在环境"></a>进程运行所在环境</h2><ul>
+<li>process.arch：返回当前系统的处理器架构（字符串），比如’arm’, ‘ia32’, or ‘x64’。</li>
+<li>process.platform：返回关于平台描述的字符串，比如 darwin、win32 等。</li>
+</ul>
+<h2 id="警告信息-process-emitWarning-warning"><a href="#警告信息-process-emitWarning-warning" class="headerlink" title="警告信息:process.emitWarning(warning);"></a>警告信息:process.emitWarning(warning);</h2><p>v6.0.0新增的接口，可以用来抛出警告信息。最简单的例子如下，只有警告信息</p>
+<pre><code class="js">process.emitWarning(&#39;Something happened!&#39;);
+// (node:50215) Warning: Something happened!
+</code></pre>
+<p>可以给警告信息加个名字，便于分类</p>
+<pre><code class="js">process.emitWarning(&#39;Something Happened!&#39;, &#39;CustomWarning&#39;);
+// (node:50252) CustomWarning: Something Happened!
+</code></pre>
+<p>可以对其进行监听</p>
+<pre><code class="js">process.emitWarning(&#39;Something Happened!&#39;, &#39;CustomWarning&#39;);
+
+process.on(&#39;warning&#39;, (warning) =&gt; &#123;
+  console.warn(warning.name);
+  console.warn(warning.message);
+  console.warn(warning.stack);
+&#125;);
+
+/*
+(node:50314) CustomWarning: Something Happened!
+CustomWarning
+Something Happened!
+CustomWarning: Something Happened!
+    at Object.&lt;anonymous&gt; (/Users/a/Documents/git-code/nodejs-learning-guide/examples/2016.11.22-node-process/emitWarning.js:3:9)
+    at Module._compile (module.js:541:32)
+    at Object.Module._extensions..js (module.js:550:10)
+    at Module.load (module.js:456:32)
+    at tryModuleLoad (module.js:415:12)
+    at Function.Module._load (module.js:407:3)
+    at Function.Module.runMain (module.js:575:10)
+    at startup (node.js:160:18)
+    at node.js:445:3
+*/
+</code></pre>
+<p>也可以直接给个Error对象</p>
+<pre><code class="js">const myWarning = new Error(&#39;Warning! Something happened!&#39;);
+myWarning.name = &#39;CustomWarning&#39;;
+
+process.emitWarning(myWarning);
+</code></pre>
+<h2 id="向进程发送信号：process-kill-pid-signal"><a href="#向进程发送信号：process-kill-pid-signal" class="headerlink" title="向进程发送信号：process.kill(pid, signal)"></a>向进程发送信号：process.kill(pid, signal)</h2><p>process.kill() 这个方法名可能会让初学者感到困惑，其实它并不是用来杀死进程的，而是用来向进程发送信号。举个例子：</p>
+<pre><code class="js">console.log(&#39;hello&#39;);
+
+process.kill(process.pid, &#39;SIGHUP&#39;);
+
+console.log(&#39;world&#39;);
+</code></pre>
+<p>输出如下，可以看到，最后一行代码并没有执行，因为向当前进程发送 SIGHUP 信号，进程退出所致。</p>
+<pre><code class="bash">hello
+[1]    50856 hangup     node kill.js
+</code></pre>
+<p>可以通过监听 SIGHUP 事件，来阻止它的默认行为。</p>
+<pre><code class="js">process.on(&#39;SIGHUP&#39;, () =&gt; &#123;
+  console.log(&#39;Got SIGHUP signal.&#39;);
+&#125;);
+
+console.log(&#39;hello&#39;);
+
+process.kill(process.pid, &#39;SIGHUP&#39;);
+
+console.log(&#39;world&#39;);
+</code></pre>
+<p>测试结果比较意外，输出如下：（osx 10.11.4），SIGHUP 事件回调里的内容并没有输出。</p>
+<pre><code class="bash">hello
+world
+</code></pre>
+<p>猜测是因为写标准输出被推到下一个事件循环导致（类似process.exit()小节提到的），再试下</p>
+<pre><code class="js">process.on(&#39;SIGHUP&#39;, () =&gt; &#123;
+  console.log(&#39;Got SIGHUP signal.&#39;);
+&#125;);
+
+setTimeout(function()&#123;
+  console.log(&#39;Exiting.&#39;);
+&#125;, 0);
+
+console.log(&#39;hello&#39;);
+
+process.kill(process.pid, &#39;SIGHUP&#39;);
+
+console.log(&#39;world&#39;);
+</code></pre>
+<p>输出如下（其实并不能说明什么。。。知道真相的朋友请举手。。。）</p>
+<pre><code class="bash">hello
+world
+Exiting.
+Got SIGHUP signal.
+</code></pre>
+<h2 id="终止进程：process-exit-exitCode-、process-exitCode"><a href="#终止进程：process-exit-exitCode-、process-exitCode" class="headerlink" title="终止进程：process.exit([exitCode])、process.exitCode"></a>终止进程：process.exit([exitCode])、process.exitCode</h2><ol>
+<li>process.exit([exitCode]) 可以用来立即退出进程。即使当前有操作没执行完，比如 process.exit() 的代码逻辑，或者未完成的异步逻辑。</li>
+<li>写数据到 process.stdout 之后，立即调用 process.exit() 是不保险的，因为在node里面，往 stdout 写数据是非阻塞的，可以跨越多个事件循环。于是，可能写到一半就跪了。比较保险的做法是，通过process.exitCode设置退出码，然后等进程自动退出。</li>
+<li>如果程序出现异常，必须退出不可，那么，可以抛出一个未被捕获的error，来终止进程，这个比 process.exit() 安全。</li>
+</ol>
+<p>来段官网的例子镇楼：</p>
+<pre><code class="js">// How to properly set the exit code while letting
+// the process exit gracefully.
+if (someConditionNotMet()) &#123;
+  printUsageToStdout();
+  process.exitCode = 1;
+&#125;
+</code></pre>
+<p>备注：整个 process.exit() 的接口说明，都在告诉我们 process.exit() 这个接口有多不可靠。。。还用吗。。。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><ul>
+<li>beforeExit：进程退出之前触发，参数为 exitCode。（此时eventLoop已经空了）如果是显式调用 process.exit()退出，或者未捕获的异常导致退出，那么 beforeExit 不会触发。（我要，这事件有何用。。。）</li>
+<li>exit：</li>
+</ul>
+<h2 id="TODO-待进一步验证"><a href="#TODO-待进一步验证" class="headerlink" title="TODO 待进一步验证"></a>TODO 待进一步验证</h2><ol>
+<li>官方文档里，对于 process.nextTick(fn) 有如下描述，如何构造用例进行测试？</li>
+</ol>
+<blockquote>
+<p>It runs before any additional I/O events (including timers) fire in subsequent ticks of the event loop.</p>
+</blockquote>
+<ol start="2">
+<li>process.channel：实际测试结果，即使父、子进程间存在IPC通道，process.channel 的值依旧是undefined.（测试方法有问题？）</li>
+</ol>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://howtonode.org/understanding-process-next-tick">Understanding process.nextTick()</a></p>
+<p><a target="_blank" rel="noopener" href="https://cnodejs.org/topic/4f16442ccae1f4aa2700109b">nodejs 异步之 Timer &Tick; 篇</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/04/Node-js/2020-04-net.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Node.js-net
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/04/Node-js/2020-04-querystring.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Node.js-querystring</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-process - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-04-process.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-process - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-process.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

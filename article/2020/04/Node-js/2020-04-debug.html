@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-debug | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvo0008iogddbthy9nqp" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-debug
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>谈到node断点调试，目前主要有三种方式，通过<code>node内置调试工具</code>、<code>通过IDE（如vscode）</code>、<code>通过node-inspector</code>，三者本质上差不多。本文着重点在于介绍 <strong>如何在本地通过node-inspector 调试远程服务器上的node代码</strong>。</p>
+<p>在进入主题之前，首先会对三种调试方式进行入门讲解，方便新手理解后面的内容。至于老司机们，可以直接跳到主题去。</p>
+<span id="more"></span>
+
+<h2 id="方式一：内置debug功能"><a href="#方式一：内置debug功能" class="headerlink" title="方式一：内置debug功能"></a>方式一：内置debug功能</h2><h4 id="进入调试模式（在第1行断点）"><a href="#进入调试模式（在第1行断点）" class="headerlink" title="进入调试模式（在第1行断点）"></a>进入调试模式（在第1行断点）</h4><pre><code class="powershell">node debug app.js
+</code></pre>
+<p><img src="https://segmentfault.com/img/bVCNET" alt="clipboard.png"></p>
+<h4 id="进入调试模式（在第n行断点）"><a href="#进入调试模式（在第n行断点）" class="headerlink" title="进入调试模式（在第n行断点）"></a>进入调试模式（在第n行断点）</h4><p>比如要在第3行断点。</p>
+<p>方式一：通过<code>debugger</code></p>
+<p><img src="https://segmentfault.com/img/bVCNE6" alt="clipboard.png"></p>
+<p>方式二：通过<code>sb(line)</code>。</p>
+<p><img src="https://segmentfault.com/img/bVCNE7" alt="clipboard.png"></p>
+<h4 id="执行下一步"><a href="#执行下一步" class="headerlink" title="执行下一步"></a>执行下一步</h4><p>通过<code>next</code>命令。</p>
+<p><img src="https://segmentfault.com/img/bVCNE9" alt="clipboard.png"></p>
+<h4 id="跳到下一个断点"><a href="#跳到下一个断点" class="headerlink" title="跳到下一个断点"></a>跳到下一个断点</h4><p>通过<code>cont</code>命令。</p>
+<p><img src="https://segmentfault.com/img/bVCNFa" alt="clipboard.png"></p>
+<h4 id="查看某个变量的值"><a href="#查看某个变量的值" class="headerlink" title="查看某个变量的值"></a>查看某个变量的值</h4><p>输入<code>repl</code>命令后，再次输入变量名，就可以看到变量对应的值。如果想继续执行代码，可以按<code>ctrl+c</code>退出。</p>
+<p><img src="https://segmentfault.com/img/bVCNFb" alt="clipboard.png"></p>
+<h4 id="添加-删除watch"><a href="#添加-删除watch" class="headerlink" title="添加/删除watch"></a>添加/删除watch</h4><ul>
+<li>通过<code>watch(expr)</code>来添加监视对象。</li>
+<li>通过<code>watchers</code>查看当前所有的监视对象。</li>
+<li>通过<code>unwatch(expr)</code>来删除监视对象。</li>
+</ul>
+<p>添加watch：</p>
+<p><img src="https://segmentfault.com/img/bVCNFc" alt="clipboard.png"></p>
+<p>删除watch：</p>
+<p><img src="https://segmentfault.com/img/bVCNFd" alt="clipboard.png"></p>
+<h4 id="进入-跳出函数（step-in、step-out）"><a href="#进入-跳出函数（step-in、step-out）" class="headerlink" title="进入/跳出函数（step in、step out）"></a>进入/跳出函数（step in、step out）</h4><ul>
+<li>进入函数：通过<code>step</code>或者<code>s</code>。</li>
+<li>跳出函数：通过<code>out</code>或者<code>o</code>。</li>
+</ul>
+<p>示例代码如下，假设代码运行到<code>logger(str);</code>这一行，首先跳进函数内部，再跳出函数。</p>
+<pre><code>var nick = &#39;chyingp&#39;;
+var country = &#39;China&#39;;
+
+var str = nick + &#39; live in &#39; + country;
+
+var logger = function(msg)&#123;
+    console.log(msg); // 这里
+    console.log(&#39;这行会跳过&#39;); // 跳过这行
+&#125;;
+
+logger(str);  // 假设运行到这里，想要进入logger方法
+
+console.log(str);
+</code></pre>
+<p>示例截图如下：</p>
+<p><img src="https://segmentfault.com/img/bVCNFh" alt="clipboard.png"></p>
+<h4 id="多个文件断点"><a href="#多个文件断点" class="headerlink" title="多个文件断点"></a>多个文件断点</h4><p>通过<code>setBreakpoint(&#39;script.js&#39;, 1), sb(...)</code>，在某个文件某一行添加断点。反正我是没成功过。。。怎么看都是bug。。。</p>
+<h4 id="重新运行"><a href="#重新运行" class="headerlink" title="重新运行"></a>重新运行</h4><p>每次都退出然后<code>node debug app.js</code>相当烦。直接用<code>restart</code></p>
+<p><img src="https://segmentfault.com/img/bVCNFi" alt="clipboard.png"></p>
+<h4 id="远程调试"><a href="#远程调试" class="headerlink" title="远程调试"></a>远程调试</h4><p>比如远程机器ip是<code>192.168.1.126</code>，在远程机器上进入调试模式</p>
+<pre><code class="powershell">[root@localhost ex]# node --debug-brk app.js
+Debugger listening on port 5858
+</code></pre>
+<p>然后，在本地机器通过<code>node debug 192.168.1.126:5858</code>连接远程机器进行调试。</p>
+<pre><code class="powershell">node debug 192.168.1.126:5858
+</code></pre>
+<p>如下：</p>
+<pre><code class="powershell">➜  /tmp node debug 192.168.1.126:5858
+connecting to 192.168.1.126:5858 ... ok
+break in /tmp/ex/app.js:1
+&gt; 1 var Logger = require(&#39;./logger&#39;);
+  2
+  3 Logger.info(&#39;hello&#39;);
+debug&gt; n
+break in /tmp/ex/app.js:3
+  1 var Logger = require(&#39;./logger&#39;);
+  2
+&gt; 3 Logger.info(&#39;hello&#39;);
+  4
+  5 &#125;);
+</code></pre>
+<p>当然，还可以通过pid进行远程调试，这里就不举例。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://nodejs.org/api/debugger.html#debugger_advanced_usage">https://nodejs.org/api/debugger.html#debugger_advanced_usage</a></p>
+<h2 id="方式二：通过IDE-vscode"><a href="#方式二：通过IDE-vscode" class="headerlink" title="方式二：通过IDE(vscode)"></a>方式二：通过IDE(vscode)</h2><p>首先，在vscode里打开项目</p>
+<p><img src="https://segmentfault.com/img/bVCNFl" alt="clipboard.png"></p>
+<p>然后，添加调试配置。主要需要修改的是可执行文件的路径。</p>
+<p><img src="https://segmentfault.com/img/bVCNFm" alt="clipboard.png"></p>
+<p>点击代码左侧添加断点。</p>
+<p><img src="https://segmentfault.com/img/bVCNFp" alt="clipboard.png"></p>
+<p>开始调试</p>
+<p><img src="https://segmentfault.com/img/bVCNFr" alt="clipboard.png"></p>
+<p>顺利断点，左侧的变量、监视对象，右侧的调试工具栏，用过<code>chrome dev tool</code>的同学应该很熟悉，不赘述。</p>
+<p><img src="https://segmentfault.com/img/bVCNFs" alt="clipboard.png"></p>
+<h2 id="方式三：通过node-inspector"><a href="#方式三：通过node-inspector" class="headerlink" title="方式三：通过node-inspector"></a>方式三：通过node-inspector</h2><p>首先，安装<code>node-inspector</code>。</p>
+<pre><code class="powershell">npm install -g node-inspector
+</code></pre>
+<h4 id="方式一：通过node-debug启动调试"><a href="#方式一：通过node-debug启动调试" class="headerlink" title="方式一：通过node-debug启动调试"></a>方式一：通过<code>node-debug</code>启动调试</h4><p>启动调试，它会自动帮你在浏览器里打开调试界面。</p>
+<pre><code class="powershell">➜  debugger git:(master) ✗ node-debug app.js
+Node Inspector v0.12.8
+Visit http://127.0.0.1:8080/?port=5858 to start debugging.
+Debugging `app.js`
+
+Debugger listening on port 5858
+</code></pre>
+<p>调试界面如下，简直不能更亲切。</p>
+<p><img src="https://segmentfault.com/img/bVCNFt" alt="clipboard.png"></p>
+<h4 id="方式二：更加灵活的方式"><a href="#方式二：更加灵活的方式" class="headerlink" title="方式二：更加灵活的方式"></a>方式二：更加灵活的方式</h4><p>步骤1：通过<code>node-inspector</code>启动Node Inspector Server</p>
+<pre><code class="powershell">➜  debugger git:(master) ✗ node-inspector
+Node Inspector v0.12.8
+Visit http://127.0.0.1:8080/?port=5858 to start debugging.
+</code></pre>
+<p>步骤2：通过传统方式启动调试。加入<code>--debug-brk</code>，好让代码在第一行断住。</p>
+<pre><code class="powershell">➜  debugger git:(master) ✗ node --debug-brk app.js
+Debugger listening on port 5858
+</code></pre>
+<p>步骤3：在浏览器里打开调试UI界面。就是步骤1里打印出来的地址 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/?port=5858%E3%80%82%E6%88%90%E5%8A%9F">http://127.0.0.1:8080/?port=5858。成功</a></p>
+<p><img src="https://segmentfault.com/img/bVCNFu" alt="clipboard.png"></p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>从上面的例子不难猜想到。（不负责任猜想）</p>
+<ul>
+<li>通过<code>node --debug-brk</code>启动调试，监听<code>5858</code>端口。</li>
+<li><code>node-inspector</code>启动服务，监听8080端口。</li>
+<li>在浏览器里访问<code>http://127.0.0.1:8080/?port=5858</code>。可以看到<code>port=5858</code>这个参数。结合之前讲到的node内置远程调试的功能，可以猜想，在返回UI调试界面的同时，服务内部通过<code>5858</code>端口开始了断点调试。</li>
+</ul>
+<p>另外，从下面截图可以看出，UI调试工具（其实是个网页）跟 <code>inspector服务</code> 之间通过<code>websocket</code>进行通信。</p>
+<p>用户在界面上操作时，比如设置断点，就向 <code>inspector服务</code> 发送一条消息，<code>inspector服务</code> 在内部通过v8调试器来实现代码的断点。</p>
+<p><img src="https://segmentfault.com/img/bVCNFC" alt="clipboard.png"></p>
+<p>可以看到，用到了<code>v8-debug</code>，这个就待深挖了。</p>
+<p><img src="https://segmentfault.com/img/bVCNFD" alt="clipboard.png"></p>
+<h2 id="通过node-inspector调试远程代码"><a href="#通过node-inspector调试远程代码" class="headerlink" title="通过node-inspector调试远程代码"></a>通过node-inspector调试远程代码</h2><p>细心的同学可能会发现，node远程调试其实在上面<code>node-inspector</code>章节的讲解里已经覆盖到了。这里还是来个实际的例子。</p>
+<p>假设我们的node代码<code>app.js</code>运行在阿里云的服务器上，服务器ip是<code>xxx.xxx.xxx.xxx</code>。</p>
+<p>首先，服务器上启动node-inspector服务</p>
+<pre><code class="powershell">[root@iZ94wb7tioqZ ~]# node-inspector
+Node Inspector v0.12.8
+Visit http://127.0.0.1:8080/?port=5858 to start debugging.
+</code></pre>
+<p>其次，通过<code>--debug-brk</code>参数，进入调试模式</p>
+<pre><code class="powershell">[root@iZ94wb7tioqZ ex]# node --debug-brk app.js
+Debugger listening on port 5858
+</code></pre>
+<p>最后，在本地通过ip地址愉快的访问调试界面。是不是很简单捏。</p>
+<p><img src="https://segmentfault.com/img/bVCNFF" alt="clipboard.png"></p>
+<h4 id="常见问题：安全限制"><a href="#常见问题：安全限制" class="headerlink" title="常见问题：安全限制"></a>常见问题：安全限制</h4><p>远程调试常见的问题就是请求被拒绝。这是服务器安全策略的限制。遇到这种情况，开放端口就完事了。</p>
+<p><img src="https://segmentfault.com/img/bVCNHD" alt="clipboard.png"></p>
+<p>在我们的云主机上，默认安装了<code>firewall-cmd</code>，可以通过<code>--add-port</code>选项来开放<code>8080</code>端口的开放。如果本机没有安装<code>firewall-cmd</code>，也可以通过<code>iptables</code>来实现同样的功能。</p>
+<pre><code class="powershell">[root@iZ94wb7tioqZ ex]# firewall-cmd --add-port=8080/tcp
+success
+</code></pre>
+<p>然后，就可以愉快的远程调试了。</p>
+<p><img src="https://segmentfault.com/img/bVCNHE" alt="clipboard.png"></p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://nodejs.org/api/debugger.html">Node Debugger</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.0x972.info/?d=2014/11/13/10/40/50-how-does-a-debugger-work">How Does a C Debugger Work?</a></p>
+<p><a target="_blank" rel="noopener" href="http://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints/">How debuggers work: Part 2 - Breakpoints</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/04/Node-js/2020-04-console.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Node.js-console
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/04/Node-js/2020-04-crypto-md5.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Node.js-crypto.md5</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-debug - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-04-debug.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-debug - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-debug.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

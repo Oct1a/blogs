@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-buffer | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvpe00dpogddd6rq60uv" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-buffer
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p>
+<ol>
+<li>cluster模块如何实现端口共享</li>
+<li>cluster模块如何分发请求</li>
+</ol>
+<h2 id="端口共享源码分析"><a href="#端口共享源码分析" class="headerlink" title="端口共享源码分析"></a>端口共享源码分析</h2><p>首先，master 进程 fork() 子进程：</p>
+<pre><code class="javascript">// master进程
+cluster.fork()
+</code></pre>
+<p>子进程创建 net.Server 实例：</p>
+<pre><code class="javascript">// worker进程
+require(&#39;net&#39;).createServer(() =&gt; &#123;&#125;).listen(3000);
+</code></pre>
+<p>在 net 模块中，调用 cluster._getServer</p>
+<pre><code class="javascript">// worker进程
+cluster._getServer(self, &#123;
+  address: address,
+  port: port,
+  addressType: addressType,
+  fd: fd,
+  flags: 0
+&#125;, cb);
+
+function cb(err, handle) &#123;
+  // 忽略错误处理
+  self._handle = handle;
+  self._listen2(address, port, addressType, backlog, fd);
+&#125;
+</code></pre>
+<p>在 cluster._getServer 中，通过 process.send(message)，向 master 进程发送 queryServer 请求。</p>
+<pre><code class="javascript">// worker进程
+cluster._getServer = function(obj, options, cb) &#123;
+    const indexesKey = [ options.address,
+                         options.port,
+                         options.addressType,
+                         options.fd ].join(&#39;:&#39;);
+    if (indexes[indexesKey] === undefined)
+      indexes[indexesKey] = 0;
+    else
+      indexes[indexesKey]++;
+
+    // message =&gt;
+    // &#123;
+    //   act: &#39;queryServer&#39;,
+    //   index: &#39;:3000:4:&#39;,
+    //   data: null,
+    //   address: null,
+    //   port: 3000,
+    //   addressType: 4,
+    //   fd: undefined
+    // &#125;
+    const message = util._extend(&#123;
+      act: &#39;queryServer&#39;,
+      index: indexes[indexesKey],
+      data: null
+    &#125;, options);
+
+    // Set custom data on handle (i.e. tls tickets key)
+    if (obj._getServerData) message.data = obj._getServerData();
+
+    /*
+      send 方法的定义如下，注意：masterInit 里也有 send 方法
+      function send(message, cb) &#123;
+        return sendHelper(process, message, null, cb);
+      &#125;
+      在 sendHelper 里对 message 进程加工，最终 message 如下所示（关键字段）：
+      &#123; cmd: &#39;NODE_CLUSTER&#39;, act: &#39;queryServer&#39; &#125;
+    */
+    send(message, function(reply, handle) &#123;
+      if (obj._setServerData) obj._setServerData(reply.data);
+
+      if (handle)
+        shared(reply, handle, indexesKey, cb);  // Shared listen socket.
+      else
+        rr(reply, indexesKey, cb);              // Round-robin.
+    &#125;);
+
+    obj.once(&#39;listening&#39;, function() &#123;
+      cluster.worker.state = &#39;listening&#39;;
+      const address = obj.address();
+      message.act = &#39;listening&#39;;
+      message.port = address &amp;&amp; address.port || options.port;
+      send(message);
+    &#125;);
+  &#125;;
+</code></pre>
+<p>在 cluster.fork() 方法里，监听了 internalMessage 事件，onmessage里，调用了 queryServer()。</p>
+<pre><code class="javascript">// master进程
+cluster.fork = function(env) &#123;
+  // 忽略非关键代码
+  const workerProcess = createWorkerProcess(id, env);
+  const worker = new Worker(&#123;
+    id: id,
+    process: workerProcess
+  &#125;);
+  worker.process.on(&#39;internalMessage&#39;, internal(worker, onmessage));
+&#125;;
+
+//
+function onmessage(message, handle) &#123;
+  var worker = this;
+  if (message.act === &#39;online&#39;)
+    online(worker);
+  else if (message.act === &#39;queryServer&#39;)
+    // 调用 queryServer 方法
+    queryServer(worker, message);
+  else if (message.act === &#39;listening&#39;)
+    listening(worker, message);
+  else if (message.act === &#39;exitedAfterDisconnect&#39;)
+    exitedAfterDisconnect(worker, message);
+  else if (message.act === &#39;close&#39;)
+    close(worker, message);
+&#125;
+</code></pre>
+<p>在 queryServer 里，首先 创建 RoundRobinHandle 实例，然后调用 handle.add()。</p>
+<p>对于 address + port + addressType + fd + index 一样的 net.Server 实例，只创建一个 RoundRobinHandle 实例，并通过 handle.add() 将worker添加进去。</p>
+<pre><code class="javascript">// master进程
+function queryServer(worker, message) &#123;
+    var args = [message.address,
+                message.port,
+                message.addressType,
+                message.fd, // undefined
+                message.index]; // 注意：对于同样的监听参数，index 是从0开始递增的整数
+    var key = args.join(&#39;:&#39;); // 例子：&#39;:3000:4::0&#39;
+    var handle = handles[key];
+    if (handle === undefined) &#123;
+      var constructor = RoundRobinHandle;
+
+      // 创建新的handle，并挂载到 handles 上
+      // 这里的 constructor 为 RoundRobinHandle
+      handles[key] = handle = new constructor(key,
+                                              message.address,
+                                              message.port,
+                                              message.addressType,
+                                              message.fd,
+                                              message.flags);
+    &#125;
+    if (!handle.data) handle.data = message.data;
+
+    // Set custom server data
+    handle.add(worker, function(errno, reply, handle) &#123;
+      reply = util._extend(&#123;
+        errno: errno,
+        key: key,
+        ack: message.seq,
+        data: handles[key].data
+      &#125;, reply);
+      if (errno) delete handles[key];  // Gives other workers a chance to retry.
+      send(worker, reply, handle);
+    &#125;);
+  &#125;
+</code></pre>
+<p>看下 RoundRobinHandle 的构造方法。创建了 net.Server 实例，并调用 server.listen() 方法（实际监听）。</p>
+<p>当 listening 事件触发，将 onconnection 事件覆盖掉，实现在多个worker中分发请求的逻辑。</p>
+<pre><code class="javascript">// master进程
+function RoundRobinHandle(key, address, port, addressType, fd) &#123;
+  this.key = key;
+  this.all = &#123;&#125;;
+  this.free = [];
+  this.handles = [];
+  this.handle = null;
+  this.server = net.createServer(assert.fail);
+
+  if (fd &gt;= 0)
+    this.server.listen(&#123; fd: fd &#125;);
+  else if (port &gt;= 0)
+    this.server.listen(port, address);
+  else
+    this.server.listen(address);  // UNIX socket path.
+
+  this.server.once(&#39;listening&#39;, () =&gt; &#123;
+    this.handle = this.server._handle;
+    // 监听 connection 事件，当用户请求进来时，通过 this.distribute() 分发请求到各个worker
+    this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
+    this.server._handle = null;
+    this.server = null;
+  &#125;);
+&#125;
+</code></pre>
+<p>注意，前面调用了 handle.add() 方法，如下所示</p>
+<pre><code class="javascript">// master进程
+// Set custom server data
+handle.add(worker, function(errno, reply, handle) &#123;
+  reply = util._extend(&#123;
+    errno: errno,
+    key: key,
+    ack: message.seq,
+    data: handles[key].data
+  &#125;, reply);
+  if (errno) delete handles[key];  // Gives other workers a chance to retry.
+  send(worker, reply, handle);
+&#125;);
+</code></pre>
+<p>看下方法定义（忽略非主要逻辑）：</p>
+<pre><code class="javascript">// master进程
+RoundRobinHandle.prototype.add = function(worker, send) &#123;
+  // 存储worker的引用
+  this.all[worker.id] = worker;
+
+  // 当listening事件触发，done 被调用（注意，在 RoundRobinHandle 构造方法里也监听了 listening）
+  const done = () =&gt; &#123;
+    if (this.handle.getsockname) &#123;
+      // osx 10.13.1，node 8.9.3，跑这个分支
+      var out = &#123;&#125;;
+      this.handle.getsockname(out);
+      // 这里的 send 函数名比较有歧义，其实是 handle.add(worker, callback) 中的 callback
+      // TODO(bnoordhuis) Check err.
+      send(null, &#123; sockname: out &#125;, null);
+    &#125; else &#123;
+      send(null, null, null);  // UNIX socket.
+    &#125;
+    this.handoff(worker);  // In case there are connections pending.
+  &#125;;
+
+  // Still busy binding.
+  this.server.once(&#39;listening&#39;, done);
+&#125;;
+</code></pre>
+<p>当 listening 事件触发，下面方法被调用。同样的，最终被 sendHelper 封装了一遍</p>
+<pre><code class="javascript">// master进程
+// error: null
+// reply: &#123;&#125;
+// handle: null
+function(errno, reply, handle) &#123;
+  reply = util._extend(&#123;
+    errno: errno,
+    key: key,
+    ack: message.seq,
+    data: handles[key].data
+  &#125;, reply);
+  if (errno) delete handles[key];  // Gives other workers a chance to retry.
+  &#123;&quot;errno&quot;:null,&quot;key&quot;:&quot;:3000:4::0&quot;,&quot;ack&quot;:1,&quot;data&quot;:null,&quot;sockname&quot;:&#123;&quot;address&quot;:&quot;::&quot;,&quot;family&quot;:&quot;IPv6&quot;,&quot;port&quot;:3000&#125;&#125;
+  send(worker, reply, handle);
+&#125;
+</code></pre>
+<p>经过 sendHelper 的封装，worker.process.send(message)，message 内容如下。注意，此时 ack === 1。</p>
+<pre><code class="javascript">// master进程
+&#123;
+  &quot;cmd&quot;: &quot;NODE_CLUSTER&quot;,
+  &quot;sockname&quot;: &#123;
+    &quot;address&quot;: &quot;::&quot;,
+    &quot;family&quot;: &quot;IPv6&quot;,
+    &quot;port&quot;: 3000
+  &#125;,
+  &quot;data&quot;: null,
+  &quot;ack&quot;: 1,
+  &quot;key&quot;: &quot;:3000:4::0&quot;,
+  &quot;errno&quot;: null,
+  &quot;seq&quot;: 0
+&#125;
+</code></pre>
+<p>当上面 message 被发出时，worker 进程的 internalMessage 事件触发。（worker进程 的internalMessage 事件是在 node_bootstrap阶段监听的，这里容易忽略）</p>
+<pre><code class="javascript">// worker进程
+cluster._setupWorker = function() &#123;
+  var worker = new Worker(&#123;
+    id: +process.env.NODE_UNIQUE_ID | 0,
+    process: process,
+    state: &#39;online&#39;
+  &#125;);
+  cluster.worker = worker;
+  process.on(&#39;internalMessage&#39;, internal(worker, onmessage));
+&#125;;
+</code></pre>
+<p>如下所示，当 message.ack 存在时，callbacks[message.ack] 被调用。</p>
+<pre><code class="javascript">// worker进程
+function internal(worker, cb) &#123;
+  return function(message, handle) &#123;
+    if (message.cmd !== &#39;NODE_CLUSTER&#39;) return;
+    var fn = cb;
+    // 此时，message.ack === 1
+    // callbacks[message.ack] 是 _getServer 的回调
+    if (message.ack !== undefined &amp;&amp; callbacks[message.ack] !== undefined) &#123;
+      fn = callbacks[message.ack];
+      delete callbacks[message.ack];
+    &#125;
+    fn.apply(worker, arguments);
+  &#125;;
+&#125;
+</code></pre>
+<p>也就是下面的回调。</p>
+<pre><code class="javascript">// worker进程
+// obj is a net#Server or a dgram#Socket object.
+cluster._getServer = function(obj, options, cb) &#123;
+
+  // 忽略部分代码
+  const message = util._extend(&#123;
+    act: &#39;queryServer&#39;,
+    index: indexes[indexesKey],
+    data: null
+  &#125;, options);
+
+  /*
+  注意：就是这里的回调】
+  reply: &#123;
+    &quot;cmd&quot;: &quot;NODE_CLUSTER&quot;,
+    &quot;sockname&quot;: &#123;
+      &quot;address&quot;: &quot;::&quot;,
+      &quot;family&quot;: &quot;IPv6&quot;,
+      &quot;port&quot;: 3000
+    &#125;,
+    &quot;data&quot;: null,
+    &quot;ack&quot;: 1,
+    &quot;key&quot;: &quot;:3000:4::0&quot;,
+    &quot;errno&quot;: null,
+    &quot;seq&quot;: 0
+  &#125;
+  handle：undefined
+  */
+  send(message, (reply, handle) =&gt; &#123;
+    if (handle)
+      shared(reply, handle, indexesKey, cb);  // Shared listen socket.
+    else
+      // 这里被调用
+      rr(reply, indexesKey, cb);              // Round-robin.
+  &#125;);
+&#125;;
+</code></pre>
+<p>下面是 rr 方法的定义。</p>
+<pre><code class="javascript">// worker进程
+// message： &#123;&quot;cmd&quot;:&quot;NODE_CLUSTER&quot;,&quot;sockname&quot;:&#123;&quot;address&quot;:&quot;::&quot;,&quot;family&quot;:&quot;IPv6&quot;,&quot;port&quot;:3000&#125;,&quot;data&quot;:null,&quot;ack&quot;:1,&quot;key&quot;:&quot;:3000:4::0&quot;,&quot;errno&quot;:null,&quot;seq&quot;:0&#125;
+// indexsKey: &quot;:3000:4:&quot;
+// cb: _getServer 的回调
+// Round-robin. Master distributes handles across workers.
+function rr(message, indexesKey, cb) &#123;
+  if (message.errno)
+    return cb(message.errno, null);
+
+  var key = message.key;
+  function listen(backlog) &#123;
+    // TODO(bnoordhuis) Send a message to the master that tells it to
+    // update the backlog size. The actual backlog should probably be
+    // the largest requested size by any worker.
+    return 0;
+  &#125;
+
+  function close() &#123;
+    // lib/net.js treats server._handle.close() as effectively synchronous.
+    // That means there is a time window between the call to close() and
+    // the ack by the master process in which we can still receive handles.
+    // onconnection() below handles that by sending those handles back to
+    // the master.
+    if (key === undefined) return;
+    send(&#123; act: &#39;close&#39;, key: key &#125;);
+    delete handles[key];
+    delete indexes[indexesKey];
+    key = undefined;
+  &#125;
+
+  function getsockname(out) &#123;
+    if (key) util._extend(out, message.sockname);
+    return 0;
+  &#125;
+
+  // XXX(bnoordhuis) Probably no point in implementing ref() and unref()
+  // because the control channel is going to keep the worker alive anyway.
+  function ref() &#123;
+  &#125;
+
+  function unref() &#123;
+  &#125;
+
+  // Faux handle. Mimics a TCPWrap with just enough fidelity to get away
+  // with it. Fools net.Server into thinking that it&#39;s backed by a real
+  // handle.
+  var handle = &#123;
+    close: close,
+    listen: listen,
+    ref: ref,
+    unref: unref,
+  &#125;;
+  if (message.sockname) &#123;
+    handle.getsockname = getsockname;  // TCP handles only.
+  &#125;
+
+  handles[key] = handle;
+  cb(0, handle); // 终于调用 cb 了。。。
+&#125;
+</code></pre>
+<p>然后，下面的回调函数被调用：</p>
+<pre><code class="javascript">// worker进程
+function cb(err, handle) &#123;
+  // err：0
+  // handle: &#123;close: fn, listen: fn, getsockname: fn, ref: fn, unref: fn&#125;
+  if (err === 0 &amp;&amp; port &gt; 0 &amp;&amp; handle.getsockname) &#123;
+    var out = &#123;&#125;;
+    err = handle.getsockname(out);
+    if (err === 0 &amp;&amp; port !== out.port)
+      err = uv.UV_EADDRINUSE;
+  &#125;
+
+  self._handle = handle; // 将 handle 赋给 net.Server 实例
+  self._listen2(address, port, addressType, backlog, fd); // 调用 _listen2 方法
+&#125;
+</code></pre>
+<p>看下此时 _listen2 做了什么。主要是抛出 listening 事件，以及 添加 onconnection 监听。</p>
+<pre><code class="javascript">// worker进程
+Server.prototype._listen2 = function(address, port, addressType, backlog, fd) &#123;
+
+  // If there is not yet a handle, we need to create one and bind.
+  // In the case of a server sent via IPC, we don&#39;t need to do this.
+  if (this._handle) &#123;
+    debug(&#39;_listen2: have a handle already&#39;);
+  &#125;
+
+  this._handle.onconnection = onconnection; // onconnect 回调
+  this._handle.owner = this;
+
+  var err = _listen(this._handle, backlog);
+
+  // generate connection key, this should be unique to the connection
+  this._connectionKey = addressType + &#39;:&#39; + address + &#39;:&#39; + port;
+
+  process.nextTick(emitListeningNT, this);
+&#125;;
+</code></pre>
+<p>前面说过，在主进程里，创建了 net.Server 实例，并对端口进行实际的监听。再来回顾这段代码</p>
+<pre><code class="javascript">// master进程
+// Start a round-robin server. Master accepts connections and distributes
+// them over the workers.
+function RoundRobinHandle(key, address, port, addressType, fd) &#123;
+  // 忽略非重点代码
+  this.server = net.createServer(assert.fail);
+  this.server.listen(port, address); // 注意这里的监听
+
+  this.server.once(&#39;listening&#39;, () =&gt; &#123;
+    this.handle = this.server._handle;
+    this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
+    this.server._handle = null;
+    this.server = null;
+  &#125;);
+&#125;
+</code></pre>
+<p>监听调用的是 net 模块中如下函数：</p>
+<pre><code class="javascript">// master进程
+self._listen2(address, port, addressType, backlog, fd);
+</code></pre>
+<pre><code class="javascript">// master进程
+Server.prototype._listen2 = function(address, port, addressType, backlog, fd) &#123;
+
+  // If there is not yet a handle, we need to create one and bind.
+  // In the case of a server sent via IPC, we don&#39;t need to do this.
+  // 此时，this._handle 是 null（初始化状态），于是走第二个分支
+  if (this._handle) &#123;
+    debug(&#39;_listen2: have a handle already&#39;);
+  &#125; else &#123;
+    debug(&#39;_listen2: create a handle&#39;);
+
+    var rval = null;
+
+    if (!address &amp;&amp; typeof fd !== &#39;number&#39;) &#123;
+      rval = createServerHandle(&#39;::&#39;, port, 6, fd);
+
+      if (typeof rval === &#39;number&#39;) &#123;
+        rval = null;
+        address = &#39;0.0.0.0&#39;;
+        addressType = 4;
+      &#125; else &#123;
+        address = &#39;::&#39;;
+        addressType = 6;
+      &#125;
+    &#125;
+
+    // rval: &#123;&quot;reading&quot;:false,&quot;owner&quot;:null,&quot;onread&quot;:null,&quot;onconnection&quot;:null,&quot;writeQueueSize&quot;:0&#125;
+    if (rval === null)
+      // 重点是这行代码，在这里面创建 TCP 实例，并进行监听
+      // fd: undefined
+      // address: ::&#39;&#39;
+      rval = createServerHandle(address, port, addressType, fd);
+
+    if (typeof rval === &#39;number&#39;) &#123;
+      var error = exceptionWithHostPort(rval, &#39;listen&#39;, address, port);
+      process.nextTick(emitErrorNT, this, error);
+      return;
+    &#125;
+    this._handle = rval;
+  &#125;
+
+  this._handle.onconnection = onconnection;
+  this._handle.owner = this;
+
+  var err = _listen(this._handle, backlog);
+
+  if (err) &#123;
+    var ex = exceptionWithHostPort(err, &#39;listen&#39;, address, port);
+    this._handle.close();
+    this._handle = null;
+    process.nextTick(emitErrorNT, this, ex);
+    return;
+  &#125;
+
+  // generate connection key, this should be unique to the connection
+  this._connectionKey = addressType + &#39;:&#39; + address + &#39;:&#39; + port;
+
+  // unref the handle if the server was unref&#39;ed prior to listening
+  if (this._unref)
+    this.unref();
+
+  process.nextTick(emitListeningNT, this);
+&#125;;
+</code></pre>
+<p>主要逻辑：创建 TCP 实例，绑定端口、IP，并返回 handle。</p>
+<pre><code class="javascript">//master进程
+function createServerHandle(address, port, addressType, fd) &#123;
+  var err = 0;
+  // assign handle in listen, and clean up if bind or listen fails
+  var handle;
+
+  var isTCP = false;
+
+  handle = new TCP();
+  isTCP = true;
+
+  if (address || port || isTCP) &#123;
+    debug(&#39;bind to &#39; + (address || &#39;anycast&#39;));
+    if (!address) &#123;
+      // Try binding to ipv6 first
+      err = handle.bind6(&#39;::&#39;, port);
+      if (err) &#123;
+        handle.close();
+        // Fallback to ipv4
+        return createServerHandle(&#39;0.0.0.0&#39;, port);
+      &#125;
+    &#125; else if (addressType === 6) &#123;
+      err = handle.bind6(address, port);
+    &#125; else &#123;
+      err = handle.bind(address, port);
+    &#125;
+  &#125;
+
+  if (err) &#123;
+    handle.close();
+    return err;
+  &#125;
+
+  return handle;
+&#125;
+</code></pre>
+<p>server._handle 初始化完成，开始监听后，触发 listening 事件。此时，RoundRobinHandle 中的回调函数被调用。</p>
+<pre><code class="javascript">// master进程
+this.server.once(&#39;listening&#39;, () =&gt; &#123;
+  // 将 this.server._handle 赋值给 this.handle
+  this.handle = this.server._handle;
+  // 覆盖 this.handle.onconnection，以达到请求分发的目的
+  this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
+  // 将server._handle 设置为null
+  this.server._handle = null;
+  // 将this.server 设置为null（这里只需要 handle 就够了）
+  this.server = null;
+&#125;);
+</code></pre>
+<p>经过上面的复杂流程，最终的结果是：</p>
+<ol>
+<li>master 进程中创建了 net.Server 实例A，并对来自特定端口的请求进行监听。</li>
+<li>worker 进程中创建了 net.Server 实例B。</li>
+<li>当新连接创建时，实例A 将请求分发给实例B。（如果有多个worker进程，master进程会按照特定算法进行分发）</li>
+</ol>
+<h2 id="请求分发源码分析"><a href="#请求分发源码分析" class="headerlink" title="请求分发源码分析"></a>请求分发源码分析</h2><p>首先，当连接请求进来时，调用 this.distribute(err, handle);</p>
+<pre><code class="javascript">// master进程
+this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
+</code></pre>
+<p>看下distribute的实现。主要做了两件事情：</p>
+<ol>
+<li>将 handle 加入待处理队列。</li>
+<li>取得第一个空闲的worker，如果存在，就调用 this.handoff(worker); 处理请求。</li>
+</ol>
+<pre><code class="javascript">// master进程
+RoundRobinHandle.prototype.distribute = function(err, handle) &#123;
+  // 将 handle 加入 handles 队列，该队列里是待处理的请求对应的handle。
+  this.handles.push(handle);
+  // 取第一个空闲的worker
+  var worker = this.free.shift();
+  // 如果有空闲的worker
+  if (worker) this.handoff(worker);
+&#125;;
+</code></pre>
+<p>看下 handoff(worker) 的实现。</p>
+<pre><code class="javascript">// master进程
+RoundRobinHandle.prototype.handoff = function(worker) &#123;
+  if (worker.id in this.all === false) &#123;
+    return;  // Worker is closing (or has closed) the server.
+  &#125;
+  // 获取第一个待处理的请求
+  var handle = this.handles.shift();
+  if (handle === undefined) &#123;
+    this.free.push(worker);  // Add to ready queue again.
+    return;
+  &#125;
+  var message = &#123; act: &#39;newconn&#39;, key: this.key &#125;;
+
+  // 向worker进程发送消息
+  // message：&#123; act: &#39;newconn&#39;, key: this.key &#125;
+  sendHelper(worker.process, message, handle, (reply) =&gt; &#123;
+    // 当 worker进程 收到消息后，ack回应，调用 handle.close()
+    if (reply.accepted)
+      handle.close();
+    else
+      this.distribute(0, handle);  // Worker is shutting down. Send to another.
+    // 再次调用 handoff(worker)。有可能前面已经有一堆的待处理请求，因此检查下还有没有请求需要处理
+    // 如有，已经空闲出来的worker可以接着处理请求
+    this.handoff(worker);
+  &#125;);
+&#125;;
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/04/Node-js/2020-04-fs.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Node.js-fs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/03/web%E5%89%8D%E7%AB%AF/2020-03-%E6%B7%B1%E5%BA%A6%E7%8E%A9%E8%BD%ACCSS-marker.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">你不知道的css ::marker用法</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-buffer - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-05-cluster.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-buffer - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-05-cluster.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

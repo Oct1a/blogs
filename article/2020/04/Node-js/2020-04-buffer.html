@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-buffer | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvnx0085ogddbt3n0jdq" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-buffer
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>Buffer是node的核心模块，开发者可以利用它来处理二进制数据，比如文件流的读写、网络请求数据的处理等。</p>
+<p>Buffer的API非常多，本文仅挑选 比较常用/容易理解 的API进行讲解，包括Buffer实例的创建、比较、连接、拷贝、查找、遍历、类型转换、截取、编码转换等。</p>
+<span id="more"></span>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><ul>
+<li>new Buffer(array)</li>
+<li>Buffer.alloc(length)</li>
+<li>Buffer.allocUnsafe(length)</li>
+<li>Buffer.from(array)</li>
+</ul>
+<h3 id="通过-new-Buffer-array"><a href="#通过-new-Buffer-array" class="headerlink" title="通过 new Buffer(array)"></a>通过 new Buffer(array)</h3><pre><code class="js">// Creates a new Buffer containing the ASCII bytes of the string &#39;buffer&#39;
+const buf = new Buffer([0x62, 0x75, 0x66, 0x66, 0x65, 0x72]);
+</code></pre>
+<p>验证下：</p>
+<pre><code class="js">var array = &#39;buffer&#39;.split(&#39;&#39;).map(function(v)&#123;
+    return &#39;0x&#39; + v.charCodeAt(0).toString(16)
+&#125;);
+
+console.log( array.join() );
+// 输出：0x62,0x75,0x66,0x66,0x65,0x72
+</code></pre>
+<h3 id="通过-Buffer-alloc-length"><a href="#通过-Buffer-alloc-length" class="headerlink" title="通过 Buffer.alloc(length)"></a>通过 Buffer.alloc(length)</h3><pre><code class="js">var buf1 = Buffer.alloc(10);  // 长度为10的buffer，初始值为0x0
+var buf2 = Buffer.alloc(10, 1);  // 长度为10的buffer，初始值为0x1
+</code></pre>
+<pre><code class="js">var buf3 = Buffer.allocUnsafe(10);  // 长度为10的buffer，初始值不确定
+</code></pre>
+<pre><code class="js">var buf4 = Buffer.from([1, 2, 3])  // 长度为3的buffer，初始值为 0x01, 0x02, 0x03
+</code></pre>
+<h3 id="通过Buffer-from"><a href="#通过Buffer-from" class="headerlink" title="通过Buffer.from()"></a>通过Buffer.from()</h3><p>例子一：Buffer.from(array)</p>
+<pre><code class="js">// [0x62, 0x75, 0x66, 0x66, 0x65, 0x72] 为字符串 &quot;buffer&quot;
+// 0x62 为16进制，转成十进制就是 98，代表的就是字母 b
+var buf = Buffer.from([0x62, 0x75, 0x66, 0x66, 0x65, 0x72]);
+console.log(buf.toString());
+</code></pre>
+<p>例子二：Buffer.from(string[, encoding])</p>
+<p>通过string创建buffer，跟将buffer转成字符串时，记得编码保持一致，不然会出现乱码，如下所示。</p>
+<pre><code class="js">var buf = Buffer.from(&#39;this is a tést&#39;);  // 默认采用utf8
+
+// 输出：this is a tést
+console.log(buf.toString());  // 默认编码是utf8，所以正常打印
+
+// 输出：this is a tC)st
+console.log(buf.toString(&#39;ascii&#39;));  // 转成字符串时，编码不是utf8，所以乱码
+</code></pre>
+<p>对乱码的分析如下：</p>
+<pre><code class="js">var letter = &#39;é&#39;;
+var buff = Buffer.from(letter);  // 默认编码是utf8，这里占据两个字节 &lt;Buffer c3 a9&gt;
+var len = buff.length;  // 2
+var code = buff[0]; // 第一个字节为0xc3，即195：超出ascii的最大支持范围
+var binary = code.toString(2);  // 195的二进制：10101001
+var finalBinary = binary.slice(1);  // 将高位的1舍弃，变成：0101001
+var finalCode = parseInt(finalBinary, 2);  // 0101001 对应的十进制：67
+var finalLetter = String.fromCharCode(finalCode);  // 67对应的字符：C
+
+// 同理 0xa9最终转成的ascii字符为)
+// 所以，最终输出为 this is a tC)st
+</code></pre>
+<p>例子三：Buffer.from(buffer)</p>
+<p>创建新的Buffer实例，并将buffer的数据拷贝到新的实例子中去。</p>
+<pre><code class="js">var buff = Buffer.from(&#39;buffer&#39;);
+var buff2 = Buffer.from(buff);
+
+console.log(buff.toString());  // 输出：buffer
+console.log(buff2.toString());  // 输出：buffer
+
+buff2[0] = 0x61;
+
+console.log(buff.toString());  // 输出：buffer
+console.log(buff2.toString());  // 输出：auffer
+</code></pre>
+<h2 id="buffer比较"><a href="#buffer比较" class="headerlink" title="buffer比较"></a>buffer比较</h2><h3 id="buf-equals-otherBuffer"><a href="#buf-equals-otherBuffer" class="headerlink" title="buf.equals(otherBuffer)"></a>buf.equals(otherBuffer)</h3><p>判断两个buffer实例存储的数据是否相同，如果是，返回true，否则返回false。</p>
+<pre><code class="js">// 例子一：编码一样，内容相同
+var buf1 = Buffer.from(&#39;A&#39;);
+var buf2 = Buffer.from(&#39;A&#39;);
+
+console.log( buf1.equals(buf2) );  // true
+
+// 例子二：编码一样，内容不同
+var buf3 = Buffer.from(&#39;A&#39;);
+var buf4 = Buffer.from(&#39;B&#39;);
+
+console.log( buf3.equals(buf4) );  // false
+
+// 例子三：编码不一样，内容相同
+var buf5 = Buffer.from(&#39;ABC&#39;);  // &lt;Buffer 41 42 43&gt;
+var buf6 = Buffer.from(&#39;414243&#39;, &#39;hex&#39;);
+
+console.log(buf5.equals(buf6));    //true
+
+//只要比较的两者内容相同,`buf.equals(otherBuffer)` 就返回true
+</code></pre>
+<h3 id="buf-compare-target-targetStart-targetEnd-sourceStart-sourceEnd"><a href="#buf-compare-target-targetStart-targetEnd-sourceStart-sourceEnd" class="headerlink" title="buf.compare(target[, targetStart[, targetEnd[, sourceStart[, sourceEnd]]]])"></a>buf.compare(target[, targetStart[, targetEnd[, sourceStart[, sourceEnd]]]])</h3><p>同样是对两个buffer实例进行比较，不同的是：</p>
+<ol>
+<li>可以指定特定比较的范围（通过start、end指定）</li>
+<li>返回值为整数，达标buf、target的大小关系</li>
+</ol>
+<p>假设返回值为</p>
+<ul>
+<li><code>0</code>：buf、target大小相同。</li>
+<li><code>1</code>：buf大于target，也就是说buf应该排在target之后。</li>
+<li><code>-1</code>：buf小于target，也就是说buf应该排在target之前。</li>
+</ul>
+<p>看例子，官方的例子挺好的，直接贴一下：</p>
+<pre><code class="js">const buf1 = Buffer.from(&#39;ABC&#39;);
+const buf2 = Buffer.from(&#39;BCD&#39;);
+const buf3 = Buffer.from(&#39;ABCD&#39;);
+
+// Prints: 0
+console.log(buf1.compare(buf1));
+
+// Prints: -1
+console.log(buf1.compare(buf2));
+
+// Prints: -1
+console.log(buf1.compare(buf3));
+
+// Prints: 1
+console.log(buf2.compare(buf1));
+
+// Prints: 1
+console.log(buf2.compare(buf3));
+
+// Prints: [ &lt;Buffer 41 42 43&gt;, &lt;Buffer 41 42 43 44&gt;, &lt;Buffer 42 43 44&gt; ]
+// (This result is equal to: [buf1, buf3, buf2])
+console.log([buf1, buf2, buf3].sort(Buffer.compare));
+</code></pre>
+<h3 id="Buffer-compare-buf1-buf2"><a href="#Buffer-compare-buf1-buf2" class="headerlink" title="Buffer.compare(buf1, buf2)"></a>Buffer.compare(buf1, buf2)</h3><p>跟 <code>buf.compare(target)</code> 大同小异，一般用于排序。直接贴官方例子：</p>
+<pre><code class="js">const buf1 = Buffer.from(&#39;1234&#39;);
+const buf2 = Buffer.from(&#39;0123&#39;);
+const arr = [buf1, buf2];
+
+// Prints: [ &lt;Buffer 30 31 32 33&gt;, &lt;Buffer 31 32 33 34&gt; ]
+// (This result is equal to: [buf2, buf1])
+console.log(arr.sort(Buffer.compare));
+</code></pre>
+<h2 id="从Buffer-from-62-谈起"><a href="#从Buffer-from-62-谈起" class="headerlink" title="从Buffer.from([62])谈起"></a>从Buffer.from([62])谈起</h2><p>这里稍微研究下Buffer.from(array)。下面是官方文档对API的说明，也就是说，每个array的元素对应1个字节（8位），取值从0到255。</p>
+<blockquote>
+<p>Allocates a new Buffer using an array of octets.</p>
+</blockquote>
+<h3 id="数组元素为数字"><a href="#数组元素为数字" class="headerlink" title="数组元素为数字"></a>数组元素为数字</h3><p>首先看下，传入的元素为数字的场景。下面分别是10进制、8进制、16进制，跟预期中的结果一致。</p>
+<pre><code class="js">var buff = Buffer.from([62])
+// &lt;Buffer 3e&gt;
+// buff[0] === parseInt(&#39;3e&#39;, 16) === 62
+</code></pre>
+<pre><code class="js">var buff = Buffer.from([062])
+// &lt;Buffer 32&gt;
+// buff[0] === parseInt(62, 8) === parseInt(32, 16) === 50
+</code></pre>
+<pre><code class="js">var buff = Buffer.from([0x62])
+// &lt;Buffer 62&gt;
+// buff[0] === parseInt(62, 16) === 98
+</code></pre>
+<h3 id="数组元素为字符串"><a href="#数组元素为字符串" class="headerlink" title="数组元素为字符串"></a>数组元素为字符串</h3><p>再看下，传入的元素为字符串的场景。</p>
+<ol>
+<li><code>0</code>开头的字符串，在parseInt(‘062’)时，可以解释为62，也可以解释为50（八进制），这里看到采用了第一种解释。</li>
+<li>字符串的场景，跟parseInt()有没有关系，暂未深入探究，只是这样猜想。TODO（找时间研究下）</li>
+</ol>
+<pre><code class="js">var buff = Buffer.from([&#39;62&#39;])
+// &lt;Buffer 3e&gt;
+// buff[0] === parseInt(&#39;3e&#39;, 16) === parseInt(&#39;62&#39;) === 62
+</code></pre>
+<pre><code class="js">var buff = Buffer.from([&#39;062&#39;])
+// &lt;Buffer 3e&gt;
+// buff[0] === parseInt(&#39;3e&#39;, 16) === parseInt(&#39;062&#39;) === 62
+</code></pre>
+<pre><code class="js">var buff = Buffer.from([&#39;0x62&#39;])
+// &lt;Buffer 62&gt;
+// buff[0] === parseInt(&#39;62&#39;, 16) === parseInt(&#39;0x62&#39;) === 98
+</code></pre>
+<h3 id="数组元素大小超出1个字节"><a href="#数组元素大小超出1个字节" class="headerlink" title="数组元素大小超出1个字节"></a>数组元素大小超出1个字节</h3><p>感兴趣的同学自行探究。</p>
+<pre><code class="js">var buff = Buffer.from([256])
+// &lt;Buffer 00&gt;
+</code></pre>
+<h2 id="Buffer-from-‘1’"><a href="#Buffer-from-‘1’" class="headerlink" title="Buffer.from(‘1’)"></a>Buffer.from(‘1’)</h2><p>一开始不自觉的会将<code>Buffer.from(&#39;1&#39;)[0]</code>跟<code>&quot;1&quot;</code>划等号，其实<code>&quot;1&quot;</code>对应的编码是49。</p>
+<pre><code class="js">var buff = Buffer.from(&#39;1&#39;)  // &lt;Buffer 31&gt;
+console.log(buff[0] === 1)  // false
+</code></pre>
+<p>这样对比就知道了，编码为1的是个控制字符，表示 Start of Heading。</p>
+<pre><code class="js">console.log( String.fromCharCode(49) )  // &#39;1&#39;
+console.log( String.fromCharCode(1) )  // &#39;\u0001&#39;
+</code></pre>
+<h2 id="buffer连接：Buffer-concat-list-totalLength"><a href="#buffer连接：Buffer-concat-list-totalLength" class="headerlink" title="buffer连接：Buffer.concat(list[, totalLength])"></a>buffer连接：Buffer.concat(list[, totalLength])</h2><p>备注：个人觉得<code>totalLength</code>这个参数挺多余的，从官方文档来看，是处于性能提升的角度考虑。不过内部实现也只是遍历list，将length累加得到totalLength，从这点来看，性能优化是几乎可以忽略不计的。</p>
+<pre><code class="js">var buff1 = Buffer.alloc(10);
+var buff2 = Buffer.alloc(20);
+
+var totalLength = buff1.length + buff2.length;
+
+console.log(totalLength);  // 30
+
+var buff3 = Buffer.concat([buff1, buff2], totalLength);
+
+console.log(buff3.length);  // 30
+</code></pre>
+<p>除了上面提到的性能优化，totalLength还有两点需要注意。假设list里面所有buffer的长度累加和为length</p>
+<ul>
+<li>totalLength &gt; length：返回长度为totalLength的Buffer实例，超出长度的部分填充0。</li>
+<li>totalLength &lt; length：返回长度为totalLength的Buffer实例，后面部分舍弃。</li>
+</ul>
+<pre><code class="js">var buff4 = Buffer.from([1, 2]);
+var buff5 = Buffer.from([3, 4]);
+
+var buff6 = Buffer.concat([buff4, buff5], 5);
+
+console.log(buff6.length);  //
+console.log(buff6);  // &lt;Buffer 01 02 03 04 00&gt;
+
+var buff7 = Buffer.concat([buff4, buff5], 3);
+
+console.log(buff7.length);  // 3
+console.log(buff7);  // &lt;Buffer 01 02 03&gt;
+</code></pre>
+<h2 id="拷贝：buf-copy-target-targetStart-sourceStart-sourceEnd"><a href="#拷贝：buf-copy-target-targetStart-sourceStart-sourceEnd" class="headerlink" title="拷贝：buf.copy(target[, targetStart[, sourceStart[, sourceEnd]]])"></a>拷贝：buf.copy(target[, targetStart[, sourceStart[, sourceEnd]]])</h2><p>使用比较简单，如果忽略后面三个参数，那就是将buf的数据拷贝到target里去，如下所示：</p>
+<pre><code class="js">var buff1 = Buffer.from([1, 2]);
+var buff2 = Buffer.alloc(2);
+
+buff1.copy(buff2);
+
+console.log(buff2);  // &lt;Buffer 01 02&gt;
+</code></pre>
+<p>另外三个参数比较直观，直接看官方例子</p>
+<pre><code class="js">const buf1 = Buffer.allocUnsafe(26);
+const buf2 = Buffer.allocUnsafe(26).fill(&#39;!&#39;);
+
+for (let i = 0 ; i &lt; 26 ; i++) &#123;
+  // 97 is the decimal ASCII value for &#39;a&#39;
+  buf1[i] = i + 97;
+&#125;
+
+buf1.copy(buf2, 8, 16, 20);
+
+// Prints: !!!!!!!!qrst!!!!!!!!!!!!!
+console.log(buf2.toString(&#39;ascii&#39;, 0, 25));
+</code></pre>
+<h2 id="查找：buf-indexOf-value-byteOffset-encoding"><a href="#查找：buf-indexOf-value-byteOffset-encoding" class="headerlink" title="查找：buf.indexOf(value[, byteOffset][, encoding])"></a>查找：buf.indexOf(value[, byteOffset][, encoding])</h2><p>跟数组的查找差不多，需要注意的是，value可能是String、Buffer、Integer中的任意类型。</p>
+<ul>
+<li>String：如果是字符串，那么encoding就是其对应的编码，默认是utf8。</li>
+<li>Buffer：如果是Buffer实例，那么会将value中的完整数据，跟buf进行对比。</li>
+<li>Integer：如果是数字，那么value会被当做无符号的8位整数，取值范围是0到255。</li>
+</ul>
+<p>另外，可以通过<code>byteOffset</code>来指定起始查找位置。</p>
+<p>直接上代码，官方例子妥妥的，耐心看完它基本就理解得差不多了。</p>
+<pre><code class="js">const buf = Buffer.from(&#39;this is a buffer&#39;);
+
+// Prints: 0
+console.log(buf.indexOf(&#39;this&#39;));
+
+// Prints: 2
+console.log(buf.indexOf(&#39;is&#39;));
+
+// Prints: 8
+console.log(buf.indexOf(Buffer.from(&#39;a buffer&#39;)));
+
+// Prints: 8
+// (97 is the decimal ASCII value for &#39;a&#39;)
+console.log(buf.indexOf(97));
+
+// Prints: -1
+console.log(buf.indexOf(Buffer.from(&#39;a buffer example&#39;)));
+
+// Prints: 8
+console.log(buf.indexOf(Buffer.from(&#39;a buffer example&#39;).slice(0, 8)));
+
+
+const utf16Buffer = Buffer.from(&#39;\u039a\u0391\u03a3\u03a3\u0395&#39;, &#39;ucs2&#39;);
+
+// Prints: 4
+console.log(utf16Buffer.indexOf(&#39;\u03a3&#39;, 0, &#39;ucs2&#39;));
+
+// Prints: 6
+console.log(utf16Buffer.indexOf(&#39;\u03a3&#39;, -4, &#39;ucs2&#39;));
+</code></pre>
+<h2 id="写：buf-write-string-offset-length-encoding"><a href="#写：buf-write-string-offset-length-encoding" class="headerlink" title="写：buf.write(string[, offset[, length]][, encoding])"></a>写：buf.write(string[, offset[, length]][, encoding])</h2><p>将sring写入buf实例，同时返回写入的字节数。</p>
+<p>参数如下：</p>
+<ul>
+<li>string：写入的字符串。</li>
+<li>offset：从buf的第几位开始写入，默认是0。</li>
+<li>length：写入多少个字节，默认是 buf.length - offset。</li>
+<li>encoding：字符串的编码，默认是utf8。</li>
+</ul>
+<p>看个简单例子</p>
+<pre><code class="js">var buff = Buffer.alloc(4);
+buff.write(&#39;a&#39;);  // 返回 1
+console.log(buff);  // 打印 &lt;Buffer 61 00 00 00&gt;
+
+buff.write(&#39;ab&#39;);  // 返回 2
+console.log(buff);  // 打印 &lt;Buffer 61 62 00 00&gt;
+</code></pre>
+<h2 id="填充：buf-fill-value-offset-end-encoding"><a href="#填充：buf-fill-value-offset-end-encoding" class="headerlink" title="填充：buf.fill(value[, offset[, end]][, encoding])"></a>填充：buf.fill(value[, offset[, end]][, encoding])</h2><p>用<code>value</code>填充buf，常用于初始化buf。参数说明如下：</p>
+<ul>
+<li>value：用来填充的内容，可以是Buffer、String或Integer。</li>
+<li>offset：从第几位开始填充，默认是0。</li>
+<li>end：停止填充的位置，默认是 buf.length。</li>
+<li>encoding：如果<code>value</code>是String，那么为<code>value</code>的编码，默认是utf8。</li>
+</ul>
+<p>例子：</p>
+<pre><code class="js">var buff = Buffer.alloc(20).fill(&#39;a&#39;);
+
+console.log(buff.toString());  // aaaaaaaaaaaaaaaaaaaa
+</code></pre>
+<h2 id="转成字符串-buf-toString-encoding-start-end"><a href="#转成字符串-buf-toString-encoding-start-end" class="headerlink" title="转成字符串: buf.toString([encoding[, start[, end]]])"></a>转成字符串: buf.toString([encoding[, start[, end]]])</h2><p>把buf解码成字符串，用法比较直观，看例子</p>
+<pre><code class="js">var buff = Buffer.from(&#39;hello&#39;);
+
+console.log( buff.toString() );  // hello
+
+console.log( buff.toString(&#39;utf8&#39;, 0, 2) );  // he
+</code></pre>
+<h2 id="转成JSON字符串：buf-toJSON"><a href="#转成JSON字符串：buf-toJSON" class="headerlink" title="转成JSON字符串：buf.toJSON()"></a>转成JSON字符串：buf.toJSON()</h2><pre><code class="js">var buff = Buffer.from(&#39;hello&#39;);
+
+console.log( buff.toJSON() );  // &#123; type: &#39;Buffer&#39;, data: [ 104, 101, 108, 108, 111 ] &#125;
+</code></pre>
+<h2 id="遍历：buf-values-、buf-keys-、buf-entries"><a href="#遍历：buf-values-、buf-keys-、buf-entries" class="headerlink" title="遍历：buf.values()、buf.keys()、buf.entries()"></a>遍历：buf.values()、buf.keys()、buf.entries()</h2><p>用于对<code>buf</code>进行<code>for...of</code>遍历，直接看例子。</p>
+<pre><code class="js">var buff = Buffer.from(&#39;abcde&#39;);
+
+for(const key of buff.keys())&#123;
+    console.log(&#39;key is %d&#39;, key);
+&#125;
+// key is 0
+// key is 1
+// key is 2
+// key is 3
+// key is 4
+
+for(const value of buff.values())&#123;
+    console.log(&#39;value is %d&#39;, value);
+&#125;
+// value is 97
+// value is 98
+// value is 99
+// value is 100
+// value is 101
+
+for(const pair of buff.entries())&#123;
+    console.log(&#39;buff[%d] === %d&#39;, pair[0], pair[1]);
+&#125;
+// buff[0] === 97
+// buff[1] === 98
+// buff[2] === 99
+// buff[3] === 100
+// buff[4] === 101
+</code></pre>
+<h2 id="截取：buf-slice-start-end"><a href="#截取：buf-slice-start-end" class="headerlink" title="截取：buf.slice([start[, end]])"></a>截取：buf.slice([start[, end]])</h2><p>用于截取buf，并返回一个新的Buffer实例。需要注意的是，这里返回的Buffer实例，指向的仍然是buf的内存地址，所以对新Buffer实例的修改，也会影响到buf。</p>
+<pre><code class="js">var buff1 = Buffer.from(&#39;abcde&#39;);
+console.log(buff1);  // &lt;Buffer 61 62 63 64 65&gt;
+
+var buff2 = buff1.slice();
+console.log(buff2);  // &lt;Buffer 61 62 63 64 65&gt;
+
+var buff3 = buff1.slice(1, 3);
+console.log(buff3);  // &lt;Buffer 62 63&gt;
+
+buff3[0] = 97;  // parseInt(61, 16) ==&gt; 97
+console.log(buff1);  // &lt;Buffer 62 63&gt;
+</code></pre>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ol>
+<li>创建、拷贝、截取、转换、查找</li>
+<li>buffer、arraybuffer、dataview、typedarray</li>
+<li>buffer vs 编码</li>
+<li>Buffer.from()、Buffer.alloc()、Buffer.alocUnsafe()</li>
+<li>Buffer vs TypedArray</li>
+</ol>
+<h2 id="文档摘要"><a href="#文档摘要" class="headerlink" title="文档摘要"></a>文档摘要</h2><p>关于buffer内存空间的动态分配</p>
+<blockquote>
+<p>Instances of the Buffer class are similar to arrays of integers but correspond to fixed-sized, raw memory allocations outside the V8 heap. The size of the Buffer is established when it is created and cannot be resized.</p>
+</blockquote>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>unicode对照表<br><a target="_blank" rel="noopener" href="https://unicode-table.com/cn/#control-character">https://unicode-table.com/cn/#control-character</a></p>
+<p>字符编码笔记：ASCII，Unicode和UTF-8<br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/05/web%E5%89%8D%E7%AB%AF/2020-05-%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          前端常用代码片段
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/04/Node-js/2020-04-cluster.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Node.js-cluster</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-buffer - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-04-buffer.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-buffer - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-buffer.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

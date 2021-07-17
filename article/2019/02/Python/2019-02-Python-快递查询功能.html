@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Python快递信息查询 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvmw004kogdd23oi72sr" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Python快递信息查询
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2019-02-27T23:23:25.000Z" itemprop="datePublished">2019-02-28</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Python/">Python</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><img src="http://cdn.dllca.cn/20180701013110.png"></p>
+<blockquote>
+<p>今天想查个快递，只知道单号，通常直接输入百度就能查到物流信息，这次想用自己代码来查询下,整个程序就用到Json和Requests两个库，调用的是<a target="_blank" rel="noopener" href="https://www.kuaidi100.com/">快递100</a>的API</p>
+</blockquote>
+<h3 id="获取快递公司简称"><a href="#获取快递公司简称" class="headerlink" title="获取快递公司简称"></a>获取快递公司简称</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&text=%27+">https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&amp;text=’+</a> 快递单号</p>
+</blockquote>
+<span id="more"></span>
+
+<pre><code>&#123;
+    &quot;comCode&quot;: &quot;&quot;,
+    &quot;num&quot;: &quot;1003030947526&quot;,
+    &quot;auto&quot;: [
+        &#123;
+            &quot;comCode&quot;: &quot;ems&quot;,
+            &quot;id&quot;: &quot;&quot;,
+            &quot;noCount&quot;: 947,
+            &quot;noPre&quot;: &quot;100303&quot;,
+            &quot;startTime&quot;: &quot;&quot;
+        &#125;
+    ]
+&#125;
+</code></pre>
+<h3 id="抓包获取快递物流信息地址，得到JSON数据"><a href="#抓包获取快递物流信息地址，得到JSON数据" class="headerlink" title="抓包获取快递物流信息地址，得到JSON数据"></a>抓包获取快递物流信息地址，得到JSON数据</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.kuaidi100.com/query?type=%E5%BF%AB%E9%80%92%E5%85%AC%E5%8F%B8%E7%AE%80%E7%A7%B0&postid=%E5%BF%AB%E9%80%92%E5%8D%95%E5%8F%B7">https://www.kuaidi100.com/query?type=快递公司简称&amp;postid=快递单号</a></p>
+</blockquote>
+<pre><code>&#123;
+    &quot;message&quot;: &quot;ok&quot;,
+    &quot;nu&quot;: &quot;1003030947526&quot;,
+    &quot;ischeck&quot;: &quot;1&quot;,
+    &quot;condition&quot;: &quot;F00&quot;,
+    &quot;com&quot;: &quot;ems&quot;,
+    &quot;status&quot;: &quot;200&quot;,
+    &quot;state&quot;: &quot;3&quot;,
+    &quot;data&quot;: [
+        &#123;
+            &quot;time&quot;: &quot;2017-12-01 13:34:11&quot;,
+            &quot;ftime&quot;: &quot;2017-12-01 13:34:11&quot;,
+            &quot;context&quot;: &quot;[苏州市]投递并签收，签收人：他人收 快递柜&quot;,
+            &quot;location&quot;: null
+        &#125;,
+        &#123;
+            &quot;time&quot;: &quot;2017-12-01 09:34:41&quot;,
+            &quot;ftime&quot;: &quot;2017-12-01 09:34:41&quot;,
+            &quot;context&quot;: &quot;[苏州市]昆山市花桥邮政速递营业部安排投递，预计23:59:00前投递（投递员姓名：陆晓华;联系电话：18912661298）&quot;,
+            &quot;location&quot;: null
+        &#125;
+&#125;
+</code></pre>
+<h3 id="完整代码（大概不到十行代码解决）"><a href="#完整代码（大概不到十行代码解决）" class="headerlink" title="完整代码（大概不到十行代码解决）"></a>完整代码（大概不到十行代码解决）</h3><pre><code>import json
+import requests
+Number = input(&#39;请输入快递单号：\n&#39;)
+#查询快递名称
+url1= &#39;https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&amp;text=&#39;+ Number
+#解析json
+express = json.loads(requests.get(url1).text)[&#39;auto&#39;][0][&#39;comCode&#39;]
+#查询快递信息
+url2= &#39;https://www.kuaidi100.com/query?type=&#123;&#125;&amp;postid=&#123;&#125;&#39;.format(express,Number)
+info = json.loads(requests.get(url2).text)[&#39;data&#39;]
+for x in info:
+    success = (x[&#39;time&#39;]+x[&#39;context&#39;])
+    print(success)
+</code></pre>
+<blockquote>
+<p>很多网站都可以用api来调用数据，比如车票，快递，豆瓣，网易…</p>
+</blockquote>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2019/03/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2019-03-%E5%90%AF%E5%8A%A8django%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          启动django出现You may need to add &#39;x.x.x.x&#39; to ALLOWED_HOSTS.
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2019/02/Python/2019-02-Python-%E6%9F%A5%E8%AF%A2%E5%A4%A9%E6%B0%94.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Python查询天气</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Python快递信息查询 - Oct1a&u=https://oct1a.cn/article/2019/02/Python/2019-02-Python-%E5%BF%AB%E9%80%92%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Python快递信息查询 - Oct1a&url=https://oct1a.cn/article/2019/02/Python/2019-02-Python-%E5%BF%AB%E9%80%92%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

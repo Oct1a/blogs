@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>微信小程序原生开发 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr78oqj70010bwddcuuv09k9" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      微信小程序原生开发
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2019-10-18T08:10:23.000Z" itemprop="datePublished">2019-10-18</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="微信小程序简述"><a href="#微信小程序简述" class="headerlink" title="微信小程序简述"></a>微信小程序简述</h1><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BE%AE%E4%BF%A1/3905974">微信 (opens new window)</a>小程序，简称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B0%8F%E7%A8%8B%E5%BA%8F">小程序 (opens new window)</a>，英文名Mini Program，是一种不需要下载安装即可使用的[应用]</p>
+<span id="more"></span>
+
+<h3 id="小程序概念"><a href="#小程序概念" class="headerlink" title="小程序概念"></a>小程序概念</h3><p>小程序没有DOM对象，一切基于组件化</p>
+<p><strong>小程序的四个重要的文件</strong></p>
+<pre><code>*.wxml ---&gt; view结构 ----&gt; html
+*.wxss ---&gt; view样式 -----&gt; css
+</code></pre>
+<h3 id="小程序适配"><a href="#小程序适配" class="headerlink" title="小程序适配"></a>小程序适配</h3><p>Iphon6： 1rpx = 1物理像素 = 0.5px</p>
+<p><strong>微信官方提供的换算方式：</strong></p>
+<pre><code>1.以iPhone6的物理像素个数为标准: 750;
+2.1rpx = 目标设备宽度 / 750 * px;
+3.注意此时底层已经做了viewport适配的处理，即实现了理想视    口
+</code></pre>
+<h3 id="小程序工具构建目录架构"><a href="#小程序工具构建目录架构" class="headerlink" title="小程序工具构建目录架构"></a>小程序工具构建目录架构</h3><pre><code>-pages                主要编写页面目录
+-utils              工具目录
+-app.js           注册小程序js
+-app.json            小程序全局配置
+-app.wxss         基本样式
+-probject.config.json        项目配置文件
+sitemap.json        迷
+</code></pre>
+<h3 id="app-json配置"><a href="#app-json配置" class="headerlink" title="app.json配置"></a>app.json配置</h3><pre><code>&#123;
+  &quot;pages&quot;: [
+    &quot;pages/index/main&quot;
+  ],
+  &quot;window&quot;: &#123;
+    &quot;backgroundTextStyle&quot;: &quot;light&quot;,
+    &quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;,
+    &quot;navigationBarTitleText&quot;: &quot;WeChat&quot;,
+    &quot;navigationBarTextStyle&quot;: &quot;black&quot;
+  &#125;,
+  &quot;tabBar&quot;: &#123;
+    &quot;color&quot;: &quot;#999&quot;,
+    &quot;backgroundColor&quot;: &quot;#fafafa&quot;,
+    &quot;selectedColor&quot;: &quot;#333&quot;,
+    &quot;borderStyle&quot;: &quot;white&quot;,
+
+    &quot;list&quot;: [&#123;
+      &quot;text&quot;: &quot;首页&quot;,
+      &quot;pagePath&quot;: &quot;pages/index/main&quot;,
+      &quot;iconPath&quot;: &quot;static/tabs/home.png&quot;,
+      &quot;selectedIconPath&quot;: &quot;static/tabs/home-active.png&quot;
+    &#125;, &#123;
+      &quot;text&quot;: &quot;订单&quot;,
+      &quot;pagePath&quot;: &quot;pages/logs/main&quot;,
+      &quot;iconPath&quot;: &quot;static/tabs/orders.png&quot;,
+      &quot;selectedIconPath&quot;: &quot;static/tabs/orders-active.png&quot;
+    &#125;],
+
+    &quot;items&quot;: [&#123;
+      &quot;name&quot;: &quot;首页&quot;,
+      &quot;pagePath&quot;: &quot;pages/index/main&quot;,
+      &quot;icon&quot;: &quot;static/tabs/home.png&quot;,
+      &quot;activeIcon&quot;: &quot;static/tabs/home-active.png&quot;
+    &#125;, &#123;
+      &quot;name&quot;: &quot;订单&quot;,
+      &quot;pagePath&quot;: &quot;pages/logs/main&quot;,
+      &quot;icon&quot;: &quot;static/tabs/orders.png&quot;,
+      &quot;activeIcon&quot;: &quot;static/tabs/orders-active.png&quot;
+    &#125;],
+    &quot;position&quot;: &quot;bottom&quot;
+  &#125;
+&#125;
+</code></pre>
+<h2 id="小程序标签组件"><a href="#小程序标签组件" class="headerlink" title="小程序标签组件"></a>小程序标签组件</h2><h4 id="基本组件"><a href="#基本组件" class="headerlink" title="基本组件"></a>基本组件</h4><pre><code>&lt;view&gt;&lt;!-- 块级元素 --&gt;&lt;/view&gt;
+&lt;image src=&quot;&quot;&gt;&lt;!-- 图片元素 --&gt;&lt;/image&gt;
+&lt;text&gt;&lt;!-- 行内元素 --&gt;&lt;/text&gt;
+&lt;web-view&gt;&lt;!-- 承载网页, 自动铺满屏幕 --&gt;&lt;/web-view&gt;
+&lt;rich-text nodes=&quot;&#123;&#123;info.content&#125;&#125;&quot;&gt;&lt;!-- 富文本组件, 渲染nodes中的html字符串 --&gt;&lt;/rich-text&gt;
+</code></pre>
+<h4 id="表单组件"><a href="#表单组件" class="headerlink" title="表单组件"></a>表单组件</h4><pre><code>&lt;button&gt;&lt;!-- 按钮 --&gt;&lt;/button&gt;
+&lt;switch&gt;&lt;!-- 开关 --&gt;&lt;/switch&gt;
+&lt;slider&gt;&lt;!-- 滑动进度条 --&gt;&lt;/slider&gt;
+&lt;picker&gt;&lt;!-- 滚动选择器 --&gt;&lt;/picker&gt;
+&lt;checkbox-group&gt;
+  &lt;!-- 多项选择容器 --&gt;
+    &lt;checkbox&gt;&lt;!-- 多项项目 --&gt;&lt;/checkbox&gt;
+&lt;/checkbox-group&gt;
+&lt;radio-group&gt;
+  &lt;!-- 单项选择容器 --&gt;
+    &lt;radio&gt;&lt;!-- 单项项目 --&gt;&lt;/radio&gt;
+&lt;/radio-group&gt;
+</code></pre>
+<h4 id="媒体组件"><a href="#媒体组件" class="headerlink" title="媒体组件"></a>媒体组件</h4><pre><code>&lt;camera&gt;&lt;!-- 系统相机 --&gt;&lt;/camera&gt;
+&lt;live-player&gt;&lt;!-- 音视频直播 --&gt;&lt;/live-player&gt;
+&lt;live-pusher&gt;&lt;!-- 音视频录制 --&gt;&lt;/live-pusher&gt;
+&lt;video&gt;&lt;!-- 音视频播放 --&gt;&lt;/video&gt;
+&lt;map&gt;&lt;!-- 地图 --&gt;&lt;/map&gt;
+&lt;canvas&gt;&lt;!-- 画布 --&gt;&lt;/canvas&gt;
+</code></pre>
+<h4 id="开放组件"><a href="#开放组件" class="headerlink" title="开放组件"></a>开放组件</h4><pre><code>&lt;ad&gt;&lt;!-- 广告 --&gt;&lt;/ad&gt;
+&lt;official-account&gt;&lt;!-- 公众号关注 --&gt;&lt;/official-account&gt;
+</code></pre>
+<h1 id="小程序基本语法API"><a href="#小程序基本语法API" class="headerlink" title="小程序基本语法API"></a>小程序基本语法API</h1><h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><pre><code>&lt;!-- bind冒泡事件 --&gt;
+&lt;view bind:tap=&quot;myEventCallBack&quot;&gt;点击&lt;/view&gt;
+&lt;!-- catch阻止冒泡事件 --&gt;
+&lt;view catch:tap=&quot;myEventCallBack&quot;&gt;点击&lt;/view&gt;
+&lt;!-- mut-bind阻止冒泡事件 --&gt;
+&lt;view mut-bind:tap=&quot;myEventCallBack&quot;&gt;点击&lt;/view&gt;
+&lt;!-- 滑动事件, 具有滑动值 --&gt;
+&lt;view bindscroll=&quot;scroll&quot;&gt;&lt;/view&gt;
+</code></pre>
+<pre><code>Page(&#123;
+  myEventCallBack(ev)&#123;
+    console.log(ev)
+  &#125;
+&#125;)
+</code></pre>
+<p><strong>事件传参</strong></p>
+<pre><code>&lt;view bind:tap=&quot;myEventCallBack&quot;  data-id=&#39;&#123;&#123;item.id&#125;&#125;&#39;&gt;点击&lt;/view&gt;
+</code></pre>
+<pre><code>Page(&#123;
+  myEventCallBack(ev)&#123;
+    // 点击当前整体元素
+    const id = ev.currentTarget.dataset.id
+  &#125;
+&#125;)
+</code></pre>
+<p><strong>事件委派</strong></p>
+<pre><code>&lt;view bind:tap=&quot;myEventCallBack&quot;&gt;
+    &lt;view data-id=&quot;0&quot;&gt;子元素A&lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code>Page(&#123;
+  myEventCallBack(ev)&#123;
+    console.log(ev.target.dataset.id)
+  &#125;
+&#125;)
+</code></pre>
+<h3 id="大括号表达式"><a href="#大括号表达式" class="headerlink" title="大括号表达式"></a>大括号表达式</h3><pre><code>&lt;view&gt; &#123;&#123; message &#125;&#125; &lt;/view&gt;
+&lt;image src=&quot;&#123;&#123;url&#125;&#125;&quot;/&gt;
+&lt;view style=&quot;display:&#123;&#123;fool?'block':'none'&#125;&#125;&quot;&gt;&lt;/view&gt;
+</code></pre>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><pre><code>&lt;view wx:for=&quot;&#123;&#123;array&#125;&#125;&quot; wx:for-index=&quot;idx&quot;&gt;
+  &#123;&#123;index&#125;&#125;---&#123;&#123;item.message&#125;&#125;---&#123;&#123;idx&#125;&#125;
+&lt;/view&gt;
+</code></pre>
+<h3 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h3><pre><code>&lt;view wx:if=&quot;&#123;&#123;length > 5&#125;&#125;&quot;&gt; 1 &lt;/view&gt;
+&lt;view wx:elif=&quot;&#123;&#123;length > 2&#125;&#125;&quot;&gt; 2 &lt;/view&gt;
+&lt;view wx:else&gt; 3 &lt;/view&gt;
+</code></pre>
+<h3 id="获取标签元素的样式"><a href="#获取标签元素的样式" class="headerlink" title="获取标签元素的样式"></a>获取标签元素的样式</h3><pre><code>//创建节点选择器
+    const query = wx.createSelectorQuery()
+    query.select(&#39;.fixed_box&#39;).boundingClientRect()
+    query.selectViewport().scrollOffset()
+    query.exec(function (res) &#123;
+      res[0].top       // #the-id节点的上边界坐标
+      res[1].scrollTop // 显示区域的竖直滚动位置
+      console.log(&#39;打印demo的元素的信息&#39;, res);
+      console.log(&#39;打印高度&#39;, res[0].height);
+    &#125;)
+</code></pre>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre><code>// 100-小程序基本编写/pages/list/list.js
+Page(&#123;
+
+    /* 页面的初始数据 */
+    data: &#123;
+    &#125;,
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) &#123;
+
+    &#125;,
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () &#123;
+
+    &#125;,
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () &#123;
+
+    &#125;,
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () &#123;
+
+    &#125;,
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () &#123;
+
+    &#125;,
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () &#123;
+
+    &#125;,
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () &#123;
+
+    &#125;,
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () &#123;
+
+    &#125;
+&#125;)
+</code></pre>
+<p><img src="http://cdn.dllca.cn/20210716190016.png"></p>
+<h2 id="全局对象wx"><a href="#全局对象wx" class="headerlink" title="全局对象wx"></a>全局对象wx</h2><h3 id="获取用户信息-按钮"><a href="#获取用户信息-按钮" class="headerlink" title="获取用户信息(按钮)"></a>获取用户信息(按钮)</h3><pre><code>// 判断用户是否已经授权
+wx.getSetting(&#123;
+  success: (result) =&gt; &#123;
+    const &#123;authSetting&#125; = result
+    // 如果authSetting为true, 代表用户授权了
+  &#125;
+&#125;)
+// 获取用户信息：需要用户授权
+wx.getUserInfo(&#123;
+  success: (result)=&gt;&#123;&#125;,
+&#125;);
+myCallBack(data)&#123;
+  const &#123;userInfo&#125; = data.mp.detail
+  // 如果userInfo有值, 代表授权成功
+&#125;
+&#125;
+</code></pre>
+<pre><code>&lt;button open-type=&quot;getUserInfo&quot; bindgetuserinfo=&quot;myCallBack&quot;&gt;用户信息授权&lt;/button&gt;
+</code></pre>
+<h3 id="本地储存"><a href="#本地储存" class="headerlink" title="本地储存"></a>本地储存</h3><pre><code>// 异步:设置&amp;添加 | 获取
+wx.setStorage(&#123;key:&#39;id&#39;,data:6&#125;)
+wx.getStorage(&#123;key:&#39;id&#39;,success,fail,complete&#125;)
+wx.getStorageInfo(&#123;success,fail,complete&#125;)
+// 同步:设置&amp;添加
+wx.setStorageSync(&#123;key:&#39;id&#39;,data:6&#125;)
+
+wx.getStorageInfoSync()
+</code></pre>
+<h3 id="拨打电话"><a href="#拨打电话" class="headerlink" title="拨打电话"></a>拨打电话</h3><pre><code>wx.makePhoneCall(&#123; phoneNumber: &#39;1340000&#39; &#125;)
+</code></pre>
+<h3 id="根据文件路径创建本地地址"><a href="#根据文件路径创建本地地址" class="headerlink" title="根据文件路径创建本地地址"></a>根据文件路径创建本地地址</h3><pre><code>wx.downloadFile(&#123; url, success: (val) =&gt; resolve(val.tempFilePath), fail: reject &#125;)
+</code></pre>
+<h3 id="本地拉取图片生成本地地址"><a href="#本地拉取图片生成本地地址" class="headerlink" title="本地拉取图片生成本地地址"></a>本地拉取图片生成本地地址</h3><pre><code>wx.chooseImage(&#123;
+  count: 1,
+  sizeType: [&#39;original&#39;, &#39;compressed&#39;],
+  sourceType: [&#39;album&#39;, &#39;camera&#39;],
+  success (res) &#123;
+    // tempFilePath可以作为img标签的src属性显示图片
+    const tempFilePaths = res.tempFilePaths
+  &#125;
+&#125;)
+</code></pre>
+<h3 id="从本地上传文件至服务器"><a href="#从本地上传文件至服务器" class="headerlink" title="从本地上传文件至服务器"></a>从本地上传文件至服务器</h3><pre><code>wx.chooseImage(&#123;
+  success (res) &#123;
+    // 本地文件地址
+    const tempFilePaths = res.tempFilePaths
+    wx.uploadFile(&#123;
+      url: &#39;https://example.weixin.qq.com/upload&#39;, //仅为示例，非真实的接口地址
+      filePath: tempFilePaths[0],
+      name: &#39;file&#39;,
+      formData: &#123;
+        &#39;user&#39;: &#39;test&#39;
+      &#125;,
+      success (res)&#123;
+        const data = res.data
+        //do something
+      &#125;
+    &#125;)
+  &#125;
+&#125;)
+</code></pre>
+<h3 id="弹出新页面显示图片"><a href="#弹出新页面显示图片" class="headerlink" title="弹出新页面显示图片"></a>弹出新页面显示图片</h3><pre><code>wx.previewImage(&#123;
+  current: &#39;&#39;, // 当前显示图片的http链接
+  urls: [] // 需要预览的图片http链接列表
+&#125;)
+</code></pre>
+<h3 id="动态改变页头"><a href="#动态改变页头" class="headerlink" title="动态改变页头"></a>动态改变页头</h3><pre><code>wx.setNavigationBarTitle(&#123; title: &#39;xxxx&#39; &#125;)
+uni.setNavigationBarColor(&#123;
+frontColor: &quot;#ffffff&quot;,
+backgroundColor: &quot;#007AFF&quot;
+&#125;)
+</code></pre>
+<h3 id="打开地图"><a href="#打开地图" class="headerlink" title="打开地图"></a>打开地图</h3><pre><code>wx.getLocation(&#123;
+ type: &#39;gcj02&#39;, //返回可以用于wx.openLocation的经纬度
+ success (res) &#123;
+   const latitude = res.latitude
+   const longitude = res.longitude
+   wx.openLocation(&#123;
+     latitude,
+     longitude,
+     scale: 18
+   &#125;)
+ &#125;
+&#125;)
+</code></pre>
+<h2 id="路由页面编程"><a href="#路由页面编程" class="headerlink" title="路由页面编程"></a>路由页面编程</h2><pre><code>&lt;button bind:tap=&quot;goToListPage&quot;&gt;点击跳转&lt;/button&gt;
+&lt;!-- 或者 --&gt;
+&lt;navigator url=&quot;/pages/index/index&quot; &gt;进入首页(tab页)&lt;/navigator&gt;
+&lt;redirectTo url=&quot;/pages/index/index&quot; &gt;进入首页(tab页)&lt;/redirectTo&gt;
+</code></pre>
+<pre><code>goToLlistPage () &#123;
+  // 点击跳转到list页面(不能跳转tapBar页面)
+  // 推入栈
+  wx.navigateTo(&#123;url:&#39;/pages/list/list&#39;&#125;)
+  // 重定向
+  wx.redirectTo(&#123;url:&#39;/pages/list/list&#39;&#125;)
+  // 跳转tapBar页面(并关闭非tapBar页面)
+  wx.switchTab(&#123;url: &#39;/pages/list/list&#39;&#125;);
+&#125;
+</code></pre>
+<h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><pre><code>// 父组件:传入index值为666
+wx.navigateTo(&#123;url:&#39;/pages/list/list?index=666&#39;&#125;)
+</code></pre>
+<pre><code>onLoad: function (options) &#123;
+    const &#123;index&#125; = options // 666
+&#125;,
+</code></pre>
+<h3 id="设置底部路由导航"><a href="#设置底部路由导航" class="headerlink" title="设置底部路由导航"></a>设置底部路由导航</h3><pre><code>// app.json
+&quot;tabBar&quot;: &#123;
+  &quot;list&quot;: [ // 对应多个路由
+    &#123;
+      &quot;pagePath&quot;: &quot;pages/list/list&quot;, // 链接对应页面
+      &quot;text&quot;: &quot;文与子&quot;,    // 链接文字
+      &quot;iconPath&quot;: &quot;/images/tab/yuedu.png&quot;, // 链接未选中图片
+      &quot;selectedIconPath&quot;: &quot;/images/tab/yuedu_hl.png&quot; // 链接选中图片
+    &#125;,
+    &#123;
+      &quot;pagePath&quot;: &quot;pages/movies/movies&quot;,
+      &quot;text&quot;: &quot;电影频道&quot;,
+      &quot;iconPath&quot;: &quot;/images/tab/dianying.png&quot;,
+      &quot;selectedIconPath&quot;: &quot;/images/tab/dianying_hl.png&quot;
+    &#125;
+  ]
+&#125;
+</code></pre>
+<h2 id="小程序复用模板"><a href="#小程序复用模板" class="headerlink" title="小程序复用模板"></a>小程序复用模板</h2><h3 id="定义模板"><a href="#定义模板" class="headerlink" title="定义模板"></a>定义模板</h3><p>使用 name 属性，作为模板的名字。然后在<code>&lt;template/&gt;</code>内定义代码片段，如：<code>pages/template/template.wxml</code></p>
+<pre><code>&lt;template name=&quot;msgItem&quot;&gt;
+  &lt;view&gt;
+    &lt;text&gt; &#123;&#123;index&#125;&#125;: &#123;&#123;msg&#125;&#125; &lt;/text&gt;
+    &lt;text&gt; Time: &#123;&#123;time&#125;&#125; &lt;/text&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+</code></pre>
+<p>在模板的同级目录创建相同名称的样式文件，如：<code>pages/template/template.wxss</code></p>
+<pre><code>.list&#123;&#125;
+</code></pre>
+<p>在模板的同级目录创建相同名称的js文件，如：<code>pages/template/template.js</code></p>
+<pre><code>Page(&#123;
+  data: &#123;
+      index: 0,
+      msg: &#39;this is a template&#39;,
+      time: &#39;2016-09-15&#39;
+  &#125;
+&#125;)
+</code></pre>
+<h3 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h3><p><code>import</code>可以在该文件中使用目标文件定义的<code>template</code>，在 index.wxml 中引用了 template.wxml，就可以使用<code>template</code>模板：<code>pages/template/template.wxml</code></p>
+<pre><code>&lt;import src=&quot;/pages/template/template.wxml&quot; /&gt;&lt;!-- 引入 --&gt;
+&lt;template is=&quot;list_template&quot; /&gt;&lt;!-- 使用 --&gt;
+</code></pre>
+<p>由于默认模板是不带有样式的，需要引入模板文件夹中的样式：<code>pages/template/template.wxss</code></p>
+<pre><code>@import &quot;/pages/template/template.wxss&quot;
+</code></pre>
+<h2 id="小程序自定义复用组件"><a href="#小程序自定义复用组件" class="headerlink" title="小程序自定义复用组件"></a>小程序自定义复用组件</h2><p>开发者可以将页面内的功能模块抽象成自定义组件，以便在不同的页面中重复使用；也可以将复杂的页面拆分成多个低耦合的模块，有助于代码维护。自定义组件在使用时与基础组件非常相似。</p>
+<h3 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h3><p>类似于页面，一个自定义组件由 <code>json</code> <code>wxml</code> <code>wxss</code> <code>js</code> 4个文件组成。要编写一个自定义组件，首先需要在 <code>json</code> 文件中进行自定义组件声明（将 <code>component</code> 字段设为 <code>true</code> 可将这一组文件设为自定义组件）：</p>
+<pre><code>&#123; &quot;component&quot;: true &#125;
+</code></pre>
+<p>同时，还要在 <code>wxml</code> 文件中编写组件模板，在 <code>wxss</code> 文件中加入组件样式，它们的写法与页面的写法类似。</p>
+<pre><code>&lt;!-- 这是自定义组件的内部WXML结构 --&gt;
+&lt;view class=&quot;inner&quot;&gt;
+     &#123;&#123;innerText&#125;&#125;
+    &lt;slot&gt;&lt;!-- 插槽是使用时, 传入的所有内容 --&gt;&lt;/slot&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code>/* 这里的样式只应用于这个自定义组件 */
+.inner &#123;
+  color: red;
+&#125;
+</code></pre>
+<p>在自定义组件的 <code>js</code> 文件中，需要使用 <code>Component()</code> 来注册组件，并提供组件的属性定义、内部数据和自定义方法。 组件的属性值和内部数据将被用于组件 <code>wxml</code> 的渲染，其中，属性值是可由组件外部传入的。更多细节参见 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/component.html">Component构造器 (opens new window)</a> 。</p>
+<pre><code>Component(&#123;
+  properties: &#123;
+    // 这里定义了innerText属性，属性值可以在组件使用时指定
+    innerText: &#123;
+      type: String,
+      value: &#39;default value&#39;,
+    &#125;
+  &#125;,
+  data: &#123;
+    // 这里是一些组件内部数据
+    someData: &#123;&#125;
+  &#125;,
+  methods: &#123;
+    // 这里是一个自定义方法
+    customMethod: function()&#123;&#125;
+  &#125;
+&#125;)
+</code></pre>
+<h3 id="使用组件"><a href="#使用组件" class="headerlink" title="使用组件"></a>使用组件</h3><p>使用已注册的自定义组件前，首先要在页面的 <code>json</code> 文件中进行引用声明。此时需要提供每个自定义组件的标签名和对应的自定义组件文件路径</p>
+<pre><code>&#123;
+  &quot;usingComponents&quot;: &#123;
+    &quot;component-tag-name&quot;: &quot;path/to/the/custom/component&quot;
+  &#125;
+&#125;
+</code></pre>
+<p>这样，在页面的 <code>wxml</code> 中就可以像使用基础组件一样使用自定义组件。节点名即自定义组件的标签名，节点属性即传递给组件的属性值。</p>
+<pre><code>&lt;view&gt;
+  &lt;!-- 以下是对一个自定义组件的引用 --&gt;
+  &lt;component-tag-name inner-text=&quot;Some text&quot;&gt;
+      &lt;!-- 这部分内容将被放置在组件 &lt;slot&gt; 的位置上 --&gt;
+    &lt;view&gt;这里是插入到组件slot中的内容&lt;/view&gt;
+  &lt;/component-tag-name&gt;
+&lt;/view&gt;
+</code></pre>
+<h3 id="组件wxml的slot"><a href="#组件wxml的slot" class="headerlink" title="组件wxml的slot"></a>组件wxml的slot</h3><p>在组件的wxml中可以包含 <code>slot</code> 节点，用于承载组件使用者提供的wxml结构。默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在组件js中声明启用。</p>
+<pre><code>Component(&#123;
+  options: &#123;
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  &#125;,
+  properties: &#123; /* ... */ &#125;,
+  methods: &#123; /* ... */ &#125;
+&#125;)
+</code></pre>
+<p>此时，可以在这个组件的wxml中使用多个slot，以不同的 <code>name</code> 来区分。</p>
+<pre><code>&lt;!-- 组件模板 --&gt;
+&lt;view class=&quot;wrapper&quot;&gt;
+  &lt;slot name=&quot;before&quot;&gt;&lt;/slot&gt;
+  &lt;view&gt;这里是组件的内部细节&lt;/view&gt;
+  &lt;slot name=&quot;after&quot;&gt;&lt;/slot&gt;
+&lt;/view&gt;
+</code></pre>
+<p>使用时，用 <code>slot</code> 属性来将节点插入到不同的slot上。</p>
+<pre><code>&lt;!-- 引用组件的页面模板 --&gt;
+&lt;view&gt;
+  &lt;component-tag-name&gt;
+    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;before&quot;&gt; 的位置上 --&gt;
+    &lt;view slot=&quot;before&quot;&gt;这里是插入到组件slot name=&quot;before&quot;中的内容&lt;/view&gt;
+    &lt;!-- 这部分内容将被放置在组件 &lt;slot name=&quot;after&quot;&gt; 的位置上 --&gt;
+    &lt;view slot=&quot;after&quot;&gt;这里是插入到组件slot name=&quot;after&quot;中的内容&lt;/view&gt;
+  &lt;/component-tag-name&gt;
+&lt;/view&gt;
+</code></pre>
+<h2 id="app-js定义共用数据–"><a href="#app-js定义共用数据–" class="headerlink" title="app.js定义共用数据–"></a>app.js定义共用数据–</h2><pre><code>// app.js
+App(&#123;
+  data:&#123;a:6&#125;
+&#125;)
+// pages/index.js
+const app = getApp()
+console.log(app.data) // &#123;a:6&#125;
+app.data.a = 7
+console.log(app.data) // &#123;a:7&#125;
+</code></pre>
+<h2 id="小程序功能组件"><a href="#小程序功能组件" class="headerlink" title="小程序功能组件"></a>小程序功能组件</h2><h3 id="提示框"><a href="#提示框" class="headerlink" title="提示框"></a>提示框</h3><pre><code>wx.showToast(&#123;title:&#39;内容&#39;,icon: &#39;success&#39;&#125;);
+</code></pre>
+<h3 id="背景音乐播放器"><a href="#背景音乐播放器" class="headerlink" title="背景音乐播放器"></a>背景音乐播放器</h3><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/BackgroundAudioManager.html">https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/BackgroundAudioManager.html</a></p>
+<pre><code>// 获取唯一后台播放器实例
+const audioPlayer = wx.getBackgroundAudioManager()
+// 设置音乐标题(必填)
+audioPlayer.title = &#39;music&#39;
+// 设置音乐地址(必填)
+audioPlayer.src = &#39;http://music.163.com/song/media/outer/url?id=1319688149.mp3&#39;
+// 设置音乐图片
+audioPlayer.coverImgUrl = &#39;http://p1.music.126.net/oErHMKLK12jQbr7k6xrlMA==/109951164344700503.jpg?param=130y130&#39;
+// 设置音乐歌手名
+audioPlayer.singer = &#39;Mr.A&#39;
+// 设置专辑名
+audioPlayer.epname = &#39;OVA&#39;
+// 设置音频开始播放的时间
+audioPlayer.startTime = 5
+// 当前音频的长度（只读）
+audioPlayer.duration
+// 当前音频的播放位置（只读）
+audioPlayer.currentTime
+// 当前是否暂停或停止（只读）
+audioPlayer.paused
+// 播放/ 暂停
+isMusicPlay ? audioPlayer.play() : audioPlayer.pause()
+// 监视音频暂停
+audioPlayer.onPause(()=&gt;&#123;&#125;)
+// 监视音频播放
+audioPlayer.onPlay(()=&gt;&#123;&#125;)
+</code></pre>
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><pre><code>wx.showActionSheet(&#123;
+    itemList: [&#39;分享到朋友圈&#39;, &#39;分享到qq空间&#39;, &#39;分享到微博&#39;],
+    success: (result) =&gt; &#123;
+        // 点击的下标
+        const &#123;tapIndex&#125; = result
+    &#125;
+&#125;)
+</code></pre>
+<h3 id="点击分享-按钮"><a href="#点击分享-按钮" class="headerlink" title="点击分享(按钮)"></a>点击分享(按钮)</h3><pre><code>&lt;button class=&quot;forward_button&quot;  open-type=&quot;share&quot;&gt;转发此文章&lt;/button&gt;
+</code></pre>
+<h2 id="发送ajax请求"><a href="#发送ajax请求" class="headerlink" title="发送ajax请求"></a>发送ajax请求</h2><h3 id="原生小程序发送请求"><a href="#原生小程序发送请求" class="headerlink" title="原生小程序发送请求"></a>原生小程序发送请求</h3><pre><code>// 注意：默认不能使用http协议请求，需要在调试工具中关闭校验
+var reqTask = wx.request(&#123;
+    url: &#39;&#39;, // 请求地址
+    data: &#123;&#125;, // 请求参数
+    header: &#123;&#39;content-type&#39;:&#39;application/json&#39;&#125;, // 请求头
+    method: &#39;GET&#39;, // 请求类型
+    dataType: &#39;json&#39;, // 请求数据类型?
+    responseType: &#39;text&#39;, // 返回数据类型?
+    success: (result)=&gt;&#123;
+        // 请求成功函数result 为结果
+    &#125;,
+    fail: ()=&gt;&#123;&#125;,
+    complete: ()=&gt;&#123;&#125;
+&#125;);
+</code></pre>
+<h3 id="使用FlyIo库发送请求"><a href="#使用FlyIo库发送请求" class="headerlink" title="使用FlyIo库发送请求"></a>使用FlyIo库发送请求</h3><pre><code>// ajax-fly请求配置文件
+const Fly = require(&quot;./wx-fly.min&quot;)
+const fly = new Fly
+//定义公共headers
+fly.config.headers=&#123;xx:5,bb:6,dd:7&#125;
+//设置超时
+fly.config.timeout=10000;
+//设置请求基地址
+fly.config.baseURL=&quot;https://wendux.github.io/&quot;
+//设置公共的Get参数
+fly.config.params=&#123;&quot;token&quot;:&quot;testtoken&quot;&#125;;
+//添加请求拦截器
+fly.interceptors.request.use((request) =&gt; &#123;
+    //给所有请求添加自定义header
+    request.headers[&quot;X-Tag&quot;] = &quot;flyio&quot;;
+    //打印出请求体
+    // console.log(request.body)
+
+    //终止请求
+    //var err=new Error(&quot;xxx&quot;)
+    //err.request=request
+    //return Promise.reject(new Error(&quot;&quot;))
+
+    //可以显式返回request, 也可以不返回，没有返回值时拦截器中默认返回request
+    return request;
+&#125;)
+//添加响应拦截器，响应拦截器会在then/catch处理之前执行
+fly.interceptors.response.use(
+    (response) =&gt; &#123;
+        //只将请求结果的data字段返回
+        return response.data
+    &#125;,
+    (err) =&gt; &#123;
+        //发生网络错误后会走到这里
+        //return Promise.resolve(&quot;ssss&quot;)
+        return err
+    &#125;
+)
+export default fly
+</code></pre>
+<h2 id="小程序标签节点对象"><a href="#小程序标签节点对象" class="headerlink" title="小程序标签节点对象"></a>小程序标签节点对象</h2><h3 id="query-标签对象"><a href="#query-标签对象" class="headerlink" title="query 标签对象"></a>query 标签对象</h3><p>返回一个 SelectorQuery 对象实例。在自定义组件或包含自定义组件的页面中。</p>
+<pre><code>// 创建一个query对象, 该对象专门用于获取标签节点
+const query = wx.createSelectorQuery()
+// 获取该标签boundingClientRect的所有属性
+query.select(&#39;#the-id&#39;).boundingClientRect()
+// 获取该标签selectViewport与scrollOffset属性
+query.selectViewport().scrollOffset()
+// 执行所有的请求, 请求结果按请求次序构成数组. 最终使用exec接受所有的属性数据
+query.exec(function(res)&#123;
+  res[0].top       // #the-id节点的上边界坐标 (boundingClientRect)
+  res[1].scrollTop // 显示区域的竖直滚动位置 (selectViewport)
+&#125;)
+</code></pre>
+<h3 id="query-NodesRef-节点信息"><a href="#query-NodesRef-节点信息" class="headerlink" title="query.NodesRef 节点信息"></a>query.NodesRef 节点信息</h3><p>**boundingClientRect() **节点的布局位置的查询请求。其功能类似于 DOM 的 <code>getBoundingClientRect</code>。</p>
+<pre><code>// 单个节点查询
+wx.createSelectorQuery().select(&#39;#the-id&#39;).boundingClientRect(function(rect)&#123;
+    rect.id      // 节点的ID
+    rect.dataset // 节点的dataset
+    rect.left    // 节点的左边界坐标
+    rect.right   // 节点的右边界坐标
+    rect.top     // 节点的上边界坐标
+    rect.bottom  // 节点的下边界坐标
+    rect.width   // 节点的宽度
+    rect.height  // 节点的高度
+&#125;).exec()
+// 多个节点查询
+wx.createSelectorQuery().selectAll(&#39;.a-class&#39;).boundingClientRect(function(rects)&#123;
+  rects.forEach(function(rect)&#123;
+    rect.id      // 节点的ID
+    rect.dataset // 节点的dataset
+    rect.left    // 节点的左边界坐标
+    rect.right   // 节点的右边界坐标
+    rect.top     // 节点的上边界坐标
+    rect.bottom  // 节点的下边界坐标
+    rect.width   // 节点的宽度
+    rect.height  // 节点的高度
+  &#125;)
+&#125;).exec()
+</code></pre>
+<p><strong>context()</strong> 节点的 Context 对象查询请求。</p>
+<pre><code>wx.createSelectorQuery().select(&#39;.the-video-class&#39;).context(function(res)&#123;
+  console.log(res.context) // 节点对应的 Context 对象。如：选中的节点是 &lt;video&gt; 组件，那么此处即返回 VideoContext 对象
+&#125;).exec()
+</code></pre>
+<p><strong>fields()</strong> 获取节点的相关信息。</p>
+<pre><code>wx.createSelectorQuery().select(&#39;#the-id&#39;).fields(&#123;
+  id: true, // 是否返回节点 id
+  dataset: true, // 是否返回节点 dataset
+  mark: true, // 是否返回节点 mark
+  rect: true, // 是否返回节点布局位置（left right top bottom）
+  size: true, // 是否返回节点尺寸（width height）
+  scrollOffset: true, // 是否返回节点的 scrollLeft scrollTop，节点必须是 scroll-view 或者 viewport
+  properties: [&#39;scrollX&#39;, &#39;scrollY&#39;], // 指定属性名列表，返回节点对应属性名的当前属性值 （id class style 和事件绑定的属性值不可获取）
+  computedStyle: [&#39;margin&#39;, &#39;backgroundColor&#39;], // 指定样式名列表，返回节点对应样式名的当前值
+  context: true, // 是否返回节点对应的 Context 对象
+  node: true, // 是否返回节点对应的 Node 实例
+&#125;, function (res) &#123;
+  res.dataset    // 节点的dataset
+  res.width      // 节点的宽度
+  res.height     // 节点的高度
+  res.scrollLeft // 节点的水平滚动位置
+  res.scrollTop  // 节点的竖直滚动位置
+  res.scrollX    // 节点 scroll-x 属性的当前值
+  res.scrollY    // 节点 scroll-y 属性的当前值
+  // 此处返回指定要返回的样式名
+  res.margin
+  res.backgroundColor
+  res.context    // 节点对应的 Context 对象
+&#125;).exec()
+</code></pre>
+<p>**node() **获取 Node 节点实例。目前支持 <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/canvas.html">Canvas (opens new window)</a> 的获取。</p>
+<pre><code>wx.createSelectorQuery().select(&#39;.canvas&#39;).node(function(res)&#123;
+    console.log(res.node) // 节点对应的 Canvas 实例。
+&#125;).exec()
+</code></pre>
+<h3 id="query-SelectorQuery-节点查询"><a href="#query-SelectorQuery-节点查询" class="headerlink" title="query.SelectorQuery 节点查询"></a>query.SelectorQuery 节点查询</h3><p>**exec() **执行所有的请求。请求结果按请求次序构成数组，在callback的第一个参数中返回。</p>
+<pre><code>//....
+query.exec(function(res)&#123;
+  res[0].top       // #the-id节点的上边界坐标 (boundingClientRect)
+  res[1].scrollTop // 显示区域的竖直滚动位置 (selectViewport)
+&#125;)
+</code></pre>
+<p><strong>in()</strong> 将选择器的选取范围更改为自定义组件 <code>component</code> 内。</p>
+<pre><code>Component(&#123;
+  queryMultipleNodes ()&#123;
+    const query = wx.createSelectorQuery().in(this)
+    query.select(&#39;#the-id&#39;).boundingClientRect(function(res)&#123;
+      res.top // 这个组件内 #the-id 节点的上边界坐标
+    &#125;).exec()
+  &#125;
+&#125;)
+</code></pre>
+<p><strong>select()</strong> 在当前页面下选择第一个匹配选择器 <code>selector</code> 的节点。</p>
+<pre><code>query.select(&#39;#box&#39;)
+</code></pre>
+<p><strong>selectAll()</strong> 在当前页面下选择匹配选择器 selector 的所有节点。</p>
+<pre><code>query.selectAll(&#39;.box&#39;)
+</code></pre>
+<p><strong>selectViewport()</strong> 显示区域。可用于获取显示区域的尺寸、滚动位置等信息。</p>
+<pre><code>query.selectViewport()
+</code></pre>
+<h2 id="小程序画布–"><a href="#小程序画布–" class="headerlink" title="小程序画布–"></a>小程序画布–</h2><h3 id="canvas的标签"><a href="#canvas的标签" class="headerlink" title="canvas的标签"></a>canvas的标签</h3><pre><code>&lt;canvas
+    type=&quot;2d&quot; // 指定 canvas 类型，支持 2d (2.9.0) 和 webgl (2.7.0), 必选项
+    bindtouchstart=&quot;onStart&quot; // 手指触摸动作开始
+    bindtouchmove=&quot;onMove&quot; // 手指触摸后移动
+    bindtouchend=&quot;onEnd&quot; // 手指触摸动作结束
+    bindtouchcancel=&quot;onCancel&quot; // 手指触摸动作被打断，如来电提醒，弹窗
+    bindlongtap=&quot;onLongTap&quot; // 手指长按 500ms 之后触发，触发了长按事件后进行移动不会触发屏幕的滚动
+    binderror=&quot;onError&quot; // 当发生错误时触发 error 事件，detail = &#123;errMsg&#125;
+/&gt;
+</code></pre>
+<h3 id="在js中获取画布的实例"><a href="#在js中获取画布的实例" class="headerlink" title="在js中获取画布的实例"></a>在js中获取画布的实例</h3><pre><code>// 创建画布
+async createCanvas ()&#123;
+  // 由于画布并没有像其他的一样支持小程序独有的 rpx 自适应尺寸单位, 所以要获取rpx适配的值
+  // 计算公式为 设备视口宽度 / 设计图宽度(375) = 设计图中的一像素适配设备视口宽度的几像素
+  const rpx = wx.getSystemInfoSync().windowWidth / 375
+  // 获取画布实例(node), 宽高等
+  const canvasRect = await getCanvasRect(&#39;#canvas&#39;)
+  const &#123;width, height, node&#125; = canvasRect
+  // 创建画笔
+  const ctx = node.getContext(&#39;2d&#39;)
+  console.log(width, height, node)
+&#125;
+</code></pre>
+<h3 id="新版2D-Canvas-插入图片的方法"><a href="#新版2D-Canvas-插入图片的方法" class="headerlink" title="新版2D Canvas 插入图片的方法"></a>新版2D Canvas 插入图片的方法</h3><pre><code>// 创建图片对象, src地址为本地地址, onload回调为图片加载完毕后, 在该函数中绘制图形
+const labelUrl123=node.createImage()
+labelUrl123.src= labelUrl
+labelUrl123.onload = () =&gt; ctx.drawImage(labelUrl123, 0, 0, 35*rpx, 35*rpx);
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2019/11/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2019-11-%E4%BD%BF%E7%94%A8Fiddler%E6%8A%93%E5%8F%96%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          【保姆级】教你如何使用Fiddler抓取移动端App请求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2019/10/web%E5%89%8D%E7%AB%AF/2019-10-%E5%93%8D%E5%BA%94%E5%BC%8F.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">响应式布局的实现方法</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=微信小程序原生开发 - Oct1a&u=https://oct1a.cn/article/2019/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/2019-11-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=微信小程序原生开发 - Oct1a&url=https://oct1a.cn/article/2019/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/2019-11-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>

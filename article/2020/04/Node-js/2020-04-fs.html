@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-fs | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvpd00dnogdd7bwa8ozu" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-fs
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h3 id="普通读取"><a href="#普通读取" class="headerlink" title="普通读取"></a>普通读取</h3><p>同步读取</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+var data;
+
+try&#123;
+    data = fs.readFileSync(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;);
+    console.log(&#39;文件内容: &#39; + data);
+&#125;catch(err)&#123;
+    console.error(&#39;读取文件出错: &#39; + err.message);
+&#125;
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="powershell">/usr/local/bin/node readFileSync.js
+文件内容: hello world
+</code></pre>
+<p>异步读取</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.readFile(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;, function(err, data)&#123;
+    if(err)&#123;
+        return console.error(&#39;读取文件出错: &#39; + err.message);
+    &#125;
+    console.log(&#39;文件内容: &#39; + data);
+&#125;);
+</code></pre>
+<p>输出如下</p>
+<pre><code class="powershell">/usr/local/bin/node readFile.js
+文件内容: hello world
+</code></pre>
+<h3 id="通过文件流读取"><a href="#通过文件流读取" class="headerlink" title="通过文件流读取"></a>通过文件流读取</h3><p>适合读取大文件</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+var readStream = fs.createReadStream(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;);
+
+readStream
+    .on(&#39;data&#39;, function(chunk) &#123;
+        console.log(&#39;读取数据: &#39; + chunk);
+    &#125;)
+    .on(&#39;error&#39;, function(err)&#123;
+        console.log(&#39;出错: &#39; + err.message);
+    &#125;)
+    .on(&#39;end&#39;, function()&#123;  // 没有数据了
+        console.log(&#39;没有数据了&#39;);
+    &#125;)
+    .on(&#39;close&#39;, function()&#123;  // 已经关闭，不会再有事件抛出
+        console.log(&#39;已经关闭&#39;);
+    &#125;);
+</code></pre>
+<p>输出如下</p>
+<pre><code class="powershell">/usr/local/bin/node createReadStream.js
+读取数据: hello world
+没有数据了
+已经关闭
+</code></pre>
+<h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><p>备注：以下代码，如果文件不存在，则创建文件；如果文件存在，则覆盖文件内容；</p>
+<p>异步写入</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.writeFile(&#39;./fileForWrite.txt&#39;, &#39;hello world&#39;, &#39;utf8&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;文件写入成功&#39;);
+&#125;);
+</code></pre>
+<p>同步写入</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+try&#123;
+    fs.writeFileSync(&#39;./fileForWrite1.txt&#39;, &#39;hello world&#39;, &#39;utf8&#39;);
+    console.log(&#39;文件写入成功&#39;);
+&#125;catch(err)&#123;
+    throw err;
+&#125;
+</code></pre>
+<h3 id="通过文件流写入"><a href="#通过文件流写入" class="headerlink" title="通过文件流写入"></a>通过文件流写入</h3><pre><code class="javascript">var fs = require(&#39;fs&#39;);
+var writeStream = fs.createWriteStream(&#39;./fileForWrite1.txt&#39;, &#39;utf8&#39;);
+
+writeStream
+    .on(&#39;close&#39;, function()&#123;  // 已经关闭，不会再有事件抛出
+        console.log(&#39;已经关闭&#39;);
+    &#125;);
+
+writeStream.write(&#39;hello&#39;);
+writeStream.write(&#39;world&#39;);
+writeStream.end(&#39;&#39;);
+</code></pre>
+<h3 id="相对底层的接口"><a href="#相对底层的接口" class="headerlink" title="相对底层的接口"></a>相对底层的接口</h3><blockquote>
+<p>fs.write(fd, buffer, offset, length[, position], callback)<br>fs.write(fd, data[, position[, encoding]], callback)<br>fs.writeSync(fd, buffer, offset, length[, position])<br>fs.writeSync(fd, data[, position[, encoding]])</p>
+</blockquote>
+<ul>
+<li>fd：写入的文件句柄。</li>
+<li>buffer：写入的内容。</li>
+<li>offset：将buffer从offset位置开始，长度为length的内容写入。</li>
+<li>length：写入的buffer内容的长度。</li>
+<li>position：从打开文件的position处写入。</li>
+<li>callback：参数为 <code>(err, written, buffer)</code>。<code>written</code>表示有xx字节的buffer被写入。</li>
+</ul>
+<p>备注：<code>fs.write(fd, buffer, offset, length[, position], callback)</code>跟<code>fs.write(fd, data[, position[, encoding]], callback)</code>的区别在于：后面的只能把所有的data写入，而前面的可以写入指定的data子串？</p>
+<h2 id="文件是否存在"><a href="#文件是否存在" class="headerlink" title="文件是否存在"></a>文件是否存在</h2><p><code>fs.exists()</code>已经是<code>deprecated</code>状态，现在可以通过下面代码判断文件是否存在。</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.access(&#39;./fileForRead.txt&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;fileForRead.txt存在&#39;);
+&#125;);
+
+fs.access(&#39;./fileForRead2.txt&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;fileForRead2.txt存在&#39;);
+&#125;);
+</code></pre>
+<p><code>fs.access()</code>除了判断文件是否存在（默认模式），还可以用来判断文件的权限。</p>
+<p>备忘：<code>fs.constants.F_OK</code>等常量无法获取（node v6.1，mac 10.11.4下，<code>fs.constants</code>是<code>undefined</code>）</p>
+<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>异步版本（如果目录已存在，会报错）</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.mkdir(&#39;./hello&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;目录创建成功&#39;);
+&#125;);
+</code></pre>
+<p>同步版本</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.mkdirSync(&#39;./hello&#39;);
+</code></pre>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.unlink(&#39;./fileForUnlink.txt&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;文件删除成功&#39;);
+&#125;);
+</code></pre>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.unlinkSync(&#39;./fileForUnlink.txt&#39;);
+</code></pre>
+<h2 id="创建目录-1"><a href="#创建目录-1" class="headerlink" title="创建目录"></a>创建目录</h2><pre><code class="javascript">// fs.mkdir(path[, mode], callback)
+var fs = require(&#39;fs&#39;);
+
+fs.mkdir(&#39;sub&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;创建目录成功&#39;);
+&#125;);
+</code></pre>
+<pre><code class="javascript">// fs.mkdirSync(path[, mode])
+var fs = require(&#39;fs&#39;);
+
+try&#123;
+    fs.mkdirSync(&#39;hello&#39;);
+    console.log(&#39;创建目录成功&#39;);
+&#125;catch(e)&#123;
+    throw e;
+&#125;
+</code></pre>
+<h2 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h2><p>同步版本，注意：<code>fs.readdirSync()</code>只会读一层，所以需要判断文件类型是否目录，如果是，则进行递归遍历。</p>
+<pre><code class="javascript">// fs.readdirSync(path[, options])
+
+var fs = require(&#39;fs&#39;);
+var path = require(&#39;path&#39;);
+
+var getFilesInDir = function(dir)&#123;
+
+    var results = [ path.resolve(dir) ];
+    var files = fs.readdirSync(dir, &#39;utf8&#39;);
+
+    files.forEach(function(file)&#123;
+
+        file = path.resolve(dir, file);
+
+        var stats = fs.statSync(file);
+
+        if(stats.isFile())&#123;
+            results.push(file);
+        &#125;else if(stats.isDirectory())&#123;
+            results = results.concat( getFilesInDir(file) );
+        &#125;
+    &#125;);
+
+    return results;
+&#125;;
+
+var files = getFilesInDir(&#39;../&#39;);
+console.log(files);
+</code></pre>
+<p>异步版本：（TODO）</p>
+<pre><code class="javascript">
+</code></pre>
+<h2 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h2><pre><code class="javascript">// fs.rename(oldPath, newPath, callback)
+var fs = require(&#39;fs&#39;);
+
+fs.rename(&#39;./hello&#39;, &#39;./world&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;重命名成功&#39;);
+&#125;);
+</code></pre>
+<pre><code class="javascript">fs.renameSync(oldPath, newPath)
+var fs = require(&#39;fs&#39;);
+
+fs.renameSync(&#39;./world&#39;, &#39;./hello&#39;);
+</code></pre>
+<h2 id="监听文件修改"><a href="#监听文件修改" class="headerlink" title="监听文件修改"></a>监听文件修改</h2><p><code>fs.watch()</code>比<code>fs.watchFile()</code>高效很多（why）</p>
+<h3 id="fs-watchFile"><a href="#fs-watchFile" class="headerlink" title="fs.watchFile()"></a>fs.watchFile()</h3><p>实现原理：轮询。每隔一段时间检查文件是否发生变化。所以在不同平台上表现基本是一致的。</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+var options = &#123;
+    persistent: true,  // 默认就是true
+    interval: 2000  // 多久检查一次
+&#125;;
+
+// curr, prev 是被监听文件的状态, fs.Stat实例
+// 可以通过 fs.unwatch() 移除监听
+fs.watchFile(&#39;./fileForWatch.txt&#39;, options, function(curr, prev)&#123;
+    console.log(&#39;修改时间为: &#39; + curr.mtime);
+&#125;);
+</code></pre>
+<p>修改<code>fileForWatch.txt</code>，可以看到控制台下打印出日志</p>
+<pre><code class="powershell">/usr/local/bin/node watchFile.js
+修改时间为: Sat Jul 16 2016 19:03:57 GMT+0800 (CST)
+修改时间为: Sat Jul 16 2016 19:04:05 GMT+0800 (CST)
+</code></pre>
+<p>为啥子？莫非单纯访问文件也会触发回调？</p>
+<blockquote>
+<p>If you want to be notified when the file was modified, not just accessed, you need to compare curr.mtime and prev.mtime.</p>
+</blockquote>
+<p>在 <strong>v0.10</strong> 之后的改动。如果监听的文件不存在，会怎么处理。如下</p>
+<blockquote>
+<p>Note: when an fs.watchFile operation results in an ENOENT error, it will invoke the listener once, with all the fields zeroed (or, for dates, the Unix Epoch). In Windows, blksize and blocks fields will be undefined, instead of zero. If the file is created later on, the listener will be called again, with the latest stat objects. This is a change in functionality since v0.10.</p>
+</blockquote>
+<h3 id="fs-watch"><a href="#fs-watch" class="headerlink" title="fs.watch()"></a>fs.watch()</h3><blockquote>
+<p>fs.watch(filename[, options][, listener])<br>fs.unwatchFile(filename[, listener])</p>
+</blockquote>
+<p>这接口非常不靠谱（当前测试用的v6.1.0），参考 <a target="_blank" rel="noopener" href="https://github.com/nodejs/node/issues/7420">https://github.com/nodejs/node/issues/7420</a></p>
+<blockquote>
+<p>fs.watch(filename[, options][, listener])#</p>
+</blockquote>
+<p>注意：<code>fs.watch()</code>这个接口并不是在所有的平台行为都一致，并且在某些情况下是不可用的。<code>recursive</code>这个选项只在<code>mac</code>、<code>windows</code>下可用。</p>
+<p>问题来了：</p>
+<ol>
+<li>不一致的表现。</li>
+<li>不可用的场景。</li>
+<li>linux上要recursive咋整。</li>
+</ol>
+<blockquote>
+<p>The fs.watch API is not 100% consistent across platforms, and is unavailable in some situations.<br>The recursive option is only supported on OS X and Windows.</p>
+</blockquote>
+<p>备忘，不可用的场景。比如网络文件系统等。</p>
+<blockquote>
+<p>For example, watching files or directories can be unreliable, and in some cases impossible, on network file systems (NFS, SMB, etc), or host file systems when using virtualization software such as Vagrant, Docker, etc.</p>
+</blockquote>
+<p>另外，listener回调有两个参数，分别是<code>event</code>、<code>filename</code>。其中，<code>filename</code>仅在linux、windows上会提供，并且不是100%提供，所以，尽量不要依赖<code>filename</code>。</p>
+<p>在linux、osx上，<code>fs.watch()</code>监听的是inode。如果文件被删除，并重新创建，那么删除事件会触发。同时，<code>fs.watch()</code>监听的还是最初的inode。（API的设计就是这样的）</p>
+<p>结论：怎么看都感觉这个API很不靠谱，虽然性能比fs.watchFile()要高很多。</p>
+<p>先来个例子，在osx下测试了一下，简直令人绝望。。。无论是创建、修改、删除文件，<code>evt</code>都是<code>rename</code>。。。</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+var options = &#123;
+    persistent: true,
+    recursive: true,
+    encoding: &#39;utf8&#39;
+&#125;;
+
+fs.watch(&#39;../&#39;, options, function(event, filename)&#123;
+    console.log(&#39;触发事件:&#39; + event);
+    if(filename)&#123;
+        console.log(&#39;文件名是: &#39; + filename);
+    &#125;else&#123;
+        console.log(&#39;文件名是没有提供&#39;);
+    &#125;
+&#125;);
+</code></pre>
+<p>修改下<code>fileForWatch.txt</code>，看到下面输出。。。感觉打死也不想用这个API。。。</p>
+<p>贴下环境：osx 10.11.4, node v6.1.0。</p>
+<pre><code class="powershell">触发事件:rename
+文件名是: fs/fileForWatch.txt___jb_bak___
+触发事件:rename
+文件名是: fs/fileForWatch.txt
+触发事件:rename
+文件名是: fs/fileForWatch.txt___jb_old___
+触发事件:rename
+文件名是: .idea/workspace.xml___jb_bak___
+触发事件:rename
+文件名是: .idea/workspace.xml
+触发事件:rename
+文件名是: .idea/workspace.xml___jb_old___
+</code></pre>
+<h2 id="修改所有者"><a href="#修改所有者" class="headerlink" title="修改所有者"></a>修改所有者</h2><p>参考linux命令行，不举例子了。。。</p>
+<blockquote>
+<p>fs.chown(path, uid, gid, callback)<br>fs.chownSync(path, uid, gid)<br>fs.fchown(fd, uid, gid, callback)<br>fs.fchownSync(fd, uid, gid)</p>
+</blockquote>
+<h2 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h2><p>可以用<code>fs.chmod()</code>，也可以用<code>fs.fchmod()</code>。两者的区别在于，前面传的是文件路径，后面传的的文件句柄。</p>
+<ol>
+<li><code>fs.chmod)</code>、<code>fs.fchmod()</code>区别：传的是文件路径，还是文件句柄。</li>
+<li><code>fs.chmod()</code>、<code>fs.lchmod()</code>区别：如果文件是软连接，那么<code>fs.chmod()</code>修改的是软连接指向的目标文件；<code>fs.lchmod()</code>修改的是软连接。</li>
+</ol>
+<blockquote>
+<p>fs.chmod(path, mode, callback)<br>fs.chmodSync(path, mode)</p>
+</blockquote>
+<blockquote>
+<p>fs.fchmod(fd, mode, callback)<br>fs.fchmodSync(fd, mode)</p>
+</blockquote>
+<blockquote>
+<p>fs.lchmod(path, mode, callback)#<br>fs.lchmodSync(path, mode)</p>
+</blockquote>
+<p>例子：</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.chmod(&#39;./fileForChown.txt&#39;, &#39;777&#39;, function(err)&#123;
+    if(err) console.log(err);
+    console.log(&#39;权限修改成功&#39;);
+&#125;);
+</code></pre>
+<p>同步版本：</p>
+<pre><code>var fs = require(&#39;fs&#39;);
+
+fs.chmodSync(&#39;./fileForChown.txt&#39;, &#39;777&#39;);
+</code></pre>
+<h2 id="获取文件状态"><a href="#获取文件状态" class="headerlink" title="获取文件状态"></a>获取文件状态</h2><p>区别：</p>
+<ul>
+<li><code>fs.stat()</code> vs <code>fs.fstat()</code>：传文件路径 vs 文件句柄。</li>
+<li><code>fs.stat()</code> vs <code>fs.lstat()</code>：如果文件是软链接，那么<code>fs.stat()</code>返回目标文件的状态，<code>fs.lstat()</code>返回软链接本身的状态。</li>
+</ul>
+<blockquote>
+<p>fs.stat(path, callback)<br>fs.statSync(path)</p>
+</blockquote>
+<blockquote>
+<p>fs.fstat(fd, callback)<br>fs.fstatSync(fd)</p>
+</blockquote>
+<blockquote>
+<p>fs.lstat(path, callback)<br>fs.lstatSync(path)</p>
+</blockquote>
+<p>主要关注<code>Class: fs.Stats</code>。</p>
+<p>首先是方法</p>
+<ul>
+<li>stats.isFile()  – 是否文件</li>
+<li>stats.isDirectory() – 是否目录</li>
+<li>stats.isBlockDevice() – 什么鬼</li>
+<li>stats.isCharacterDevice() – 什么鬼</li>
+<li>stats.isSymbolicLink() (only valid with fs.lstat()) – 什么鬼</li>
+<li>stats.isFIFO() – 什么鬼</li>
+<li>stats.isSocket() – 是不是socket文件</li>
+</ul>
+<p>官网例子：</p>
+<pre><code class="javascript">&#123;
+  dev: 2114,
+  ino: 48064969,
+  mode: 33188,
+  nlink: 1,
+  uid: 85,
+  gid: 100,
+  rdev: 0,
+  size: 527,
+  blksize: 4096,
+  blocks: 8,
+  atime: Mon, 10 Oct 2011 23:24:11 GMT, // 访问时间
+  mtime: Mon, 10 Oct 2011 23:24:11 GMT,  // 文件内容修改时间
+  ctime: Mon, 10 Oct 2011 23:24:11 GMT,  // 文件状态修改时间
+  birthtime: Mon, 10 Oct 2011 23:24:11 GMT  // 创建时间
+&#125;
+</code></pre>
+<ul>
+<li>atime：Access Time // 访问时间</li>
+<li>mtime:: Modified Time  // 文件内容修改时间</li>
+<li>ctime: Changed Time.  // 文件状态修改时间，比如修改文件所有者、修改权限、重命名等</li>
+<li>birthtime: Birth Time // 创建时间。在某些系统上是不可靠的，因为拿不到。</li>
+</ul>
+<p>例子：</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+var getTimeDesc = function(d)&#123;
+    return [d.getFullYear(), d.getMonth()+1, d.getDate()].join(&#39;-&#39;) + &#39; &#39; + [d.getHours(), d.getMinutes(), d.getSeconds()].join(&#39;:&#39;);
+&#125;;
+
+fs.stat(&#39;./fileForStat.txt&#39;, function(err, stats)&#123;
+    console.log(&#39;文件大小: &#39; + stats.size);
+    console.log(&#39;创建时间: &#39; + getTimeDesc(stats.birthtime));
+    console.log(&#39;访问时间: &#39; + getTimeDesc(stats.atime));
+    console.log(&#39;修改时间: &#39; + getTimeDesc(stats.mtime));
+&#125;);
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="powershell">/usr/local/bin/node stat.js
+文件大小: 3613
+创建时间: 2016-7-16 12:40:49
+访问时间: 2016-7-16 12:40:49
+修改时间: 2016-7-16 12:40:49
+
+Process finished with exit code 0
+</code></pre>
+<p>同步的例子：</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+var getTimeDesc = function(d)&#123;
+    return [d.getFullYear(), d.getMonth()+1, d.getDate()].join(&#39;-&#39;) + &#39; &#39; + [d.getHours(), d.getMinutes(), d.getSeconds()].join(&#39;:&#39;);
+&#125;;
+
+var stats = fs.statSync(&#39;./fileForStat.txt&#39;);
+
+console.log(&#39;文件大小: &#39; + stats.size);
+console.log(&#39;创建时间: &#39; + getTimeDesc(stats.birthtime));
+console.log(&#39;访问时间: &#39; + getTimeDesc(stats.atime));
+console.log(&#39;修改时间: &#39; + getTimeDesc(stats.mtime));
+</code></pre>
+<h2 id="访问-权限检测"><a href="#访问-权限检测" class="headerlink" title="访问/权限检测"></a>访问/权限检测</h2><p>例子：</p>
+<pre><code class="javascript">// fs.access(path[, mode], callback)
+var fs = require(&#39;fs&#39;);
+
+fs.access(&#39;./fileForAccess.txt&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;可以访问&#39;);
+&#125;);
+</code></pre>
+<p>同步版本：</p>
+<pre><code class="javascript">// fs.accessSync(path[, mode])
+var fs = require(&#39;fs&#39;);
+
+// 如果成功，则返回undefined，如果失败，则抛出错误（什么鬼）
+try&#123;
+    fs.accessSync(&#39;./fileForAccess.txt&#39;);
+&#125;catch(e)&#123;
+    throw(e);
+&#125;
+</code></pre>
+<h2 id="文件打开-关闭"><a href="#文件打开-关闭" class="headerlink" title="文件打开/关闭"></a>文件打开/关闭</h2><p>比较底层的接口，实际需要用到的机会不多。需要用到的时候看下<a target="_blank" rel="noopener" href="https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback">文档</a>就行。</p>
+<ul>
+<li>flags：文件打开模式，比如<code>r</code>、<code>r+</code>、<code>w</code>、<code>w+</code>等。可选模式非常多。</li>
+<li>mode：默认是<code>666</code>，可读+可写。</li>
+</ul>
+<blockquote>
+<p>fs.open(path, flags[, mode], callback)<br>fs.openSync(path, flags[, mode])<br>fs.close(fd, callback)<br>fs.closeSync(fd)</p>
+</blockquote>
+<h2 id="文件读取（底层）"><a href="#文件读取（底层）" class="headerlink" title="文件读取（底层）"></a>文件读取（底层）</h2><p>相对底层的读取接口，参数如下</p>
+<ul>
+<li>fd：文件句柄。</li>
+<li>buffer：将读取的文件内容写到buffer里。</li>
+<li>offset：buffer开始写入的位置。（在offset开始写入，还是offset+1？）</li>
+<li>length：要读取的字节数。</li>
+<li>position：文件从哪个位置开始读取。如果是null，那么就从当前位置开始读取。（读取操作会记录下上一个位置）</li>
+</ul>
+<p>此外，<code>callback</code>的回调参数为<code>(err, bytesRead, buffer)</code></p>
+<blockquote>
+<p>fs.read(fd, buffer, offset, length, position, callback)</p>
+</blockquote>
+<h2 id="追加文件内容"><a href="#追加文件内容" class="headerlink" title="追加文件内容"></a>追加文件内容</h2><blockquote>
+<p>fs.appendFile(file, data[, options], callback)</p>
+</blockquote>
+<ul>
+<li>file：可以是文件路径，也可以是文件句柄。（还可以是buffer？）</li>
+<li>data：要追加的内容。string或者buffer。</li>
+<li>options<ul>
+<li>encoding：编码，默认是<code>utf8</code></li>
+<li>mode：默认是<code>0o666</code></li>
+<li>flag：默认是<code>a</code></li>
+</ul>
+</li>
+</ul>
+<p>注意：如果<code>file</code>是文件句柄，那么</p>
+<ul>
+<li>开始追加数据前，file需要已经打开。</li>
+<li>file需要手动关闭。</li>
+</ul>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.appendFile(&#39;./extra/fileForAppend.txt&#39;, &#39;hello&#39;, &#39;utf8&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;append成功&#39;);
+&#125;);
+</code></pre>
+<h2 id="文件内容截取"><a href="#文件内容截取" class="headerlink" title="文件内容截取"></a>文件内容截取</h2><blockquote>
+<p>fs.truncate(path, len, callback)<br>fs.truncateSync(path, len)</p>
+<p>fs.ftruncate(fd, len, callback)<br>fs.ftruncateSync(fd, len)</p>
+</blockquote>
+<p>用途参考<a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">linux说明文档</a>。</p>
+<p>要点：</p>
+<ul>
+<li><code>offset</code>不会变化。比如通过<code>fs.read()</code>读取文件内容，就需要特别注意。</li>
+<li>如果<code>len</code>小于文件内容长度，剩余文件内容部分会丢失；如果<code>len</code>大于文件内容长度，那么超出的部分，会用<code>\0</code>进行填充。</li>
+<li>如果传的是文件路径，需要确保文件是可写的；如果传的是文件句柄，需要确保文件句柄已经打开并且可写入。</li>
+</ul>
+<blockquote>
+<p>The truncate() and ftruncate() functions cause the regular file named<br>by path or referenced by fd to be truncated to a size of precisely<br>length bytes.</p>
+</blockquote>
+<blockquote>
+<p>If the file previously was larger than this size, the extra data is<br>lost.  If the file previously was shorter, it is extended, and the<br>extended part reads as null bytes (‘\0’).</p>
+</blockquote>
+<blockquote>
+<p>The file offset is not changed.</p>
+</blockquote>
+<blockquote>
+<p>With ftruncate(), the file must be open for writing; with truncate(), the file must be writable.</p>
+</blockquote>
+<h2 id="修改文件属性（时间）"><a href="#修改文件属性（时间）" class="headerlink" title="修改文件属性（时间）"></a>修改文件属性（时间）</h2><ul>
+<li>path/fd：文件路径/文件句柄</li>
+<li>atime：Access Time。上一次访问文件数据的时间。</li>
+<li>mtime：Modified Time。修改时间。</li>
+</ul>
+<blockquote>
+<p>fs.utimes(path, atime, mtime, callback)<br>fs.utimesSync(path, atime, mtime)</p>
+</blockquote>
+<blockquote>
+<p>fs.futimes(fd, atime, mtime, callback)<br>fs.futimesSync(fd, atime, mtime)</p>
+</blockquote>
+<p>备注，在命令行下可以</p>
+<ul>
+<li>通过<code>stat</code>查看文件的状态信息，包括了上面的atime、mtime。</li>
+<li>通过<code>touch</code>修改这几个时间。</li>
+</ul>
+<h2 id="创建文件链接"><a href="#创建文件链接" class="headerlink" title="创建文件链接"></a>创建文件链接</h2><blockquote>
+<p>fs.symlink(target, path[, type], callback)<br>fs.symlinkSync(target, path[, type])</p>
+<p>fs.link(srcpath, dstpath, callback)<br>fs.linkSync(srcpath, dstpath)</p>
+</blockquote>
+<blockquote>
+<p> link() creates a new link (also known as a hard link) to an existing file.</p>
+</blockquote>
+<p>软链接、硬链接区别：<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">参考</a> 或者 [这个]。(<a target="_blank" rel="noopener" href="http://www.cnblogs.com/itech/archive/2009/04/10/1433052.html">http://www.cnblogs.com/itech/archive/2009/04/10/1433052.html</a>)</p>
+<ul>
+<li>硬链接：inode相同，多个别名。删除一个硬链接文件，不会影响其他有相同inode的文件。</li>
+<li>软链接：有自己的inode，用户数据块存放指向文件的inode。</li>
+</ul>
+<p>参考<a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man2/link.2.html">这里</a>。</p>
+<h2 id="创建临时目录"><a href="#创建临时目录" class="headerlink" title="创建临时目录"></a>创建临时目录</h2><blockquote>
+<p>fs.mkdtemp(prefix, callback)<br>fs.mkdtempSync(prefix)</p>
+</blockquote>
+<p>备忘：跟普通的随便找个目录，创建个随机名字的文件夹，有什么区别？</p>
+<p>代码示例如下：</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.mkdtemp(&#39;/tmp/&#39;, function(err, folder)&#123;
+    if(err) throw err;
+    console.log(&#39;创建临时目录: &#39; + folder);
+&#125;);
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="powershell">/usr/local/bin/node mkdtemp.js
+创建临时目录: /tmp/Cxw51O
+</code></pre>
+<h2 id="找出软连接指向的真实路径"><a href="#找出软连接指向的真实路径" class="headerlink" title="找出软连接指向的真实路径"></a>找出软连接指向的真实路径</h2><blockquote>
+<p>fs.readlink(path[, options], callback)<br>fs.readlinkSync(path[, options])</p>
+</blockquote>
+<p>如下面例子，创建了个软链接指向<code>fileForReadLink.txt</code>，通过<code>fs.readlink()</code>就可以找出原始的路径。</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+var randomFileName = &#39;./extra/fileForReadLink-&#39; + String(Math.random()).slice(2, 6) + &#39;.txt&#39;;
+
+fs.symlinkSync(&#39;./extra/fileForReadLink.txt&#39;, randomFileName);
+fs.readlink(randomFileName, &#39;utf8&#39;, function(err, linkString)&#123;
+    if(err) throw err;
+    console.log(&#39;链接文件内容: &#39; + linkString);
+&#125;);
+</code></pre>
+<p>类似终端下直接运行<code>readlink</code>。对于软链接文件，效果同上面代码。对于硬链接，没有输出。</p>
+<pre><code class="powershell">➜  extra git:(master) ✗ readlink fileForReadLink-9827.txt
+./extra/fileForReadLink.txt
+➜  extra git:(master) ✗ readlink fileForLinkHard.txt
+➜  extra git:(master) ✗ readlink fileForLinkSoft.txt
+./extra/fileForLink.txt
+</code></pre>
+<h2 id="真实路径"><a href="#真实路径" class="headerlink" title="真实路径"></a>真实路径</h2><blockquote>
+<p>fs.realpath(path[, options], callback)<br>fs.realpathSync(path[, options])</p>
+</blockquote>
+<p>例子：（不能作用于软链接？）</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+var path = require(&#39;path&#39;);
+
+// fileForRealPath1.txt 是普通文件,正常运行
+fs.realpath(&#39;./extra/inner/fileForRealPath1.txt&#39;, function(err, resolvedPath)&#123;
+    if(err) throw err;
+    console.log(&#39;fs.realpath: &#39; + resolvedPath);
+&#125;);
+
+// fileForRealPath.txt 是软链接, 会报错,提示找不到文件
+fs.realpath(&#39;./extra/inner/fileForRealPath.txt&#39;, function(err, resolvedPath)&#123;
+    if(err) throw err;
+    console.log(&#39;fs.realpath: &#39; + resolvedPath);
+&#125;);
+
+console.log( &#39;path.resolve: &#39; + path.resolve(&#39;./extra/inner/fileForRealpath.txt&#39;) );
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="powershell">path.resolve: /Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/extra/inner/fileForRealpath.txt
+fs.realpath: /Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/extra/inner/fileForRealPath1.txt
+/Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/realpath.js:12
+    if(err) throw err;
+            ^
+
+Error: ENOENT: no such file or directory, realpath &#39;./extra/inner/fileForRealPath.txt&#39;
+    at Error (native)
+
+Process finished with exit code 1
+</code></pre>
+<h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><blockquote>
+<p>fs.rmdir(path, callback)<br>fs.rmdirSync(path)</p>
+</blockquote>
+<p>例子如下：</p>
+<pre><code class="javascript">var fs = require(&#39;fs&#39;);
+
+fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
+    if(err) throw err;
+    console.log(&#39;目录删除成功&#39;);
+&#125;);
+</code></pre>
+<h2 id="不常用"><a href="#不常用" class="headerlink" title="不常用"></a>不常用</h2><h3 id="缓冲区内容写到磁盘"><a href="#缓冲区内容写到磁盘" class="headerlink" title="缓冲区内容写到磁盘"></a>缓冲区内容写到磁盘</h3><blockquote>
+<p>fs.fdatasync(fd, callback)<br>fs.fdatasyncSync(fd)</p>
+</blockquote>
+<p>可以参考这里：</p>
+<blockquote>
+<p>1、sync函数<br>sync函数只是将所有修改过的块缓冲区排入写队列，然后就返回，它并不等待实际写磁盘操作结束。<br>通常称为update的系统守护进程会周期性地（一般每隔30秒）调用sync函数。这就保证了定期冲洗内核的块缓冲区。命令sync(1)也调用sync函数。<br>2、fsync函数<br>fsync函数只对由文件描述符filedes指定的单一文件起作用，并且等待写磁盘操作结束，然后返回。<br>fsync可用于数据库这样的应用程序，这种应用程序需要确保将修改过的块立即写到磁盘上。<br>3、fdatasync函数<br>fdatasync函数类似于fsync，但它只影响文件的数据部分。而除数据外，fsync还会同步更新文件的属性。<br>对于提供事务支持的数据库，在事务提交时，都要确保事务日志（包含该事务所有的修改操作以及一个提交记录）完全写到硬盘上，才认定事务提交成功并返回给应用层。</p>
+</blockquote>
+<h2 id="待确认"><a href="#待确认" class="headerlink" title="待确认"></a>待确认</h2><ol>
+<li>通篇的<code>mode</code>，待确认。</li>
+<li>fs.access()更多用法（涉及 fs.constants.F_OK等权限）</li>
+</ol>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/04/Node-js/2020-04-child-process.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Node.js-child_process
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/04/Node-js/2020-05-cluster.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Node.js-buffer</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-fs - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-04-fs.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-fs - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-fs.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>
