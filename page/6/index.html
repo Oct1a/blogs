@@ -2,42 +2,49 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    
-    <title>Oct1a</title>
+  <meta charset="utf-8">
+  
+    <title>
+      
+            Oct1a
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
 
     
 
-    
-        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
-    
+        
+          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+            
 
-    
+              
 
-    
+                  
 
-    
+                      
 
-    
+                          
 
-    
+                              
 <link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
 
 
-    <script>
-        window.isPost = false
-        window.aomori = {
-            
-            
-            
-        }
-        window.aomori_logo_typed_animated = true
-        window.aomori_search_algolia = true
+                                <script>
+                                  window.isPost = false
+                                  window.aomori = {
+                                    
+                                    
+                                    
+                                  }
+                                  window.aomori_logo_typed_animated = true
+                                  window.aomori_search_algolia = true
+                                </script>
 
-    </script>
-
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 
 <body>
 
@@ -117,6 +124,830 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="index">
+  
+    
+      <article
+id="post-2020-05-charset-enc-dec"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-charset-enc-dec.html">Node.js-buffer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在web服务端开发中，字符的编解码几乎每天都要打交道。编解码一旦处理不当，就会出现令人头疼的乱码问题。</p>
+<p>不少从事node服务端开发的同学，由于对字符编码码相关知识了解不足，遇到问题时，经常会一筹莫展，花大量的时间在排查、解决问题。</p>
+<p>文本先对字符编解码的基础知识进行简单介绍，然后举例说明如何在node中进行编解码，最后是服务端的代码案例。</p>
+<h2 id="关于字符编解码"><a href="#关于字符编解码" class="headerlink" title="关于字符编解码"></a>关于字符编解码</h2><p>在网络通信的过程中，传输的都是二进制的比特位，不管发送的内容是文本还是图片，采用的语言是中文还是英文。</p>
+<p>举个例子，客户端向服务端发送”你好”。</p>
+<blockquote>
+<p>客户端 — 你好 —&gt; 服务端</p>
+</blockquote>
+<p>这中间包含了两个关键步骤，分别对应的是编码、解码。</p>
+<ol>
+<li>客户端：将”你好”这个字符串，编码成计算机网络需要的二进制比特位。</li>
+<li>服务端：将接收到的二进制比特位，解码成”你好”这个字符串。</li>
+</ol>
+<p>总结一下：</p>
+<ol>
+<li>编码：将需要传送的数据，转成对应的二进制比特位。</li>
+<li>解码：将二进制比特位，转成原始的数据。</li>
+</ol>
+<p>上面有些重要的技术细节没有提到，答案在下一小节。</p>
+<ul>
+<li>客户端怎么知道”你好”这个字符对应的比特位是多少？</li>
+<li>服务端收到二进制比特位之后，怎么知道对应的字符串是什么？</li>
+</ul>
+<h2 id="关于字符集和字符编码"><a href="#关于字符集和字符编码" class="headerlink" title="关于字符集和字符编码"></a>关于字符集和字符编码</h2><p>上面提到字符、二进制的转换问题。既然两者可以互相转换，也就是说存在明确的转换规则，可以实现<strong>字符&lt;-&gt;二进制</strong>的相互转换。</p>
+<p>这里提到的转换规则，其实就是我们经常听到的字符集&amp;字符编码。</p>
+<p><strong>字符集</strong>是一系列字符（文字、标点符号等）的集合。字符集有很多，常见的有ASCII、Unicode、GBK等。不同字符集主要的区别在于包含字符个数的不同。</p>
+<p>了解了字符集的概念后，接下来介绍下字符编码。</p>
+<p>字符集告诉我们支持哪些字符，但具体字符怎么编码，是由<strong>字符编码</strong>决定的。比如Unicode字符集，支持的字符编码有UTF8(常用)、UTF16、UTF32。</p>
+<p>概括一下：</p>
+<ul>
+<li>字符集：字符的集合，不同字符集包含的字符数不同。</li>
+<li>字符编码：字符集中字符的实际编码方式。</li>
+<li>一个字符集可能有多种字符编码方式。</li>
+</ul>
+<p>可以把字符编码看成一个映射表，客户端、服务端就是根据这个映射表，来实现字符跟二进制的编解码转换。</p>
+<p>举个例子，”你”这个字符，在UTF8编码中，占据三个字节<code>0xe4 0xbd 0xa0</code>，而在GBK编码中，占据两个字节<code>0xc4 0xe3</code>。</p>
+<h2 id="字符编解码例子"><a href="#字符编解码例子" class="headerlink" title="字符编解码例子"></a>字符编解码例子</h2><p>上面已经提到了字符编解码所需的基础知识。下面我们看一个简单的例子，这里借助了<code>icon-lite</code>这个库来帮助我们实现编解码的操作。</p>
+<p>可以看到，在字符编码时，我们采用了<code>gbk</code>。在解码时，如果同样采用<code>gbk</code>，可以得到原始的字符。而当我们解码时采用<code>utf8</code>时，则出现了乱码。</p>
+<pre><code class="javascript">var iconv = require(&#39;iconv-lite&#39;);
+
+var oriText = &#39;你&#39;;
+
+var encodedBuff = iconv.encode(oriText, &#39;gbk&#39;);
+console.log(encodedBuff);
+// &lt;Buffer c4 e3&gt;
+
+var decodedText = iconv.decode(encodedBuff, &#39;gbk&#39;);
+console.log(decodedText);
+// 你
+
+var wrongText = iconv.decode(encodedBuff, &#39;utf8&#39;);
+console.log(wrongText);
+// ��
+</code></pre>
+<h2 id="实际例子：服务端编解码"><a href="#实际例子：服务端编解码" class="headerlink" title="实际例子：服务端编解码"></a>实际例子：服务端编解码</h2><p>通常我们需要处理编解码的场景有文件读写、网络请求处理。这里距网络请求的例子，介绍如何在服务端进行编解码。</p>
+<p>假设我们运行着如下http服务，监听来自客户端的请求。客户端传输数据时采用了<code>gbk</code>编码，而服务端默认采用的是<code>utf8</code>编码。</p>
+<p>如果此时采用默认的<code>utf8</code>对请求进行解码，就会出现乱码，因此需要特殊处理。</p>
+<p>服务端代码如下（为简化代码，这里跳过了请求方法、请求编码的判断）</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var iconv = require(&#39;iconv-lite&#39;);
+
+// 假设客户端采用post方法，编码为gbk
+var server = http.createServer(function (req, res) &#123;
+    var chunks = [];
+
+    req.on(&#39;data&#39;, function (chunk) &#123;
+        chunks.push(chunk)
+    &#125;);
+
+    req.on(&#39;end&#39;, function () &#123;
+        chunks = Buffer.concat(chunks);
+
+        // 对二进制进行解码
+        var body = iconv.decode(chunks, &#39;gbk&#39;);
+        console.log(body);
+
+        res.end(&#39;HELLO FROM SERVER&#39;);
+    &#125;);
+
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<p>对应的客户端代码如下：</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var iconv = require(&#39;iconv-lite&#39;);
+
+var charset = &#39;gbk&#39;;
+
+// 对字符&quot;你&quot;进行编码
+var reqBuff = iconv.encode(&#39;你&#39;, charset);
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;text/plain&#39;,
+        &#39;Content-Encoding&#39;: &#39;identity&#39;,
+        &#39;Charset&#39;: charset // 设置请求字符集编码
+    &#125;
+&#125;;
+
+var client = http.request(options, function(res) &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+client.end(reqBuff);
+</code></pre>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>iconv-lite<br><a target="_blank" rel="noopener" href="https://github.com/ashtuchkin/iconv-lite">https://github.com/ashtuchkin/iconv-lite</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-asymmetric-enc-dec"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-buffer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
+<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
+<h2 id="加密、解密方法"><a href="#加密、解密方法" class="headerlink" title="加密、解密方法"></a>加密、解密方法</h2><p>在Node.js中，负责安全的模块是<code>crypto</code>。非对称加密中，公钥加密，私钥解密，加解密对应的API分别如下。</p>
+<p>加密函数：</p>
+<pre><code class="javascript">crypto.publicEncrypt(key, buffer)
+</code></pre>
+<p>解密函数：</p>
+<pre><code class="javascript">crypto.privateDecrypt(privateKey, buffer)
+</code></pre>
+<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>假设有如下<code>utils.js</code></p>
+<pre><code class="javascript">// utils.js
+const crypto = require(&#39;crypto&#39;);
+
+// 加密方法
+exports.encrypt = (data, key) =&gt; &#123;
+  // 注意，第二个参数是Buffer类型
+  return crypto.publicEncrypt(key, Buffer.from(data));
+&#125;;
+
+// 解密方法
+exports.decrypt = (encrypted, key) =&gt; &#123;
+  // 注意，encrypted是Buffer类型
+  return crypto.privateDecrypt(key, encrypted);
+&#125;;
+</code></pre>
+<p>测试代码<code>app.js</code>：</p>
+<pre><code class="javascript">const utils = require(&#39;./utils&#39;);
+const keys = require(&#39;./keys&#39;);
+
+const plainText = &#39;你好，我是程序猿小卡&#39;;
+const crypted = utils.encrypt(plainText, keys.pubKey); // 加密
+const decrypted = utils.decrypt(crypted, keys.privKey); // 解密
+
+console.log(decrypted.toString()); // 你好，我是程序猿小卡
+</code></pre>
+<p>附上公钥、私钥 <code>keys.js</code>：</p>
+<pre><code class="javascript">exports.privKey = `-----BEGIN RSA PRIVATE KEY-----
+MIICXQIBAAKBgQDFWnl8fChyKI/Tgo1ILB+IlGr8ZECKnnO8XRDwttBbf5EmG0qV
+8gs0aGkh649rb75I+tMu2JSNuVj61CncL/7Ct2kAZ6CZZo1vYgtzhlFnxd4V7Ra+
+aIwLZaXT/h3eE+/cFsL4VAJI5wXh4Mq4Vtu7uEjeogAOgXACaIqiFyrk3wIDAQAB
+AoGBAKdrunYlqfY2fNUVAqAAdnvaVOxqa+psw4g/d3iNzjJhBRTLwDl2TZUXImEZ
+QeEFueqVhoROTa/xVg/r3tshiD/QC71EfmPVBjBQJJIvJUbjtZJ/O+L2WxqzSvqe
+wzYaTm6Te3kZeG/cULNMIL+xU7XsUmslbGPAurYmHA1jNKFpAkEA48aUogSv8VFn
+R2QuYmilz20LkCzffK2aq2+9iSz1ZjCvo+iuFt71Y3+etWomzcZCuJ5sn0w7lcSx
+nqyzCFDspQJBAN3O2VdQF3gua0Q5VHmK9AvsoXLmCfRa1RiKuFOtrtC609RfX4DC
+FxDxH09UVu/8Hmdau8t6OFExcBriIYJQwDMCQQCZLjFDDHfuiFo2js8K62mnJ6SB
+H0xlIrND2+/RUuTuBov4ZUC+rM7GTUtEodDazhyM4C4Yq0HfJNp25Zm5XALpAkBG
+atLpO04YI3R+dkzxQUH1PyyKU6m5X9TjM7cNKcikD4wMkjK5p+S2xjYQc1AeZEYq
+vc187dJPRIi4oC3PN1+tAkBuW51/5vBj+zmd73mVcTt28OmSKOX6kU29F0lvEh8I
+oHiLOo285vG5ZtmXiY58tAiPVQXa7eU8hPQHTHWa9qp6
+-----END RSA PRIVATE KEY-----
+`;
+
+exports.pubKey = `-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDFWnl8fChyKI/Tgo1ILB+IlGr8
+ZECKnnO8XRDwttBbf5EmG0qV8gs0aGkh649rb75I+tMu2JSNuVj61CncL/7Ct2kA
+Z6CZZo1vYgtzhlFnxd4V7Ra+aIwLZaXT/h3eE+/cFsL4VAJI5wXh4Mq4Vtu7uEje
+ogAOgXACaIqiFyrk3wIDAQAB
+-----END PUBLIC KEY-----
+`;
+</code></pre>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>可以看到，通过Node.js进行非对称加密、解密还是挺方便的。更多用法，可以参考官方文档。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="非对称解密出错">非对称解密出错</a></p>
+<p><a target="_blank" rel="noopener" href="https://nodejs.org/api/crypto.html">https://nodejs.org/api/crypto.html</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-body-parser"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-buffer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
+<pre><code class="javascript">app.use(bodyParser.json());
+app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
+</code></pre>
+<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
+<h2 id="入门基础"><a href="#入门基础" class="headerlink" title="入门基础"></a>入门基础</h2><p>在正式讲解前，我们先来看一个POST请求的报文，如下所示。</p>
+<pre><code class="http">POST /test HTTP/1.1
+Host: 127.0.0.1:3000
+Content-Type: text/plain; charset=utf8
+Content-Encoding: gzip
+
+chyingp
+</code></pre>
+<p>其中需要我们注意的有<code>Content-Type</code>、<code>Content-Encoding</code>以及报文主体：</p>
+<ul>
+<li>Content-Type：请求报文主体的类型、编码。常见的类型有<code>text/plain</code>、<code>application/json</code>、<code>application/x-www-form-urlencoded</code>。常见的编码有<code>utf8</code>、<code>gbk</code>等。</li>
+<li>Content-Encoding：声明报文主体的压缩格式，常见的取值有<code>gzip</code>、<code>deflate</code>、<code>identity</code>。</li>
+<li>报文主体：这里是个普通的文本字符串<code>chyingp</code>。</li>
+</ul>
+<h2 id="body-parser主要做了什么"><a href="#body-parser主要做了什么" class="headerlink" title="body-parser主要做了什么"></a>body-parser主要做了什么</h2><p><code>body-parser</code>实现的要点如下：</p>
+<ol>
+<li>处理不同类型的请求体：比如<code>text</code>、<code>json</code>、<code>urlencoded</code>等，对应的报文主体的格式不同。</li>
+<li>处理不同的编码：比如<code>utf8</code>、<code>gbk</code>等。</li>
+<li>处理不同的压缩类型：比如<code>gzip</code>、<code>deflare</code>等。</li>
+<li>其他边界、异常的处理。</li>
+</ol>
+<h2 id="一、处理不同类型请求体"><a href="#一、处理不同类型请求体" class="headerlink" title="一、处理不同类型请求体"></a>一、处理不同类型请求体</h2><p>为了方便读者测试，以下例子均包含服务端、客户端代码。</p>
+<h3 id="解析text-plain"><a href="#解析text-plain" class="headerlink" title="解析text/plain"></a>解析text/plain</h3><p>客户端请求的代码如下，采用默认编码，不对请求体进行压缩。请求体类型为<code>text/plain</code>。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/test&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;text/plain&#39;,
+        &#39;Content-Encoding&#39;: &#39;identity&#39;
+    &#125;
+&#125;;
+
+var client = http.request(options, (res) =&gt; &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+client.end(&#39;chyingp&#39;);
+</code></pre>
+<p>服务端代码如下。<code>text/plain</code>类型处理比较简单，就是buffer的拼接。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+
+var parsePostBody = function (req, done) &#123;
+    var arr = [];
+    var chunks;
+
+    req.on(&#39;data&#39;, buff =&gt; &#123;
+        arr.push(buff);
+    &#125;);
+
+    req.on(&#39;end&#39;, () =&gt; &#123;
+        chunks = Buffer.concat(arr);
+        done(chunks);
+    &#125;);
+&#125;;
+
+var server = http.createServer(function (req, res) &#123;
+    parsePostBody(req, (chunks) =&gt; &#123;
+        var body = chunks.toString();
+        res.end(`Your nick is $&#123;body&#125;`)
+    &#125;);
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<h3 id="解析application-json"><a href="#解析application-json" class="headerlink" title="解析application/json"></a>解析application/json</h3><p>客户端代码如下，把<code>Content-Type</code>换成<code>application/json</code>。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var querystring = require(&#39;querystring&#39;);
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/test&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+        &#39;Content-Encoding&#39;: &#39;identity&#39;
+    &#125;
+&#125;;
+
+var jsonBody = &#123;
+    nick: &#39;chyingp&#39;
+&#125;;
+
+var client = http.request(options, (res) =&gt; &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+client.end( JSON.stringify(jsonBody) );
+</code></pre>
+<p>服务端代码如下，相比<code>text/plain</code>，只是多了个<code>JSON.parse()</code>的过程。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+
+var parsePostBody = function (req, done) &#123;
+    var length = req.headers[&#39;content-length&#39;] - 0;
+    var arr = [];
+    var chunks;
+
+    req.on(&#39;data&#39;, buff =&gt; &#123;
+        arr.push(buff);
+    &#125;);
+
+    req.on(&#39;end&#39;, () =&gt; &#123;
+        chunks = Buffer.concat(arr);
+        done(chunks);
+    &#125;);
+&#125;;
+
+var server = http.createServer(function (req, res) &#123;
+    parsePostBody(req, (chunks) =&gt; &#123;
+        var json = JSON.parse( chunks.toString() );    // 关键代码
+        res.end(`Your nick is $&#123;json.nick&#125;`)
+    &#125;);
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<h3 id="解析application-x-www-form-urlencoded"><a href="#解析application-x-www-form-urlencoded" class="headerlink" title="解析application/x-www-form-urlencoded"></a>解析application/x-www-form-urlencoded</h3><p>客户端代码如下，这里通过<code>querystring</code>对请求体进行格式化，得到类似<code>nick=chyingp</code>的字符串。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var querystring = require(&#39;querystring&#39;);
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/test&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;form/x-www-form-urlencoded&#39;,
+        &#39;Content-Encoding&#39;: &#39;identity&#39;
+    &#125;
+&#125;;
+
+var postBody = &#123; nick: &#39;chyingp&#39; &#125;;
+
+var client = http.request(options, (res) =&gt; &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+client.end( querystring.stringify(postBody) );
+</code></pre>
+<p>服务端代码如下，同样跟<code>text/plain</code>的解析差不多，就多了个<code>querystring.parse()</code>的调用。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var querystring = require(&#39;querystring&#39;);
+
+var parsePostBody = function (req, done) &#123;
+    var length = req.headers[&#39;content-length&#39;] - 0;
+    var arr = [];
+    var chunks;
+
+    req.on(&#39;data&#39;, buff =&gt; &#123;
+        arr.push(buff);
+    &#125;);
+
+    req.on(&#39;end&#39;, () =&gt; &#123;
+        chunks = Buffer.concat(arr);
+        done(chunks);
+    &#125;);
+&#125;;
+
+var server = http.createServer(function (req, res) &#123;
+    parsePostBody(req, (chunks) =&gt; &#123;
+        var body = querystring.parse( chunks.toString() );  // 关键代码
+        res.end(`Your nick is $&#123;body.nick&#125;`)
+    &#125;);
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<h2 id="二、处理不同编码"><a href="#二、处理不同编码" class="headerlink" title="二、处理不同编码"></a>二、处理不同编码</h2><p>很多时候，来自客户端的请求，采用的不一定是默认的<code>utf8</code>编码，这个时候，就需要对请求体进行解码处理。</p>
+<p>客户端请求如下，有两个要点。</p>
+<ol>
+<li>编码声明：在<code>Content-Type</code>最后加上<code> ;charset=gbk</code></li>
+<li>请求体编码：这里借助了<code>iconv-lite</code>，对请求体进行编码<code>iconv.encode(&#39;程序猿小卡&#39;, encoding)</code></li>
+</ol>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var iconv = require(&#39;iconv-lite&#39;);
+
+var encoding = &#39;gbk&#39;;  // 请求编码
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/test&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;text/plain; charset=&#39; + encoding,
+        &#39;Content-Encoding&#39;: &#39;identity&#39;,
+    &#125;
+&#125;;
+
+// 备注：nodejs本身不支持gbk编码，所以请求发送前，需要先进行编码
+var buff = iconv.encode(&#39;程序猿小卡&#39;, encoding);
+
+var client = http.request(options, (res) =&gt; &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+client.end(buff, encoding);
+</code></pre>
+<p>服务端代码如下，这里多了两个步骤：编码判断、解码操作。首先通过<code>Content-Type</code>获取编码类型<code>gbk</code>，然后通过<code>iconv-lite</code>进行反向解码操作。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var contentType = require(&#39;content-type&#39;);
+var iconv = require(&#39;iconv-lite&#39;);
+
+var parsePostBody = function (req, done) &#123;
+    var obj = contentType.parse(req.headers[&#39;content-type&#39;]);
+    var charset = obj.parameters.charset;  // 编码判断：这里获取到的值是 &#39;gbk&#39;
+
+    var arr = [];
+    var chunks;
+
+    req.on(&#39;data&#39;, buff =&gt; &#123;
+        arr.push(buff);
+    &#125;);
+
+    req.on(&#39;end&#39;, () =&gt; &#123;
+        chunks = Buffer.concat(arr);
+        var body = iconv.decode(chunks, charset);  // 解码操作
+        done(body);
+    &#125;);
+&#125;;
+
+var server = http.createServer(function (req, res) &#123;
+    parsePostBody(req, (body) =&gt; &#123;
+        res.end(`Your nick is $&#123;body&#125;`)
+    &#125;);
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<h2 id="三、处理不同压缩类型"><a href="#三、处理不同压缩类型" class="headerlink" title="三、处理不同压缩类型"></a>三、处理不同压缩类型</h2><p>这里举个<code>gzip</code>压缩的例子。客户端代码如下，要点如下：</p>
+<ol>
+<li>压缩类型声明：<code>Content-Encoding</code>赋值为<code>gzip</code>。</li>
+<li>请求体压缩：通过<code>zlib</code>模块对请求体进行gzip压缩。</li>
+</ol>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var zlib = require(&#39;zlib&#39;);
+
+var options = &#123;
+    hostname: &#39;127.0.0.1&#39;,
+    port: &#39;3000&#39;,
+    path: &#39;/test&#39;,
+    method: &#39;POST&#39;,
+    headers: &#123;
+        &#39;Content-Type&#39;: &#39;text/plain&#39;,
+        &#39;Content-Encoding&#39;: &#39;gzip&#39;
+    &#125;
+&#125;;
+
+var client = http.request(options, (res) =&gt; &#123;
+    res.pipe(process.stdout);
+&#125;);
+
+// 注意：将 Content-Encoding 设置为 gzip 的同时，发送给服务端的数据也应该先进行gzip
+var buff = zlib.gzipSync(&#39;chyingp&#39;);
+
+client.end(buff);
+</code></pre>
+<p>服务端代码如下，这里通过<code>zlib</code>模块，对请求体进行了解压缩操作（guzip）。</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+var zlib = require(&#39;zlib&#39;);
+
+var parsePostBody = function (req, done) &#123;
+    var length = req.headers[&#39;content-length&#39;] - 0;
+    var contentEncoding = req.headers[&#39;content-encoding&#39;];
+    var stream = req;
+
+    // 关键代码如下
+    if(contentEncoding === &#39;gzip&#39;) &#123;
+        stream = zlib.createGunzip();
+        req.pipe(stream);
+    &#125;
+
+    var arr = [];
+    var chunks;
+
+    stream.on(&#39;data&#39;, buff =&gt; &#123;
+        arr.push(buff);
+    &#125;);
+
+    stream.on(&#39;end&#39;, () =&gt; &#123;
+        chunks = Buffer.concat(arr);
+        done(chunks);
+    &#125;);
+
+    stream.on(&#39;error&#39;, error =&gt; console.error(error.message));
+&#125;;
+
+var server = http.createServer(function (req, res) &#123;
+    parsePostBody(req, (chunks) =&gt; &#123;
+        var body = chunks.toString();
+        res.end(`Your nick is $&#123;body&#125;`)
+    &#125;);
+&#125;);
+
+server.listen(3000);
+</code></pre>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p><code>body-parser</code>的核心实现并不复杂，翻看源码后你会发现，更多的代码是在处理异常跟边界。</p>
+<p>另外，对于POST请求，还有一个非常常见的<code>Content-Type</code>是<code>multipart/form-data</code>，这个的处理相对复杂些，<code>body-parser</code>不打算对其进行支持。篇幅有限，后续章节再继续展开。</p>
+<p>欢迎交流，如有错漏请指出。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">https://github.com/expressjs/body-parser/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ashtuchkin/iconv-lite">https://github.com/ashtuchkin/iconv-lite</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-cookie-parser-deep-in"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-cookie-parser-deep-in.html">Node.js-buffer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="文章导读"><a href="#文章导读" class="headerlink" title="文章导读"></a>文章导读</h2><p><code>cookie-parser</code>是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。</p>
+<p>它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对<code>Express + cookie-parser</code>的签名、验证机制不了解导致的。</p>
+<p>本文深入讲解<code>Express + cookie-parser</code>的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。</p>
+<h2 id="入门例子：cookie设置与解析"><a href="#入门例子：cookie设置与解析" class="headerlink" title="入门例子：cookie设置与解析"></a>入门例子：cookie设置与解析</h2><p>先从最简单的例子来看下<code>cookie-parser</code>的使用，下面采用默认配置。</p>
+<ul>
+<li>cookie设置：使用<code>Express</code>的内置方法<code>res.cookie</code>。</li>
+<li>cookie解析：使用<code>cookie-parser</code>中间件。</li>
+</ul>
+<pre><code class="javascript">var express = require(&#39;express&#39;);
+var cookieParser = require(&#39;cookie-parser&#39;);
+var app = express();
+
+app.use(cookieParser());
+
+app.use(function (req, res, next) &#123;
+  console.log(req.cookies.nick); // 第二次访问，输出chyingp
+  next();
+&#125;);
+
+app.use(function (req, res, next) &#123;
+  res.cookie(&#39;nick&#39;, &#39;chyingp&#39;);
+  res.end(&#39;ok&#39;);
+&#125;);
+
+app.listen(3000);
+</code></pre>
+<p>在当前场景下，<code>cookie-parser</code>中间件大致实现如下：</p>
+<pre><code class="javascript">app.use(function (req, res, next) &#123;
+  req.cookies = cookie.parse(req.headers.cookie);
+  next();
+&#125;);
+</code></pre>
+<h2 id="进阶例子：cookie签名与解析"><a href="#进阶例子：cookie签名与解析" class="headerlink" title="进阶例子：cookie签名与解析"></a>进阶例子：cookie签名与解析</h2><p>出于安全的考虑，我们通常需要对cookie进行签名。</p>
+<p>例子改写如下，有两个注意点：</p>
+<ol>
+<li><code>cookieParser</code>初始化时，传入<code>secret</code>作为签名的秘钥。</li>
+<li>设置cookie时，将<code>signed</code>设置为<code>true</code>，表示对cookie进行签名。</li>
+<li>获取cookie时，可以同时通过<code>req.cookies</code>，也可以通过<code>req.signedCookies</code>获取。</li>
+</ol>
+<pre><code class="javascript">var express = require(&#39;express&#39;);
+var cookieParser = require(&#39;cookie-parser&#39;);
+var app = express();
+
+// 初始化中间件，传入的第一个参数为singed secret
+app.use(cookieParser(&#39;secret&#39;));
+
+app.use(function (req, res, next) &#123;
+  console.log(req.cookies.nick); // chyingp
+  console.log(req.signedCookies.nick); // chyingp
+  next();
+&#125;);
+
+app.use(function (req, res, next) &#123;
+  // 传入第三个参数 &#123;signed: true&#125;，表示要对cookie进行摘要计算
+  res.cookie(&#39;nick&#39;, &#39;chyingp&#39;, &#123;signed: true&#125;);
+  res.end(&#39;ok&#39;);
+&#125;);
+
+app.listen(3000);
+</code></pre>
+<p>签名前的cookie值为<code>chyingp</code>，签名后的cookie值为<code>s%3Achyingp.uVofnk6k%2B9mHQpdPlQeOfjM8B5oa6mppny9d%2BmG9rD0</code>。</p>
+<p>下面就来分析下，cookie的签名、解析是如何实现的。</p>
+<h2 id="cookie签名、解析实现剖析"><a href="#cookie签名、解析实现剖析" class="headerlink" title="cookie签名、解析实现剖析"></a>cookie签名、解析实现剖析</h2><p>Express完成cookie值的签名，<code>cookie-parser</code>实现签名cookie的解析。两者公用同一个秘钥。</p>
+<h3 id="cookie签名"><a href="#cookie签名" class="headerlink" title="cookie签名"></a>cookie签名</h3><p>Express对cookie的设置（包括签名），都是通过<code>res.cookie</code>这个方法实现的。</p>
+<p>精简后的代码如下：</p>
+<pre><code class="javascript">res.cookie = function (name, value, options) &#123;
+  var secret = this.req.secret;
+  var signed = opts.signed;
+
+  // 如果 options.signed 为true，则对cookie进行签名
+  if (signed) &#123;
+    val = &#39;s:&#39; + sign(val, secret);
+  &#125;
+
+  this.append(&#39;Set-Cookie&#39;, cookie.serialize(name, String(val), opts));
+
+  return this;
+&#125;;
+</code></pre>
+<p><code>sign</code>为签名函数。伪代码如下，其实就是把cookie的原始值，跟hmac后的值拼接起来。</p>
+<blockquote>
+<p>敲黑板划重点：签名后的cookie值，包含了原始值。</p>
+</blockquote>
+<pre><code class="javascript">function sign (val, secret) &#123;
+  return val + &#39;.&#39; + hmac(val, secret);
+&#125;
+</code></pre>
+<p>这里的<code>secret</code>哪来的呢？是<code>cookie-parser</code>初始化的时候传入的。如下伪代码所示：</p>
+<pre><code class="javascript">var cookieParser = function (secret) &#123;
+  return function (req, res, next) &#123;
+    req.secret = secret;
+    // ...
+    next();
+  &#125;;
+&#125;;
+
+app.use(cookieParser(&#39;secret&#39;));
+</code></pre>
+<h3 id="签名cookie解析"><a href="#签名cookie解析" class="headerlink" title="签名cookie解析"></a>签名cookie解析</h3><p>知道了cookie签名的机制后，如何”解析”签名cookie就很清楚了。这个阶段，中间件主要做了两件事：</p>
+<ol>
+<li>将签名cookie对应的原始值提取出来</li>
+<li>验证签名cookie是否合法</li>
+</ol>
+<p>实现代码如下：</p>
+<pre><code class="javascript">// str：签名后的cookie，比如 &quot;s:chyingp.uVofnk6k+9mHQpdPlQeOfjM8B5oa6mppny9d+mG9rD0&quot;
+// secret：秘钥，比如 &quot;secret&quot;
+function signedCookie(str, secret) &#123;
+
+  // 检查是否 s: 开头，确保只对签过名的cookie进行解析
+  if (str.substr(0, 2) !== &#39;s:&#39;) &#123;
+    return str;
+  &#125;
+
+  // 校验签名的值是否合法，如合法，返回true，否则，返回false
+  var val = unsign(str.slice(2), secret);
+
+  if (val !== false) &#123;
+    return val;
+  &#125;
+
+  return false;
+&#125;
+</code></pre>
+<p>判断、提取cookie原始值比较简单。只是是<code>unsign</code>方法名比较有迷惑性。</p>
+<p>一般只会对签名进行合法校验，并没有所谓的反签名。</p>
+<p><code>unsign</code>方法的代码如下。首先，从传入的cookie值中，分别提取出原始值A1、签名值B1。用同样的秘钥对A1进行签名，得到A2。根据A2、B1是否相等，判断签名是否合法。</p>
+<pre><code class="javascript">exports.unsign = function(val, secret)&#123;
+  var str = val.slice(0, val.lastIndexOf(&#39;.&#39;))
+    , mac = exports.sign(str, secret);
+
+  return sha1(mac) == sha1(val) ? str : false;
+&#125;;
+</code></pre>
+<h2 id="cookie签名的作用"><a href="#cookie签名的作用" class="headerlink" title="cookie签名的作用"></a>cookie签名的作用</h2><p>主要是出于安全考虑，防止cookie被篡改，增强安全性。</p>
+<p>举个小例子来看下cookie签名是如何实现防篡改的。</p>
+<p>基于前面的例子展开。假设网站通过<code>nick</code>这个cookie来区分当前登录的用户是谁。在前面例子中，登录用户的cookie中，nick对应的值如下：(decode后的)</p>
+<pre><code>s:chyingp.uVofnk6k+9mHQpdPlQeOfjM8B5oa6mppny9d+mG9rD0
+</code></pre>
+<p>此时，有人试图修改这个cookie值，来达到伪造身份的目的。比如修改成<code>xiaoming</code>：</p>
+<pre><code>s:xiaoming.uVofnk6k+9mHQpdPlQeOfjM8B5oa6mppny9d+mG9rD0
+</code></pre>
+<p>当网站收到请求，对签名cookie进行解析，发现签名验证不通过。由此可判断，cookie是伪造的。</p>
+<pre><code>hmac(&quot;xiaoming&quot;, &quot;secret&quot;) !== &quot;uVofnk6k+9mHQpdPlQeOfjM8B5oa6mppny9d+mG9rD0&quot;
+</code></pre>
+<h2 id="签名就能够确保安全吗"><a href="#签名就能够确保安全吗" class="headerlink" title="签名就能够确保安全吗"></a>签名就能够确保安全吗</h2><p>当然不是。</p>
+<p>上个小节的例子，仅通过<code>nick</code>这个cookie的值来判断登录的是哪个用户，这是一个非常糟糕的设计。虽然在秘钥未知的情况下，很难伪造签名cookie的，但原始值相同的情况下，签名也是相同的。这种情况下，其实是很容易伪造的。</p>
+<p>另外，开源组件的算法是公开的，因此秘钥的安全性就成了关键，要确保秘钥不泄露。</p>
+<p>还有很多，这里不展开。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本文主要对<code>Express + cookie-parser</code>的签名和解析机制进行相对深入的介绍。不少类似的总结文章中，把cookie的签名说成了加密，这是一个常见的错误，读者朋友可以注意一下。</p>
+<p>签名部分的介绍，稍微涉及一些简单的安全知识，对这块不熟悉的同学可以留言交流。为讲解方便，部分段落、用词可能不够严谨。如有错漏，敬请指出。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/expressjs/cookie-parser">https://github.com/expressjs/cookie-parser</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
   
     
       <article
@@ -813,461 +1644,6 @@ app.use(&#39;/&#39;, function(req, res, next)&#123;
 
     
   
-    
-      <article
-id="post-2020-05-express-session实现简易身份认证"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-express-session%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-https"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
-<ul>
-<li>颁发证书的机构不在操作系统的受信列表里</li>
-<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
-</ul>
-<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
-<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
-<pre><code class="js">var https = require(&#39;https&#39;);
-
-https.get(&#39;https://www.baidu.com&#39;, function(res)&#123;
-    res.on(&#39;data&#39;, function(data)&#123;
-        process.stdout.write(data);
-    &#125;);
-&#125;).on(&#39;error&#39;, function(err)&#123;
-    console.error(err);
-&#125;);
-</code></pre>
-<p>运行上面代码，输出如下。可以看到出现报错，提示信息是“self signed certificate in certificate chain”。大意就是说证书是网站自己签发的，不安全。</p>
-<pre><code class="bash">&#123; Error: self signed certificate in certificate chain
-    at Error (native)
-    at TLSSocket.&lt;anonymous&gt; (_tls_wrap.js:1055:38)
-    at emitNone (events.js:86:13)
-    at TLSSocket.emit (events.js:185:7)
-    at TLSSocket._finishInit (_tls_wrap.js:580:8)
-    at TLSWrap.ssl.onhandshakedone (_tls_wrap.js:412:38) code: &#39;SELF_SIGNED_CERT_IN_CHAIN&#39; &#125;
-</code></pre>
-<p>出现上述错误怎么处理呢？我们知道，如果是在浏览器里访问，有两种处理方式：</p>
-<ul>
-<li>忽略浏览器的安全提示，继续访问（浏览器可能会直接禁止你访问）</li>
-<li>将网站的根证书导入到操作系统的受信任根证书列表里</li>
-</ul>
-<h2 id="入门示例"><a href="#入门示例" class="headerlink" title="入门示例"></a>入门示例</h2><p>TODO</p>
-<h2 id="基础讲解"><a href="#基础讲解" class="headerlink" title="基础讲解"></a>基础讲解</h2><p>。。。</p>
-<h2 id="本地证书"><a href="#本地证书" class="headerlink" title="本地证书"></a>本地证书</h2><p>。。。</p>
-<h2 id="服务器：自签名证书"><a href="#服务器：自签名证书" class="headerlink" title="服务器：自签名证书"></a>服务器：自签名证书</h2><pre><code class="bash">➜  server git:(master) ✗ mkdir cert
-➜  server git:(master) ✗ cd cert
-➜  cert git:(master) ✗ openssl genrsa -out chyingp-key.pem 2048
-Generating RSA private key, 2048 bit long modulus
-.............................+++
-..........................................+++
-e is 65537 (0x10001)
-➜  cert git:(master) ✗ openssl req -new -sha256 -key chyingp-key.pem -out chyingp-csr.pem
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter &#39;.&#39;, the field will be left blank.
------
-Country Name (2 letter code) [AU]:CN
-State or Province Name (full name) [Some-State]:Guangdong
-Locality Name (eg, city) []:Shenzhen
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:YH
-Organizational Unit Name (eg, section) []:web
-Common Name (e.g. server FQDN or YOUR name) []:www.chyingp.com
-Email Address []:416394284@qq.com
-
-Please enter the following &#39;extra&#39; attributes
-to be sent with your certificate request
-A challenge password []:123456
-An optional company name []:YH
-➜  cert git:(master) ✗ openssl x509 -req -in chyingp-csr.pem -signkey chyingp-key.pem -out chyingp-cert.pem
-</code></pre>
-<h2 id="私有CA签名的证书"><a href="#私有CA签名的证书" class="headerlink" title="私有CA签名的证书"></a>私有CA签名的证书</h2><p>首先，创建自签名的CA证书</p>
-<pre><code class="bash"># 创建ca的私钥
-openssl genrsa -out my-ca.key.pem 2048
-
-# 创建ca的证书
-openssl req \
-  -x509 \
-  -new \
-  -nodes \
-  -key my-ca.key.pem \
-  -days 1024 \
-  -out my-ca.crt.pem \
-  -subj &quot;/C=CN/ST=Guandong/L=Shenzhen/O=YH Inc/CN=chyingp.com&quot;
-</code></pre>
-<p>然后，创建用CA的私钥进行签名的网站证书</p>
-<pre><code class="bash"># 创建私钥
-openssl genrsa \
-  -out my-server.key.pem \
-  2048
-
-# 创建证书签名请求
-openssl req -new \
-  -key my-server.key.pem \
-  -out my-server.csr.pem \
-  -subj &quot;/C=CN/ST=Guandong/L=Shenzhen/O=YH Inc/CN=www.chyingp.com&quot;
-
-# 创建网站证书
-openssl x509 \
-  -req -in my-server.csr.pem \
-  -CA my-ca.crt.pem \
-  -CAkey my-ca.key.pem \
-  -CAcreateserial \
-  -out my-server.crt.pem \
-  -days 500
-</code></pre>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-log4js"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-log4js.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>对于线上项目用来说，日志是非常重要的一环。log4js是使用得比较多的一个日志组件，经常跟Express一起配合使用。本文从入门实例开始，讲解log4js的使用，以及如何跟Express进行整合。</p>
-<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>输出日志如下，包括日志打印时间、日志级别、日志分类、日志内容。</p>
-<pre><code class="javascript">// started.js
-var log4js = require(&#39;log4js&#39;);
-var logger = log4js.getLogger();
-logger.debug(&#39;hello world&#39;);
-
-// 输出：
-// [2017-02-28 21:28:22.853] [DEBUG] [default] - hello world
-</code></pre>
-<h2 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h2><p><code>logger.setLevel(&#39;INFO&#39;);</code> 表示想要打印的最低级别的日志是<code>INFO</code>，也就是说，调用类似<code>logger.debug()</code>等级别低于<code>INFO</code>的接口，日志是不会打印出来的。</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-var logger = log4js.getLogger();
-logger.setLevel(&#39;INFO&#39;);
-
-logger.debug(&#39;level: debug&#39;);
-logger.info(&#39;level: info&#39;);
-logger.error(&#39;level: error&#39;);
-
-// 输出如下：
-// [2017-02-28 21:50:45.372] [INFO] [default] - level: info
-// [2017-02-28 21:50:45.376] [ERROR] [default] - level: error
-</code></pre>
-<h2 id="日志类别"><a href="#日志类别" class="headerlink" title="日志类别"></a>日志类别</h2><p>除级别外，还可以对日志进行分类，<code>log4js.getLogger(category)</code>，如下所示</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-var alogger = log4js.getLogger(&#39;category-a&#39;);
-var blogger = log4js.getLogger(&#39;category-b&#39;);
-
-alogger.info(&#39;hello&#39;);
-blogger.info(&#39;hello&#39;);
-
-// 输出如下：
-// [2017-02-28 22:36:57.570] [INFO] category-a - hello
-// [2017-02-28 22:36:57.574] [INFO] category-b - hello
-</code></pre>
-<h2 id="appenders"><a href="#appenders" class="headerlink" title="appenders"></a>appenders</h2><p>appenders指定日志输出的位置，可以同时配置多个，用category进行区分。比如 <code>log4js.getLogger(&#39;info&#39;)</code> 应用的就是 <code>type</code> 为 <code>dateFile</code> 的配置。</p>
-<p>可以注意到，<code>type</code> 为 <code>console</code> 的配置没有声明 <code>category</code> ，因此，所有的日志都会打印到控制台。</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-
-log4js.configure(&#123;
-    appenders: [
-        &#123; type: &#39;console&#39;&#125;,
-        &#123; type: &#39;dateFile&#39;, filename: &#39;./logs/info.log&#39;, category: &#39;info&#39; &#125;
-    ]
-&#125;);
-
-var logger = log4js.getLogger(&#39;info&#39;);
-logger.setLevel(&#39;INFO&#39;);
-
-logger.trace(&#39;trace&#39;);
-logger.debug(&#39;debug&#39;);
-logger.info(&#39;info&#39;);
-
-// 输出如下：
-// [2017-02-28 22:51:30.723] [INFO] info - info
-</code></pre>
-<h2 id="express应用"><a href="#express应用" class="headerlink" title="express应用"></a>express应用</h2><p>一个比较简单的例子如下，日志全部打印到控制台。</p>
-<pre><code class="javascript">var express = require(&#39;express&#39;);
-var log4js = require(&#39;log4js&#39;);
-var app = express();
-
-log4js.configure(&#123;
-    appenders: [
-        &#123; type: &#39;console&#39;, category: &#39;app&#39; &#125;
-    ]
-&#125;);
-
-var logger = log4js.getLogger(&#39;app&#39;);
-
-logger.setLevel(&#39;INFO&#39;);  // 级别 &gt; INFO 的日志才会被打印
-
-app.use( log4js.connectLogger(logger) );
-
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p>访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/">http://127.0.0.1:3000</a> ，打印日志如下</p>
-<pre><code class="bash">[2017-03-01 00:28:29.301] [INFO] app - ::ffff:127.0.0.1 - - &quot;GET / HTTP/1.1&quot; 304 - &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36&quot;
-</code></pre>
-<p><code>log4js.connectLogger(logger)</code> 时，可以声明日志的级别。</p>
-<pre><code class="javascript">// 级别 &gt; INFO 的日志才会被打印
-logger.setLevel(&#39;INFO&#39;);
-
-// 日志的级别是 WARN
-app.use( log4js.connectLogger(logger, &#123;level: &#39;WARN&#39;&#125;) );
-</code></pre>
-<p>注意，如果声明的日志级别低于<code>logger.setLevel(level)</code>限定的级别，那么日志不会被打印，如下例子。</p>
-<pre><code class="javascript">logger.setLevel(&#39;INFO&#39;);
-
-app.use( log4js.connectLogger(logger, &#123;level: &#39;DEBUG&#39;&#125;) );
-</code></pre>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>官网：<a target="_blank" rel="noopener" href="https://github.com/nomiddlename/log4js-node">https://github.com/nomiddlename/log4js-node</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-node8-napi"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-node8-napi.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="N-API简介"><a href="#N-API简介" class="headerlink" title="N-API简介"></a>N-API简介</h2><p>Node.js 8.0 在2017年6月份发布，升级的特性中，包含了N-API。编写过或者使用过 node扩展的同学，不少都遇到过升级node版本，node扩展编译失败的情况。因为node扩展严重依赖于V8暴露的API，而node不同版本依赖的V8版本可能不同，一旦升级node版本，原先运行正常的node扩展就编译失败了。</p>
-<p>这种情况对node生态圈无疑是不利的，N-API的引入正是试图改善这种情况的一种尝试。它跟底层JS引擎无关，只要N-API暴露的API足够稳定，那么node扩展的编写者就不用过分担忧node的升级问题。</p>
-<h2 id="如何使用N-API"><a href="#如何使用N-API" class="headerlink" title="如何使用N-API"></a>如何使用N-API</h2><p>先强调一点，N-API并不是对原有node扩展实现方式的替代，它只是提供了一系列底层无关的API，来帮助开发者编写跨版本的node扩展。至于如何编写、编译、使用扩展，跟原来的差不多。</p>
-<p>本文会从一个超级简单的例子，简单介绍N-API的使用，包括环境准备、编写扩展、编译、运行几个步骤。</p>
-<blockquote>
-<p>备注：当前N-API还处于试验阶段，官方文档提供的例子都是有问题的，如用于生产环境需格外谨慎。</p>
-</blockquote>
-<h2 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h2><p>首先，N-API是8.0版本引入的，首先确保本地安装了8.0版本。笔者用的是<code>nvm</code>，读者可自行选择安装方式。</p>
-<pre><code class="bash">nvm i 8.0
-nvm use 8.0
-</code></pre>
-<p>然后，安装<code>node-gyp</code>，编译扩展会用到。</p>
-<pre><code class="bash">npm install -g node-gyp
-</code></pre>
-<p>创建项目目录，并初始化<code>package.json</code>。</p>
-<pre><code class="bash">mkdir hello &amp; cd hello # 目录名随便起
-npm init -f
-</code></pre>
-<h2 id="2、编写扩展"><a href="#2、编写扩展" class="headerlink" title="2、编写扩展"></a>2、编写扩展</h2><p>创建<code>hello.cc</code>作为扩展的源文件。</p>
-<pre><code class="bash">mkdir src
-touch src/hello.cc
-</code></pre>
-<p>编辑<code>hello.cc</code>，输入如下内容。</p>
-<pre><code class="c">#include &lt;node_api.h&gt;
-
-// 实际暴露的方法，这里只是简单返回一个字符串
-napi_value HelloMethod (napi_env env, napi_callback_info info) &#123;
-    napi_value world;
-    napi_create_string_utf8(env, &quot;world&quot;, 5, &amp;world);
-    return world;
-&#125;
-
-// 扩展的初始化方法，其中
-// env：环境变量
-// exports、module：node模块中对外暴露的对象
-void Init (napi_env env, napi_value exports, napi_value module, void* priv) &#123;
-    // napi_property_descriptor 为结构体，作用是描述扩展暴露的 属性/方法 的描述
-    napi_property_descriptor desc = &#123; &quot;hello&quot;, 0, HelloMethod, 0, 0, 0, napi_default, 0 &#125;;
-    napi_define_properties(env, exports, 1, &amp;desc);  // 定义暴露的方法
-&#125;
-
-NAPI_MODULE(hello, Init);  // 注册扩展，扩展名叫做hello，Init为扩展的初始化方法
-</code></pre>
-<h2 id="3、编译扩展"><a href="#3、编译扩展" class="headerlink" title="3、编译扩展"></a>3、编译扩展</h2><p>首先，创建编译描述文件<code>binding.gyp</code>。</p>
-<pre><code class="json">&#123;
-  &quot;targets&quot;: [
-    &#123;
-      &quot;target_name&quot;: &quot;hello&quot;,
-      &quot;sources&quot;: [ &quot;./src/hello.cc&quot; ]
-    &#125;
-  ]
-&#125;
-</code></pre>
-<p>然后，运行如下命令进行编译。</p>
-<pre><code class="bash">node-gyp rebuild
-</code></pre>
-<h2 id="4、调用扩展"><a href="#4、调用扩展" class="headerlink" title="4、调用扩展"></a>4、调用扩展</h2><p>未方便调用扩展，先安装<code>bindings</code>。</p>
-<pre><code class="bash">npm install --save bindings
-</code></pre>
-<p>然后，创建<code>app.js</code>，调用刚编译的扩展。</p>
-<pre><code class="javascript">var addon = require(&#39;bindings&#39;)(&#39;hello&#39;);
-
-console.log( addon.hello() );  // world
-</code></pre>
-<p>运行代码，由于N-API当前尚处于Experimental阶段，记得加上<code>--napi-modules</code>标记。</p>
-<pre><code class="bash">node --napi-modules app.js
-</code></pre>
-<p>输出如下</p>
-<pre><code class="bash">&#123;&quot;path&quot;:&quot;/data/github/abi-stable-node-addon-examples/1_hello_world/napi/build/Release/hello.node&quot;&#125;
-world
-(node:6500) Warning: N-API is an experimental feature and could change at any time.
-</code></pre>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>N-API：<a target="_blank" rel="noopener" href="https://nodejs.org/api/n-api.html">https://nodejs.org/api/n-api.html</a></p>
-<p>C++ Addons：<a target="_blank" rel="noopener" href="https://nodejs.org/api/addons.html">https://nodejs.org/api/addons.html</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
 
   
     <nav class="pagination">
@@ -1312,7 +1688,7 @@ world
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -1325,7 +1701,7 @@ world
       <ul>
         
           <li>
-            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
           </li>
         
           <li>
@@ -1337,11 +1713,11 @@ world
           </li>
         
           <li>
-            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
           </li>
         
       </ul>
@@ -1377,7 +1753,7 @@ world
       Oct1a &copy;
         2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
           <br>
-          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号-7</span></a>
     </div>
 
   </div>

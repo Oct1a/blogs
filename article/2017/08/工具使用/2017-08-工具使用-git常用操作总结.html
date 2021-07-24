@@ -2,42 +2,51 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    
-    <title>git常用操作总结 | Oct1a</title>
+  <meta charset="utf-8">
+  
+    <title>
+      
+        git常用操作总结 |
+          
+            Oct1a
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="git常用操作总结|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
 
     
 
-    
-        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
-    
+        
+          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+            
 
-    
+              
 
-    
+                  
 
-    
+                      
 
-    
+                          
 
-    
+                              
 <link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
 
 
-    <script>
-        window.isPost = true
-        window.aomori = {
-            
-            
-            
-        }
-        window.aomori_logo_typed_animated = true
-        window.aomori_search_algolia = true
+                                <script>
+                                  window.isPost = true
+                                  window.aomori = {
+                                    
+                                    
+                                    
+                                  }
+                                  window.aomori_logo_typed_animated = true
+                                  window.aomori_search_algolia = true
+                                </script>
 
-    </script>
-
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 
 <body>
 
@@ -163,7 +172,7 @@
         </div>
 
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
-            <p><img src="http://cdn.dllca.cn/20210716111129.jpeg"></p>
+            <p><img src="https://img.oct1a.cn/20210716111129.jpeg"></p>
 <span id="more"></span>
 
 
@@ -176,9 +185,9 @@
 <li><p> 在你的电脑上生成 ssh 秘钥,打开终端，执行 <code>ssh-keygen -t rsa -C &quot;你公司内部邮箱地址&quot;</code> ，如果执行成功，切换到 <code>~/.ssh</code>目录下，此时目录应该如下所示。复制<code>id_rsa.pub</code>的内容。</p>
 </li>
 </ol>
-<p><img src="http://cdn.dllca.cn/20210716111145.jpeg"></p>
+<p><img src="https://img.oct1a.cn/20210716111145.jpeg"></p>
 <ol start="3">
-<li> 这里以 github 为例，如下图所示，进入 settings -&gt; SSH and GPG keys 通过 <code>cat</code>命令查看文件<code>id_rsa.pub</code>的内容，然后复制过来，点击 add ssh key，这一步等于说把你的公钥放到了 github 上进行托管。<br><img src="http://cdn.dllca.cn/20210716111158.jpeg"></li>
+<li> 这里以 github 为例，如下图所示，进入 settings -&gt; SSH and GPG keys 通过 <code>cat</code>命令查看文件<code>id_rsa.pub</code>的内容，然后复制过来，点击 add ssh key，这一步等于说把你的公钥放到了 github 上进行托管。<br><img src="https://img.oct1a.cn/20210716111158.jpeg"></li>
 <li>全局配置 git 的用户名和邮箱</li>
 </ol>
 <pre><code>git config --global user.name &quot;xxx&quot;
@@ -186,7 +195,7 @@ git config --global user.email &quot;xxx@xx.com&quot;
 </code></pre>
 <p>完成以上四步，你就可以愉快的 pull 代码开发了，和 https 拉取方式不同的是，https 方式需要每次提交前都手动输入用户名和密码，ssh 的方式配置完毕后 git 都会使用你本地的私钥和远程仓库的公钥进行验证是否是一对秘钥，从而简化了操作流程。</p>
 <h2 id="git-的工作区域和流程"><a href="#git-的工作区域和流程" class="headerlink" title="git 的工作区域和流程"></a>git 的工作区域和流程</h2><p>要想弄懂 git 是怎么对我们的代码进行管理的，那首当其冲的是了解 git 的工作区域是如何构成的。因为，只有彻底弄懂了 git 工作区域的构成，你才可以在适当的区域使用合适的命令。如下图所示，此图包含了 git 的4个工作区和一些常见的操作。</p>
-<p><img src="http://cdn.dllca.cn/20210716111214.jpeg" alt="git"></p>
+<p><img src="https://img.oct1a.cn/20210716111214.jpeg" alt="git"></p>
 <p>workspace：工作区，就是平时进行开发改动的地方，是当前看到最新的内容，在开发的过程也就是对工作区的操作</p>
 <p>Index：暂存区，当执行<code>git add</code> 的命令后，工作区的文件就会被移入暂存区，暂存区标记了当前工作区中那些内容是被 git 管理的，当完成某个需求或者功能后需要提交代码，第一步就是通过 git add 先提交到暂存区。</p>
 <p>Repository：本地仓库，位于自己的电脑上，通过<code>git commit</code> 提交暂存区的内容，会进入本地仓库。</p>
@@ -238,25 +247,25 @@ git branch -m &lt;old-branch-name&gt; &lt;new-branch-name&gt;
 </code></pre>
 <h2 id="工作中使用-git-解决问题的场景"><a href="#工作中使用-git-解决问题的场景" class="headerlink" title="工作中使用 git 解决问题的场景"></a>工作中使用 git 解决问题的场景</h2><h3 id="git-rebase-让你的提交记录更加清晰可读"><a href="#git-rebase-让你的提交记录更加清晰可读" class="headerlink" title="git rebase 让你的提交记录更加清晰可读"></a>git rebase 让你的提交记录更加清晰可读</h3><h4 id="git-rebase-的使用"><a href="#git-rebase-的使用" class="headerlink" title="git rebase 的使用"></a>git rebase 的使用</h4><p>rebase 翻译为变基，他的作用和 merge 很相似，用于把一个分支的修改合并到当前分支上。</p>
 <p>如下图所示，下图介绍了经过 rebase 前后提交历史的变化情况。</p>
-<p><img src="http://cdn.dllca.cn/20210716111230.jpeg" alt="WechatIMG2.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111230.jpeg" alt="WechatIMG2.png"></p>
 <p>现在我们来用一个例子来解释一下上面的过程。</p>
 <p>假设我们现在有2条分支，一个为 master ，一个为 feature/1，他们都基于初始的一个提交<code>add readme</code>进行检出分支，之后，master分支增加了<code>3.js</code>,和<code>4.js</code>的文件，分别进行了2次提交，feature/1也增加了<code>1.js</code>和<code>2.js</code>的文件，分别对应以下2条提交记录。</p>
 <p>此时，对应分支的提交记录如下。</p>
 <p>master 分支如下图：</p>
-<p><img src="http://cdn.dllca.cn/20210716111243.jpeg" alt="image-20210531144909187.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111243.jpeg" alt="image-20210531144909187.png"></p>
 <p>feature/1分支如下图</p>
-<p><img src="http://cdn.dllca.cn/20210716111251.jpeg" alt="image-20210531145504071.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111251.jpeg" alt="image-20210531145504071.png"></p>
 <p>结合起来看是这样的</p>
-<p><img src="http://cdn.dllca.cn/20210716111258.jpeg" alt="image-20210531145553107.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111258.jpeg" alt="image-20210531145553107.png"></p>
 <p>此时，切换到 feature/1 分支下，执行 <code>git rebase master</code> ,成功之后，通过 log 查看记录。</p>
 <p>如下图所示：可以看到先是逐个应用了 mater 分支的更改，然后以 master 分支最后的提交作为基点，再逐个应用 feature/1的每个更改。</p>
-<p><img src="http://cdn.dllca.cn/20210716111309.jpeg" alt="image-20210531150719965.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111309.jpeg" alt="image-20210531150719965.png"></p>
 <p>所以，我们的提交记录就会非常清晰，没有分叉，上面演示的是比较顺利的情况，但是大部分情况下，rebase 的过程中会产生冲突的，此时，就需要手动解决冲突，然后使用<code>git add</code> 、<code>git rebase --continue</code>的方式来处理冲突，完成 rebase，如果不想要某次 rebase 的结果，那么需要使用 <code>git rebase --skip</code>来跳过这次 rebase。</p>
 <h4 id="git-merge-和-git-rebase-的区别"><a href="#git-merge-和-git-rebase-的区别" class="headerlink" title="git merge 和 git rebase 的区别"></a>git merge 和 git rebase 的区别</h4><p>不同于 <code>git rebase</code>的是，<code>git merge</code> 在不是 <code>fast-forward</code>（快速合并）的情况下，会产生一条额外的合并记录，类似<code>Merge branch &#39;xxx&#39; into &#39;xxx&#39;</code>的一条提交信息。</p>
-<p><img src="http://cdn.dllca.cn/20210716111317.jpeg" alt="image-20210531151838328.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111317.jpeg" alt="image-20210531151838328.png"></p>
 <p>另外，在解决冲突的时候，用 merge 只需要解决一次冲突即可，简单粗暴，而用 rebase 的时候 ，需要一次又一次的解决冲突。</p>
 <h4 id="git-rebase-交互模式"><a href="#git-rebase-交互模式" class="headerlink" title="git rebase 交互模式"></a>git rebase 交互模式</h4><p> 在开发中，常会遇到在一个分支上产生了很多的无效的提交，这种情况下使用 rebase 的交互式模式可以把已经发生的多次提交压缩成一次提交，得到了一个干净的提交历史，例如某个分支的提交历史情况如下：</p>
-<p><img src="http://cdn.dllca.cn/20210716111325.jpeg" alt="image-20210518211345258.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111325.jpeg" alt="image-20210518211345258.png"></p>
 <p>进入交互式模式的方式是执行：</p>
 <pre><code>git rebase -i &lt;base-commit&gt;
 </code></pre>
@@ -264,7 +273,7 @@ git branch -m &lt;old-branch-name&gt; &lt;new-branch-name&gt;
 <pre><code>git rebase -i ac18084
 </code></pre>
 <p>此时会进入一个 vim 的交互式页面，编辑器列出的信息像下列这样。</p>
-<p><img src="http://cdn.dllca.cn/20210716111336.jpeg" alt="image-20210518212036198.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111336.jpeg" alt="image-20210518212036198.png"></p>
 <p>想要合并这一堆更改，我们要使用 squash 策略进行合并，即把当前的 commit 和它的上一个 commit 内容进行合并， 大概可以表示为下面这样。</p>
 <pre><code>pick  ... ...
 s     ... ...
@@ -272,20 +281,20 @@ s     ... ...
 s     ... ...
 </code></pre>
 <p>修改文件后 按下<code>:</code>然后<code>wq</code>保存退出，此时又会弹出一个编辑页面，这个页面是用来编辑提交的信息，修改为<code>feat: 更正</code>,最后保存一下，接着使用<code>git branch</code>查看提交的 commit 信息，rebase 后的提交记录如下图所示，是不是清爽了很多？rebase 操作可以让我们的提交历史变得更加清晰。</p>
-<p><img src="http://cdn.dllca.cn/20210716111346.jpeg" alt="image-20210518212812000.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111346.jpeg" alt="image-20210518212812000.png"></p>
 <blockquote>
 <p>特别注意，只能在自己使用的 feature 分支上进行 rebase 操作，不允许在集成分支上进行 rebase，因为这种操作会修改集成分支的历史记录。</p>
 </blockquote>
 <h3 id="使用-git-cherry-pick-获取指定的-commit"><a href="#使用-git-cherry-pick-获取指定的-commit" class="headerlink" title="使用 git cherry-pick 获取指定的 commit"></a>使用 git cherry-pick 获取指定的 commit</h3><p><code>git cherry-pick</code>可以理解为”挑拣”提交，和 merge 合并一个分支的所有提交不同的是，它会获取某一个分支的单笔提交，并作为一个新的提交引入到你当前分支上。当我们需要在本地合入其他分支的提交时，如果我们不想对整个分支进行合并，而是只想将某一次提交合入到本地当前分支上，那么就要使用<code>git cherry-pick</code>了。</p>
 <p>如下场景，以下有三条分支，feature/cherry-pick1 和 feature/cherry-pick2 都是基于 master 拉出来的两条功能性分支，对应的分支 log 如下</p>
-<p><img src="http://cdn.dllca.cn/20210716111354.jpeg" alt="image-20210518221001432.png"></p>
-<p><img src="http://cdn.dllca.cn/20210716111402.jpeg" alt="image-20210518221010458.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111354.jpeg" alt="image-20210518221001432.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111402.jpeg" alt="image-20210518221010458.png"></p>
 <p>master 分支的提交如下</p>
-<p><img src="http://cdn.dllca.cn/20210716111410.jpeg" alt="image-20210518221051734.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111410.jpeg" alt="image-20210518221051734.png"></p>
 <p>现在 master 只需要 feature/cherry-pick1 和 feature/cherry-pick2 有关 change 的修改，并不关心 fix 内容的修改。此时就可以用<code>cherry-pick</code>指令了。</p>
 <p>语法： <code>git cherry-pick [commit-hash]</code></p>
 <p><code>commit-hash</code> 表示的是某次 commit 的 hash 值。现在，依次执行以下两条指令 <code>git cherry-pick e0bb7f3</code> <code>git cherry-pick c9a3101</code>, 过程中，如果出现冲突，解决冲突后 进行<code>git add</code> ，接着执行 <code>git cherry-pick --continue</code>，最后，master 上的提交如下</p>
-<p><img src="http://cdn.dllca.cn/20210716111422.jpeg" alt="image-20210518235707190.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111422.jpeg" alt="image-20210518235707190.png"></p>
 <p>此时，master 分支上应用了需要的提交，就达到了我们想要的效果。如果需要多个<code>cherry-pick</code>需要同步到目标分支，可以简写为<code>git cherry-pick &lt;first-commit-id&gt;...&lt;last-commit-id&gt;</code>，这是一个左开右闭的区间，也就时说 <code>first-commit-id</code>提交带来的代码的改动不会被合并过去，如果需要合并过去，可以使用<code>git cherry-pick &lt;first-commit-id&gt;^...&lt;last-commit-id&gt;</code>，它表示包含<code>first-commit-id</code>到<code>last-commit-id</code>在内的提交都会被合并过去。</p>
 <h3 id="使用-git-revert-回滚某次的提交"><a href="#使用-git-revert-回滚某次的提交" class="headerlink" title="使用 git revert 回滚某次的提交"></a>使用 git revert 回滚某次的提交</h3><p>想象这么一个场景，你的项目最近有2个版本要上线，这两个版本还伴随着之前遗留的 bug 的修复，一开始的时候，你将 bug 修复在了第一个版本的 release 分支上，突然在发版前一天，测试那边反馈，需要把第一个版本修复 bug 的内容改在第二个版本上，这个时候，第一个版本的集成分支的提交应该包括了第一个版本的功能内容，遗留 bug 修复的提交和其他同事提交的内容，想要通过 reset 的方式摘除之前的关于 bug 修复的 commit 肯定是不行的，同时，这种做法比较危险，此时，我们既不想破坏之前的提交记录，又想撤回我们遗留 bug 的 commit 记录应该怎么做呢？<code>git revert</code> 就派上了用场。</p>
 <blockquote>
@@ -294,9 +303,9 @@ s     ... ...
 <p>语法： <code>git revert &lt;commit-id&gt;</code>针对普通commit</p>
 <p><code>git revert &lt;commit-id&gt; -m</code> 针对merge的commit</p>
 <p>下面就用一个案例来理解一下这个命令，如下图所示，假设被红框框起来的地方是会引起 bug 的一次提交，在他的提交之后，又进行了2次提交，其中包含了其它同事的提交。</p>
-<p><img src="http://cdn.dllca.cn/20210716111430.jpeg" alt="image-20210519142702752.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111430.jpeg" alt="image-20210519142702752.png"></p>
 <p>此时想把引起提交的 bug 的干掉，执行<code>git revert 1121932</code>，执行操作后，再打开查看日志，如下图所示，可以看到是新增了一条 commit 记录，之前的 commit 记录并没有消失，此时也达到了代码回退的效果</p>
-<p><img src="http://cdn.dllca.cn/20210716111438.jpeg" alt="image-20210519142824836.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111438.jpeg" alt="image-20210519142824836.png"></p>
 <p>此外 git revert 也可以回滚多次的提交</p>
 <p>语法：<code>git revert [commit-id1] [commit-id2] ...</code> 注意这是一个前开后闭区间，即不包括 commit1，但包括 commit2。</p>
 <p>回滚我们的提交有二种方式，一种是上文提到的<code>git revert</code>命令外，还可以使用<code>git reset</code>命令，那么它们两者有什么区别呢？</p>
@@ -314,7 +323,7 @@ git stash clear // 删除所有缓存的stash
 </code></pre>
 <p>下面通过几幅图对 <code>stash</code>的命令做进一步了解。</p>
 <p>此时，我正在开发一个新功能，修改了<code>1.js</code> 文件里的内容</p>
-<p><img src="http://cdn.dllca.cn/20210716111448.jpeg" alt="image-20210519175036869.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111448.jpeg" alt="image-20210519175036869.png"></p>
 <p>还没开发完成，这个时候，我想去 hotfix 分支上修复 bug，得暂停下开发切换到 hotfix 分支，但是现在工作区还有内容，此时如果切换分支，git 会报出下面的错误</p>
 <pre><code>error: Your local changes to the following files would be overwritten by checkout:
         1.js
@@ -325,18 +334,18 @@ Aborting
 <pre><code>Saved working directory and index state WIP on stash: 22e561c feat: add 1.js
 </code></pre>
 <p>此时，我们的工作区已经干净了，可以切换到 hotfix 分支进行 bug 修复的工作，假设我们现在 bug 修复完成了，继续切回 feature 分支进行原本功能的开发，此时只需要执行 <code>git stash pop</code>，之前我们暂存的修改就会恢复到工作区，如下图所示。</p>
-<p><img src="http://cdn.dllca.cn/20210716111457.jpeg" alt="image-20210519185011012.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111457.jpeg" alt="image-20210519185011012.png"></p>
 <p>当我们想要暂存文件，切换分支做某些事的时候，可以用<code>git stash</code>这种机制帮助开发。</p>
 <p>推荐在使用 stash 的相关命令时，每一次暂存的时候，不要直接使用 <code>git stash</code>命令进行暂存下来，而是使用<code>git stash save &quot;message...&quot;</code>这种方式给本次的提交做一个信息的记录，这样，想应用更改的时候，先通过<code>git stash list</code>查看一下所有的暂存列表。之后，推荐使用<code>git stash apply stash@$&#123;num&#125;</code>的方式进行应用对应的 stash，这样不会清空已有的 stash 的列表项，并且能应用到当前的工作区，不需要这个暂存的话，再手动清除就可以了。</p>
 <h3 id="不同的工作区域撤销更改"><a href="#不同的工作区域撤销更改" class="headerlink" title="不同的工作区域撤销更改"></a>不同的工作区域撤销更改</h3><p>开发中，我们经常需要回退代码的操作，在不同的工作区域中，回退代码的方式也是不相同的。如下图所示，假设现在要在 feature/revoke 分支上进行开发,</p>
 <p>首先通过 <code>git status</code>查看下现在的状态。</p>
-<p><img src="http://cdn.dllca.cn/20210716111505.jpeg" alt="image-20210520115802579.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111505.jpeg" alt="image-20210520115802579.png"></p>
 <p>目前我们的工作区是很干净的，没有任何修改的操作，此时，修改一下代码再次查看状态，可以看到，<code>1.js</code>这个文件被修改了。</p>
-<p><img src="http://cdn.dllca.cn/20210716111513.jpeg" alt="image-20210520115934693.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111513.jpeg" alt="image-20210520115934693.png"></p>
 <p>现在我们想把<code>1.js</code>这个文件恢复到修改前的状态，即撤回工作区的修改，就可以使用 <code>git checkout -- &lt;filename&gt;</code>的命令，如果要撤回多个文件的修改，文件之间使用空格隔开，如下图所示，我们撤回了<code>1.js</code>文件的修改，工作区也恢复干净了。</p>
-<p><img src="http://cdn.dllca.cn/20210716111524.jpeg" alt="image-20210520120242475.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111524.jpeg" alt="image-20210520120242475.png"></p>
 <p>如果说现在我们对文件进行了修改，并且已经提交到暂存区了，这部分文件我们不想要的话，那么就可以通过 <code>git reset &lt;filename&gt;</code>的命令来对特定的文件进行撤销，<code>git reset</code>会撤回所有存在暂存区的文件，如下图所示，查看前后的状态可知，文件最后成功撤回到工作区了。</p>
-<p><img src="http://cdn.dllca.cn/20210716111639.jpeg" alt="image-20210520141538130.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111639.jpeg" alt="image-20210520141538130.png"></p>
 <h3 id="配置-git-alias提升工作效率"><a href="#配置-git-alias提升工作效率" class="headerlink" title="配置 git alias提升工作效率"></a>配置 git alias提升工作效率</h3><p>一般我们在工作中，接到开发任务后，需要新创建一个分支进行开发 此时需要 用到 <code>git branch</code> 、<code>git checkout</code> 、 <code>git pull</code>等命令，在我们一顿操作后，开发完成，到了提交代码的阶段，又要诸如此类 <code>git add</code> 、 <code>git commit</code>、<code>git push</code> 等命令，虽然简单，但是输入起来也是不够简洁，作为一个程序员，开发程序就是为了提高我们的效率的，懒是人类进步的源泉，所以我们可以通过配置别名的方式，简化这些命令。</p>
 <p>它的基本用法是 <code>git config --global alias.&lt;简化的字符&gt; 原始命令</code></p>
 <p>如下面的例子：</p>
@@ -345,9 +354,9 @@ $ git config --global alias.ci commit
 $ git config --global alias.br branch
 </code></pre>
 <p>这里将 <code>co</code>表示<code>checkout</code>， <code>ci</code>表示<code>commit</code> ，<code>br</code> 表示<code>branch</code>, 以后提交就可以简写成</p>
-<p><img src="http://cdn.dllca.cn/20210716111629.jpeg" alt="image-20210519152804390.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111629.jpeg" alt="image-20210519152804390.png"></p>
 <p><code>--global</code> 是全局参数，也就是配置一次后，这些命令可以在这台电脑下的所有仓库都适用。这些命令其实是更新你全局的 .gitconfig 文件，该文件用来保存全局的 git 配置，<code>vim ~/.gitconfig</code>，执行这段命令后，显示如下，下图展示了刚才通过 <code>git config --global alias</code> 添加的 alias</p>
-<p><img src="http://cdn.dllca.cn/20210716111617.jpeg" alt="image-20210519153624712.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111617.jpeg" alt="image-20210519153624712.png"></p>
 <p>也可以通过修改这个文件的 alias 项来设置别名。</p>
 <p>这里分享一个我自己常用的别名设置，把以下配置替换到 <code>.gitconfig</code>文件里的<code>[alias]</code>所属的区域，然后就可以愉快的使用了~</p>
 <pre><code>[alias]
@@ -368,9 +377,9 @@ dump = cat-file -p
 lg = log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit
 </code></pre>
 <p>这样，我们每次想查看 git 的历史记录,就不用输入那么一长串命令 直接使用 <code>git lg</code> ，下图是 axios 源码里的提交记录,使用封装后的<code>git lg</code>查看的效果图</p>
-<p><img src="http://cdn.dllca.cn/20210716111600.jpeg" alt="image-20210519162327693.png"></p>
+<p><img src="https://img.oct1a.cn/20210716111600.jpeg" alt="image-20210519162327693.png"></p>
 <p>分支之间的关系一眼就很明了，在哪个 commit 上进行的 merge 操作也很清晰，可以帮助我们很好的追溯历史的提交和解决问题。</p>
-<p><img src="http://cdn.dllca.cn/20210716111710.jpg"></p>
+<p><img src="https://img.oct1a.cn/20210716111710.jpg"></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2014/06/git_remote.html">阮一峰的git教程</a></p>
 <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903603694469134#heading-3">Git merge和rebase分支合并命令的区别</a></p>
 
@@ -483,7 +492,7 @@ lg = log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Crese
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -496,7 +505,7 @@ lg = log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Crese
       <ul>
         
           <li>
-            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
           </li>
         
           <li>
@@ -508,11 +517,11 @@ lg = log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Crese
           </li>
         
           <li>
-            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
           </li>
         
       </ul>
@@ -548,7 +557,7 @@ lg = log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Crese
       Oct1a &copy;
         2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
           <br>
-          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号-7</span></a>
     </div>
 
   </div>

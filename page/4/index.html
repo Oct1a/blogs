@@ -2,42 +2,49 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    
-    <title>Oct1a</title>
+  <meta charset="utf-8">
+  
+    <title>
+      
+            Oct1a
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
 
     
 
-    
-        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
-    
+        
+          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+            
 
-    
+              
 
-    
+                  
 
-    
+                      
 
-    
+                          
 
-    
+                              
 <link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
 
 
-    <script>
-        window.isPost = false
-        window.aomori = {
-            
-            
-            
-        }
-        window.aomori_logo_typed_animated = true
-        window.aomori_search_algolia = true
+                                <script>
+                                  window.isPost = false
+                                  window.aomori = {
+                                    
+                                    
+                                    
+                                  }
+                                  window.aomori_logo_typed_animated = true
+                                  window.aomori_search_algolia = true
+                                </script>
 
-    </script>
-
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 
 <body>
 
@@ -117,6 +124,200 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="index">
+  
+    
+      <article
+id="post-2020-04-events"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-events.html">Node.js-events</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>events模块是node的核心模块之一，几乎所有常用的node模块都继承了events模块，比如http、fs等。</p>
+<p>模块本身非常简单，API虽然也不少，但常用的就那么几个，这里举几个简单例子。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-http"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-http.html">Node.js-http</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="http模块概览"><a href="#http模块概览" class="headerlink" title="http模块概览"></a>http模块概览</h2><p>大多数nodejs开发者都是冲着开发web server的目的选择了nodejs。正如官网所展示的，借助http模块，可以几行代码就搞定一个超迷你的web server。</p>
+<p>在nodejs中，<code>http</code>可以说是最核心的模块，同时也是比较复杂的一个模块。上手很简单，但一旦深入学习，不少初学者就会觉得头疼，不知从何入手。</p>
+<p>本文先从一个简单的例子出发，引出<code>http</code>模块最核心的四个实例。看完本文，应该就能够对http模块有个整体的认识。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-http-req"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-http-req.html">Node.js-http.req</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>本文的重点会放在<code>req</code>这个对象上。前面已经提到，它其实是http.IncomingMessage实例，在服务端、客户端作用略微有差异</p>
+<ul>
+<li>服务端处：获取请求方的相关信息，如request header等。</li>
+<li>客户端处：获取响应方返回的相关信息，如statusCode等。
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-http-res"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-http-res.html">Node.js-http.res</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>http模块四剑客之一的<code>res</code>，应该都不陌生了。一个web服务程序，接受到来自客户端的http请求后，向客户端返回正确的响应内容，这就是<code>res</code>的职责。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
   
     
       <article
@@ -403,470 +604,6 @@ class="article article-type-post"
 
     
   
-    
-      <article
-id="post-2020-04-readline"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-readline.html">Node.js-readline</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>readline是个非常实用的模块。如名字所示，主要用来实现逐行读取，比如读取用户输入，或者读取文件内容。常见使用场景有下面几种，本文会逐一举例说明。</p>
-<ul>
-<li>文件逐行读取：比如说进行日志分析。</li>
-<li>自动完成：比如输入npm，自动提示”help init install”。</li>
-<li>命令行工具：比如npm init这种问答式的脚手架工具。
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-stream"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-stream.html">Node.js-stream</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>nodejs的核心模块，基本上都是stream的的实例，比如process.stdout、http.clientRequest。</p>
-<p>对于大部分的nodejs开发者来说，平常并不会直接用到stream模块，只需要了解stream的运行机制即可（非常重要）。</p>
-<p>而对于想要实现自定义stream实例的开发者来说，就得好好研究stream的扩展API了，比如gulp的内部实现就大量用到了自定义的stream类型。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-string-decoder"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-string-decoder.html">Node.js-string_decoder</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h2><p><code>string_decoder</code>模块用于将Buffer转成对应的字符串。使用者通过调用<code>stringDecoder.write(buffer)</code>，可以获得buffer对应的字符串。</p>
-<p>它的特殊之处在于，当传入的buffer不完整（比如三个字节的字符，只传入了两个），内部会维护一个internal buffer将不完整的字节cache住，等到使用者再次调用<code>stringDecoder.write(buffer)</code>传入剩余的字节，来拼成完整的字符。</p>
-<p>这样可以有效避免buffer不完整带来的错误，对于很多场景，比如网络请求中的包体解析等，非常有用。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-stream-readable"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-stream-readable.html">Node.js-stream.readable</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>flowing mode + paused mode</p>
-<p>默认：paused mode（刚创建时）</p>
-<p>paused mode -&gt; flowing mode 几种方式</p>
-<ol>
-<li>添加 stream.on(‘data’, fn) 事件监听</li>
-<li>调用 stream.resume()</li>
-<li>调用 stream.pipe()</li>
-</ol>
-<pre><code class="js">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./hello.txt&#39;);
-
-console.log(&#39;1. isPaused: &#39; + readstream.isPaused());
-
-setTimeout(function() &#123;
-    readstream.on(&#39;data&#39;, function (content) &#123;
-        console.log(`3. content is [ %s ]` + content);
-    &#125;);
-    console.log(&#39;2. isPaused: &#39; + readstream.isPaused());
-&#125;, 3000);
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="bash">1. isPaused: false
-2. isPaused: false
-3. content is [ %s ]hello world
-</code></pre>
-<h2 id="三种状态"><a href="#三种状态" class="headerlink" title="三种状态"></a>三种状态</h2><ul>
-<li>readable._readableState.flowing = null</li>
-<li>readable._readableState.flowing = false</li>
-<li>readable._readableState.flowing = true</li>
-</ul>
-<p>分别解释下：</p>
-<ul>
-<li>null：当前还没有地方在消费数据（比如调用readable.pipe(dst)或者readable.on(‘data’, fn)），此时为null。</li>
-<li>true：当前正在消费数据（比如调用readable.pipe(dst)或者readable.on(‘data’, fn)），此时为true；</li>
-<li>false：调用比如<code>readable.pause()</code>、<code>readable.unpipe()</code>，会将状态置为false。需要注意的时，状态为false不代表不生产数据。有可能没有地方消费数据，但数据还在继续产生，并在internal buffer里缓存起来。</li>
-</ul>
-<h2 id="close事件"><a href="#close事件" class="headerlink" title="close事件"></a>close事件</h2><ol>
-<li>close事件触发的含义：接下来不会再有新的事件抛出。</li>
-<li>close事件触发的时机：当stream以及对应的底层资源（比如文件描述符）已经关闭（这段翻译过来好拗口）</li>
-</ol>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./hello.txt&#39;);
-
-readstream.on(&#39;data&#39;, function (chunk) &#123;
-    console.log(&#39;on data: %s&#39;, chunk);
-&#125;);
-
-readstream.on(&#39;close&#39;, function () &#123;
-    console.log(&#39;on close&#39;);
-&#125;);
-</code></pre>
-<p>输出：</p>
-<pre><code class="bash">on data: hello world
-on close
-</code></pre>
-<h2 id="data事件"><a href="#data事件" class="headerlink" title="data事件"></a>data事件</h2><ol>
-<li>触发时机：当stream在flowing状态，并且有数据进来的时候。</li>
-<li>回调参数chunk的类型：默认是Buffer类型，当调用stream.setEncoding(‘xx’)时，则为String类型。</li>
-<li>其他：当stream没有被明确暂停（比如调用stream.pause())，给stream添加data事件会将stream转成flowing模式。</li>
-</ol>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./hello.txt&#39;);
-var readstream2 = fs.createReadStream(&#39;./hello.txt&#39;);
-var readstream3 = fs.createReadStream(&#39;./hello.txt&#39;);
-
-readstream.on(&#39;data&#39;, function (chunk) &#123;
-    console.log(&#39;1. chunk type is Buffer ? %s&#39;, Buffer.isBuffer(chunk));
-&#125;);
-
-readstream2.setEncoding(&#39;utf8&#39;);
-readstream2.on(&#39;data&#39;, function (chunk) &#123;
-    console.log(&#39;2. chunk type is String ? %s&#39;, typeof chunk === &#39;string&#39;);
-&#125;);
-
-readstream3.setEncoding(&#39;utf8&#39;);
-readstream3.on(&#39;data&#39;, function (chunk) &#123;
-    console.log(&#39;3. data is: %s&#39;, chunk);
-&#125;);
-
-// 输出
-// 1. chunk type is Buffer ? true
-// 2. chunk type is String ? true
-// 3. data is: hello world
-</code></pre>
-<blockquote>
-<p>Attaching a ‘data’ event listener to a stream that has not been explicitly paused will switch the stream into flowing mode. Data will then be passed as soon as it is available.</p>
-</blockquote>
-<h2 id="end事件"><a href="#end事件" class="headerlink" title="end事件"></a>end事件</h2><ol>
-<li>触发时机：当没有更多数据等待消费。</li>
-</ol>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./hello.txt&#39;);
-
-readstream.on(&#39;data&#39;, function (chunk) &#123;
-    console.log(&#39;on data: %s&#39;, chunk);
-&#125;);
-
-readstream.on(&#39;end&#39;, function () &#123;
-    console.log(&#39;on end&#39;);
-&#125;);
-
-readstream.on(&#39;close&#39;, function () &#123;
-    console.log(&#39;on close&#39;);
-&#125;);
-
-// 输出：
-// on data: hello world
-// on end
-// on close
-</code></pre>
-<h2 id="error事件"><a href="#error事件" class="headerlink" title="error事件"></a>error事件</h2><ol>
-<li>触发实机：任何时候都可能触发，原因可能有多种，比如读取一个不存在的文件，或者stream push了非法的数据等。</li>
-</ol>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./none-exists.txt&#39;);
-
-readstream.on(&#39;error&#39;, function (error) &#123;
-    console.log(&#39;on error: %s&#39;, error.message);
-&#125;);
-
-// 输出：
-// on error: ENOENT: no such file or directory, open &#39;./none-exists.txt&#39;
-</code></pre>
-<p>如果没有添加 error 事件监听，报错并退出</p>
-<pre><code class="bash">events.js:160
-      throw er; // Unhandled &#39;error&#39; event
-      ^
-
-Error: ENOENT: no such file or directory, open &#39;./none-exists.txt&#39;
-    at Error (native)
-</code></pre>
-<h2 id="readable事件"><a href="#readable事件" class="headerlink" title="readable事件"></a>readable事件</h2><ol>
-<li>触发时机：当有数据可读时，或者数据已经读完，但是end尚未触发（感觉这样设计不合理）</li>
-</ol>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readstream = fs.createReadStream(&#39;./hello.txt&#39;);
-readstream.on(&#39;readable&#39;, function() &#123;
-  console.log(&#39;readable: %s&#39;, readstream.read());
-&#125;);
-readstream.on(&#39;end&#39;, function() &#123;
-  console.log(&#39;end&#39;);
-&#125;);
-
-// 输出：
-// readable: hello world
-// readable: null
-// end
-</code></pre>
-<h2 id="pipe方法"><a href="#pipe方法" class="headerlink" title="pipe方法"></a>pipe方法</h2><blockquote>
-<p>stream.pipe(dest, {end: true})</p>
-</blockquote>
-<p>stream.pipe(dest)返回dest，也就是说可以链式调用 stream.pipe(dest1).pipe(dest2)…</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var r = fs.createReadStream(&#39;./hello.txt&#39;);
-var z = require(&#39;zlib&#39;).createGzip();
-var w = fs.createWriteStream(&#39;./hello.txt.gz&#39;);
-
-r.pipe(z).pipe(w);
-</code></pre>
-<p>当end为true（默认）时，当数据读取结束，dest会自动关闭；否则dest不自动关闭。</p>
-<p>例子：end事件触发时，dest已经被关闭，此时再往dest写数据，报错</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var src = fs.createReadStream(&#39;./hello.txt&#39;);
-var dest = fs.createWriteStream(&#39;./dest.txt&#39;);
-
-src.pipe(dest);
-
-src.on(&#39;end&#39;, function () &#123;
-    try&#123;
-        dest.end(&#39; end&#39;);
-    &#125;catch(error)&#123;
-        console.log(&#39;error! error.message is %s&#39;, error.message);
-    &#125;
-
-    console.log(&#39;end&#39;);
-&#125;);
-
-// 输出：
-// error! error.message is write after end
-// end
-</code></pre>
-<p>显示声明<code>end</code>为<code>true</code>，成功写入。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var src = fs.createReadStream(&#39;./hello.txt&#39;);
-var dest = fs.createWriteStream(&#39;./dest.txt&#39;);
-
-src.pipe(dest, &#123; end: false &#125;);
-
-src.on(&#39;end&#39;, function () &#123;
-    dest.end(&#39; end&#39;);
-    console.log(&#39;end&#39;);
-&#125;);
-</code></pre>
-<h2 id="read-size-方法"><a href="#read-size-方法" class="headerlink" title="read(size)方法"></a>read(size)方法</h2><p>作用：读取internal buffer中的数据（在paused模式下使用）<br>参数说明：size，要读取的字节数<br>返回：Buffer 或者 String 或者 null</p>
-<ul>
-<li>Buffer：默认返回类型。</li>
-<li>String：当已调用了stream.setEncoding(encoding) 时，返回String类型。</li>
-<li>null：当前没有数据可以读取。（比如已经全部读完，或者读取的速度过快，当前internal buffer还没进入可读取状态）</li>
-</ul>
-<p>如果指定了size，且</p>
-<ol>
-<li>当前还没有足够的数据可以读取，返回null</li>
-<li>如果stram已经end了，那么一次性返回internal buffer中的所有数据（有可能超过size大小）</li>
-</ol>
-<blockquote>
-<p>The optional size argument specifies a specific number of bytes to read. If size bytes are not available to be read, null will be returned unless the stream has ended, in which case all of the data remaining in the internal buffer will be returned (even if it exceeds size bytes).</p>
-</blockquote>
-<p>如果没有指定size，那么，internal buffer中的所有数据一次性返回。</p>
-<blockquote>
-<p>If the size argument is not specified, all of the data contained in the internal buffer will be returned.</p>
-</blockquote>
-<p>如果 readable.read() 返回了数据，那么 data 事件会被触发。</p>
-<blockquote>
-<p>Note: If the readable.read() method returns a chunk of data, a ‘data’ event will also be emitted.</p>
-</blockquote>
-<p>通过 fs.createReadStream(path, options) 创建的 stream，internal buffer 的大小为 64kb</p>
-<blockquote>
-<p>Be aware that, unlike the default value set for highWaterMark on a readable stream (16 kb), the stream returned by this method has a default value of 64 kb for the same parameter.</p>
-</blockquote>
-<p>看例子：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readable = fs.createReadStream(&#39;./jquery-3.2.1.js&#39;);
-
-readable.on(&#39;readable&#39;, function (chunk) &#123;
-  var chunk;
-  while (null !== (chunk = readable.read())) &#123;
-    console.log(`Received $&#123;Math.ceil(chunk.length/1024)&#125; kb of data.`);
-  &#125;
-&#125;);
-
-// 输出
-// Received 64 kb of data.
-// Received 64 kb of data.
-// Received 64 kb of data.
-// Received 64 kb of data.
-// Received 6 kb of data.
-</code></pre>
-<p>试下指定size</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readable = fs.createReadStream(&#39;./jquery-3.2.1.js&#39;);
-var size = 1024 * 32;  // 32k
-
-readable.on(&#39;readable&#39;, function (chunk) &#123;
-  var chunk;
-  while (null !== (chunk = readable.read(size))) &#123;
-    console.log(`Received $&#123;Math.ceil(chunk.length/1024)&#125; kb of data.`);
-  &#125;
-&#125;);
-
-// 输出
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 32 kb of data.
-// Received 6 kb of data.
-</code></pre>
-<h2 id="readable-unpipe-destination"><a href="#readable-unpipe-destination" class="headerlink" title="readable.unpipe([destination])"></a>readable.unpipe([destination])</h2><p>作用：停止向 destination 写入数据。<br>参数：destination 可选，如果没有指定，则对所有 dest 的写入都被停止。</p>
-<p>例子：略</p>
-<h2 id="readable-unshift-chunk"><a href="#readable-unshift-chunk" class="headerlink" title="readable.unshift(chunk)"></a>readable.unshift(chunk)</h2><blockquote>
-<p>Note: The stream.unshift(chunk) method cannot be called after the ‘end’ event has been emitted or a runtime error will be thrown.</p>
-</blockquote>
-<blockquote>
-<p>Developers using stream.unshift() often should consider switching to use of a Transform stream instead. See the API for Stream Implementers section for more information.</p>
-</blockquote>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
 
   
     <nav class="pagination">
@@ -911,7 +648,7 @@ readable.on(&#39;readable&#39;, function (chunk) &#123;
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -924,7 +661,7 @@ readable.on(&#39;readable&#39;, function (chunk) &#123;
       <ul>
         
           <li>
-            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%89%8B%E5%86%99mini-vue3%E7%B3%BB%E7%BB%9F.html">手写mini-Vue3系统,探究原理</a>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
           </li>
         
           <li>
@@ -936,11 +673,11 @@ readable.on(&#39;readable&#39;, function (chunk) &#123;
           </li>
         
           <li>
-            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
           </li>
         
       </ul>
@@ -976,7 +713,7 @@ readable.on(&#39;readable&#39;, function (chunk) &#123;
       Oct1a &copy;
         2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
           <br>
-          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号</span></a>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号-7</span></a>
     </div>
 
   </div>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+    <title>
+      
+        前端网页字体优化的4种方案 |
+          
+            Oct1a
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="前端网页字体优化的4种方案|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
+
+    
+
+        
+          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+            
+
+              
+
+                  
+
+                      
+
+                          
+
+                              
+<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
+
+
+                                <script>
+                                  window.isPost = true
+                                  window.aomori = {
+                                    
+                                    
+                                    
+                                  }
+                                  window.aomori_logo_typed_animated = true
+                                  window.aomori_search_algolia = true
+                                </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckrengs1v0001pcdd2merg8ku" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      前端网页字体优化的4种方案
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-07-11T05:50:58.000Z" itemprop="datePublished">2021-07-11</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/font/" rel="tag">font</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>日常开发网页经常会使用一些特殊字体，比如思源黑体、苹方字体等，因为这些字体在一般的宿主环境中是不存在的，需要通过 css 的 <code>@font-face</code> 定义，并从服务器中加载对应的字体文件，而字体文件一般都是比较大的，甚至有时候一个字体比其他所有的资源（js、css、图片）加起来还要大，对网页的加载性能起到非常关键的影响，因此有必要对字体进行一些优化。 本文主要从字体格式、按需提取、统一渲染三个方面来谈谈优化字体的常用技巧。</p>
+<span id="more"></span>
+
+<h2 id="1-转换字体格式"><a href="#1-转换字体格式" class="headerlink" title="1. 转换字体格式"></a><strong>1. 转换字体格式</strong></h2><p>现在是 1202 年了，各主流设备基本都支持 woff2 字体格式，因此网站中没有必要再引入多种不同格式的字体了。一般地，建议只引入 woff2 就好了，既可以保持代码的简洁性，又可以减少上传到你服务器的文件，何乐而不为？</p>
+<p>可是很多时候美术同学只提供其他格式的字体文件给我们，比如 TTF 或 OTF，那如何将其转换成 woff2 呢？</p>
+<ul>
+<li><h4 id="TTF-字体转-WOFF2"><a href="#TTF-字体转-WOFF2" class="headerlink" title="TTF 字体转 WOFF2"></a>TTF 字体转 WOFF2</h4></li>
+</ul>
+<p>TTF 字体，是苹果和 windows 都支持的一种字体，因此是美术同学最喜欢用的。TTF 转换 WOFF2 是比较简单的，可以选择线上转换，推荐的网站有以下两个</p>
+<ul>
+<li>  <a href="https://link.juejin.cn/?target=https://everythingfonts.com/ttf-to-woff2" title="https://everythingfonts.com/ttf-to-woff2">ttf-to-woff2</a></li>
+<li>  <a href="https://link.juejin.cn/?target=https://www.fontsquirrel.com/tools/webfont-generator" title="https://www.fontsquirrel.com/tools/webfont-generator">webfont-generator</a></li>
+</ul>
+<p>但是个人觉得线上转换等待上传的时间比较久，而且有时候生成的文件是空白的，因此更加倾向于使用 node 库 <a href="https://link.juejin.cn/?target=https://www.npmjs.com/package/ttf2woff2" title="https://www.npmjs.com/package/ttf2woff2">ttf2woff2</a> 转换。该库的周下载量达到 10w+ 的，可见好多人都会有将 tff 转换成 woff2 的需求。 使用方法也很简单：</p>
+<pre><code>cat font.ttf | ttf2woff2 &gt; font.woff2
+</code></pre>
+<p>因为使用 了 cat 命令来提取 ttf 的内容，如果你使用的是 windows ，需要使用 git bash 或 wsl 来运行。</p>
+<ul>
+<li><h4 id="OTF-转-WOFF2"><a href="#OTF-转-WOFF2" class="headerlink" title="OTF 转 WOFF2"></a>OTF 转 WOFF2</h4></li>
+</ul>
+<p>除了 TTF ，美术同学还经常提供 OTF 给我们，这是微软和 Adobe 共同研发的字体，因此在 windows 平台还是比较流行的。那如何将其转换成 WOFF2 呢？目前我还没有发现哪个线上网站或 node 库能一步到位转换的，在 google 上搜索好几个线上转换的网站，要么转换完成后无法下载 ，要么转换下载后是个空文件，反正就是不靠谱的东西。</p>
+<p>经过一番折腾后，找到了一个不错的 python 库 <a href="https://link.juejin.cn/?target=https://github.com/awesometoolbox/otf2ttf" title="https://github.com/awesometoolbox/otf2ttf">otf2ttf</a>，能够稳定的将 otf 转 ttf。 使用方法也比较简单，首先安装 python，然后通过 pip 安装 otf2ttf 就可以使用了（pip 类似于 npm，是 python 的包管理器），不过官方的文档中示例代码应该是有一点小笔误：</p>
+<pre><code>otf2ttf MyFont.ttf
+</code></pre>
+<p>里面的 MyFont.ttf 应该是 MyFont.otf 才对，因为这个 input 应该是 OTF 类型而不是 TTF 。</p>
+<p>使用 python otf2ttf 生成 ttf 文件 后，就可以使用上面提到的将 ttf 转换成 woff2 的方法获取到 woff2 了。</p>
+<blockquote>
+<p>关于字体转换的这里再啰嗦一下：有时候美术同学还会提供 ttc 文件给我们，这不是单个字体，而是将多种字体打包在一起了，需要从中提取出 ttf 后才能使用，可以尝试使用 <a href="https://link.juejin.cn/?target=https://www.npmjs.com/package/ttc2ttf" title="https://www.npmjs.com/package/ttc2ttf">TTC2TTF</a>。</p>
+</blockquote>
+<h2 id="2-按需压缩字体"><a href="#2-按需压缩字体" class="headerlink" title="2. 按需压缩字体"></a><strong>2. 按需压缩字体</strong></h2><p>一般的，尽管将字体转换成 woff2 格式，最小依然也有好几百 K ，而更多情况下会有 1-4M 左右。有时候，我们只有少数的文字需要用到特殊字体，比如说只有 <code>0-9</code> 这 10 个数字用到某种特殊字体，如果把整个字体文件引入就没有必要了，比切10个图片还要大。好在有一些技术能够将 <code>0-9</code> 这10个数字对应的字体子集提取出来。我平时会使用 <a href="https://link.juejin.cn/?target=https://github.com/aui/font-spider" title="https://github.com/aui/font-spider">font-spider 字蜘</a> 来提取。</p>
+<p>首先，全局安装 font-spider:</p>
+<pre><code>npm install font-spider -g
+</code></pre>
+<p>然后，新建一个 html 文件，比如文件名为 <code>index.html</code> ，里面用一个元素包含所有的你想要提取的文字，比如 0-9，并为这个元素定义上你想要的特殊字体：</p>
+<pre><code> &lt;h1&gt;0123456789&lt;/h1&gt;
+
+&lt;style&gt; @font-face &#123;
+  font-family: &#39;sourceHan&#39;;
+  src: url(&#39;./SourceHanSansCN-Regular.ttf&#39;);
+  font-weight: normal;
+  font-style: normal;
+&#125;
+
+h1 &#123;
+    font-family: &#39;sourceHan&#39;;
+&#125; &lt;/style&gt;
+</code></pre>
+<p>最后，在这个 html 文件所在的目录执行以下命令：</p>
+<pre><code>font-spider index.html
+</code></pre>
+<p>这时候，原来的 <code>SourceHanSansCN-Regular.ttf</code> 就会被移动到 <code>.font-spider/</code> 目录下，而原来位置的字体会被替换成只提取了 <code>0-9</code> 的字体文件。这个体积相差了好几个数量级的：</p>
+<p>完整的字体文件大小是 10M ：</p>
+<p><img src="https://img.oct1a.cn/20210721183955.png" alt="image.png"></p>
+<p>只提取 <code>0-9</code> 10 个数字的字体文件只有 7K：</p>
+<p><img src="https://img.oct1a.cn/20210721184008.png" alt="image.png"></p>
+<p>所以，如果你的网站内容是静态不变的，则建议使用 font-spider 将你所要用到的文字提取出来，这将会大大的减少字体文件的体积。</p>
+<h2 id="3️-统一渲染时机"><a href="#3️-统一渲染时机" class="headerlink" title="3️.统一渲染时机"></a><strong>3️.统一渲染时机</strong></h2><p>将字体转换成 WOFF2 及静态内容网站使用 font-spider 进行按需压缩，可以很好的控制字体的大小。（PS：WOFF2 字体没有必要再开启 GZIP，因为这个字体文本本身就是压缩过的）。</p>
+<p>最后，我们再来看看网络速度对字体内容的影响，假如你的网页全部内容都使用某种字体，CSS 定义如下：</p>
+<pre><code>@font-face &#123;
+  font-family: myfont;
+  src: url(&#39;./myfont.woff2&#39;) format(&#39;woff2&#39;);
+&#125;
+
+
+body &#123;
+  font-family: myfont;
+&#125;
+</code></pre>
+<p>假如这个 myfont.woff2 文件大小为 4M，而网络下载速度只有 1M/s ，则加载这个字体需要 4 秒钟。这4秒期间由于还没有加载完成远程字体，浏览器会使用什么字体渲染呢？事实上，不同的浏览器表现会不一样的，以下是一些常见的桌面浏览器的表现：</p>
+<ul>
+<li><p>  IE：它会直接使用备用字体渲染，最后等webfont字体加载完毕后重新渲染。</p>
+</li>
+<li><p>  Safari：它会一直等待webfont字体加载完毕，并且期间不会渲染字体。</p>
+</li>
+<li><p>  Chrome / Firefox：它们会等待webfont字体加载，如果在3秒之内没有加载完毕，则使用备用字体渲染。最后webfont加载完毕，使用并重新渲染。</p>
+</li>
+</ul>
+<p>我们需要想办法统一这些行为，比较理想的行为是：先使用系统默认字体，等到远程字体加载完成了再替换成特殊字体。借助于 <a href="https://link.juejin.cn/?target=https://github.com/typekit/webfontloader" title="https://github.com/typekit/webfontloader">WebFontLoader</a> 可以很容易的实现这一效果。下面来看一下如何使用:</p>
+<ol>
+<li> 在 css 中通过 @font-face 定义一个字体：</li>
+</ol>
+<pre><code>@font-face &#123;
+  font-family: &#39;myfont&#39;;
+  src: url(&#39;./myfont.woff2&#39;) format(&#39;woff2&#39;);
+&#125;
+</code></pre>
+<blockquote>
+<p>注意，CSS 中只需要定义字体就行，而不要使用使用这个字休。</p>
+</blockquote>
+<ol start="2">
+<li> 然后 引入 webfontloader (也可以通过 npm 安装)，将你在 css 中定义的字体名称添加到 <code>custom.families</code> 列表中，并在 active 回调中将该字体添加到对应的元素上，代码如下：</li>
+</ol>
+<pre><code>&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt; WebFont.load(&#123;
+  custom: &#123;
+    families: [&#39;myfont&#39;],
+  &#125;,
+  classes: false,
+  active() &#123;
+    document.body.style.fontFamily = &#39;myfont&#39;;
+  &#125;,
+&#125;); &lt;/script&gt;
+</code></pre>
+<p>这样浏览器一开始就会使用默认字体渲染内容，等字体加载完成后再使用特殊字体重新渲染。</p>
+<h2 id="4-提前预渲染字体"><a href="#4-提前预渲染字体" class="headerlink" title="4.提前预渲染字体"></a><strong>4.提前预渲染字体</strong></h2><p>在网页头部添加<code>link</code>标签</p>
+<pre><code>&lt;head&gt;
+ &lt;link rel=&quot;preload&quot; href=&quot;/assets/Pacifico-Bold.woff2&quot; as=&quot;font&quot; type=&quot;font/woff2&quot; crossorigin&gt;
+&lt;/head&gt;
+</code></pre>
+<p><code>href=&quot;/assets/Pacifico-Bold.woff2&quot; as=&quot;font&quot;</code>属性告诉浏览器将该资源作为字体下载，在资源队列中进行优先级排序下载。</p>
+<p><code>crossorigin</code> 属性是为了防止出现跨域问题。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+<div class="article-reprint hairline">
+  
+    <p>
+      文章转载自 <a target="_blank" href="https://juejin.cn/post/6984971905069482021">掘金社区</a>
+    </p>
+  
+</div>
+
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Window10升级Window11（体验版dev）详细流程</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=前端网页字体优化的4种方案 - Oct1a&u=https://oct1a.cn/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=前端网页字体优化的4种方案 - Oct1a&url=https://oct1a.cn/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html&pic=">
+            <box-icon name='pinterest-alt' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+  <div class="footer-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-inner">
+      Oct1a &copy;
+        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+          <br>
+          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><span style="margin-left:8px">闽ICP备14018417号-7</span></a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+    
+
+        
+<script src="/dist/build.js?1619416789282.js"></script>
+
+          
+<script src="/dist/custom.js?1619416789282.js"></script>
+
+
+            
+
+                
+
+                    
+
+</body>
+
+</html>
