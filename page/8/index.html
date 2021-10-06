@@ -2,47 +2,51 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  
-    <title>
-      
-            Oct1a
-    </title>
+    <meta charset="utf-8">
+    
+    <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
     <meta name="author" content="Oct1a_H">
     <meta name="generator" content="hexo">
     <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
 
     
 
-        
-          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = false
+        window.aomori = {
             
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
 
-              
-
-                  
-
-                      
-
-                          
-
-                              
-<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
-
-
-                                <script>
-                                  window.isPost = false
-                                  window.aomori = {
-                                    
-                                    
-                                    
-                                  }
-                                  window.aomori_logo_typed_animated = true
-                                  window.aomori_search_algolia = true
-                                </script>
+    </script>
 
 </head>
 
@@ -127,7 +131,7 @@
   
     
       <article
-id="post-2020-05-cluster"
+id="post-2020-05-debugLog"
 class="article article-type-post"
 >
 
@@ -138,614 +142,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-cluster.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p>
-<ol>
-<li>cluster模块如何实现端口共享</li>
-<li>cluster模块如何分发请求</li>
-</ol>
-<h2 id="端口共享源码分析"><a href="#端口共享源码分析" class="headerlink" title="端口共享源码分析"></a>端口共享源码分析</h2><p>首先，master 进程 fork() 子进程：</p>
-<pre><code class="javascript">// master进程
-cluster.fork()
-</code></pre>
-<p>子进程创建 net.Server 实例：</p>
-<pre><code class="javascript">// worker进程
-require(&#39;net&#39;).createServer(() =&gt; &#123;&#125;).listen(3000);
-</code></pre>
-<p>在 net 模块中，调用 cluster._getServer</p>
-<pre><code class="javascript">// worker进程
-cluster._getServer(self, &#123;
-  address: address,
-  port: port,
-  addressType: addressType,
-  fd: fd,
-  flags: 0
-&#125;, cb);
-
-function cb(err, handle) &#123;
-  // 忽略错误处理
-  self._handle = handle;
-  self._listen2(address, port, addressType, backlog, fd);
-&#125;
-</code></pre>
-<p>在 cluster._getServer 中，通过 process.send(message)，向 master 进程发送 queryServer 请求。</p>
-<pre><code class="javascript">// worker进程
-cluster._getServer = function(obj, options, cb) &#123;
-    const indexesKey = [ options.address,
-                         options.port,
-                         options.addressType,
-                         options.fd ].join(&#39;:&#39;);
-    if (indexes[indexesKey] === undefined)
-      indexes[indexesKey] = 0;
-    else
-      indexes[indexesKey]++;
-
-    // message =&gt;
-    // &#123;
-    //   act: &#39;queryServer&#39;,
-    //   index: &#39;:3000:4:&#39;,
-    //   data: null,
-    //   address: null,
-    //   port: 3000,
-    //   addressType: 4,
-    //   fd: undefined
-    // &#125;
-    const message = util._extend(&#123;
-      act: &#39;queryServer&#39;,
-      index: indexes[indexesKey],
-      data: null
-    &#125;, options);
-
-    // Set custom data on handle (i.e. tls tickets key)
-    if (obj._getServerData) message.data = obj._getServerData();
-
-    /*
-      send 方法的定义如下，注意：masterInit 里也有 send 方法
-      function send(message, cb) &#123;
-        return sendHelper(process, message, null, cb);
-      &#125;
-      在 sendHelper 里对 message 进程加工，最终 message 如下所示（关键字段）：
-      &#123; cmd: &#39;NODE_CLUSTER&#39;, act: &#39;queryServer&#39; &#125;
-    */
-    send(message, function(reply, handle) &#123;
-      if (obj._setServerData) obj._setServerData(reply.data);
-
-      if (handle)
-        shared(reply, handle, indexesKey, cb);  // Shared listen socket.
-      else
-        rr(reply, indexesKey, cb);              // Round-robin.
-    &#125;);
-
-    obj.once(&#39;listening&#39;, function() &#123;
-      cluster.worker.state = &#39;listening&#39;;
-      const address = obj.address();
-      message.act = &#39;listening&#39;;
-      message.port = address &amp;&amp; address.port || options.port;
-      send(message);
-    &#125;);
-  &#125;;
-</code></pre>
-<p>在 cluster.fork() 方法里，监听了 internalMessage 事件，onmessage里，调用了 queryServer()。</p>
-<pre><code class="javascript">// master进程
-cluster.fork = function(env) &#123;
-  // 忽略非关键代码
-  const workerProcess = createWorkerProcess(id, env);
-  const worker = new Worker(&#123;
-    id: id,
-    process: workerProcess
-  &#125;);
-  worker.process.on(&#39;internalMessage&#39;, internal(worker, onmessage));
-&#125;;
-
-//
-function onmessage(message, handle) &#123;
-  var worker = this;
-  if (message.act === &#39;online&#39;)
-    online(worker);
-  else if (message.act === &#39;queryServer&#39;)
-    // 调用 queryServer 方法
-    queryServer(worker, message);
-  else if (message.act === &#39;listening&#39;)
-    listening(worker, message);
-  else if (message.act === &#39;exitedAfterDisconnect&#39;)
-    exitedAfterDisconnect(worker, message);
-  else if (message.act === &#39;close&#39;)
-    close(worker, message);
-&#125;
-</code></pre>
-<p>在 queryServer 里，首先 创建 RoundRobinHandle 实例，然后调用 handle.add()。</p>
-<p>对于 address + port + addressType + fd + index 一样的 net.Server 实例，只创建一个 RoundRobinHandle 实例，并通过 handle.add() 将worker添加进去。</p>
-<pre><code class="javascript">// master进程
-function queryServer(worker, message) &#123;
-    var args = [message.address,
-                message.port,
-                message.addressType,
-                message.fd, // undefined
-                message.index]; // 注意：对于同样的监听参数，index 是从0开始递增的整数
-    var key = args.join(&#39;:&#39;); // 例子：&#39;:3000:4::0&#39;
-    var handle = handles[key];
-    if (handle === undefined) &#123;
-      var constructor = RoundRobinHandle;
-
-      // 创建新的handle，并挂载到 handles 上
-      // 这里的 constructor 为 RoundRobinHandle
-      handles[key] = handle = new constructor(key,
-                                              message.address,
-                                              message.port,
-                                              message.addressType,
-                                              message.fd,
-                                              message.flags);
-    &#125;
-    if (!handle.data) handle.data = message.data;
-
-    // Set custom server data
-    handle.add(worker, function(errno, reply, handle) &#123;
-      reply = util._extend(&#123;
-        errno: errno,
-        key: key,
-        ack: message.seq,
-        data: handles[key].data
-      &#125;, reply);
-      if (errno) delete handles[key];  // Gives other workers a chance to retry.
-      send(worker, reply, handle);
-    &#125;);
-  &#125;
-</code></pre>
-<p>看下 RoundRobinHandle 的构造方法。创建了 net.Server 实例，并调用 server.listen() 方法（实际监听）。</p>
-<p>当 listening 事件触发，将 onconnection 事件覆盖掉，实现在多个worker中分发请求的逻辑。</p>
-<pre><code class="javascript">// master进程
-function RoundRobinHandle(key, address, port, addressType, fd) &#123;
-  this.key = key;
-  this.all = &#123;&#125;;
-  this.free = [];
-  this.handles = [];
-  this.handle = null;
-  this.server = net.createServer(assert.fail);
-
-  if (fd &gt;= 0)
-    this.server.listen(&#123; fd: fd &#125;);
-  else if (port &gt;= 0)
-    this.server.listen(port, address);
-  else
-    this.server.listen(address);  // UNIX socket path.
-
-  this.server.once(&#39;listening&#39;, () =&gt; &#123;
-    this.handle = this.server._handle;
-    // 监听 connection 事件，当用户请求进来时，通过 this.distribute() 分发请求到各个worker
-    this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
-    this.server._handle = null;
-    this.server = null;
-  &#125;);
-&#125;
-</code></pre>
-<p>注意，前面调用了 handle.add() 方法，如下所示</p>
-<pre><code class="javascript">// master进程
-// Set custom server data
-handle.add(worker, function(errno, reply, handle) &#123;
-  reply = util._extend(&#123;
-    errno: errno,
-    key: key,
-    ack: message.seq,
-    data: handles[key].data
-  &#125;, reply);
-  if (errno) delete handles[key];  // Gives other workers a chance to retry.
-  send(worker, reply, handle);
-&#125;);
-</code></pre>
-<p>看下方法定义（忽略非主要逻辑）：</p>
-<pre><code class="javascript">// master进程
-RoundRobinHandle.prototype.add = function(worker, send) &#123;
-  // 存储worker的引用
-  this.all[worker.id] = worker;
-
-  // 当listening事件触发，done 被调用（注意，在 RoundRobinHandle 构造方法里也监听了 listening）
-  const done = () =&gt; &#123;
-    if (this.handle.getsockname) &#123;
-      // osx 10.13.1，node 8.9.3，跑这个分支
-      var out = &#123;&#125;;
-      this.handle.getsockname(out);
-      // 这里的 send 函数名比较有歧义，其实是 handle.add(worker, callback) 中的 callback
-      // TODO(bnoordhuis) Check err.
-      send(null, &#123; sockname: out &#125;, null);
-    &#125; else &#123;
-      send(null, null, null);  // UNIX socket.
-    &#125;
-    this.handoff(worker);  // In case there are connections pending.
-  &#125;;
-
-  // Still busy binding.
-  this.server.once(&#39;listening&#39;, done);
-&#125;;
-</code></pre>
-<p>当 listening 事件触发，下面方法被调用。同样的，最终被 sendHelper 封装了一遍</p>
-<pre><code class="javascript">// master进程
-// error: null
-// reply: &#123;&#125;
-// handle: null
-function(errno, reply, handle) &#123;
-  reply = util._extend(&#123;
-    errno: errno,
-    key: key,
-    ack: message.seq,
-    data: handles[key].data
-  &#125;, reply);
-  if (errno) delete handles[key];  // Gives other workers a chance to retry.
-  &#123;&quot;errno&quot;:null,&quot;key&quot;:&quot;:3000:4::0&quot;,&quot;ack&quot;:1,&quot;data&quot;:null,&quot;sockname&quot;:&#123;&quot;address&quot;:&quot;::&quot;,&quot;family&quot;:&quot;IPv6&quot;,&quot;port&quot;:3000&#125;&#125;
-  send(worker, reply, handle);
-&#125;
-</code></pre>
-<p>经过 sendHelper 的封装，worker.process.send(message)，message 内容如下。注意，此时 ack === 1。</p>
-<pre><code class="javascript">// master进程
-&#123;
-  &quot;cmd&quot;: &quot;NODE_CLUSTER&quot;,
-  &quot;sockname&quot;: &#123;
-    &quot;address&quot;: &quot;::&quot;,
-    &quot;family&quot;: &quot;IPv6&quot;,
-    &quot;port&quot;: 3000
-  &#125;,
-  &quot;data&quot;: null,
-  &quot;ack&quot;: 1,
-  &quot;key&quot;: &quot;:3000:4::0&quot;,
-  &quot;errno&quot;: null,
-  &quot;seq&quot;: 0
-&#125;
-</code></pre>
-<p>当上面 message 被发出时，worker 进程的 internalMessage 事件触发。（worker进程 的internalMessage 事件是在 node_bootstrap阶段监听的，这里容易忽略）</p>
-<pre><code class="javascript">// worker进程
-cluster._setupWorker = function() &#123;
-  var worker = new Worker(&#123;
-    id: +process.env.NODE_UNIQUE_ID | 0,
-    process: process,
-    state: &#39;online&#39;
-  &#125;);
-  cluster.worker = worker;
-  process.on(&#39;internalMessage&#39;, internal(worker, onmessage));
-&#125;;
-</code></pre>
-<p>如下所示，当 message.ack 存在时，callbacks[message.ack] 被调用。</p>
-<pre><code class="javascript">// worker进程
-function internal(worker, cb) &#123;
-  return function(message, handle) &#123;
-    if (message.cmd !== &#39;NODE_CLUSTER&#39;) return;
-    var fn = cb;
-    // 此时，message.ack === 1
-    // callbacks[message.ack] 是 _getServer 的回调
-    if (message.ack !== undefined &amp;&amp; callbacks[message.ack] !== undefined) &#123;
-      fn = callbacks[message.ack];
-      delete callbacks[message.ack];
-    &#125;
-    fn.apply(worker, arguments);
-  &#125;;
-&#125;
-</code></pre>
-<p>也就是下面的回调。</p>
-<pre><code class="javascript">// worker进程
-// obj is a net#Server or a dgram#Socket object.
-cluster._getServer = function(obj, options, cb) &#123;
-
-  // 忽略部分代码
-  const message = util._extend(&#123;
-    act: &#39;queryServer&#39;,
-    index: indexes[indexesKey],
-    data: null
-  &#125;, options);
-
-  /*
-  注意：就是这里的回调】
-  reply: &#123;
-    &quot;cmd&quot;: &quot;NODE_CLUSTER&quot;,
-    &quot;sockname&quot;: &#123;
-      &quot;address&quot;: &quot;::&quot;,
-      &quot;family&quot;: &quot;IPv6&quot;,
-      &quot;port&quot;: 3000
-    &#125;,
-    &quot;data&quot;: null,
-    &quot;ack&quot;: 1,
-    &quot;key&quot;: &quot;:3000:4::0&quot;,
-    &quot;errno&quot;: null,
-    &quot;seq&quot;: 0
-  &#125;
-  handle：undefined
-  */
-  send(message, (reply, handle) =&gt; &#123;
-    if (handle)
-      shared(reply, handle, indexesKey, cb);  // Shared listen socket.
-    else
-      // 这里被调用
-      rr(reply, indexesKey, cb);              // Round-robin.
-  &#125;);
-&#125;;
-</code></pre>
-<p>下面是 rr 方法的定义。</p>
-<pre><code class="javascript">// worker进程
-// message： &#123;&quot;cmd&quot;:&quot;NODE_CLUSTER&quot;,&quot;sockname&quot;:&#123;&quot;address&quot;:&quot;::&quot;,&quot;family&quot;:&quot;IPv6&quot;,&quot;port&quot;:3000&#125;,&quot;data&quot;:null,&quot;ack&quot;:1,&quot;key&quot;:&quot;:3000:4::0&quot;,&quot;errno&quot;:null,&quot;seq&quot;:0&#125;
-// indexsKey: &quot;:3000:4:&quot;
-// cb: _getServer 的回调
-// Round-robin. Master distributes handles across workers.
-function rr(message, indexesKey, cb) &#123;
-  if (message.errno)
-    return cb(message.errno, null);
-
-  var key = message.key;
-  function listen(backlog) &#123;
-    // TODO(bnoordhuis) Send a message to the master that tells it to
-    // update the backlog size. The actual backlog should probably be
-    // the largest requested size by any worker.
-    return 0;
-  &#125;
-
-  function close() &#123;
-    // lib/net.js treats server._handle.close() as effectively synchronous.
-    // That means there is a time window between the call to close() and
-    // the ack by the master process in which we can still receive handles.
-    // onconnection() below handles that by sending those handles back to
-    // the master.
-    if (key === undefined) return;
-    send(&#123; act: &#39;close&#39;, key: key &#125;);
-    delete handles[key];
-    delete indexes[indexesKey];
-    key = undefined;
-  &#125;
-
-  function getsockname(out) &#123;
-    if (key) util._extend(out, message.sockname);
-    return 0;
-  &#125;
-
-  // XXX(bnoordhuis) Probably no point in implementing ref() and unref()
-  // because the control channel is going to keep the worker alive anyway.
-  function ref() &#123;
-  &#125;
-
-  function unref() &#123;
-  &#125;
-
-  // Faux handle. Mimics a TCPWrap with just enough fidelity to get away
-  // with it. Fools net.Server into thinking that it&#39;s backed by a real
-  // handle.
-  var handle = &#123;
-    close: close,
-    listen: listen,
-    ref: ref,
-    unref: unref,
-  &#125;;
-  if (message.sockname) &#123;
-    handle.getsockname = getsockname;  // TCP handles only.
-  &#125;
-
-  handles[key] = handle;
-  cb(0, handle); // 终于调用 cb 了。。。
-&#125;
-</code></pre>
-<p>然后，下面的回调函数被调用：</p>
-<pre><code class="javascript">// worker进程
-function cb(err, handle) &#123;
-  // err：0
-  // handle: &#123;close: fn, listen: fn, getsockname: fn, ref: fn, unref: fn&#125;
-  if (err === 0 &amp;&amp; port &gt; 0 &amp;&amp; handle.getsockname) &#123;
-    var out = &#123;&#125;;
-    err = handle.getsockname(out);
-    if (err === 0 &amp;&amp; port !== out.port)
-      err = uv.UV_EADDRINUSE;
-  &#125;
-
-  self._handle = handle; // 将 handle 赋给 net.Server 实例
-  self._listen2(address, port, addressType, backlog, fd); // 调用 _listen2 方法
-&#125;
-</code></pre>
-<p>看下此时 _listen2 做了什么。主要是抛出 listening 事件，以及 添加 onconnection 监听。</p>
-<pre><code class="javascript">// worker进程
-Server.prototype._listen2 = function(address, port, addressType, backlog, fd) &#123;
-
-  // If there is not yet a handle, we need to create one and bind.
-  // In the case of a server sent via IPC, we don&#39;t need to do this.
-  if (this._handle) &#123;
-    debug(&#39;_listen2: have a handle already&#39;);
-  &#125;
-
-  this._handle.onconnection = onconnection; // onconnect 回调
-  this._handle.owner = this;
-
-  var err = _listen(this._handle, backlog);
-
-  // generate connection key, this should be unique to the connection
-  this._connectionKey = addressType + &#39;:&#39; + address + &#39;:&#39; + port;
-
-  process.nextTick(emitListeningNT, this);
-&#125;;
-</code></pre>
-<p>前面说过，在主进程里，创建了 net.Server 实例，并对端口进行实际的监听。再来回顾这段代码</p>
-<pre><code class="javascript">// master进程
-// Start a round-robin server. Master accepts connections and distributes
-// them over the workers.
-function RoundRobinHandle(key, address, port, addressType, fd) &#123;
-  // 忽略非重点代码
-  this.server = net.createServer(assert.fail);
-  this.server.listen(port, address); // 注意这里的监听
-
-  this.server.once(&#39;listening&#39;, () =&gt; &#123;
-    this.handle = this.server._handle;
-    this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
-    this.server._handle = null;
-    this.server = null;
-  &#125;);
-&#125;
-</code></pre>
-<p>监听调用的是 net 模块中如下函数：</p>
-<pre><code class="javascript">// master进程
-self._listen2(address, port, addressType, backlog, fd);
-</code></pre>
-<pre><code class="javascript">// master进程
-Server.prototype._listen2 = function(address, port, addressType, backlog, fd) &#123;
-
-  // If there is not yet a handle, we need to create one and bind.
-  // In the case of a server sent via IPC, we don&#39;t need to do this.
-  // 此时，this._handle 是 null（初始化状态），于是走第二个分支
-  if (this._handle) &#123;
-    debug(&#39;_listen2: have a handle already&#39;);
-  &#125; else &#123;
-    debug(&#39;_listen2: create a handle&#39;);
-
-    var rval = null;
-
-    if (!address &amp;&amp; typeof fd !== &#39;number&#39;) &#123;
-      rval = createServerHandle(&#39;::&#39;, port, 6, fd);
-
-      if (typeof rval === &#39;number&#39;) &#123;
-        rval = null;
-        address = &#39;0.0.0.0&#39;;
-        addressType = 4;
-      &#125; else &#123;
-        address = &#39;::&#39;;
-        addressType = 6;
-      &#125;
-    &#125;
-
-    // rval: &#123;&quot;reading&quot;:false,&quot;owner&quot;:null,&quot;onread&quot;:null,&quot;onconnection&quot;:null,&quot;writeQueueSize&quot;:0&#125;
-    if (rval === null)
-      // 重点是这行代码，在这里面创建 TCP 实例，并进行监听
-      // fd: undefined
-      // address: ::&#39;&#39;
-      rval = createServerHandle(address, port, addressType, fd);
-
-    if (typeof rval === &#39;number&#39;) &#123;
-      var error = exceptionWithHostPort(rval, &#39;listen&#39;, address, port);
-      process.nextTick(emitErrorNT, this, error);
-      return;
-    &#125;
-    this._handle = rval;
-  &#125;
-
-  this._handle.onconnection = onconnection;
-  this._handle.owner = this;
-
-  var err = _listen(this._handle, backlog);
-
-  if (err) &#123;
-    var ex = exceptionWithHostPort(err, &#39;listen&#39;, address, port);
-    this._handle.close();
-    this._handle = null;
-    process.nextTick(emitErrorNT, this, ex);
-    return;
-  &#125;
-
-  // generate connection key, this should be unique to the connection
-  this._connectionKey = addressType + &#39;:&#39; + address + &#39;:&#39; + port;
-
-  // unref the handle if the server was unref&#39;ed prior to listening
-  if (this._unref)
-    this.unref();
-
-  process.nextTick(emitListeningNT, this);
-&#125;;
-</code></pre>
-<p>主要逻辑：创建 TCP 实例，绑定端口、IP，并返回 handle。</p>
-<pre><code class="javascript">//master进程
-function createServerHandle(address, port, addressType, fd) &#123;
-  var err = 0;
-  // assign handle in listen, and clean up if bind or listen fails
-  var handle;
-
-  var isTCP = false;
-
-  handle = new TCP();
-  isTCP = true;
-
-  if (address || port || isTCP) &#123;
-    debug(&#39;bind to &#39; + (address || &#39;anycast&#39;));
-    if (!address) &#123;
-      // Try binding to ipv6 first
-      err = handle.bind6(&#39;::&#39;, port);
-      if (err) &#123;
-        handle.close();
-        // Fallback to ipv4
-        return createServerHandle(&#39;0.0.0.0&#39;, port);
-      &#125;
-    &#125; else if (addressType === 6) &#123;
-      err = handle.bind6(address, port);
-    &#125; else &#123;
-      err = handle.bind(address, port);
-    &#125;
-  &#125;
-
-  if (err) &#123;
-    handle.close();
-    return err;
-  &#125;
-
-  return handle;
-&#125;
-</code></pre>
-<p>server._handle 初始化完成，开始监听后，触发 listening 事件。此时，RoundRobinHandle 中的回调函数被调用。</p>
-<pre><code class="javascript">// master进程
-this.server.once(&#39;listening&#39;, () =&gt; &#123;
-  // 将 this.server._handle 赋值给 this.handle
-  this.handle = this.server._handle;
-  // 覆盖 this.handle.onconnection，以达到请求分发的目的
-  this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
-  // 将server._handle 设置为null
-  this.server._handle = null;
-  // 将this.server 设置为null（这里只需要 handle 就够了）
-  this.server = null;
-&#125;);
-</code></pre>
-<p>经过上面的复杂流程，最终的结果是：</p>
-<ol>
-<li>master 进程中创建了 net.Server 实例A，并对来自特定端口的请求进行监听。</li>
-<li>worker 进程中创建了 net.Server 实例B。</li>
-<li>当新连接创建时，实例A 将请求分发给实例B。（如果有多个worker进程，master进程会按照特定算法进行分发）</li>
-</ol>
-<h2 id="请求分发源码分析"><a href="#请求分发源码分析" class="headerlink" title="请求分发源码分析"></a>请求分发源码分析</h2><p>首先，当连接请求进来时，调用 this.distribute(err, handle);</p>
-<pre><code class="javascript">// master进程
-this.handle.onconnection = (err, handle) =&gt; this.distribute(err, handle);
-</code></pre>
-<p>看下distribute的实现。主要做了两件事情：</p>
-<ol>
-<li>将 handle 加入待处理队列。</li>
-<li>取得第一个空闲的worker，如果存在，就调用 this.handoff(worker); 处理请求。</li>
-</ol>
-<pre><code class="javascript">// master进程
-RoundRobinHandle.prototype.distribute = function(err, handle) &#123;
-  // 将 handle 加入 handles 队列，该队列里是待处理的请求对应的handle。
-  this.handles.push(handle);
-  // 取第一个空闲的worker
-  var worker = this.free.shift();
-  // 如果有空闲的worker
-  if (worker) this.handoff(worker);
-&#125;;
-</code></pre>
-<p>看下 handoff(worker) 的实现。</p>
-<pre><code class="javascript">// master进程
-RoundRobinHandle.prototype.handoff = function(worker) &#123;
-  if (worker.id in this.all === false) &#123;
-    return;  // Worker is closing (or has closed) the server.
-  &#125;
-  // 获取第一个待处理的请求
-  var handle = this.handles.shift();
-  if (handle === undefined) &#123;
-    this.free.push(worker);  // Add to ready queue again.
-    return;
-  &#125;
-  var message = &#123; act: &#39;newconn&#39;, key: this.key &#125;;
-
-  // 向worker进程发送消息
-  // message：&#123; act: &#39;newconn&#39;, key: this.key &#125;
-  sendHelper(worker.process, message, handle, (reply) =&gt; &#123;
-    // 当 worker进程 收到消息后，ack回应，调用 handle.close()
-    if (reply.accepted)
-      handle.close();
-    else
-      this.distribute(0, handle);  // Worker is shutting down. Send to another.
-    // 再次调用 handoff(worker)。有可能前面已经有一堆的待处理请求，因此检查下还有没有请求需要处理
-    // 如有，已经空闲出来的worker可以接着处理请求
-    this.handoff(worker);
-  &#125;);
-&#125;;
-</code></pre>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
         
     </div>
     </div>
@@ -777,7 +181,7 @@ RoundRobinHandle.prototype.handoff = function(worker) &#123;
   
     
       <article
-id="post-2020-03-深度玩转CSS-marker"
+id="post-2020-05-debug-log"
 class="article article-type-post"
 >
 
@@ -788,13 +192,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/03/web%E5%89%8D%E7%AB%AF/2020-03-%E6%B7%B1%E5%BA%A6%E7%8E%A9%E8%BD%ACCSS-marker.html">你不知道的css ::marker用法</a>
+        <a href="/article/2020/04/Node-js/2020-05-debug-log.html">Node.js-debug-log</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>本文将介绍 CSS 中一个比较有意思的伪元素 <code>::marker</code>，利用它，我们可以让我们的文字序号变得更加的有意思！</p>
-<h2 id="什么是-marker"><a href="#什么是-marker" class="headerlink" title="什么是 ::marker"></a>什么是 ::marker</h2><p>CSS 伪元素 <code>::marker</code> 是从 <a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-lists-3/#marker-pseudo">CSS Pseudo-Elements Level 3</a> 开始新增，<a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-pseudo-4/#marker-pseudo">CSS Pseudo-Elements Level 4</a> 中完善的一个比较新的伪元素，从 Chrome 86+ 开始得到浏览器的支持。</p>
-<p>利用它，我们可以给元素添加一个伪元素，用于生成一个项目符号或者数字。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，比如express框架中就用到了。下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
         
     </div>
     </div>
@@ -809,162 +214,7 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2020-03-05T08:50:58.000Z" itemprop="datePublished">2020-03-05</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-美化console-log的文本"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/web%E5%89%8D%E7%AB%AF/2020-01-%E7%BE%8E%E5%8C%96console-log%E7%9A%84%E6%96%87%E6%9C%AC.html">美化console.log的文本</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="美化console-log的文本"><a href="#美化console-log的文本" class="headerlink" title="美化console.log的文本"></a>美化console.log的文本</h2><p>使用非常简单有意思：</p>
-<pre><code>console.log(&quot;%c css88.com&quot;, &quot;font-size:20pt&quot;)
-</code></pre>
-<p>以%c开头，后面的文字就打印的信息，后面一个参数就是样式属性；</p>
-<p>可以尝试多个样式，每碰到一个%c开头就会应用对应的样式：</p>
-<pre><code>console.log(&quot;%c 前端开发 %c css88.com %c 愚人码头&quot;, &quot;color:red&quot;,&quot;&quot;,&quot;color:orange;font-weight:bold&quot;)
-</code></pre>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-01-22T13:27:14.000Z" itemprop="datePublished">2020-01-22</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-你所知道的background-position"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/web%E5%89%8D%E7%AB%AF/2020-01-%E4%BD%A0%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84background-position.html">你所知道的background-position（转载）</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><code>background</code>属性是<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css3-background/">CSS中最常见的属性之一</a>，它是一个简写属性，其包含<code>background-color</code>、<code>background-image</code>、<code>background-repeat</code>、<code>background-attachment</code>、<code>background-position</code>、<code>background-clip</code>、<code>background-origin</code>和<code>background-size</code>。你可能会说，这些属性再简单不过了，没有可讲的。这篇文章接下来要介绍的不是所有有关于<code>background</code>里面的属性，而是说说<code>background-position</code>属性。在详细介绍<code>background-position</code>之前，先要问大家，你真的了解这个属性吗？言外之意，接下来介绍是你所不了解的<code>background-position</code>相关细节。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-01-20T12:17:43.000Z" itemprop="datePublished">2020-01-20</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-socket-io安装失败"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/Node-js/2020-01-socket-io%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5.html">Nodejs npm安装socket.io报错解决办法</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><img src="https://img.oct1a.cn/20181007184029.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-01-02T05:50:58.000Z" itemprop="datePublished">2020-01-02</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
@@ -972,10 +222,6 @@ class="article article-type-post"
         </div>
     
     
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li></ul>
-        </div>
-    
     </div>
 </footer>
 
@@ -985,7 +231,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2019-11-微信小程序"
+id="post-2020-05-express-session-deep-in"
 class="article article-type-post"
 >
 
@@ -996,11 +242,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2019/11/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/2019-11-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F.html">微信小程序云开发</a>
+        <a href="/article/2020/04/Node-js/2020-05-express-session-deep-in.html">Node.js-express-session-deep-in</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p><img src="https://img.oct1a.cn/20181007144239.png"></p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文先简单介绍session跟cookie的区别与联系，接着深入剖析<code>express-session</code>中间件的实现。关于<code>express-session</code>的基础使用，可参见笔者前面的文章。</p>
         
     </div>
     </div>
@@ -1015,17 +261,13 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2019-11-12T08:10:23.000Z" itemprop="datePublished">2019-11-12</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
         </div>
     
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li></ul>
-        </div>
     
     </div>
 </footer>
@@ -1036,7 +278,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2019-11-使用Fiddler抓取移动端App请求"
+id="post-2020-05-express-session实现简易身份认证"
 class="article article-type-post"
 >
 
@@ -1047,15 +289,271 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2019/11/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2019-11-%E4%BD%BF%E7%94%A8Fiddler%E6%8A%93%E5%8F%96%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82.html">【保姆级】教你如何使用Fiddler抓取移动端App请求</a>
+        <a href="/article/2020/04/Node-js/2020-05-express-session%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.html">Node.js-express+session实现简易身份认证</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>目录</p>
+        <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-https"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-https</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
 <ul>
-<li>  <a href="#1%E3%80%81%E6%8A%93%E5%8F%96Android%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82">1、抓取Android移动端App请求</a></li>
-<li>  <a href="#2%E3%80%81%E6%8A%93%E5%8F%96IOS%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82">2、抓取IOS移动端App请求</a></li>
-<li>  <a href="#3%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A">3、总结</a></li>
+<li>颁发证书的机构不在操作系统的受信列表里</li>
+<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
+</ul>
+<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
+<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-log4js"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-log4js.html">Node.js-log4js</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>对于线上项目用来说，日志是非常重要的一环。log4js是使用得比较多的一个日志组件，经常跟Express一起配合使用。本文从入门实例开始，讲解log4js的使用，以及如何跟Express进行整合。</p>
+<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>输出日志如下，包括日志打印时间、日志级别、日志分类、日志内容。</p>
+<pre><code class="javascript">// started.js
+var log4js = require(&#39;log4js&#39;);
+var logger = log4js.getLogger();
+logger.debug(&#39;hello world&#39;);
+
+// 输出：
+// [2017-02-28 21:28:22.853] [DEBUG] [default] - hello world
+</code></pre>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-node8-napi"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-node8-napi.html">Node.js-node8-napi</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="N-API简介"><a href="#N-API简介" class="headerlink" title="N-API简介"></a>N-API简介</h2><p>Node.js 8.0 在2017年6月份发布，升级的特性中，包含了N-API。编写过或者使用过 node扩展的同学，不少都遇到过升级node版本，node扩展编译失败的情况。因为node扩展严重依赖于V8暴露的API，而node不同版本依赖的V8版本可能不同，一旦升级node版本，原先运行正常的node扩展就编译失败了。</p>
+<p>这种情况对node生态圈无疑是不利的，N-API的引入正是试图改善这种情况的一种尝试。它跟底层JS引擎无关，只要N-API暴露的API足够稳定，那么node扩展的编写者就不用过分担忧node的升级问题。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-stream"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-stream.html">Node.js-stream</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>类型：<br>自定义 ReadStream<br>自定义 WriteStream<br>自定义 DuplexStream<br>自定义 TransformStrem</p>
+<p>模式对比：<br>string/buffer<br>object mode</p>
+<p>缓存：(buffering、highWaterMark)</p>
+<p>两种视角：<br>stream使用<br>stream实现</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-文件上传-multer"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-multer.html">Node.js-文件上传-multer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。</p>
+<p>常用的开源组件有<strong>multer</strong>、<strong>formidable</strong>等，借助这两个开源组件，可以轻松搞定图片上传。</p>
+<p>本文主要讲解以下内容，后续章节会对技术实现细节进行深入挖掘。本文所有例子均有代码示例，可在<a href="../examples/2016.11.07-advanced-express-multer/">这里</a>查看。</p>
+<ul>
+<li>基础例子：借助express、multer实现单图、多图上传。</li>
+<li>常用API：获取上传的图片的信息。</li>
+<li>进阶使用：自定义保存的图片路径、名称。</li>
 </ul>
         
     </div>
@@ -1071,311 +569,7 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2019-11-02T05:50:58.000Z" itemprop="datePublished">2019-11-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2019-11-微信小程序原生开发"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2019/10/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/2019-11-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91.html">微信小程序原生开发</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h1 id="微信小程序简述"><a href="#微信小程序简述" class="headerlink" title="微信小程序简述"></a>微信小程序简述</h1><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BE%AE%E4%BF%A1/3905974">微信 (opens new window)</a>小程序，简称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B0%8F%E7%A8%8B%E5%BA%8F">小程序 (opens new window)</a>，英文名Mini Program，是一种不需要下载安装即可使用的[应用]</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2019-10-18T08:10:23.000Z" itemprop="datePublished">2019-10-18</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2019-10-响应式"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2019/10/web%E5%89%8D%E7%AB%AF/2019-10-%E5%93%8D%E5%BA%94%E5%BC%8F.html">响应式布局的实现方法</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="设置Meta标签"><a href="#设置Meta标签" class="headerlink" title="设置Meta标签"></a>设置Meta标签</h2><p>首先我们在使用Media的时候需要先设置下面这段代码，来兼容移动设备的展示效果：</p>
-<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;
-</code></pre>
-<p>这段代码的几个参数解释：</p>
-<pre><code>width = device-width：宽度等于当前设备的宽度
-
-height = device-height：高度等于当前设备的高度
-
-initial-scale：初始的缩放比例（默认设置为1.0）  
-
-minimum-scale：允许用户缩放到的最小比例（默认设置为1.0）    
-
-maximum-scale：允许用户缩放到的最大比例（默认设置为1.0）   
-
-user-scalable：用户是否可以手动缩放（默认设置为no，因为我们不希望用户放大缩小页面） 
-</code></pre>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2019-10-18T05:50:58.000Z" itemprop="datePublished">2019-10-18</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2019-10-Npm包管理"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2019/10/Node-js/2019-10-Npm%E5%8C%85%E7%AE%A1%E7%90%86.html">Npm包管理</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><code>CommonJS</code>包规范是理论，<code>NPM (Node Package Manager)</code> 是其中一种实践。对于<code>Node</code>而言，<code>NPM</code>帮助其完成了第三方模块的发布、安装和依赖等。借助<code>NPM</code>，<code>Node</code>与第三方模块之间形成了很好的一个生态系统。</p>
-<pre><code>## 查看版本
-    • npm –v
-## 帮助说明
-    • npm
-## 查看所有模块的版本
-    • npm version
-## 搜索模块包
-    • npm search 包名
-## 下载当前项目所依赖的包
-    • npm install
-## 在当前目录安装包
-    • npm install 包名
-## 全局模式安装包（全局安装的包一般都是一些工具）
-    • npm install 包名 –g
-## 安装包并指定版本
-    • npm install 包名@1    |-这里会下1.几版本的最新版本，也可以指定详细版本1.2.4....-|
-## 安装包并添加到生产依赖中(dependencies)
-    • npm install 包名 –save 简写：-S
-## 安装包并添加到开发依赖中(devDependencies)
-    • npm install 包名 –save-dev 简写：-D
-## 删除一个模块
-    • npm remove 包名
-## 从本地安装
-    • npm install 文件路径
-## 从镜像源安装
-    • npm install 包名 –registry=地址
-## 设置镜像源
-    • npm config set registry 地址
-## 初始化项目
-    • npm init
-## 用户登录 (本机第一次发布包)
-    • npm adduser
-## 用户登录 (非第一次发布项目)
-    • npm login
-## 上传该项目
-    • npm publish
-</code></pre>
-<h2 id="NPM-包的引入机制"><a href="#NPM-包的引入机制" class="headerlink" title="NPM 包的引入机制"></a>NPM 包的引入机制</h2><hr>
-<p>通过<code>npm</code>下载的包，直接通过包名引入即可。<code>node</code>在使用模块名称来引入模块时，它会先在当前目录的node_modules中寻找是否含有该模块。如果有则直接使用，如果没有则去上一级目录的<code>node_modules</code>中寻找，如果有则直接使用，如果没有则再去上一级目录寻找，直到找到磁盘的根目录，如果依然没有，则报错。</p>
-<h2 id="NPM-本地仓库地址配置"><a href="#NPM-本地仓库地址配置" class="headerlink" title="NPM 本地仓库地址配置"></a>NPM 本地仓库地址配置</h2><hr>
-<ol>
-<li><p> <strong>配置本地仓库地址</strong> 在指定目录创建<code>node_global</code>和<code>node_cache</code></p>
-</li>
-<li><p> <strong>运行配置指令</strong></p>
-</li>
-</ol>
-<pre><code>npm config set prefix &quot;D:\nodejs\node_global&quot;
-npm config set cache &quot;D:\nodejs\node_cache&quot;
-</code></pre>
-<h2 id="NPM-基本配置命令"><a href="#NPM-基本配置命令" class="headerlink" title="NPM 基本配置命令"></a>NPM 基本配置命令</h2><hr>
-<ol>
-<li><p> <strong>检测本地仓库</strong> <code>npm list -global</code></p>
-</li>
-<li><p><strong>配置镜像站</strong> <code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code> <code>npm config set registry https://registry.npm.taobao.org</code></p>
-<p> <code>npm config set registry http://registry.npmjs.org</code></p>
-</li>
-<li><p> <strong>查看c盘配置文件仓库地址</strong> <code>C:\Users\Administrator\.npmrc</code></p>
-</li>
-<li><p> <strong>添加新的环境变量</strong> <code>环境变量NODE_PATH内容是：D:\nodejs\node_global\node_modules</code></p>
-</li>
-<li><p> <strong>编辑环境变量PATH</strong> <code>D:\nodejs\node_global</code></p>
-</li>
-</ol>
-<h2 id="package-文件代码解析"><a href="#package-文件代码解析" class="headerlink" title="package 文件代码解析"></a>package 文件代码解析</h2><hr>
-<pre><code>&#123;
-  &quot;scripts&quot;:&#123;&#125;, // 包命令
-  &quot;name&quot;: &quot;myName&quot;,    // 包的名字
-  &quot;version&quot;: &quot;1.x.1&quot;,    // 包的版本
-  &quot;description&quot;: &quot;description&quot;,    // 包的描述
-    &quot;homepage&quot;: &quot;www.xxx.com&quot;,    // 包的官网url
-  &quot;dependencies&quot;: &#123;...&#125;,    // 生产依赖环境
-  &quot;devDependencies&quot;: &#123;...&#125;,    // 开发s依赖环境
-  &quot;repository&quot;: &#123;...&#125;, // 包代码的Repo信息
-  &quot;main&quot;:&quot;./...&quot;,    // main 字段指定了程序的主入口文件
-  &quot;keywords&quot;:&quot;xx&quot; // 关键字
-&#125;
-</code></pre>
-<h2 id="JS-中引入NPM-包"><a href="#JS-中引入NPM-包" class="headerlink" title="JS 中引入NPM 包"></a>JS 中引入NPM 包</h2><hr>
-<pre><code>// node.js语法：require(&#39;包名&#39;)
-var math = require(&#39;math&#39;)
-console.log(math.add(123,456))
-// ES6语法:import xxx from &#39;包名&#39;
-var xxx from &#39;math&#39;
-</code></pre>
-<h2 id="开发-npm-命令行工具"><a href="#开发-npm-命令行工具" class="headerlink" title="开发 npm 命令行工具"></a>开发 npm 命令行工具</h2><hr>
-<pre><code># 初始化项目
-npm init
-
-# 修改 package.json 中bin字段
-&quot;bin&quot;: &#123;
-    &quot;open-dev&quot;: &quot;./index.js&quot;
-&#125;
-
-# 新建 index.js
-#!/usr/bin/env node
-console.log(&#39;open-dev&#39;)
-# `#!/usr/bin/env node` 的意思是让系统自己去找node的执行程序，该行必不可少。
-
-# 执行 npm link
-npm link
-
-# 运行脚手架工具
-git-tool
-
-# index.js 中 process.argv 可用来获取命令行参数
-#!/usr/bin/env node
-console.log(&#39;open-dev&#39;)
-console.log(process.argv) # [&#39;...&#39;, &#39;...&#39;, ....]
-</code></pre>
-<h2 id="commander-js-的使用"><a href="#commander-js-的使用" class="headerlink" title="commander.js 的使用"></a>commander.js 的使用</h2><hr>
-<p>完整的 <a target="_blank" rel="noopener" href="http://nodejs.org/">node.js (opens new window)</a> 命令行解决方案，可以用于开发脚手架工具的使用。</p>
-<h3 id="命令行指令基本使用"><a href="#命令行指令基本使用" class="headerlink" title="命令行指令基本使用"></a>命令行指令基本使用</h3><pre><code>#!/usr/bin/env node
-const program = require(&#39;commander&#39;)
-// 配置命令
-program.option(&#39;-d, --debug&#39;, &#39;开启调试模式&#39;)
-// 读取命令行参数
-program.parse(process.argv)
-// 判断命令行参数
-if (program.debug) &#123;
-    console.log(&#39;已开启调试模式....&#39;)
-&#125;
-// 命令行运行 `open-dev -d`
-</code></pre>
-<h3 id="命令行指令携带参数"><a href="#命令行指令携带参数" class="headerlink" title="命令行指令携带参数"></a>命令行指令携带参数</h3><pre><code>#!/usr/bin/env node
-// 配置命令, 携带值 &lt;type&gt;
-program.option(&#39;-r, --run &lt;type&gt;&#39;, &#39;开启微信开发者工具&#39;)
-// 读取命令行参数
-program.parse(process.argv);
-// 判断命令行参数
-if (program.run) &#123;
-  // 读取传入值
-  const type = program.opts().run
-  console.log(type)
-&#125;
-</code></pre>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2019-10-17T05:58:15.000Z" itemprop="datePublished">2019-10-17</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
@@ -1383,9 +577,59 @@ if (program.run) &#123;
         </div>
     
     
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li></ul>
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-日志模块morgan"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97morgan.html">Node.js-日志模块morgan</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="章节概览"><a href="#章节概览" class="headerlink" title="章节概览"></a>章节概览</h2><p>morgan是express默认的日志中间件，也可以脱离express，作为node.js的日志组件单独使用。本文由浅入深，内容主要包括：</p>
+<ul>
+<li>morgan使用入门例子</li>
+<li>如何将日志保存到本地文件</li>
+<li>核心API使用说明及例子</li>
+<li>进阶使用：1、日志分割 2、将日志写入数据库</li>
+<li>源码剖析：morgan的日志格式以及预编译</li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
         </div>
+    
     
     </div>
 </footer>
@@ -1397,7 +641,7 @@ if (program.run) &#123;
 
   
     <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/page/7/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/">Next</a>
+        <a class="extend prev" rel="prev" href="/page/7/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/">Next</a>
     </nav>
   
 </div>
@@ -1428,7 +672,7 @@ if (program.run) &#123;
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -1438,7 +682,7 @@ if (program.run) &#123;
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -1451,23 +695,23 @@ if (program.run) &#123;
       <ul>
         
           <li>
-            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
+            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
+            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
           </li>
         
           <li>
-            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
           </li>
         
       </ul>
@@ -1494,41 +738,40 @@ if (program.run) &#123;
     </div>
 
     <footer class="footer">
-  <div class="footer-wave">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
-  </div>
-
-  <div class="footer-wrap">
-    <div class="footer-inner">
-      Oct1a &copy;
-        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
-          <br>
-          <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
-          <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
-          <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
-          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
     </div>
 
-  </div>
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
 
 </footer>
 
 
 
-    
-
         
-<script src="/dist/build.js?1619416789282.js"></script>
-
-          
-<script src="/dist/custom.js?1619416789282.js"></script>
-
-
-            
 
                 
+<script src="/dist/build.js?1632321966441.js"></script>
 
                     
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
 
 </body>
 

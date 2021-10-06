@@ -2,47 +2,51 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  
-    <title>
-      
-            Oct1a
-    </title>
+    <meta charset="utf-8">
+    
+    <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
     <meta name="author" content="Oct1a_H">
     <meta name="generator" content="hexo">
     <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
 
     
 
-        
-          <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = false
+        window.aomori = {
             
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
 
-              
-
-                  
-
-                      
-
-                          
-
-                              
-<link rel="stylesheet" href="/dist/build.css?v=1619416789282.css">
-
-
-                                <script>
-                                  window.isPost = false
-                                  window.aomori = {
-                                    
-                                    
-                                    
-                                  }
-                                  window.aomori_logo_typed_animated = true
-                                  window.aomori_search_algolia = true
-                                </script>
+    </script>
 
 </head>
 
@@ -127,7 +131,7 @@
   
     
       <article
-id="post-2020-05-express-session实现简易身份认证"
+id="post-2020-04-util"
 class="article article-type-post"
 >
 
@@ -138,11 +142,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-express-session%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-04-util.html">Node.js-util</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能。</p>
+        <h2 id="debuglog-section"><a href="#debuglog-section" class="headerlink" title="debuglog(section)"></a>debuglog(section)</h2><p>很有用的调试方法。可以通过 util.debuglog(name) 来创建一个调试fn，这个fn的特点是，只有在运行程序时候，声明环境变量NODE_DEBUG=name，才会打印出调试信息。</p>
         
     </div>
     </div>
@@ -174,7 +178,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-https"
+id="post-2020-04-文件系统操作-fs"
 class="article article-type-post"
 >
 
@@ -185,108 +189,310 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-04-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C-fs.html">Node.js-d</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
-<ul>
-<li>颁发证书的机构不在操作系统的受信列表里</li>
-<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
+        <p>node 的<code>fs</code>文档密密麻麻的 api 非常多，毕竟全面支持对文件系统的操作。文档组织的很好，操作基本分为文件操作、目录操作、文件信息、流这个大方面，编程方式也支持同步、异步和 Promise。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-buffer"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-buffer.html">Node.js-buffer</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>js最初并没有读写二进制的API，Node.js引入了Buffer类，以便开发者能够对二进制数据进行操作，比如网络请求、文件操作等。</p>
+<p>随着ES6规范里TypedArray的增加，Node.js的Buffer类也实现了 Uint8Array 的API。。。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-charset-enc-dec"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-charset-enc-dec.html">Node.js-charset-enc-dec</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在web服务端开发中，字符的编解码几乎每天都要打交道。编解码一旦处理不当，就会出现令人头疼的乱码问题。</p>
+<p>不少从事node服务端开发的同学，由于对字符编码码相关知识了解不足，遇到问题时，经常会一筹莫展，花大量的时间在排查、解决问题。</p>
+<p>文本先对字符编解码的基础知识进行简单介绍，然后举例说明如何在node中进行编解码，最后是服务端的代码案例。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-asymmetric-enc-dec"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-asymmetric-enc-dec</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
+<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-body-parser"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-body-parser</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
+<pre><code class="javascript">app.use(bodyParser.json());
+app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
+</code></pre>
+<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-cookie-parser-deep-in"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-cookie-parser-deep-in.html">Node.js-cookie-parser-deep-in</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="文章导读"><a href="#文章导读" class="headerlink" title="文章导读"></a>文章导读</h2><p><code>cookie-parser</code>是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。</p>
+<p>它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对<code>Express + cookie-parser</code>的签名、验证机制不了解导致的。</p>
+<p>本文深入讲解<code>Express + cookie-parser</code>的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-cookie"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-cookie.html">Node.js-cookie</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="入门基础"><a href="#入门基础" class="headerlink" title="入门基础"></a>入门基础</h2><ul>
+<li>domain：cookie属于哪个域，如果不显示声明，则限制只有当前域可以访问。比如当前域名为id.qq.com，那么默认当前域下的cookie <a target="_blank" rel="noopener" href="http://www.qq.com无法访问.如果某个cookie申明domain为qq.com,那么,只要是qq.com域下,都可以访问该cookie./">www.qq.com无法访问。如果某个cookie申明domain为qq.com，那么，只要是qq.com域下，都可以访问该cookie。</a></li>
+<li>path：cookie所属的路径，比如声明path＝/，那么，所有路径下的页面都可以访问该cookie。如果声明cookie所属的path为/test，那么/test/sub-test/下的页面也可以访问该cookie，而/hello下的页面则无法访问该cookie。</li>
+<li>httpOnly：页面的js无法读写该cookie。</li>
+<li>secure：该cookie只能在https环境下使用。</li>
+<li>expires：过期时间</li>
+<li>maxAge：</li>
 </ul>
-<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
-<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
-<pre><code class="js">var https = require(&#39;https&#39;);
-
-https.get(&#39;https://www.baidu.com&#39;, function(res)&#123;
-    res.on(&#39;data&#39;, function(data)&#123;
-        process.stdout.write(data);
-    &#125;);
-&#125;).on(&#39;error&#39;, function(err)&#123;
-    console.error(err);
-&#125;);
-</code></pre>
-<p>运行上面代码，输出如下。可以看到出现报错，提示信息是“self signed certificate in certificate chain”。大意就是说证书是网站自己签发的，不安全。</p>
-<pre><code class="bash">&#123; Error: self signed certificate in certificate chain
-    at Error (native)
-    at TLSSocket.&lt;anonymous&gt; (_tls_wrap.js:1055:38)
-    at emitNone (events.js:86:13)
-    at TLSSocket.emit (events.js:185:7)
-    at TLSSocket._finishInit (_tls_wrap.js:580:8)
-    at TLSWrap.ssl.onhandshakedone (_tls_wrap.js:412:38) code: &#39;SELF_SIGNED_CERT_IN_CHAIN&#39; &#125;
-</code></pre>
-<p>出现上述错误怎么处理呢？我们知道，如果是在浏览器里访问，有两种处理方式：</p>
-<ul>
-<li>忽略浏览器的安全提示，继续访问（浏览器可能会直接禁止你访问）</li>
-<li>将网站的根证书导入到操作系统的受信任根证书列表里</li>
-</ul>
-<h2 id="入门示例"><a href="#入门示例" class="headerlink" title="入门示例"></a>入门示例</h2><p>TODO</p>
-<h2 id="基础讲解"><a href="#基础讲解" class="headerlink" title="基础讲解"></a>基础讲解</h2><p>。。。</p>
-<h2 id="本地证书"><a href="#本地证书" class="headerlink" title="本地证书"></a>本地证书</h2><p>。。。</p>
-<h2 id="服务器：自签名证书"><a href="#服务器：自签名证书" class="headerlink" title="服务器：自签名证书"></a>服务器：自签名证书</h2><pre><code class="bash">➜  server git:(master) ✗ mkdir cert
-➜  server git:(master) ✗ cd cert
-➜  cert git:(master) ✗ openssl genrsa -out chyingp-key.pem 2048
-Generating RSA private key, 2048 bit long modulus
-.............................+++
-..........................................+++
-e is 65537 (0x10001)
-➜  cert git:(master) ✗ openssl req -new -sha256 -key chyingp-key.pem -out chyingp-csr.pem
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter &#39;.&#39;, the field will be left blank.
------
-Country Name (2 letter code) [AU]:CN
-State or Province Name (full name) [Some-State]:Guangdong
-Locality Name (eg, city) []:Shenzhen
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:YH
-Organizational Unit Name (eg, section) []:web
-Common Name (e.g. server FQDN or YOUR name) []:www.chyingp.com
-Email Address []:416394284@qq.com
-
-Please enter the following &#39;extra&#39; attributes
-to be sent with your certificate request
-A challenge password []:123456
-An optional company name []:YH
-➜  cert git:(master) ✗ openssl x509 -req -in chyingp-csr.pem -signkey chyingp-key.pem -out chyingp-cert.pem
-</code></pre>
-<h2 id="私有CA签名的证书"><a href="#私有CA签名的证书" class="headerlink" title="私有CA签名的证书"></a>私有CA签名的证书</h2><p>首先，创建自签名的CA证书</p>
-<pre><code class="bash"># 创建ca的私钥
-openssl genrsa -out my-ca.key.pem 2048
-
-# 创建ca的证书
-openssl req \
-  -x509 \
-  -new \
-  -nodes \
-  -key my-ca.key.pem \
-  -days 1024 \
-  -out my-ca.crt.pem \
-  -subj &quot;/C=CN/ST=Guandong/L=Shenzhen/O=YH Inc/CN=chyingp.com&quot;
-</code></pre>
-<p>然后，创建用CA的私钥进行签名的网站证书</p>
-<pre><code class="bash"># 创建私钥
-openssl genrsa \
-  -out my-server.key.pem \
-  2048
-
-# 创建证书签名请求
-openssl req -new \
-  -key my-server.key.pem \
-  -out my-server.csr.pem \
-  -subj &quot;/C=CN/ST=Guandong/L=Shenzhen/O=YH Inc/CN=www.chyingp.com&quot;
-
-# 创建网站证书
-openssl x509 \
-  -req -in my-server.csr.pem \
-  -CA my-ca.crt.pem \
-  -CAkey my-ca.key.pem \
-  -CAcreateserial \
-  -out my-server.crt.pem \
-  -days 500
-</code></pre>
 
         
     </div>
@@ -319,7 +525,7 @@ openssl x509 \
   
     
       <article
-id="post-2020-05-log4js"
+id="post-2020-05-crypto-diffie-hellman"
 class="article article-type-post"
 >
 
@@ -330,106 +536,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-log4js.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>对于线上项目用来说，日志是非常重要的一环。log4js是使用得比较多的一个日志组件，经常跟Express一起配合使用。本文从入门实例开始，讲解log4js的使用，以及如何跟Express进行整合。</p>
-<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>输出日志如下，包括日志打印时间、日志级别、日志分类、日志内容。</p>
-<pre><code class="javascript">// started.js
-var log4js = require(&#39;log4js&#39;);
-var logger = log4js.getLogger();
-logger.debug(&#39;hello world&#39;);
-
-// 输出：
-// [2017-02-28 21:28:22.853] [DEBUG] [default] - hello world
-</code></pre>
-<h2 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h2><p><code>logger.setLevel(&#39;INFO&#39;);</code> 表示想要打印的最低级别的日志是<code>INFO</code>，也就是说，调用类似<code>logger.debug()</code>等级别低于<code>INFO</code>的接口，日志是不会打印出来的。</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-var logger = log4js.getLogger();
-logger.setLevel(&#39;INFO&#39;);
-
-logger.debug(&#39;level: debug&#39;);
-logger.info(&#39;level: info&#39;);
-logger.error(&#39;level: error&#39;);
-
-// 输出如下：
-// [2017-02-28 21:50:45.372] [INFO] [default] - level: info
-// [2017-02-28 21:50:45.376] [ERROR] [default] - level: error
-</code></pre>
-<h2 id="日志类别"><a href="#日志类别" class="headerlink" title="日志类别"></a>日志类别</h2><p>除级别外，还可以对日志进行分类，<code>log4js.getLogger(category)</code>，如下所示</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-var alogger = log4js.getLogger(&#39;category-a&#39;);
-var blogger = log4js.getLogger(&#39;category-b&#39;);
-
-alogger.info(&#39;hello&#39;);
-blogger.info(&#39;hello&#39;);
-
-// 输出如下：
-// [2017-02-28 22:36:57.570] [INFO] category-a - hello
-// [2017-02-28 22:36:57.574] [INFO] category-b - hello
-</code></pre>
-<h2 id="appenders"><a href="#appenders" class="headerlink" title="appenders"></a>appenders</h2><p>appenders指定日志输出的位置，可以同时配置多个，用category进行区分。比如 <code>log4js.getLogger(&#39;info&#39;)</code> 应用的就是 <code>type</code> 为 <code>dateFile</code> 的配置。</p>
-<p>可以注意到，<code>type</code> 为 <code>console</code> 的配置没有声明 <code>category</code> ，因此，所有的日志都会打印到控制台。</p>
-<pre><code class="javascript">var log4js = require(&#39;log4js&#39;);
-
-log4js.configure(&#123;
-    appenders: [
-        &#123; type: &#39;console&#39;&#125;,
-        &#123; type: &#39;dateFile&#39;, filename: &#39;./logs/info.log&#39;, category: &#39;info&#39; &#125;
-    ]
-&#125;);
-
-var logger = log4js.getLogger(&#39;info&#39;);
-logger.setLevel(&#39;INFO&#39;);
-
-logger.trace(&#39;trace&#39;);
-logger.debug(&#39;debug&#39;);
-logger.info(&#39;info&#39;);
-
-// 输出如下：
-// [2017-02-28 22:51:30.723] [INFO] info - info
-</code></pre>
-<h2 id="express应用"><a href="#express应用" class="headerlink" title="express应用"></a>express应用</h2><p>一个比较简单的例子如下，日志全部打印到控制台。</p>
-<pre><code class="javascript">var express = require(&#39;express&#39;);
-var log4js = require(&#39;log4js&#39;);
-var app = express();
-
-log4js.configure(&#123;
-    appenders: [
-        &#123; type: &#39;console&#39;, category: &#39;app&#39; &#125;
-    ]
-&#125;);
-
-var logger = log4js.getLogger(&#39;app&#39;);
-
-logger.setLevel(&#39;INFO&#39;);  // 级别 &gt; INFO 的日志才会被打印
-
-app.use( log4js.connectLogger(logger) );
-
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p>访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/">http://127.0.0.1:3000</a> ，打印日志如下</p>
-<pre><code class="bash">[2017-03-01 00:28:29.301] [INFO] app - ::ffff:127.0.0.1 - - &quot;GET / HTTP/1.1&quot; 304 - &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36&quot;
-</code></pre>
-<p><code>log4js.connectLogger(logger)</code> 时，可以声明日志的级别。</p>
-<pre><code class="javascript">// 级别 &gt; INFO 的日志才会被打印
-logger.setLevel(&#39;INFO&#39;);
-
-// 日志的级别是 WARN
-app.use( log4js.connectLogger(logger, &#123;level: &#39;WARN&#39;&#125;) );
-</code></pre>
-<p>注意，如果声明的日志级别低于<code>logger.setLevel(level)</code>限定的级别，那么日志不会被打印，如下例子。</p>
-<pre><code class="javascript">logger.setLevel(&#39;INFO&#39;);
-
-app.use( log4js.connectLogger(logger, &#123;level: &#39;DEBUG&#39;&#125;) );
-</code></pre>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>官网：<a target="_blank" rel="noopener" href="https://github.com/nomiddlename/log4js-node">https://github.com/nomiddlename/log4js-node</a></p>
-
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
+<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
         
     </div>
     </div>
@@ -461,7 +573,7 @@ app.use( log4js.connectLogger(logger, &#123;level: &#39;DEBUG&#39;&#125;) );
   
     
       <article
-id="post-2020-05-node8-napi"
+id="post-2020-05-crypto-theory"
 class="article article-type-post"
 >
 
@@ -472,1610 +584,17 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-node8-napi.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="N-API简介"><a href="#N-API简介" class="headerlink" title="N-API简介"></a>N-API简介</h2><p>Node.js 8.0 在2017年6月份发布，升级的特性中，包含了N-API。编写过或者使用过 node扩展的同学，不少都遇到过升级node版本，node扩展编译失败的情况。因为node扩展严重依赖于V8暴露的API，而node不同版本依赖的V8版本可能不同，一旦升级node版本，原先运行正常的node扩展就编译失败了。</p>
-<p>这种情况对node生态圈无疑是不利的，N-API的引入正是试图改善这种情况的一种尝试。它跟底层JS引擎无关，只要N-API暴露的API足够稳定，那么node扩展的编写者就不用过分担忧node的升级问题。</p>
-<h2 id="如何使用N-API"><a href="#如何使用N-API" class="headerlink" title="如何使用N-API"></a>如何使用N-API</h2><p>先强调一点，N-API并不是对原有node扩展实现方式的替代，它只是提供了一系列底层无关的API，来帮助开发者编写跨版本的node扩展。至于如何编写、编译、使用扩展，跟原来的差不多。</p>
-<p>本文会从一个超级简单的例子，简单介绍N-API的使用，包括环境准备、编写扩展、编译、运行几个步骤。</p>
-<blockquote>
-<p>备注：当前N-API还处于试验阶段，官方文档提供的例子都是有问题的，如用于生产环境需格外谨慎。</p>
-</blockquote>
-<h2 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h2><p>首先，N-API是8.0版本引入的，首先确保本地安装了8.0版本。笔者用的是<code>nvm</code>，读者可自行选择安装方式。</p>
-<pre><code class="bash">nvm i 8.0
-nvm use 8.0
-</code></pre>
-<p>然后，安装<code>node-gyp</code>，编译扩展会用到。</p>
-<pre><code class="bash">npm install -g node-gyp
-</code></pre>
-<p>创建项目目录，并初始化<code>package.json</code>。</p>
-<pre><code class="bash">mkdir hello &amp; cd hello # 目录名随便起
-npm init -f
-</code></pre>
-<h2 id="2、编写扩展"><a href="#2、编写扩展" class="headerlink" title="2、编写扩展"></a>2、编写扩展</h2><p>创建<code>hello.cc</code>作为扩展的源文件。</p>
-<pre><code class="bash">mkdir src
-touch src/hello.cc
-</code></pre>
-<p>编辑<code>hello.cc</code>，输入如下内容。</p>
-<pre><code class="c">#include &lt;node_api.h&gt;
-
-// 实际暴露的方法，这里只是简单返回一个字符串
-napi_value HelloMethod (napi_env env, napi_callback_info info) &#123;
-    napi_value world;
-    napi_create_string_utf8(env, &quot;world&quot;, 5, &amp;world);
-    return world;
-&#125;
-
-// 扩展的初始化方法，其中
-// env：环境变量
-// exports、module：node模块中对外暴露的对象
-void Init (napi_env env, napi_value exports, napi_value module, void* priv) &#123;
-    // napi_property_descriptor 为结构体，作用是描述扩展暴露的 属性/方法 的描述
-    napi_property_descriptor desc = &#123; &quot;hello&quot;, 0, HelloMethod, 0, 0, 0, napi_default, 0 &#125;;
-    napi_define_properties(env, exports, 1, &amp;desc);  // 定义暴露的方法
-&#125;
-
-NAPI_MODULE(hello, Init);  // 注册扩展，扩展名叫做hello，Init为扩展的初始化方法
-</code></pre>
-<h2 id="3、编译扩展"><a href="#3、编译扩展" class="headerlink" title="3、编译扩展"></a>3、编译扩展</h2><p>首先，创建编译描述文件<code>binding.gyp</code>。</p>
-<pre><code class="json">&#123;
-  &quot;targets&quot;: [
-    &#123;
-      &quot;target_name&quot;: &quot;hello&quot;,
-      &quot;sources&quot;: [ &quot;./src/hello.cc&quot; ]
-    &#125;
-  ]
-&#125;
-</code></pre>
-<p>然后，运行如下命令进行编译。</p>
-<pre><code class="bash">node-gyp rebuild
-</code></pre>
-<h2 id="4、调用扩展"><a href="#4、调用扩展" class="headerlink" title="4、调用扩展"></a>4、调用扩展</h2><p>未方便调用扩展，先安装<code>bindings</code>。</p>
-<pre><code class="bash">npm install --save bindings
-</code></pre>
-<p>然后，创建<code>app.js</code>，调用刚编译的扩展。</p>
-<pre><code class="javascript">var addon = require(&#39;bindings&#39;)(&#39;hello&#39;);
-
-console.log( addon.hello() );  // world
-</code></pre>
-<p>运行代码，由于N-API当前尚处于Experimental阶段，记得加上<code>--napi-modules</code>标记。</p>
-<pre><code class="bash">node --napi-modules app.js
-</code></pre>
-<p>输出如下</p>
-<pre><code class="bash">&#123;&quot;path&quot;:&quot;/data/github/abi-stable-node-addon-examples/1_hello_world/napi/build/Release/hello.node&quot;&#125;
-world
-(node:6500) Warning: N-API is an experimental feature and could change at any time.
-</code></pre>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>N-API：<a target="_blank" rel="noopener" href="https://nodejs.org/api/n-api.html">https://nodejs.org/api/n-api.html</a></p>
-<p>C++ Addons：<a target="_blank" rel="noopener" href="https://nodejs.org/api/addons.html">https://nodejs.org/api/addons.html</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-stream"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-stream.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>类型：<br>自定义 ReadStream<br>自定义 WriteStream<br>自定义 DuplexStream<br>自定义 TransformStrem</p>
-<p>模式对比：<br>string/buffer<br>object mode</p>
-<p>缓存：(buffering、highWaterMark)</p>
-<p>两种视角：<br>stream使用<br>stream实现</p>
-<h2 id="Readable-Stream"><a href="#Readable-Stream" class="headerlink" title="Readable Stream"></a>Readable Stream</h2><p>可以通过两种方式从一个Readable Steram中读取数据：</p>
+        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
+<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
+<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
 <ol>
-<li>none-flowing：默认</li>
-<li>flowing</li>
-</ol>
-<h3 id="none-flowing-mode"><a href="#none-flowing-mode" class="headerlink" title="none-flowing mode"></a>none-flowing mode</h3><p>以下代码从标准输入中读取内容，并写回到标准输出。</p>
-<ol>
-<li>read()方法是同步调用，默认返回buffer，也可以通过 readStream.setEncoding(charset) 使得取得的内容为字符串。（从内部的缓冲区里读取内容）</li>
-<li>当内部缓冲区有数据可供读取时，readable触发（可能触发多次）。read() 方法会循环调用，直到返回null。此时，停止数据读取，直到下一次readable触发，或者end触发。</li>
-<li>回车：process.stdin.read() 返回，程序打印标准输入的内容。</li>
-<li>EOF：触发end事件，CTRL+D(linux)、CTRL+Z(windows)。</li>
-</ol>
-<pre><code class="javascript">process.stdin
-  .on(&#39;readable&#39;, () =&gt; &#123;
-    let chunk;
-    while ((chunk = process.stdin.read()) !== null) &#123;
-      console.log(`Buffer.isBuffer(chunk): $&#123;Buffer.isBuffer(buffer)&#125;`); // true
-      console.log(`Chunk read: $&#123;chunk.toString()&#125;`);
-    &#125;
-  &#125;)
-  .on(&#39;end&#39;, () =&gt; &#123;
-    process.stdout.write(&#39;End of Stream&#39;);
-  &#125;);
-</code></pre>
-<h3 id="flowing-mode"><a href="#flowing-mode" class="headerlink" title="flowing mode"></a>flowing mode</h3><p>跟none-flowing mode的区别：</p>
-<ol>
-<li>none-flowing：当内部缓冲区有数据，触发readable事件。用户需要主动调用 read() 方法读取数据。（如果用户在 readable 事件触发时，没有调用 read() 方法，会怎么样？）</li>
-<li>flowing：当有数据到来时，’data’ 事件触发，同时内部缓冲区的数据会被带到回调参数里。</li>
-</ol>
-<pre><code class="javascript">process.stdin
-  .on(&#39;data&#39;, (chunk) =&gt; &#123;
-    console.log(`Buffer.isBuffer(chunk): $&#123;Buffer.isBuffer(chunk)&#125;`);
-    console.log(`Chunk read: $&#123;chunk.toString()&#125;`);
-  &#125;)
-  .on(&#39;end&#39;, () =&gt; &#123;
-    process.stdout.write(&#39;End of Stream&#39;);
-  &#125;);
-</code></pre>
-<p>flowing mode是对旧版本stream接口的继承（换个翻译方式？Stream1），在控制数据的流向方面灵活性一般。随着Stream2接口的引入，flowing mode不是默认的模式。</p>
-<p>要将stream切换到flowing mode，有两种方式：</p>
-<ol>
-<li>添加 ‘data’ 回调。</li>
-<li>调用 resume() 方法。</li>
-</ol>
-<p>要让stream暂时停止抛出 ‘data’ 事件，可以调用 pause() 方法。注意，这样并不能将stream切换到none-flowing mode，只是暂停 ‘data’ 事件的触发，后续进来的数据会被缓存在内部缓冲区。</p>
-<h2 id="实现Readable-Steam"><a href="#实现Readable-Steam" class="headerlink" title="实现Readable Steam"></a>实现Readable Steam</h2><pre><code class="javascript">// randomStream.js
-const &#123; Readable &#125; = require(&#39;stream&#39;);
-
-const arr = [];
-
-class RandomStream extends Readable &#123;
-  constructor (options) &#123;
-    super(options);
-  &#125;
-
-  _read () &#123;
-    arr.push(`[RandomStream] _read() is called`);
-    let num = Math.random();
-    this.push(num.toString() + &#39; &#39;, &#39;utf8&#39;);
-
-    if (num &lt;= 0.1) &#123;
-      this.push(null); // end
-    &#125;
-  &#125;
-&#125;
-
-const rs = new RandomStream();
-rs
-.on(&#39;readable&#39;, () =&gt; &#123;
-  arr.push(`[readable] before loop`);
-
-  let chunk;
-  while ((chunk = rs.read()) !== null) &#123;
-    arr.push(`chunk read: $&#123;chunk&#125;`);
-  &#125;
-
-  arr.push(`[readable] after loop`);
-&#125;)
-.on(&#39;end&#39;, () =&gt; &#123;
-  arr.push(`[end]`);
-  console.log(arr.join(&#39;\n&#39;));
-&#125;)
-</code></pre>
-<p>运行结果输出如下（顺序有点不大对劲？）：</p>
-<pre><code class="bash">[RandomStream] _read() is called
-[readable] before loop
-[RandomStream] _read() is called
-chunk read: 0.9455902221151478 0.4752694596188789
-[RandomStream] _read() is called
-chunk read: 0.9372690495391933
-[RandomStream] _read() is called
-chunk read: 0.053975422709547694
-[readable] after loop
-[readable] before loop
-[readable] after loop
-[readable] before loop
-[readable] after loop
-[readable] before loop
-[readable] after loop
-[end]
-</code></pre>
-<h2 id="Write-Stream"><a href="#Write-Stream" class="headerlink" title="Write Stream"></a>Write Stream</h2><p>通过 write() 写入数据。如果chunk是buffer类型，encoding可以忽略不计。如果chunk是string类型，则通过encoding指定编码，默认是utf8。当chunk写入完成，callback被调用。</p>
-<p>write(chunk, [encoding], [callback])</p>
-<p>通过 end() 结束写入。chunk、encoding、callback 参数作用跟 write() 方法相同。这里的 callback，作用跟 .on(‘finish’, onFinishCallback) 中的 onFinishCallback 相同。</p>
-<p>end(chunk, [encoding], [callback])</p>
-<pre><code class="javascript">const http = require(&#39;http&#39;);
-const port = 3000;
-
-http.createServer((req, res) =&gt; &#123;
-  let num;
-  while ((num = Math.random()) &gt; 0.1) &#123;
-    res.write(&#39;res.write(): &#39; + num.toString() + &#39;\n&#39;);
-  &#125;
-  res.end(&#39;res.end(): the end&#39;);
-  res.on(&#39;finish&#39;, () =&gt; console.log(&#39;finished.&#39;));
-&#125;).listen(port);
-</code></pre>
-<p>请求：</p>
-<pre><code class="bash">curl http://127.0.0.1:3000
-</code></pre>
-<p>输出：</p>
-<pre><code class="bash">res.write(): 0.3070578038171923
-res.write(): 0.6395702937677197
-res.write(): 0.7310690728411677
-res.write(): 0.9383379632316118
-res.write(): 0.47331240688271636
-res.write(): 0.1311702075669403
-res.write(): 0.7170623464834849
-res.write(): 0.3973024871804054
-res.write(): 0.7583489396978729
-res.write(): 0.5808965383971327
-res.write(): 0.22983892514760362
-res.write(): 0.25565119168375583
-res.end(): the end
-</code></pre>
-<p>备注：如果是通过浏览器访问，浏览器本身可能会对响应进行缓存，因此，多次调用res.write()，浏览器里有可能是一次性把内容展示出来 ）</p>
-<h2 id="Duplex-Stream"><a href="#Duplex-Stream" class="headerlink" title="Duplex Stream"></a>Duplex Stream</h2><p>Duplex Stream可读、可写。开发者需要同时实现 _read()、_write() 方法。简单的例子如下：</p>
-<pre><code class="javascript">const &#123; Duplex &#125; = require(&#39;stream&#39;);
-
-class DP extends Duplex &#123;
-  constructor (options = &#123;&#125;) &#123;
-    super(options);
-    this._innerChunks = [];
-  &#125;
-
-  _write (chunk, encoding, callback) &#123;
-    this._innerChunks.push(&#123;chunk, encoding&#125;);
-    callback();
-  &#125;
-
-  _read () &#123;
-    this._innerChunks.forEach(item =&gt; &#123;
-      let upperCasedAlphabet = item.chunk.toString().toUpperCase();
-      this.push(upperCasedAlphabet);
-    &#125;);
-    this.push(null); // end
-  &#125;
-&#125;
-
-const dp = new DP();
-dp.pipe(process.stdout);
-
-dp.write(&#39;a&#39;);
-dp.write(&#39;b&#39;);
-dp.write(&#39;c&#39;);
-dp.end();
-</code></pre>
-<p>相比 readstream、writestream，支持另外的配置参数：</p>
-<ul>
-<li>allowHalfOpen：默认是true。如果设置为false，当 read side 结束时，wirte side 也会被结束掉。</li>
-<li>readableObjectMode：默认是false。设置read side的objectMode。</li>
-<li>writableObjectMode：默认是false。设置write side的objectMode。</li>
-<li>readableHighWaterMark：设置read side的highWaterMark。如果有 highWaterMark 设置项存在，这个设置项会被忽略。</li>
-<li>writableHighWaterMark：设置write side的highWaterMark。如果有 highWaterMark 设置项存在，这个设置项会被忽略。</li>
-</ul>
-<h2 id="Transform-Stream"><a href="#Transform-Stream" class="headerlink" title="Transform Stream"></a>Transform Stream</h2><p>需要自定义 _transform()、_flush() 方法。代码如下：</p>
-<pre><code class="javascript">const &#123; Transform &#125; = require(&#39;stream&#39;);
-
-class TR extends Transform &#123;
-  constructor (options = &#123;&#125;) &#123;
-    super(options);
-  &#125;
-
-  _transform (chunk, encoding, callback) &#123;
-    let upperCasedAlphabet = chunk.toString().toUpperCase();
-    this.push(upperCasedAlphabet);
-    callback();
-  &#125;
-
-  _flush (callback) &#123;
-    this.push(&#39;!&#39;);
-    callback();
-  &#125;
-&#125;
-
-const tr = new TR();
-// tr.pipe(process.stdout);
-tr.on(&#39;data&#39;, (chunk) =&gt; console.log(`ondata: $&#123;chunk&#125;`));
-
-tr.write(&#39;a&#39;);
-tr.write(&#39;b&#39;);
-tr.write(&#39;c&#39;);
-tr.end();
-
-// ondata: A
-// ondata: B
-// ondata: C
-// ondata: !
-</code></pre>
-<h2 id="各种模式"><a href="#各种模式" class="headerlink" title="各种模式"></a>各种模式</h2><p>combine stream：<br><a target="_blank" rel="noopener" href="https://www.npmjs.org/package/multipipe">https://www.npmjs.org/package/multipipe</a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/combine-stream">https://www.npmjs.com/package/combine-stream</a></p>
-<p>fork stream：</p>
-<p>merge stream<br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/multistream">https://www.npmjs.com/package/multistream</a><br><a target="_blank" rel="noopener" href="https://npmjs.org/package/merge-stream">https://npmjs.org/package/merge-stream</a><br><a target="_blank" rel="noopener" href="https://npmjs.org/package/multistream-merge">https://npmjs.org/package/multistream-merge</a></p>
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><h3 id="readSteram"><a href="#readSteram" class="headerlink" title="readSteram"></a>readSteram</h3><p>process.stdin.read() vs process.stdin.read(size) 在终端上的表现。</p>
-<p>readable 事件触发，用户没有调用 read() 方法，会有什么影响？（丢失数据？还是数据保留在内部缓冲区，但新的数据不进去了？）</p>
-<p>_read([size]) 方法，有没有传 size ，两者实现的区别？内部调用 push() 时，如果 返回 false，该如何处理？（返回false时，当前想push的data是否需要重新push？）</p>
-<p>实现 Readable Stream，打印的 readable 有点不大对？</p>
-<h3 id="write-stream"><a href="#write-stream" class="headerlink" title="write stream"></a>write stream</h3><p>write(chunk) 调用，如果写入的 chunk 太多，且远超过 backpressure 的值，会有什么影响（internal buffer 也容不下的情况）？</p>
-<p>backpressure 对read stream、write stream 的影响。</p>
-<h3 id="transform-stream"><a href="#transform-stream" class="headerlink" title="transform stream"></a>transform stream</h3><p>readstream.on(‘data’, fn) 与 readStream.pipe(stream) 的区别（）。多次调用 write()，on(‘data’) 输出会换行。pipe() 不会换行（参考 Transform Stream小节）</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Node.js Design Patterns</p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-文件上传-multer"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-multer.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。</p>
-<p>常用的开源组件有<strong>multer</strong>、<strong>formidable</strong>等，借助这两个开源组件，可以轻松搞定图片上传。</p>
-<p>本文主要讲解以下内容，后续章节会对技术实现细节进行深入挖掘。本文所有例子均有代码示例，可在<a href="../examples/2016.11.07-advanced-express-multer/">这里</a>查看。</p>
-<ul>
-<li>基础例子：借助express、multer实现单图、多图上传。</li>
-<li>常用API：获取上传的图片的信息。</li>
-<li>进阶使用：自定义保存的图片路径、名称。</li>
-</ul>
-<h2 id="环境初始化"><a href="#环境初始化" class="headerlink" title="环境初始化"></a>环境初始化</h2><p>非常简单，一行命令。</p>
-<pre><code class="bash">npm install express multer multer --save
-</code></pre>
-<p>每个示例下面，都有下面两个文件</p>
-<pre><code class="bash">➜  upload-custom-filename git:(master) ✗ tree -L 1
-.
-├── app.js # 服务端代码，用来处理文件上传请求
-├── form.html # 前端页面，用来上传文件
-</code></pre>
-<h2 id="基础例子：单图上传"><a href="#基础例子：单图上传" class="headerlink" title="基础例子：单图上传"></a>基础例子：单图上传</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-single">这里</a>。</p>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-single/app.js">app.js</a>。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var express = require(&#39;express&#39;);
-var multer  = require(&#39;multer&#39;)
-
-var app = express();
-var upload = multer(&#123; dest: &#39;upload/&#39; &#125;);
-
-// 单图上传
-app.post(&#39;/upload&#39;, upload.single(&#39;logo&#39;), function(req, res, next)&#123;
-    res.send(&#123;ret_code: &#39;0&#39;&#125;);
-&#125;);
-
-app.get(&#39;/form&#39;, function(req, res, next)&#123;
-    var form = fs.readFileSync(&#39;./form.html&#39;, &#123;encoding: &#39;utf8&#39;&#125;);
-    res.send(form);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-single/form.html">form.html</a>。</p>
-<pre><code class="html">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-    &lt;h2&gt;单图上传&lt;/h2&gt;
-    &lt;input type=&quot;file&quot; name=&quot;logo&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-&lt;/form&gt;
-</code></pre>
-<p>运行服务。</p>
-<pre><code class="bash">node app.js
-</code></pre>
-<p>访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/form">http://127.0.0.1:3000/form</a> ，选择图片，点击“提交”，done。然后，你就会看到 upload 目录下多了个图片。</p>
-<h2 id="基础例子：多图上传"><a href="#基础例子：多图上传" class="headerlink" title="基础例子：多图上传"></a>基础例子：多图上传</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-multi">这里</a>。</p>
-<p>代码简直不能更简单，将前面的 upload.single(‘logo’) 改成 upload.array(‘logo’, 2) 就行。表示：同时支持2张图片上传，并且 name 属性为 logo。</p>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-multi/app.js">app.js</a>。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var express = require(&#39;express&#39;);
-var multer  = require(&#39;multer&#39;)
-
-var app = express();
-var upload = multer(&#123; dest: &#39;upload/&#39; &#125;);
-
-// 多图上传
-app.post(&#39;/upload&#39;, upload.array(&#39;logo&#39;, 2), function(req, res, next)&#123;
-    res.send(&#123;ret_code: &#39;0&#39;&#125;);
-&#125;);
-
-app.get(&#39;/form&#39;, function(req, res, next)&#123;
-    var form = fs.readFileSync(&#39;./form.html&#39;, &#123;encoding: &#39;utf8&#39;&#125;);
-    res.send(form);
-&#125;);
-
-app.listen(3000);
-
-</code></pre>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-multi/form.html">form.html</a>。</p>
-<pre><code class="html">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-    &lt;h2&gt;多图上传&lt;/h2&gt;
-    &lt;input type=&quot;file&quot; name=&quot;logos&quot;&gt;
-    &lt;input type=&quot;file&quot; name=&quot;logos&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-&lt;/form&gt;
-</code></pre>
-<p>同样的测试步骤，不赘述。</p>
-<h2 id="获取上传的图片的信息"><a href="#获取上传的图片的信息" class="headerlink" title="获取上传的图片的信息"></a>获取上传的图片的信息</h2><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info">这里</a>。</p>
-<p>很多时候，除了将图片保存在服务器外，我们还需要做很多其他事情，比如将图片的信息存到数据库里。</p>
-<p>常用的信息比如原始文件名、文件类型、文件大小、本地保存路径等。借助multer，我们可以很方便的获取这些信息。</p>
-<p>还是单文件上传的例子，此时，multer会将文件的信息写到 req.file 上，如下代码所示。</p>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info/app.js">app.js</a>。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var express = require(&#39;express&#39;);
-var multer  = require(&#39;multer&#39;)
-
-var app = express();
-var upload = multer(&#123; dest: &#39;upload/&#39; &#125;);
-
-// 单图上传
-app.post(&#39;/upload&#39;, upload.single(&#39;logo&#39;), function(req, res, next)&#123;
-    var file = req.file;
-
-    console.log(&#39;文件类型：%s&#39;, file.mimetype);
-    console.log(&#39;原始文件名：%s&#39;, file.originalname);
-    console.log(&#39;文件大小：%s&#39;, file.size);
-    console.log(&#39;文件保存路径：%s&#39;, file.path);
-
-    res.send(&#123;ret_code: &#39;0&#39;&#125;);
-&#125;);
-
-app.get(&#39;/form&#39;, function(req, res, next)&#123;
-    var form = fs.readFileSync(&#39;./form.html&#39;, &#123;encoding: &#39;utf8&#39;&#125;);
-    res.send(form);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-get-file-info/form.html">form.html</a>。</p>
-<pre><code class="html">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-    &lt;h2&gt;单图上传&lt;/h2&gt;
-    &lt;input type=&quot;file&quot; name=&quot;logo&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-&lt;/form&gt;
-</code></pre>
-<p>启动服务，上传文件后，就会看到控制台下打印出的信息。</p>
-<pre><code class="bash">文件类型：image/png
-原始文件名：1.png
-文件大小：18379
-文件保存路径：upload/b7e4bb22375695d92689e45b551873d9
-</code></pre>
-<h2 id="自定义文件上传路径、名称"><a href="#自定义文件上传路径、名称" class="headerlink" title="自定义文件上传路径、名称"></a>自定义文件上传路径、名称</h2><p>有的时候，我们想要定制文件上传的路径、名称，multer也可以方便的实现。</p>
-<h3 id="自定义本地保存的路径"><a href="#自定义本地保存的路径" class="headerlink" title="自定义本地保存的路径"></a>自定义本地保存的路径</h3><p>非常简单，比如我们想将文件上传到 my-upload 目录下，修改下 dest 配置项就行。</p>
-<pre><code class="javascript">var upload = multer(&#123; dest: &#39;upload/&#39; &#125;);
-</code></pre>
-<p>在上面的配置下，所有资源都是保存在同个目录下。有时我们需要针对不同文件进行个性化设置，那么，可以参考下一小节的内容。</p>
-<h3 id="自定义本地保存的文件名"><a href="#自定义本地保存的文件名" class="headerlink" title="自定义本地保存的文件名"></a>自定义本地保存的文件名</h3><p>完整示例代码请参考<a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename">这里</a>。</p>
-<p>代码稍微长一点，单同样简单。multer 提供了 <strong>storage</strong> 这个参数来对资源保存的路径、文件名进行个性化设置。</p>
-<p>使用注意事项如下：</p>
-<ul>
-<li>destination：设置资源的保存路径。注意，如果没有这个配置项，默认会保存在 /tmp/uploads 下。此外，路径需要自己创建。</li>
-<li>filename：设置资源保存在本地的文件名。</li>
-</ul>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename/app.js">app.js</a>。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var express = require(&#39;express&#39;);
-var multer  = require(&#39;multer&#39;)
-
-var app = express();
-
-var createFolder = function(folder)&#123;
-    try&#123;
-        fs.accessSync(folder);
-    &#125;catch(e)&#123;
-        fs.mkdirSync(folder);
-    &#125;
-&#125;;
-
-var uploadFolder = &#39;./upload/&#39;;
-
-createFolder(uploadFolder);
-
-// 通过 filename 属性定制
-var storage = multer.diskStorage(&#123;
-    destination: function (req, file, cb) &#123;
-        cb(null, uploadFolder);    // 保存的路径，备注：需要自己创建
-    &#125;,
-    filename: function (req, file, cb) &#123;
-        // 将保存文件名设置为 字段名 + 时间戳，比如 logo-1478521468943
-        cb(null, file.fieldname + &#39;-&#39; + Date.now());
-    &#125;
-&#125;);
-
-// 通过 storage 选项来对 上传行为 进行定制化
-var upload = multer(&#123; storage: storage &#125;)
-
-// 单图上传
-app.post(&#39;/upload&#39;, upload.single(&#39;logo&#39;), function(req, res, next)&#123;
-    var file = req.file;
-    res.send(&#123;ret_code: &#39;0&#39;&#125;);
-&#125;);
-
-app.get(&#39;/form&#39;, function(req, res, next)&#123;
-    var form = fs.readFileSync(&#39;./form.html&#39;, &#123;encoding: &#39;utf8&#39;&#125;);
-    res.send(form);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p><a href="../examples/2016.11.07-advanced-express-multer/upload-custom-filename/form.html">form.html</a>。</p>
-<pre><code class="html">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-    &lt;h2&gt;单图上传&lt;/h2&gt;
-    &lt;input type=&quot;file&quot; name=&quot;logo&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
-&lt;/form&gt;
-</code></pre>
-<p>测试步骤不赘述，访问一下就知道效果了。</p>
-<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>本文对multer的基础用法进行了介绍，并未涉及过多原理性的东西。俗话说 <strong>授人以渔不如授人以渔</strong>，在后续的章节里，会对文件上传的细节进行挖掘，好让读者朋友对文件上传加深进一步的认识。</p>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>multer官方文档：<a target="_blank" rel="noopener" href="https://github.com/expressjs/multer">https://github.com/expressjs/multer</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-日志模块morgan"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97morgan.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="章节概览"><a href="#章节概览" class="headerlink" title="章节概览"></a>章节概览</h2><p>morgan是express默认的日志中间件，也可以脱离express，作为node.js的日志组件单独使用。本文由浅入深，内容主要包括：</p>
-<ul>
-<li>morgan使用入门例子</li>
-<li>如何将日志保存到本地文件</li>
-<li>核心API使用说明及例子</li>
-<li>进阶使用：1、日志分割 2、将日志写入数据库</li>
-<li>源码剖析：morgan的日志格式以及预编译</li>
-</ul>
-<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>首先，初始化项目。</p>
-<pre><code class="bash">npm install express morgan
-</code></pre>
-<p>然后，在<code>basic.js</code>中添加如下代码。</p>
-<pre><code class="js">var express = require(&#39;express&#39;);
-var app = express();
-var morgan = require(&#39;morgan&#39;);
-
-app.use(morgan(&#39;short&#39;));
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p><code>node basic.js</code>运行程序，并在浏览器里访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/">http://127.0.0.1:3000</a> ，打印日志如下</p>
-<pre><code class="bash">➜  2016.12.11-advanced-morgan git:(master) ✗ node basic.js
-::ffff:127.0.0.1 - GET / HTTP/1.1 304 - - 3.019 ms
-::ffff:127.0.0.1 - GET /favicon.ico HTTP/1.1 200 2 - 0.984 ms
-</code></pre>
-<h2 id="将日志打印到本地文件"><a href="#将日志打印到本地文件" class="headerlink" title="将日志打印到本地文件"></a>将日志打印到本地文件</h2><p>morgan支持stream配置项，可以通过它来实现将日志落地的效果，代码如下：</p>
-<pre><code class="js">var express = require(&#39;express&#39;);
-var app = express();
-var morgan = require(&#39;morgan&#39;);
-var fs = require(&#39;fs&#39;);
-var path = require(&#39;path&#39;);
-
-var accessLogStream = fs.createWriteStream(path.join(__dirname, &#39;access.log&#39;), &#123;flags: &#39;a&#39;&#125;);
-
-app.use(morgan(&#39;short&#39;, &#123;stream: accessLogStream&#125;));
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<h2 id="使用讲解"><a href="#使用讲解" class="headerlink" title="使用讲解"></a>使用讲解</h2><h3 id="核心API"><a href="#核心API" class="headerlink" title="核心API"></a>核心API</h3><p>morgan的API非常少，使用频率最高的就是<code>morgan()</code>，作用是返回一个express日志中间件。</p>
-<pre><code class="js">morgan(format, options)
-</code></pre>
-<p>参数说明如下：</p>
-<ul>
-<li>format：可选，morgan与定义了几种日志格式，每种格式都有对应的名称，比如<code>combined</code>、<code>short</code>等，默认是<code>default</code>。不同格式的差别可参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/morgan/#predefined-formats">这里</a>。下文会讲解下，如果自定义日志格式。</li>
-<li>options：可选，配置项，包含<code>stream（常用）</code>、<code>skip</code>、<code>immediate</code>。<ul>
-<li>stream：日志的输出流配置，默认是<code>process.stdout</code>。</li>
-<li>skip：是否跳过日志记录，使用方式可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/morgan/#skip">这里</a>。</li>
-<li>immediate：布尔值，默认是false。当为true时，一收到请求，就记录日志；如果为false，则在请求返回后，再记录日志。</li>
-</ul>
-</li>
-</ul>
-<h3 id="自定义日志格式"><a href="#自定义日志格式" class="headerlink" title="自定义日志格式"></a>自定义日志格式</h3><p>首先搞清楚morgan中的两个概念：format 跟 token。非常简单：</p>
-<ul>
-<li>format：日志格式，本质是代表日志格式的字符串，比如 <code>:method :url :status :res[content-length] - :response-time ms</code>。</li>
-<li>token：format的组成部分，比如上面的<code>:method</code>、<code>:url</code>即使所谓的token。</li>
-</ul>
-<p>搞清楚format、token的区别后，就可以看下morgan中，关于自定义日志格式的关键API。</p>
-<pre><code class="js">morgan.format(name, format);  // 自定义日志格式
-morgan.token(name, fn);  // 自定义token
-</code></pre>
-<h2 id="自定义format"><a href="#自定义format" class="headerlink" title="自定义format"></a>自定义format</h2><p>非常简单，首先通过<code>morgan.format()</code>定义名为<code>joke</code>的日志格式，然后通过<code>morgan(&#39;joke&#39;)</code>调用即可。</p>
-<pre><code class="js">var express = require(&#39;express&#39;);
-var app = express();
-var morgan = require(&#39;morgan&#39;);
-
-morgan.format(&#39;joke&#39;, &#39;[joke] :method :url :status&#39;);
-
-app.use(morgan(&#39;joke&#39;));
-
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p>我们来看下运行结果</p>
-<pre><code class="bash">➜  2016.12.11-advanced-morgan git:(master) ✗ node morgan.format.js
-[joke] GET / 304
-[joke] GET /favicon.ico 200
-</code></pre>
-<h2 id="自定义token"><a href="#自定义token" class="headerlink" title="自定义token"></a>自定义token</h2><p>代码如下，通过<code>morgan.token()</code>自定义token，然后将自定义的token，加入自定义的format中即可。</p>
-<pre><code class="js">var express = require(&#39;express&#39;);
-var app = express();
-var morgan = require(&#39;morgan&#39;);
-
-// 自定义token
-morgan.token(&#39;from&#39;, function(req, res)&#123;
-    return req.query.from || &#39;-&#39;;
-&#125;);
-
-// 自定义format，其中包含自定义的token
-morgan.format(&#39;joke&#39;, &#39;[joke] :method :url :status :from&#39;);
-
-// 使用自定义的format
-app.use(morgan(&#39;joke&#39;));
-
-app.use(function(req, res, next)&#123;
-    res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<p>运行程序，并在浏览器里先后访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/hello?from=app">http://127.0.0.1:3000/hello?from=app</a> 和 <a target="_blank" rel="noopener" href="http://127.0.0.1:3000/hello?from=pc">http://127.0.0.1:3000/hello?from=pc</a></p>
-<pre><code class="bash">➜  2016.12.11-advanced-morgan git:(master) ✗ node morgan.token.js
-[joke] GET /hello?from=app 200 app
-[joke] GET /favicon.ico 304 -
-[joke] GET /hello?from=pc 200 pc
-[joke] GET /favicon.ico 304 -
-</code></pre>
-<h2 id="高级使用"><a href="#高级使用" class="headerlink" title="高级使用"></a>高级使用</h2><h3 id="日志切割"><a href="#日志切割" class="headerlink" title="日志切割"></a>日志切割</h3><p>一个线上应用，如果所有的日志都落地到同一个本地文件，时间久了，文件会变得非常大，既影响性能，又不便于查看。这时候，就需要用到日志分割了。</p>
-<p>借助<code>file-stream-rotator</code>插件，可以轻松完成日志分割的工作。除了<code>file-stream-rotator</code>相关的配置代码，其余跟之前的例子差不多，这里不赘述。</p>
-<pre><code class="js">var FileStreamRotator = require(&#39;file-stream-rotator&#39;)
-var express = require(&#39;express&#39;)
-var fs = require(&#39;fs&#39;)
-var morgan = require(&#39;morgan&#39;)
-var path = require(&#39;path&#39;)
-
-var app = express()
-var logDirectory = path.join(__dirname, &#39;log&#39;)
-
-// ensure log directory exists
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
-
-// create a rotating write stream
-var accessLogStream = FileStreamRotator.getStream(&#123;
-  date_format: &#39;YYYYMMDD&#39;,
-  filename: path.join(logDirectory, &#39;access-%DATE%.log&#39;),
-  frequency: &#39;daily&#39;,
-  verbose: false
-&#125;)
-
-// setup the logger
-app.use(morgan(&#39;combined&#39;, &#123;stream: accessLogStream&#125;))
-
-app.get(&#39;/&#39;, function (req, res) &#123;
-  res.send(&#39;hello, world!&#39;)
-&#125;)
-</code></pre>
-<h3 id="日志写入数据库"><a href="#日志写入数据库" class="headerlink" title="日志写入数据库"></a>日志写入数据库</h3><p>有的时候，我们会有这样的需求，将访问日志写入数据库。这种需求常见于需要实时查询统计的日志系统。</p>
-<p>在morgan里该如何实现呢？从文档上，并没有看到适合的扩展接口。于是查阅了下<code>morgan</code>的源码，发现实现起来非常简单。</p>
-<p>回顾下之前日志写入本地文件的例子，最关键的两行代码如下。通过<code>stream</code>指定日志的输出流。</p>
-<pre><code class="js">var accessLogStream = fs.createWriteStream(path.join(__dirname, &#39;access.log&#39;), &#123;flags: &#39;a&#39;&#125;);
-app.use(morgan(&#39;short&#39;, &#123;stream: accessLogStream&#125;));
-</code></pre>
-<p>在<code>morgan</code>内部，大致实现是这样的（简化后）。</p>
-<pre><code class="js">// opt为配置文件
-var stream = opts.stream || process.stdout;
-var logString = createLogString();  // 伪代码，根据format、token的定义，生成日志
-stream.write(logString);
-</code></pre>
-<p>于是，可以用比较取巧的方式来实现目的：声明一个带<code>write</code>方法的对象，并作为<code>stream</code>配置传入。</p>
-<pre><code class="js">var express = require(&#39;express&#39;);
-var app = express();
-var morgan = require(&#39;morgan&#39;);
-
-// 带write方法的对象
-var dbStream = &#123;
-  write: function(line)&#123;
-    saveToDatabase(line);  // 伪代码，保存到数据库
-  &#125;
-&#125;;
-
-// 将 dbStream 作为 stream 配置项的值
-app.use(morgan(&#39;short&#39;, &#123;stream: dbStream&#125;));
-app.use(function(req, res, next)&#123;
-  res.send(&#39;ok&#39;);
-&#125;);
-
-app.listen(3000);
-</code></pre>
-<h2 id="深入剖析"><a href="#深入剖析" class="headerlink" title="深入剖析"></a>深入剖析</h2><p>morgan的代码非常简洁，从设计上来说，morgan的生命周期包含：</p>
-<blockquote>
-<p>token定义 –&gt; 日志格式定义 -&gt; 日志格式预编译 –&gt; 请求达到/返回 –&gt; 写日志</p>
-</blockquote>
-<p>其中，token定义、日志格式定义前面已经讲到，这里就只讲下 <strong>日志格式预编译</strong> 的细节。</p>
-<p>跟模板引擎预编译一样，日志格式预编译，也是为了提升性能。源码如下，最关键的代码就是<code>compile(fmt)</code>。</p>
-<pre><code class="js">function getFormatFunction (name) &#123;
-  // lookup format
-  var fmt = morgan[name] || name || morgan.default
-
-  // return compiled format
-  return typeof fmt !== &#39;function&#39;
-    ? compile(fmt)
-    : fmt
-&#125;
-</code></pre>
-<p><code>compile()</code>方法的实现细节这里不赘述，着重看下<code>compile(fmt)</code>返回的内容：</p>
-<pre><code class="js">var morgan = require(&#39;morgan&#39;);
-var format = morgan[&#39;tiny&#39;];
-var fn = morgan.compile(format);
-
-console.log(fn.toString());
-</code></pre>
-<p>运行上面程序，输出内容如下，其中<code>tokens</code>其实就是<code>morgan</code>。</p>
-<pre><code class="bash">function anonymous(tokens, req, res
-/**/) &#123;
-  return &quot;&quot;
-    + (tokens[&quot;method&quot;](req, res, undefined) || &quot;-&quot;) + &quot; &quot;
-    + (tokens[&quot;url&quot;](req, res, undefined) || &quot;-&quot;) + &quot; &quot;
-    + (tokens[&quot;status&quot;](req, res, undefined) || &quot;-&quot;) + &quot; &quot;
-    + (tokens[&quot;res&quot;](req, res, &quot;content-length&quot;) || &quot;-&quot;) + &quot; - &quot;
-    + (tokens[&quot;response-time&quot;](req, res, undefined) || &quot;-&quot;) + &quot; ms&quot;;
-&#125;
-</code></pre>
-<p>看下<code>morgan.token()</code>的定义，就很清晰了</p>
-<pre><code class="js">function token (name, fn) &#123;
-  morgan[name] = fn
-  return this
-&#125;
-</code></pre>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/expressjs/morgan">https://github.com/expressjs/morgan</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-图片地址转成datauri"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%88%90datauri.html">Node.js-buffer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="将图片转成datauri"><a href="#将图片转成datauri" class="headerlink" title="将图片转成datauri"></a>将图片转成datauri</h2><p>nodejs读取图片，转成base64,也就是把图片转成对应的datauri,这是个很常用的功能。快速实现了个简单的demo，这里顺便记录一下。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-child-process"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-child-process.html">Node.js-child_process</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在node中，child_process这个模块非常重要。掌握了它，等于在node的世界开启了一扇新的大门。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-fs"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-fs.html">Node.js-fs</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h3 id="普通读取"><a href="#普通读取" class="headerlink" title="普通读取"></a>普通读取</h3><p>同步读取</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var data;
-
-try&#123;
-    data = fs.readFileSync(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;);
-    console.log(&#39;文件内容: &#39; + data);
-&#125;catch(err)&#123;
-    console.error(&#39;读取文件出错: &#39; + err.message);
-&#125;
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="powershell">/usr/local/bin/node readFileSync.js
-文件内容: hello world
-</code></pre>
-<p>异步读取</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.readFile(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;, function(err, data)&#123;
-    if(err)&#123;
-        return console.error(&#39;读取文件出错: &#39; + err.message);
-    &#125;
-    console.log(&#39;文件内容: &#39; + data);
-&#125;);
-</code></pre>
-<p>输出如下</p>
-<pre><code class="powershell">/usr/local/bin/node readFile.js
-文件内容: hello world
-</code></pre>
-<h3 id="通过文件流读取"><a href="#通过文件流读取" class="headerlink" title="通过文件流读取"></a>通过文件流读取</h3><p>适合读取大文件</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var readStream = fs.createReadStream(&#39;./fileForRead.txt&#39;, &#39;utf8&#39;);
-
-readStream
-    .on(&#39;data&#39;, function(chunk) &#123;
-        console.log(&#39;读取数据: &#39; + chunk);
-    &#125;)
-    .on(&#39;error&#39;, function(err)&#123;
-        console.log(&#39;出错: &#39; + err.message);
-    &#125;)
-    .on(&#39;end&#39;, function()&#123;  // 没有数据了
-        console.log(&#39;没有数据了&#39;);
-    &#125;)
-    .on(&#39;close&#39;, function()&#123;  // 已经关闭，不会再有事件抛出
-        console.log(&#39;已经关闭&#39;);
-    &#125;);
-</code></pre>
-<p>输出如下</p>
-<pre><code class="powershell">/usr/local/bin/node createReadStream.js
-读取数据: hello world
-没有数据了
-已经关闭
-</code></pre>
-<h2 id="文件写入"><a href="#文件写入" class="headerlink" title="文件写入"></a>文件写入</h2><p>备注：以下代码，如果文件不存在，则创建文件；如果文件存在，则覆盖文件内容；</p>
-<p>异步写入</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.writeFile(&#39;./fileForWrite.txt&#39;, &#39;hello world&#39;, &#39;utf8&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;文件写入成功&#39;);
-&#125;);
-</code></pre>
-<p>同步写入</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-try&#123;
-    fs.writeFileSync(&#39;./fileForWrite1.txt&#39;, &#39;hello world&#39;, &#39;utf8&#39;);
-    console.log(&#39;文件写入成功&#39;);
-&#125;catch(err)&#123;
-    throw err;
-&#125;
-</code></pre>
-<h3 id="通过文件流写入"><a href="#通过文件流写入" class="headerlink" title="通过文件流写入"></a>通过文件流写入</h3><pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var writeStream = fs.createWriteStream(&#39;./fileForWrite1.txt&#39;, &#39;utf8&#39;);
-
-writeStream
-    .on(&#39;close&#39;, function()&#123;  // 已经关闭，不会再有事件抛出
-        console.log(&#39;已经关闭&#39;);
-    &#125;);
-
-writeStream.write(&#39;hello&#39;);
-writeStream.write(&#39;world&#39;);
-writeStream.end(&#39;&#39;);
-</code></pre>
-<h3 id="相对底层的接口"><a href="#相对底层的接口" class="headerlink" title="相对底层的接口"></a>相对底层的接口</h3><blockquote>
-<p>fs.write(fd, buffer, offset, length[, position], callback)<br>fs.write(fd, data[, position[, encoding]], callback)<br>fs.writeSync(fd, buffer, offset, length[, position])<br>fs.writeSync(fd, data[, position[, encoding]])</p>
-</blockquote>
-<ul>
-<li>fd：写入的文件句柄。</li>
-<li>buffer：写入的内容。</li>
-<li>offset：将buffer从offset位置开始，长度为length的内容写入。</li>
-<li>length：写入的buffer内容的长度。</li>
-<li>position：从打开文件的position处写入。</li>
-<li>callback：参数为 <code>(err, written, buffer)</code>。<code>written</code>表示有xx字节的buffer被写入。</li>
-</ul>
-<p>备注：<code>fs.write(fd, buffer, offset, length[, position], callback)</code>跟<code>fs.write(fd, data[, position[, encoding]], callback)</code>的区别在于：后面的只能把所有的data写入，而前面的可以写入指定的data子串？</p>
-<h2 id="文件是否存在"><a href="#文件是否存在" class="headerlink" title="文件是否存在"></a>文件是否存在</h2><p><code>fs.exists()</code>已经是<code>deprecated</code>状态，现在可以通过下面代码判断文件是否存在。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.access(&#39;./fileForRead.txt&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;fileForRead.txt存在&#39;);
-&#125;);
-
-fs.access(&#39;./fileForRead2.txt&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;fileForRead2.txt存在&#39;);
-&#125;);
-</code></pre>
-<p><code>fs.access()</code>除了判断文件是否存在（默认模式），还可以用来判断文件的权限。</p>
-<p>备忘：<code>fs.constants.F_OK</code>等常量无法获取（node v6.1，mac 10.11.4下，<code>fs.constants</code>是<code>undefined</code>）</p>
-<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>异步版本（如果目录已存在，会报错）</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.mkdir(&#39;./hello&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;目录创建成功&#39;);
-&#125;);
-</code></pre>
-<p>同步版本</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.mkdirSync(&#39;./hello&#39;);
-</code></pre>
-<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.unlink(&#39;./fileForUnlink.txt&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;文件删除成功&#39;);
-&#125;);
-</code></pre>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.unlinkSync(&#39;./fileForUnlink.txt&#39;);
-</code></pre>
-<h2 id="创建目录-1"><a href="#创建目录-1" class="headerlink" title="创建目录"></a>创建目录</h2><pre><code class="javascript">// fs.mkdir(path[, mode], callback)
-var fs = require(&#39;fs&#39;);
-
-fs.mkdir(&#39;sub&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;创建目录成功&#39;);
-&#125;);
-</code></pre>
-<pre><code class="javascript">// fs.mkdirSync(path[, mode])
-var fs = require(&#39;fs&#39;);
-
-try&#123;
-    fs.mkdirSync(&#39;hello&#39;);
-    console.log(&#39;创建目录成功&#39;);
-&#125;catch(e)&#123;
-    throw e;
-&#125;
-</code></pre>
-<h2 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h2><p>同步版本，注意：<code>fs.readdirSync()</code>只会读一层，所以需要判断文件类型是否目录，如果是，则进行递归遍历。</p>
-<pre><code class="javascript">// fs.readdirSync(path[, options])
-
-var fs = require(&#39;fs&#39;);
-var path = require(&#39;path&#39;);
-
-var getFilesInDir = function(dir)&#123;
-
-    var results = [ path.resolve(dir) ];
-    var files = fs.readdirSync(dir, &#39;utf8&#39;);
-
-    files.forEach(function(file)&#123;
-
-        file = path.resolve(dir, file);
-
-        var stats = fs.statSync(file);
-
-        if(stats.isFile())&#123;
-            results.push(file);
-        &#125;else if(stats.isDirectory())&#123;
-            results = results.concat( getFilesInDir(file) );
-        &#125;
-    &#125;);
-
-    return results;
-&#125;;
-
-var files = getFilesInDir(&#39;../&#39;);
-console.log(files);
-</code></pre>
-<p>异步版本：（TODO）</p>
-<pre><code class="javascript">
-</code></pre>
-<h2 id="文件重命名"><a href="#文件重命名" class="headerlink" title="文件重命名"></a>文件重命名</h2><pre><code class="javascript">// fs.rename(oldPath, newPath, callback)
-var fs = require(&#39;fs&#39;);
-
-fs.rename(&#39;./hello&#39;, &#39;./world&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;重命名成功&#39;);
-&#125;);
-</code></pre>
-<pre><code class="javascript">fs.renameSync(oldPath, newPath)
-var fs = require(&#39;fs&#39;);
-
-fs.renameSync(&#39;./world&#39;, &#39;./hello&#39;);
-</code></pre>
-<h2 id="监听文件修改"><a href="#监听文件修改" class="headerlink" title="监听文件修改"></a>监听文件修改</h2><p><code>fs.watch()</code>比<code>fs.watchFile()</code>高效很多（why）</p>
-<h3 id="fs-watchFile"><a href="#fs-watchFile" class="headerlink" title="fs.watchFile()"></a>fs.watchFile()</h3><p>实现原理：轮询。每隔一段时间检查文件是否发生变化。所以在不同平台上表现基本是一致的。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-var options = &#123;
-    persistent: true,  // 默认就是true
-    interval: 2000  // 多久检查一次
-&#125;;
-
-// curr, prev 是被监听文件的状态, fs.Stat实例
-// 可以通过 fs.unwatch() 移除监听
-fs.watchFile(&#39;./fileForWatch.txt&#39;, options, function(curr, prev)&#123;
-    console.log(&#39;修改时间为: &#39; + curr.mtime);
-&#125;);
-</code></pre>
-<p>修改<code>fileForWatch.txt</code>，可以看到控制台下打印出日志</p>
-<pre><code class="powershell">/usr/local/bin/node watchFile.js
-修改时间为: Sat Jul 16 2016 19:03:57 GMT+0800 (CST)
-修改时间为: Sat Jul 16 2016 19:04:05 GMT+0800 (CST)
-</code></pre>
-<p>为啥子？莫非单纯访问文件也会触发回调？</p>
-<blockquote>
-<p>If you want to be notified when the file was modified, not just accessed, you need to compare curr.mtime and prev.mtime.</p>
-</blockquote>
-<p>在 <strong>v0.10</strong> 之后的改动。如果监听的文件不存在，会怎么处理。如下</p>
-<blockquote>
-<p>Note: when an fs.watchFile operation results in an ENOENT error, it will invoke the listener once, with all the fields zeroed (or, for dates, the Unix Epoch). In Windows, blksize and blocks fields will be undefined, instead of zero. If the file is created later on, the listener will be called again, with the latest stat objects. This is a change in functionality since v0.10.</p>
-</blockquote>
-<h3 id="fs-watch"><a href="#fs-watch" class="headerlink" title="fs.watch()"></a>fs.watch()</h3><blockquote>
-<p>fs.watch(filename[, options][, listener])<br>fs.unwatchFile(filename[, listener])</p>
-</blockquote>
-<p>这接口非常不靠谱（当前测试用的v6.1.0），参考 <a target="_blank" rel="noopener" href="https://github.com/nodejs/node/issues/7420">https://github.com/nodejs/node/issues/7420</a></p>
-<blockquote>
-<p>fs.watch(filename[, options][, listener])#</p>
-</blockquote>
-<p>注意：<code>fs.watch()</code>这个接口并不是在所有的平台行为都一致，并且在某些情况下是不可用的。<code>recursive</code>这个选项只在<code>mac</code>、<code>windows</code>下可用。</p>
-<p>问题来了：</p>
-<ol>
-<li>不一致的表现。</li>
-<li>不可用的场景。</li>
-<li>linux上要recursive咋整。</li>
-</ol>
-<blockquote>
-<p>The fs.watch API is not 100% consistent across platforms, and is unavailable in some situations.<br>The recursive option is only supported on OS X and Windows.</p>
-</blockquote>
-<p>备忘，不可用的场景。比如网络文件系统等。</p>
-<blockquote>
-<p>For example, watching files or directories can be unreliable, and in some cases impossible, on network file systems (NFS, SMB, etc), or host file systems when using virtualization software such as Vagrant, Docker, etc.</p>
-</blockquote>
-<p>另外，listener回调有两个参数，分别是<code>event</code>、<code>filename</code>。其中，<code>filename</code>仅在linux、windows上会提供，并且不是100%提供，所以，尽量不要依赖<code>filename</code>。</p>
-<p>在linux、osx上，<code>fs.watch()</code>监听的是inode。如果文件被删除，并重新创建，那么删除事件会触发。同时，<code>fs.watch()</code>监听的还是最初的inode。（API的设计就是这样的）</p>
-<p>结论：怎么看都感觉这个API很不靠谱，虽然性能比fs.watchFile()要高很多。</p>
-<p>先来个例子，在osx下测试了一下，简直令人绝望。。。无论是创建、修改、删除文件，<code>evt</code>都是<code>rename</code>。。。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-var options = &#123;
-    persistent: true,
-    recursive: true,
-    encoding: &#39;utf8&#39;
-&#125;;
-
-fs.watch(&#39;../&#39;, options, function(event, filename)&#123;
-    console.log(&#39;触发事件:&#39; + event);
-    if(filename)&#123;
-        console.log(&#39;文件名是: &#39; + filename);
-    &#125;else&#123;
-        console.log(&#39;文件名是没有提供&#39;);
-    &#125;
-&#125;);
-</code></pre>
-<p>修改下<code>fileForWatch.txt</code>，看到下面输出。。。感觉打死也不想用这个API。。。</p>
-<p>贴下环境：osx 10.11.4, node v6.1.0。</p>
-<pre><code class="powershell">触发事件:rename
-文件名是: fs/fileForWatch.txt___jb_bak___
-触发事件:rename
-文件名是: fs/fileForWatch.txt
-触发事件:rename
-文件名是: fs/fileForWatch.txt___jb_old___
-触发事件:rename
-文件名是: .idea/workspace.xml___jb_bak___
-触发事件:rename
-文件名是: .idea/workspace.xml
-触发事件:rename
-文件名是: .idea/workspace.xml___jb_old___
-</code></pre>
-<h2 id="修改所有者"><a href="#修改所有者" class="headerlink" title="修改所有者"></a>修改所有者</h2><p>参考linux命令行，不举例子了。。。</p>
-<blockquote>
-<p>fs.chown(path, uid, gid, callback)<br>fs.chownSync(path, uid, gid)<br>fs.fchown(fd, uid, gid, callback)<br>fs.fchownSync(fd, uid, gid)</p>
-</blockquote>
-<h2 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h2><p>可以用<code>fs.chmod()</code>，也可以用<code>fs.fchmod()</code>。两者的区别在于，前面传的是文件路径，后面传的的文件句柄。</p>
-<ol>
-<li><code>fs.chmod)</code>、<code>fs.fchmod()</code>区别：传的是文件路径，还是文件句柄。</li>
-<li><code>fs.chmod()</code>、<code>fs.lchmod()</code>区别：如果文件是软连接，那么<code>fs.chmod()</code>修改的是软连接指向的目标文件；<code>fs.lchmod()</code>修改的是软连接。</li>
-</ol>
-<blockquote>
-<p>fs.chmod(path, mode, callback)<br>fs.chmodSync(path, mode)</p>
-</blockquote>
-<blockquote>
-<p>fs.fchmod(fd, mode, callback)<br>fs.fchmodSync(fd, mode)</p>
-</blockquote>
-<blockquote>
-<p>fs.lchmod(path, mode, callback)#<br>fs.lchmodSync(path, mode)</p>
-</blockquote>
-<p>例子：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.chmod(&#39;./fileForChown.txt&#39;, &#39;777&#39;, function(err)&#123;
-    if(err) console.log(err);
-    console.log(&#39;权限修改成功&#39;);
-&#125;);
-</code></pre>
-<p>同步版本：</p>
-<pre><code>var fs = require(&#39;fs&#39;);
-
-fs.chmodSync(&#39;./fileForChown.txt&#39;, &#39;777&#39;);
-</code></pre>
-<h2 id="获取文件状态"><a href="#获取文件状态" class="headerlink" title="获取文件状态"></a>获取文件状态</h2><p>区别：</p>
-<ul>
-<li><code>fs.stat()</code> vs <code>fs.fstat()</code>：传文件路径 vs 文件句柄。</li>
-<li><code>fs.stat()</code> vs <code>fs.lstat()</code>：如果文件是软链接，那么<code>fs.stat()</code>返回目标文件的状态，<code>fs.lstat()</code>返回软链接本身的状态。</li>
-</ul>
-<blockquote>
-<p>fs.stat(path, callback)<br>fs.statSync(path)</p>
-</blockquote>
-<blockquote>
-<p>fs.fstat(fd, callback)<br>fs.fstatSync(fd)</p>
-</blockquote>
-<blockquote>
-<p>fs.lstat(path, callback)<br>fs.lstatSync(path)</p>
-</blockquote>
-<p>主要关注<code>Class: fs.Stats</code>。</p>
-<p>首先是方法</p>
-<ul>
-<li>stats.isFile()  – 是否文件</li>
-<li>stats.isDirectory() – 是否目录</li>
-<li>stats.isBlockDevice() – 什么鬼</li>
-<li>stats.isCharacterDevice() – 什么鬼</li>
-<li>stats.isSymbolicLink() (only valid with fs.lstat()) – 什么鬼</li>
-<li>stats.isFIFO() – 什么鬼</li>
-<li>stats.isSocket() – 是不是socket文件</li>
-</ul>
-<p>官网例子：</p>
-<pre><code class="javascript">&#123;
-  dev: 2114,
-  ino: 48064969,
-  mode: 33188,
-  nlink: 1,
-  uid: 85,
-  gid: 100,
-  rdev: 0,
-  size: 527,
-  blksize: 4096,
-  blocks: 8,
-  atime: Mon, 10 Oct 2011 23:24:11 GMT, // 访问时间
-  mtime: Mon, 10 Oct 2011 23:24:11 GMT,  // 文件内容修改时间
-  ctime: Mon, 10 Oct 2011 23:24:11 GMT,  // 文件状态修改时间
-  birthtime: Mon, 10 Oct 2011 23:24:11 GMT  // 创建时间
-&#125;
-</code></pre>
-<ul>
-<li>atime：Access Time // 访问时间</li>
-<li>mtime:: Modified Time  // 文件内容修改时间</li>
-<li>ctime: Changed Time.  // 文件状态修改时间，比如修改文件所有者、修改权限、重命名等</li>
-<li>birthtime: Birth Time // 创建时间。在某些系统上是不可靠的，因为拿不到。</li>
-</ul>
-<p>例子：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-var getTimeDesc = function(d)&#123;
-    return [d.getFullYear(), d.getMonth()+1, d.getDate()].join(&#39;-&#39;) + &#39; &#39; + [d.getHours(), d.getMinutes(), d.getSeconds()].join(&#39;:&#39;);
-&#125;;
-
-fs.stat(&#39;./fileForStat.txt&#39;, function(err, stats)&#123;
-    console.log(&#39;文件大小: &#39; + stats.size);
-    console.log(&#39;创建时间: &#39; + getTimeDesc(stats.birthtime));
-    console.log(&#39;访问时间: &#39; + getTimeDesc(stats.atime));
-    console.log(&#39;修改时间: &#39; + getTimeDesc(stats.mtime));
-&#125;);
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="powershell">/usr/local/bin/node stat.js
-文件大小: 3613
-创建时间: 2016-7-16 12:40:49
-访问时间: 2016-7-16 12:40:49
-修改时间: 2016-7-16 12:40:49
-
-Process finished with exit code 0
-</code></pre>
-<p>同步的例子：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-var getTimeDesc = function(d)&#123;
-    return [d.getFullYear(), d.getMonth()+1, d.getDate()].join(&#39;-&#39;) + &#39; &#39; + [d.getHours(), d.getMinutes(), d.getSeconds()].join(&#39;:&#39;);
-&#125;;
-
-var stats = fs.statSync(&#39;./fileForStat.txt&#39;);
-
-console.log(&#39;文件大小: &#39; + stats.size);
-console.log(&#39;创建时间: &#39; + getTimeDesc(stats.birthtime));
-console.log(&#39;访问时间: &#39; + getTimeDesc(stats.atime));
-console.log(&#39;修改时间: &#39; + getTimeDesc(stats.mtime));
-</code></pre>
-<h2 id="访问-权限检测"><a href="#访问-权限检测" class="headerlink" title="访问/权限检测"></a>访问/权限检测</h2><p>例子：</p>
-<pre><code class="javascript">// fs.access(path[, mode], callback)
-var fs = require(&#39;fs&#39;);
-
-fs.access(&#39;./fileForAccess.txt&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;可以访问&#39;);
-&#125;);
-</code></pre>
-<p>同步版本：</p>
-<pre><code class="javascript">// fs.accessSync(path[, mode])
-var fs = require(&#39;fs&#39;);
-
-// 如果成功，则返回undefined，如果失败，则抛出错误（什么鬼）
-try&#123;
-    fs.accessSync(&#39;./fileForAccess.txt&#39;);
-&#125;catch(e)&#123;
-    throw(e);
-&#125;
-</code></pre>
-<h2 id="文件打开-关闭"><a href="#文件打开-关闭" class="headerlink" title="文件打开/关闭"></a>文件打开/关闭</h2><p>比较底层的接口，实际需要用到的机会不多。需要用到的时候看下<a target="_blank" rel="noopener" href="https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback">文档</a>就行。</p>
-<ul>
-<li>flags：文件打开模式，比如<code>r</code>、<code>r+</code>、<code>w</code>、<code>w+</code>等。可选模式非常多。</li>
-<li>mode：默认是<code>666</code>，可读+可写。</li>
-</ul>
-<blockquote>
-<p>fs.open(path, flags[, mode], callback)<br>fs.openSync(path, flags[, mode])<br>fs.close(fd, callback)<br>fs.closeSync(fd)</p>
-</blockquote>
-<h2 id="文件读取（底层）"><a href="#文件读取（底层）" class="headerlink" title="文件读取（底层）"></a>文件读取（底层）</h2><p>相对底层的读取接口，参数如下</p>
-<ul>
-<li>fd：文件句柄。</li>
-<li>buffer：将读取的文件内容写到buffer里。</li>
-<li>offset：buffer开始写入的位置。（在offset开始写入，还是offset+1？）</li>
-<li>length：要读取的字节数。</li>
-<li>position：文件从哪个位置开始读取。如果是null，那么就从当前位置开始读取。（读取操作会记录下上一个位置）</li>
-</ul>
-<p>此外，<code>callback</code>的回调参数为<code>(err, bytesRead, buffer)</code></p>
-<blockquote>
-<p>fs.read(fd, buffer, offset, length, position, callback)</p>
-</blockquote>
-<h2 id="追加文件内容"><a href="#追加文件内容" class="headerlink" title="追加文件内容"></a>追加文件内容</h2><blockquote>
-<p>fs.appendFile(file, data[, options], callback)</p>
-</blockquote>
-<ul>
-<li>file：可以是文件路径，也可以是文件句柄。（还可以是buffer？）</li>
-<li>data：要追加的内容。string或者buffer。</li>
-<li>options<ul>
-<li>encoding：编码，默认是<code>utf8</code></li>
-<li>mode：默认是<code>0o666</code></li>
-<li>flag：默认是<code>a</code></li>
-</ul>
-</li>
-</ul>
-<p>注意：如果<code>file</code>是文件句柄，那么</p>
-<ul>
-<li>开始追加数据前，file需要已经打开。</li>
-<li>file需要手动关闭。</li>
-</ul>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.appendFile(&#39;./extra/fileForAppend.txt&#39;, &#39;hello&#39;, &#39;utf8&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;append成功&#39;);
-&#125;);
-</code></pre>
-<h2 id="文件内容截取"><a href="#文件内容截取" class="headerlink" title="文件内容截取"></a>文件内容截取</h2><blockquote>
-<p>fs.truncate(path, len, callback)<br>fs.truncateSync(path, len)</p>
-<p>fs.ftruncate(fd, len, callback)<br>fs.ftruncateSync(fd, len)</p>
-</blockquote>
-<p>用途参考<a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">linux说明文档</a>。</p>
-<p>要点：</p>
-<ul>
-<li><code>offset</code>不会变化。比如通过<code>fs.read()</code>读取文件内容，就需要特别注意。</li>
-<li>如果<code>len</code>小于文件内容长度，剩余文件内容部分会丢失；如果<code>len</code>大于文件内容长度，那么超出的部分，会用<code>\0</code>进行填充。</li>
-<li>如果传的是文件路径，需要确保文件是可写的；如果传的是文件句柄，需要确保文件句柄已经打开并且可写入。</li>
-</ul>
-<blockquote>
-<p>The truncate() and ftruncate() functions cause the regular file named<br>by path or referenced by fd to be truncated to a size of precisely<br>length bytes.</p>
-</blockquote>
-<blockquote>
-<p>If the file previously was larger than this size, the extra data is<br>lost.  If the file previously was shorter, it is extended, and the<br>extended part reads as null bytes (‘\0’).</p>
-</blockquote>
-<blockquote>
-<p>The file offset is not changed.</p>
-</blockquote>
-<blockquote>
-<p>With ftruncate(), the file must be open for writing; with truncate(), the file must be writable.</p>
-</blockquote>
-<h2 id="修改文件属性（时间）"><a href="#修改文件属性（时间）" class="headerlink" title="修改文件属性（时间）"></a>修改文件属性（时间）</h2><ul>
-<li>path/fd：文件路径/文件句柄</li>
-<li>atime：Access Time。上一次访问文件数据的时间。</li>
-<li>mtime：Modified Time。修改时间。</li>
-</ul>
-<blockquote>
-<p>fs.utimes(path, atime, mtime, callback)<br>fs.utimesSync(path, atime, mtime)</p>
-</blockquote>
-<blockquote>
-<p>fs.futimes(fd, atime, mtime, callback)<br>fs.futimesSync(fd, atime, mtime)</p>
-</blockquote>
-<p>备注，在命令行下可以</p>
-<ul>
-<li>通过<code>stat</code>查看文件的状态信息，包括了上面的atime、mtime。</li>
-<li>通过<code>touch</code>修改这几个时间。</li>
-</ul>
-<h2 id="创建文件链接"><a href="#创建文件链接" class="headerlink" title="创建文件链接"></a>创建文件链接</h2><blockquote>
-<p>fs.symlink(target, path[, type], callback)<br>fs.symlinkSync(target, path[, type])</p>
-<p>fs.link(srcpath, dstpath, callback)<br>fs.linkSync(srcpath, dstpath)</p>
-</blockquote>
-<blockquote>
-<p> link() creates a new link (also known as a hard link) to an existing file.</p>
-</blockquote>
-<p>软链接、硬链接区别：<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">参考</a> 或者 [这个]。(<a target="_blank" rel="noopener" href="http://www.cnblogs.com/itech/archive/2009/04/10/1433052.html">http://www.cnblogs.com/itech/archive/2009/04/10/1433052.html</a>)</p>
-<ul>
-<li>硬链接：inode相同，多个别名。删除一个硬链接文件，不会影响其他有相同inode的文件。</li>
-<li>软链接：有自己的inode，用户数据块存放指向文件的inode。</li>
-</ul>
-<p>参考<a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man2/link.2.html">这里</a>。</p>
-<h2 id="创建临时目录"><a href="#创建临时目录" class="headerlink" title="创建临时目录"></a>创建临时目录</h2><blockquote>
-<p>fs.mkdtemp(prefix, callback)<br>fs.mkdtempSync(prefix)</p>
-</blockquote>
-<p>备忘：跟普通的随便找个目录，创建个随机名字的文件夹，有什么区别？</p>
-<p>代码示例如下：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.mkdtemp(&#39;/tmp/&#39;, function(err, folder)&#123;
-    if(err) throw err;
-    console.log(&#39;创建临时目录: &#39; + folder);
-&#125;);
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="powershell">/usr/local/bin/node mkdtemp.js
-创建临时目录: /tmp/Cxw51O
-</code></pre>
-<h2 id="找出软连接指向的真实路径"><a href="#找出软连接指向的真实路径" class="headerlink" title="找出软连接指向的真实路径"></a>找出软连接指向的真实路径</h2><blockquote>
-<p>fs.readlink(path[, options], callback)<br>fs.readlinkSync(path[, options])</p>
-</blockquote>
-<p>如下面例子，创建了个软链接指向<code>fileForReadLink.txt</code>，通过<code>fs.readlink()</code>就可以找出原始的路径。</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var randomFileName = &#39;./extra/fileForReadLink-&#39; + String(Math.random()).slice(2, 6) + &#39;.txt&#39;;
-
-fs.symlinkSync(&#39;./extra/fileForReadLink.txt&#39;, randomFileName);
-fs.readlink(randomFileName, &#39;utf8&#39;, function(err, linkString)&#123;
-    if(err) throw err;
-    console.log(&#39;链接文件内容: &#39; + linkString);
-&#125;);
-</code></pre>
-<p>类似终端下直接运行<code>readlink</code>。对于软链接文件，效果同上面代码。对于硬链接，没有输出。</p>
-<pre><code class="powershell">➜  extra git:(master) ✗ readlink fileForReadLink-9827.txt
-./extra/fileForReadLink.txt
-➜  extra git:(master) ✗ readlink fileForLinkHard.txt
-➜  extra git:(master) ✗ readlink fileForLinkSoft.txt
-./extra/fileForLink.txt
-</code></pre>
-<h2 id="真实路径"><a href="#真实路径" class="headerlink" title="真实路径"></a>真实路径</h2><blockquote>
-<p>fs.realpath(path[, options], callback)<br>fs.realpathSync(path[, options])</p>
-</blockquote>
-<p>例子：（不能作用于软链接？）</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-var path = require(&#39;path&#39;);
-
-// fileForRealPath1.txt 是普通文件,正常运行
-fs.realpath(&#39;./extra/inner/fileForRealPath1.txt&#39;, function(err, resolvedPath)&#123;
-    if(err) throw err;
-    console.log(&#39;fs.realpath: &#39; + resolvedPath);
-&#125;);
-
-// fileForRealPath.txt 是软链接, 会报错,提示找不到文件
-fs.realpath(&#39;./extra/inner/fileForRealPath.txt&#39;, function(err, resolvedPath)&#123;
-    if(err) throw err;
-    console.log(&#39;fs.realpath: &#39; + resolvedPath);
-&#125;);
-
-console.log( &#39;path.resolve: &#39; + path.resolve(&#39;./extra/inner/fileForRealpath.txt&#39;) );
-</code></pre>
-<p>输出如下：</p>
-<pre><code class="powershell">path.resolve: /Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/extra/inner/fileForRealpath.txt
-fs.realpath: /Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/extra/inner/fileForRealPath1.txt
-/Users/a/Documents/git-code/git-blog/demo/2015.05.21-node-basic/fs/realpath.js:12
-    if(err) throw err;
-            ^
-
-Error: ENOENT: no such file or directory, realpath &#39;./extra/inner/fileForRealPath.txt&#39;
-    at Error (native)
-
-Process finished with exit code 1
-</code></pre>
-<h2 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a>删除目录</h2><blockquote>
-<p>fs.rmdir(path, callback)<br>fs.rmdirSync(path)</p>
-</blockquote>
-<p>例子如下：</p>
-<pre><code class="javascript">var fs = require(&#39;fs&#39;);
-
-fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
-    if(err) throw err;
-    console.log(&#39;目录删除成功&#39;);
-&#125;);
-</code></pre>
-<h2 id="不常用"><a href="#不常用" class="headerlink" title="不常用"></a>不常用</h2><h3 id="缓冲区内容写到磁盘"><a href="#缓冲区内容写到磁盘" class="headerlink" title="缓冲区内容写到磁盘"></a>缓冲区内容写到磁盘</h3><blockquote>
-<p>fs.fdatasync(fd, callback)<br>fs.fdatasyncSync(fd)</p>
-</blockquote>
-<p>可以参考这里：</p>
-<blockquote>
-<p>1、sync函数<br>sync函数只是将所有修改过的块缓冲区排入写队列，然后就返回，它并不等待实际写磁盘操作结束。<br>通常称为update的系统守护进程会周期性地（一般每隔30秒）调用sync函数。这就保证了定期冲洗内核的块缓冲区。命令sync(1)也调用sync函数。<br>2、fsync函数<br>fsync函数只对由文件描述符filedes指定的单一文件起作用，并且等待写磁盘操作结束，然后返回。<br>fsync可用于数据库这样的应用程序，这种应用程序需要确保将修改过的块立即写到磁盘上。<br>3、fdatasync函数<br>fdatasync函数类似于fsync，但它只影响文件的数据部分。而除数据外，fsync还会同步更新文件的属性。<br>对于提供事务支持的数据库，在事务提交时，都要确保事务日志（包含该事务所有的修改操作以及一个提交记录）完全写到硬盘上，才认定事务提交成功并返回给应用层。</p>
-</blockquote>
-<h2 id="待确认"><a href="#待确认" class="headerlink" title="待确认"></a>待确认</h2><ol>
-<li>通篇的<code>mode</code>，待确认。</li>
-<li>fs.access()更多用法（涉及 fs.constants.F_OK等权限）</li>
-</ol>
-
+<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
+<li>对称加密、非对称加密、电子签名</li>
+<li>分组加密模式
         
     </div>
     </div>
@@ -2108,7 +627,7 @@ fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
 
   
     <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/page/6/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/">Next</a>
+        <a class="extend prev" rel="prev" href="/page/6/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/">Next</a>
     </nav>
   
 </div>
@@ -2139,7 +658,7 @@ fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -2149,7 +668,7 @@ fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -2162,23 +681,23 @@ fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
       <ul>
         
           <li>
-            <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
+            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
+            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
           </li>
         
           <li>
-            <a href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">(no title)</a>
+            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
           </li>
         
           <li>
-            <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
           </li>
         
       </ul>
@@ -2205,41 +724,40 @@ fs.rmdir(&#39;./dirForRemove&#39;, function(err)&#123;
     </div>
 
     <footer class="footer">
-  <div class="footer-wave">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
-  </div>
-
-  <div class="footer-wrap">
-    <div class="footer-inner">
-      Oct1a &copy;
-        2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
-          <br>
-          <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
-          <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
-          <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
-          <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
     </div>
 
-  </div>
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
 
 </footer>
 
 
 
-    
-
         
-<script src="/dist/build.js?1619416789282.js"></script>
-
-          
-<script src="/dist/custom.js?1619416789282.js"></script>
-
-
-            
 
                 
+<script src="/dist/build.js?1632321966441.js"></script>
 
                     
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
 
 </body>
 
