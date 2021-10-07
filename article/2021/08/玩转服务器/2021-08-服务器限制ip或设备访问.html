@@ -176,9 +176,12 @@
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
             <h2 id="限制IP访问"><a href="#限制IP访问" class="headerlink" title="限制IP访问"></a>限制IP访问</h2><pre><code>server&#123;
     allow 127.0.0.1/16; //allow:允许访问
-  deny all; //拒绝访问
+    deny all; //拒绝访问
 &#125;
 </code></pre>
+<blockquote>
+<p>不懂IP段如何计算，这个工具不错：<a target="_blank" rel="noopener" href="https://ipjisuanqi.com/">ip计算器 ip地址计算器</a></p>
+</blockquote>
 <h2 id="限制设备型号访问"><a href="#限制设备型号访问" class="headerlink" title="限制设备型号访问"></a>限制设备型号访问</h2><pre><code>server&#123;
   location /&#123;
     if($http_user_agent ~&quot;(HUAWEIVNS-AL00)|(可添加其他关键字)&quot;)&#123;
