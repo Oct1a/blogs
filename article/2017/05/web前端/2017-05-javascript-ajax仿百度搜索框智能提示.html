@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>javascript+ajax仿百度搜索框智能提示 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="javascript+ajax仿百度搜索框智能提示|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvlv001logdd7yqu3qat" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      javascript+ajax仿百度搜索框智能提示
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2017-05-23T06:40:37.000Z" itemprop="datePublished">2017-05-23</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><img src="https://img.oct1a.cn/20180725162544.png"></p>
+<p>输入框内输入内容，实时显示搜索内容</p>
+<p><img src="https://img.oct1a.cn/20180725162816.png"></p>
+<span id="more"></span>
+
+<p>点击搜索内容跳转播放页面</p>
+<p><img src="https://img.oct1a.cn/20180725172055.png"></p>
+<h1 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h1><p><strong>问题和功能实现大致分为六部分：</strong></p>
+<p>　　　　<strong>1、</strong>什么时候请求数据或者触发请求数据的条件是什么?</p>
+<p>　　　　<strong>2、</strong>怎么去请求数据？</p>
+<p>　　　　<strong>3、</strong>数据怎么格式处理？</p>
+<p>　　　　<strong>4、</strong>处理的数据怎么放到页面中？</p>
+<p>　　　　<strong>5、</strong>实现键盘按键切换下拉提示</p>
+<p>　　　　<strong>6、</strong>enter按键打开新页面，跳转到搜索结果</p>
+<h1 id="界面布局"><a href="#界面布局" class="headerlink" title="界面布局"></a>界面布局</h1><ul>
+<li>Mac窗口样式<ul>
+<li>窗口头部<ul>
+<li>三个按钮</li>
+</ul>
+</li>
+<li>搜索表单<ul>
+<li>一只小鸡</li>
+<li>inout 输入框</li>
+<li>button 按钮</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="html">    &lt;div id=&quot;Mac-windows&quot;&gt;
+        &lt;div id=&quot;windows-head&quot;&gt;
+            &lt;button id=&quot;exit&quot;&gt;&lt;/button&gt;
+            &lt;button id=&quot;small&quot;&gt;&lt;/button&gt;
+            &lt;button id=&quot;max&quot;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;form target=&quot;_self&quot; id=&quot;search&quot;&gt;
+            &lt;img src=&quot;./img/images-02.png&quot; /&gt;
+            &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;search-box&quot; value=&quot;&quot; autocomplete=&quot;off&quot; /&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;搜索&quot; id=&quot;search-button&quot; /&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;hint&quot;&gt;
+        &lt;ul id=&quot;data_result&quot;&gt;&lt;/ul&gt;
+    &lt;/div&gt;
+</code></pre>
+<h1 id="主要代码"><a href="#主要代码" class="headerlink" title="主要代码"></a>主要代码</h1><h2 id="常用函数封装"><a href="#常用函数封装" class="headerlink" title="常用函数封装"></a>常用函数封装</h2><pre><code class="javascript">    var getDOMid = function(id) &#123;
+        return document.getElementById(id);
+    &#125;
+    var getDOMClass = function(cla) &#123;
+        return document.getElementsByClassName(cla);
+    &#125;
+    var getElementLeft = function(element) &#123;
+        var actualLeft = element.offsetLeft; //offsetLeft获取父元素左边的距离
+        var current = element.offsetParent;
+        while (current != null) &#123;
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        &#125;
+        return actualLeft;
+    &#125;
+
+    var getElementTop = function(element) &#123;
+            var actualTop = element.offsetTop; //获取父元素顶部距离
+            var current = element.offsetParent;
+            while (current != null) &#123;
+                actualTop += current.offsetTop;
+                current = current.offsetParent;
+            &#125;
+            return actualTop;
+        &#125;
+</code></pre>
+<h2 id="封装事件函数"><a href="#封装事件函数" class="headerlink" title="封装事件函数"></a>封装事件函数</h2><pre><code class="javascript">var addEvent = function(id, event, fn) &#123;
+            var el = getDOMid(id) || document;
+            if (el.addEventListener) &#123; //解决浏览器兼容问题
+                el.addEventListener(event, fn, false); //适合非IE浏览器
+            &#125; else &#123;
+                el.attachEvent(&#39;on&#39; + event, fn); //适合IE浏览器
+            &#125;
+        &#125;
+</code></pre>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><pre><code class="javascript">    var ajaxGet = function(url, callback) &#123;
+        var _xhr = null;
+        // 考虑兼容性
+        if (window.XMLHttpRequest) &#123;
+            _xhr = new XMLHttpRequest(); //非IE浏览器
+        &#125; else if (window.ActiveXObject) &#123;
+            _xhr = new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;); //IE浏览器
+        &#125;
+        // 监听连接事件
+        _xhr.onreadystatechange = function() &#123;
+            if (_xhr.readyState == 4 &amp;&amp; _xhr.status == 200) &#123;
+                callback(JSON.parse(_xhr.responseText)); //JSON.parse()是把字符串转成js可识别对象
+            &#125;
+        &#125;
+        _xhr.open(&#39;get&#39;, url, true);
+        _xhr.send();
+    &#125;
+</code></pre>
+<h2 id="提示框处理"><a href="#提示框处理" class="headerlink" title="提示框处理"></a>提示框处理</h2><h3 id="提示框输入自动显示"><a href="#提示框输入自动显示" class="headerlink" title="提示框输入自动显示"></a>提示框输入自动显示</h3><pre><code class="javascript">addEvent(&#39;search-box&#39;, &#39;keyup&#39;, function() &#123;
+        var _dom = getDOMid(&#39;hint&#39;);
+        _dom.style.top = getElementTop(getDOMid(&#39;search-box&#39;)) + 38 + &#39;px&#39;;
+        _dom.style.left = getElementLeft(getDOMid(&#39;search-box&#39;)) + &#39;px&#39;;
+        _dom.style.width = getDOMid(&#39;search-box&#39;).offsetWidth + &#39;px&#39;;
+        _dom.style.position = &#39;absolute&#39;;
+        _dom.style.display = &#39;block&#39;;
+    &#125;);
+</code></pre>
+<h4 id="点击其他位置提示框隐藏"><a href="#点击其他位置提示框隐藏" class="headerlink" title="点击其他位置提示框隐藏"></a>点击其他位置提示框隐藏</h4><p>  ​</p>
+<pre><code class="javascript"> document.body.onclick = function() &#123;
+        getDOMid(&#39;hint&#39;).style.display = &#39;none&#39;;
+    &#125;
+</code></pre>
+<h2 id="小鸡动画设置"><a href="#小鸡动画设置" class="headerlink" title="小鸡动画设置"></a>小鸡动画设置</h2><ul>
+<li><p>鼠标移入—&gt;小鸡向前移动，换图片</p>
+<pre><code class="javascript"> var chick = document.getElementsByTagName(&#39;img&#39;)[0];
+      chick.style.left = (getDOMid(&#39;search-box&#39;).offsetWidth / 2) - (chick.offsetWidth / 2) + &#39;px&#39;;
+      var n = parseInt(chick.style.left);
+      addEvent(&#39;search-box&#39;, &#39;mousemove&#39;, function() &#123;
+          chick.src = &quot;./img/images-01.png&quot;;
+          var time = setInterval(function() &#123;
+              if (n &lt; 40) &#123;
+                  clearInterval(time);
+              &#125; else &#123;
+                  n -= 40;
+                  chick.style.left = n + &#39;px&#39;;
+              &#125;
+          &#125;, 100);
+      &#125;);
+</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>鼠标移出—&gt;小鸡回归原位</p>
+<pre><code class="javascript"> addEvent(&#39;search-box&#39;, &#39;mouseout&#39;, function() &#123;
+        chick.src = &quot;./img/images-02.png&quot;;
+        var box_width = parseInt((getDOMid(&#39;search-box&#39;).offsetWidth / 2) - (chick.offsetWidth / 2));
+        if (n &lt; 30) &#123;
+            var time = setInterval(function() &#123;
+                n += 80;
+                if (n &gt; box_width) &#123;
+                    clearInterval(time);
+                &#125; else &#123;
+                    chick.style.left = n + &#39;px&#39;;
+                &#125;
+            &#125;, 100)
+        &#125;
+    &#125;);
+</code></pre>
+</li>
+</ul>
+<h3 id="如何获取网站API？"><a href="#如何获取网站API？" class="headerlink" title="如何获取网站API？"></a>如何获取网站API？</h3><p><strong>直接从开发者工具，监控网络，找到请求地址。</strong></p>
+<p>比如获取百度查询数据接口</p>
+<pre><code>https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=123&amp;json=1&amp;p=3&amp;sid=26525_1468_21124_18559_26350_22073&amp;req=2&amp;bs=sp0.baidu.com%20API&amp;pbs=sp0.baidu.com%20API&amp;csor=3&amp;pwd=s%27s%27s&amp;cb=jQuery1102009673098249865686_1532417299552&amp;_=1532417299572
+</code></pre>
+<p>再把api缩减了一下，删除了大部分暂时用不上的参数。</p>
+<pre><code>https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=关键词&amp;json=1&amp;p=3&amp;cb=fn
+</code></pre>
+<p><strong>必应搜索</strong></p>
+<p><a target="_blank" rel="noopener" href="https://cn.bing.com/search?q=">https://cn.bing.com/search?q=</a></p>
+<p><a target="_blank" rel="noopener" href="http://api.bing.com/qsonhs.aspx?q=">http://api.bing.com/qsonhs.aspx?q=</a></p>
+<p><strong>百度搜索</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=">https://www.baidu.com/s?wd=</a></p>
+<p><a target="_blank" rel="noopener" href="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%85%B3%E9%94%AE%E8%AF%8D&amp;son=1&amp;p=3&amp;cb=fn">https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=关键词&amp;son=1&amp;p=3&amp;cb=fn</a></p>
+<p><strong>网盘搜索API</strong></p>
+<p><a target="_blank" rel="noopener" href="http://unionsug.baidu.com/su?cb=empty&amp;wd=%E5%85%B3%E9%94%AE%E5%AD%97&amp;p=3&amp;json=1">http://unionsug.baidu.com/su?cb=empty&amp;wd=关键字&amp;p=3&amp;json=1</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.panduoduo.net/s/name/%E5%85%B3%E9%94%AE%E5%AD%97">http://www.panduoduo.net/s/name/关键字</a></p>
+<blockquote>
+<p>用原生js的确麻烦，会遇到请求失败，同源策略问题，得要学会用JSONP解决。。。</p>
+</blockquote>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2017/06/Android/2017-06-APP-%E4%BB%BF%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          基于MUI框架的一个仿今日头条的app
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-CSS-PigPeggy.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">用纯Css画小猪佩奇</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=javascript+ajax仿百度搜索框智能提示 - Oct1a&url=https://oct1a.cn/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-javascript-ajax%E4%BB%BF%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E6%A1%86%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA.html">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=javascript+ajax仿百度搜索框智能提示 - Oct1a&u=https://oct1a.cn/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-javascript-ajax%E4%BB%BF%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E6%A1%86%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=javascript+ajax仿百度搜索框智能提示 - Oct1a&url=https://oct1a.cn/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-javascript-ajax%E4%BB%BF%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E6%A1%86%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA.html&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/V2ray/" rel="tag">V2ray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-u%E7%9B%98%E4%B8%8D%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BD%AC%E6%8D%A2%E6%A0%BC%E5%BC%8F.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-node%E6%89%A7%E8%A1%8Csql%E8%AF%AD%E5%8F%A5%E5%87%BA%E9%94%99.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-10-Nginx%E7%AC%94%E8%AE%B0.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/Node-js/2021-11-koa%E4%B8%8Ews%E5%85%B1%E4%BA%AB%E7%AB%AF%E5%8F%A3.html">koa与websockect共用一个端口</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-11-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B1%8F%E8%94%BD%E7%89%B9%E5%AE%9A%E7%BD%91%E5%9D%80ip.html">Linux利用iptables屏蔽某些域名</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+        
+
+                
+<script src="/dist/build.js?1632321966441.js"></script>
+
+                    
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
+
+</body>
+
+</html>

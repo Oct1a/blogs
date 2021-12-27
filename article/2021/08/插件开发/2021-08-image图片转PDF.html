@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>utools插件开发-图片批量转PDF格式 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="utools插件开发-图片批量转PDF格式|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cksk2u4dj0001x8ddegad6ipo" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      utools插件开发-图片批量转PDF格式
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-08-09T03:50:58.000Z" itemprop="datePublished">2021-08-09</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utools/" rel="tag">utools</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><img src="http://img.oct1a.cn/20210810112917.png" alt="image-20210810112909768"></p>
+<p>应之前一个<code>txt转word</code>插件下的评论一个需求，顺手做个转换插件。</p>
+<span id="more"></span>
+
+
+<h2 id="📌-分析："><a href="#📌-分析：" class="headerlink" title="📌 分析："></a>📌 分析：</h2><p><img src="http://img.oct1a.cn/20210810113743.png" alt="image-20210810113743436"></p>
+<p>图片类型有很多，但常见的图片格式一般只是：<code>png</code>|<code>jpg</code>|<code>gif</code>|<code>jpeg</code>|<code>webp</code>，所以本次只对该几种格式进行转换（其他类型其实也不适合转pdf🙃）</p>
+<p>根据用户的需求可以猜想出的转换可能会分为三种：单图转换、多图转换、多图合并转换。</p>
+<p>前期思路：需要将用户选中的图片格式，进行路径读取，使用canvas进行转换，然后输出为PDF格式。</p>
+<p>后面感觉这样效率会不会太低，直接用第三方库不香嘛，</p>
+<h2 id="🔍-寻找轮子"><a href="#🔍-寻找轮子" class="headerlink" title="🔍 寻找轮子"></a>🔍 寻找轮子</h2><p>找了几个都具有该功能的第三方库，所以确定了该需求还是可以做的（没有什么靠轮子搞不定的😷）</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/hollton/image-pdf"><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/image-pdf">image-pdf - npm (npmjs.com)</a></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mrrio/jspdf"><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/jspdf">jspdf - npm (npmjs.com)</a></a></p>
+<p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/pdf-image">pdf-image - npm (npmjs.com)</a></p>
+<p>看到其他库的话差不多都是封装这个库来使用，最终选择了<code>jspdf</code>。</p>
+<p>这个是<code>官方demo</code>,方便我们调试查看效果<a target="_blank" rel="noopener" href="http://mrrio.github.io/jsPDF/">jsPDF - Create PDFs with HTML5 JavaScript Library (mrrio.github.io)</a></p>
+<p><img src="http://img.oct1a.cn/20210810133321.png" alt="image-20210810133320948"></p>
+<h2 id="✍-代码编写"><a href="#✍-代码编写" class="headerlink" title="✍ 代码编写"></a>✍ 代码编写</h2><p>因<code>jspdf</code>对图片处理也都是先将图片转为base64进行处理，不管是传入图片路径，或者网络路径，都是先转为base64。</p>
+<h4 id="将图片转为base64格式"><a href="#将图片转为base64格式" class="headerlink" title="将图片转为base64格式"></a>将图片转为base64格式</h4><pre><code class="javascript">const getImageBase64 = (imgPath, fileName)=&gt; &#123;
+  let data = fs.readFileSync(imgPath, &#39;binary&#39;)
+  const buffer = new Buffer(data, &#39;binary&#39;);
+  let img64 = &#39;data: image/&#39; + getImageType(fileName) + &#39;;base64,&#39; + buffer.toString(&#39;base64&#39;);
+  return img64 || &quot;&quot;
+&#125;
+</code></pre>
+<h4 id="判断图片的格式"><a href="#判断图片的格式" class="headerlink" title="判断图片的格式"></a>判断图片的格式</h4><blockquote>
+<p>转为base64需要头部加入图片的格式，如：data:image/png</p>
+</blockquote>
+<pre><code class="javascript">const isImage = str =&gt; &#123;
+    var reg = /\.(png|jpg|gif|jpeg|webp)$/;
+    return reg.test(str);
+&#125;
+</code></pre>
+<h2 id="🧭-对jsPDF进行封装"><a href="#🧭-对jsPDF进行封装" class="headerlink" title="🧭 对jsPDF进行封装"></a>🧭 对jsPDF进行封装</h2><pre><code class="javascript">const &#123; jsPDF &#125; = require(&quot;./jspdf.umd.min.js&quot;); //将jspdf下载至本地，不知道怎么回事，用npm下载的无法导入使用
+
+// A4纸宽高
+const a4Page = &#123;
+  width: 595.28,
+  height: 841.89
+&#125;
+
+let pdf
+let fontFamily = &#39;Arial&#39;
+
+// pdf页面间距
+let padding = &#123;
+  width: 20,
+  height: 25
+&#125;
+
+// 生成的pdf的宽高
+let pdfPage = &#123;&#125;
+
+// pdf插入内容的位置
+let pdfPostion = 0
+
+const init = options =&gt; &#123;
+  if (options &amp;&amp; typeof options.initFont === &#39;function&#39;) &#123;
+    fontFamily = options.initFont(jsPDF.API)
+  &#125;
+  pdf = new jsPDF(&#39;&#39;, &#39;pt&#39;, &#39;a4&#39;)
+
+  if (options.pagePadding) &#123;
+    Object.assign(padding, options.pagePadding)
+  &#125;
+  pdfPage = &#123;
+    width: a4Page.width - padding.width * 2,
+    height: a4Page.height - padding.height * 2
+  &#125;
+  pdfPostion = padding.height
+&#125;
+
+// 插入图片
+const addImage = img =&gt; &#123;
+  const imgPage = &#123;
+    width: pdfPage.width,
+    height: img.height / img.width * pdfPage.width
+  &#125;
+  console.log(imgPage.height)
+  if (imgPage.height &gt; pdfPage.height) &#123; // 图片高于一页pdf高度时，将图片截断生成多页pdf
+    let _pdfPostion = pdfPostion
+    let leftImgHeight = imgPage.height
+    while (leftImgHeight &gt; 0) &#123;
+      pdf.addImage(img.data, &#39;png&#39;, padding.width, _pdfPostion, imgPage.width, imgPage.height)
+      _pdfPostion -= a4Page.height;
+      leftImgHeight = imgPage.height + _pdfPostion;
+      if (leftImgHeight &gt; 0) &#123;
+        pdf.addPage();
+        pdfPostion = leftImgHeight
+      &#125;
+    &#125;
+  &#125; else &#123; // 否则将图片插入到pdf中，若pdf剩余高度不足以插入整张图时，新增一页并将插入位置重置
+    if (pdfPostion + imgPage.height &gt; pdfPage.height) &#123;
+      pdf.addPage()
+      pdfPostion = padding.height
+    &#125;
+    pdf.addImage(img.data, &#39;png&#39;, padding.width, pdfPostion, imgPage.width, imgPage.height)
+    pdfPostion += imgPage.height
+  &#125;
+&#125;
+
+// 插入文字
+const addText = text =&gt; &#123;
+  let &#123; fontSize = 16, spacing = 5, textIndent = 0 &#125; = text.options
+  if (pdfPostion + spacing &gt; pdfPage.height) &#123;
+    pdf.addPage()
+    pdfPostion = padding.height
+  &#125;
+  const splitLength = pdfPage.width - textIndent
+  const words = pdf.setFont(fontFamily)
+    .setFontSize(fontSize)
+    .splitTextToSize(text.data, splitLength)
+  pdf.text(padding.width + textIndent, pdfPostion + fontSize + spacing, words)
+  pdfPostion += fontSize * words.length + spacing * 2
+&#125;
+
+const addPage = () =&gt; &#123;
+  pdf.addPage()
+  pdfPostion = padding.height
+&#125;
+
+/**
+ * base64图片数组生成pdf
+ * @param &#123;*&#125; images base64图片数组
+ * @param &#123;*&#125; title 下载pdf文件的名称
+ * @param &#123;*&#125; options 配置信息
+ */
+const savePdf = (images, title, options) =&gt; &#123;
+  images.forEach(img =&gt; &#123;
+    switch (img.type) &#123;
+      case &#39;page&#39;:
+        addPage()
+        break
+      case &#39;image&#39;:
+        addImage(img)
+        break
+      case &#39;text&#39;:
+        addText(img)
+        break
+      default:
+        break
+    &#125;
+  &#125;)
+  return pdf.save(`$&#123;title&#125;.pdf`, &#123;
+      returnPromise: true
+    &#125;)
+&#125;
+
+/**
+ * 图片转为base64信息
+ * img: 图片dom，设置图片最大宽高，以防渲染出的图片体积过大
+ */
+const getBase64Image = img =&gt; &#123;
+  if (img.width &gt; 1000) &#123;
+    img.height = img.height / img.width * 1000
+    img.width = 1000
+  &#125;
+  const canvas = document.createElement(&#39;canvas&#39;)
+  canvas.width = img.width
+  canvas.height = img.height
+  const ctx = canvas.getContext(&quot;2d&quot;)
+  ctx.drawImage(img, 0, 0, img.width, img.height)
+  return canvas.toDataURL(&#39;image/png&#39;)
+&#125;
+
+
+
+/**
+ * 处理src图片转为base64并执行生成pdf
+ * @param &#123;*&#125; images 图片数组，可为 base64 信息，或 src 地址
+ * @param &#123;*&#125; title 下载pdf文件的名称
+ * @param &#123;*&#125; options 配置信息
+ */
+
+const imagePdf = (images, title = &#39;Oct1a&#39;, options = &#123;&#125;) =&gt; &#123;
+  init(options)
+  let newImages = []
+  let index = 0
+  const formatImages = (index, resolve, reject) =&gt; &#123;
+    if (index &lt; images.length) &#123;
+      const img = images[index]
+      let _img = &#123;
+        type: img.type || &#39;image&#39;,
+        data: img.data || &#39;&#39;,
+        width: img.width || 100,
+        height: img.height || 100,
+        options: img.options || &#123;&#125;
+      &#125;
+      if (_img.type === &#39;image&#39; &amp;&amp; _img.data.indexOf(&#39;data:image/&#39;) === -1) &#123;
+        const newImg = new Image()
+        newImg.onload = () =&gt; &#123;
+          _img.data = getBase64Image(newImg)
+          _img.width = newImg.width
+          _img.height = newImg.height
+          newImages.push(_img)
+          formatImages(++index, resolve, reject)
+        &#125;
+        newImg.onerror = () =&gt; &#123;
+          formatImages(++index, resolve, reject)
+        &#125;
+        newImg.setAttribute(&#39;crossOrigin&#39;, &#39;anonymous&#39;)
+        newImg.src = _img.data
+      &#125; else &#123;
+        newImages.push(_img)
+        formatImages(++index, resolve, reject)
+      &#125;
+    &#125; else &#123;
+      savePdf(newImages, title, options)
+        .then(result =&gt; &#123;
+          resolve(result)
+        &#125;)
+        .catch(error =&gt; &#123;
+          reject(error)
+        &#125;)
+    &#125;
+  &#125;
+
+  const promise = new Promise((resolve, reject) =&gt; &#123;
+    formatImages(index, result =&gt; &#123;
+      resolve(result)
+    &#125;, error =&gt; &#123;
+      reject(error)
+    &#125;)
+  &#125;)
+  return promise
+&#125;
+module.exports = &#123;
+  imagePdf
+&#125;
+</code></pre>
+<h2 id="🎶-主文件"><a href="#🎶-主文件" class="headerlink" title="🎶 主文件"></a>🎶 主文件</h2><pre><code class="javascript">const fs = require(&#39;fs&#39;);
+const $path = require(&#39;path&#39;);
+
+const &#123; imagePdf &#125; = require(&quot;./js/index.js&quot;);
+</code></pre>
+<h3 id="🧩-批量对图片进行转换"><a href="#🧩-批量对图片进行转换" class="headerlink" title="🧩 批量对图片进行转换"></a>🧩 批量对图片进行转换</h3><p>循环选中文件，获取图片base64，传入封装的方法内。</p>
+<blockquote>
+<p>* type 插入类型，image 图片类型，text 文字类型，page 新增一页。默认 image</p>
+<p> * data 插入内容，image 时可为 base64 信息，或 src 地址；text 时为文字内容</p>
+<p> * width 图片宽，图片信息为 src 时可不传</p>
+<p> * height 图片高，</p>
+<p> * options: { 文字配置信息，非必须</p>
+<p>​     *  fontSize: 文字大小, 默认16px</p>
+<pre><code> \*  spacing: 间距，默认同5px
+   
+ \*  textIndent: 文字缩进, 单位px,默认0
+</code></pre>
+<p> * }</p>
+</blockquote>
+<pre><code class="javascript">  let files = action.payload
+  // 遍历选中文件
+  for (const element of files) &#123;
+      if (element.isFile) &#123;
+          let &#123; name, path &#125; = element
+          let img64 = getImageBase64(path, name)
+          imagePdf([&#123;
+              data: img64
+          &#125;], name.slice(0, name.lastIndexOf(&#39;.&#39;))) //文件名使用图片原名称切割获取
+      &#125;
+  &#125;
+</code></pre>
+<h3 id="💦-批量将多个图片合成一个PDF"><a href="#💦-批量将多个图片合成一个PDF" class="headerlink" title="💦 批量将多个图片合成一个PDF"></a>💦 批量将多个图片合成一个PDF</h3><pre><code class="javascript">let files = action.payload
+let images = []
+// 遍历选中文件
+for (const element of files) &#123;
+    if (element.isFile) &#123;
+        let &#123; name, path &#125; = element
+        let img64 = getImageBase64(path, name)
+        images.push(&#123;
+            data: img64
+        &#125;)
+    &#125;
+&#125;
+imagePdf(images, new Date().getTime()) //多张图片合并就直接使用时间戳作为文件名了。
+</code></pre>
+<p><img src="http://img.oct1a.cn/blog/20210816120955.png"></p>
+<h2 id="💕-感谢"><a href="#💕-感谢" class="headerlink" title="💕 感谢"></a>💕 感谢</h2><p><a target="_blank" rel="noopener" href="https://github.com/hollton/image-pdf">hollton/image-pdf: image to pdf 图片转为pdf文件 (github.com)</a><br>[<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/jspdf">jspdf - npm (npmjs.com)</a>]</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Canvas绘制模糊问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">utools插件开发-查询同义词和反义词插件</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=utools插件开发-图片批量转PDF格式 - Oct1a&url=https://oct1a.cn/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=utools插件开发-图片批量转PDF格式 - Oct1a&u=https://oct1a.cn/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=utools插件开发-图片批量转PDF格式 - Oct1a&url=https://oct1a.cn/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/V2ray/" rel="tag">V2ray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-u%E7%9B%98%E4%B8%8D%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BD%AC%E6%8D%A2%E6%A0%BC%E5%BC%8F.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-node%E6%89%A7%E8%A1%8Csql%E8%AF%AD%E5%8F%A5%E5%87%BA%E9%94%99.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-10-Nginx%E7%AC%94%E8%AE%B0.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/Node-js/2021-11-koa%E4%B8%8Ews%E5%85%B1%E4%BA%AB%E7%AB%AF%E5%8F%A3.html">koa与websockect共用一个端口</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-11-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B1%8F%E8%94%BD%E7%89%B9%E5%AE%9A%E7%BD%91%E5%9D%80ip.html">Linux利用iptables屏蔽某些域名</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+        
+
+                
+<script src="/dist/build.js?1632321966441.js"></script>
+
+                    
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
+
+</body>
+
+</html>

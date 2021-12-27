@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>基于MUI框架的一个仿今日头条的app | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="基于MUI框架的一个仿今日头条的app|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvm20025ogddbxb11y93" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      基于MUI框架的一个仿今日头条的app
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2017-06-17T08:30:03.000Z" itemprop="datePublished">2017-06-17</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Android/">Android</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p><img src="https://img.oct1a.cn/20180727100526.png"></p>
+<p>仿今日头条界面，数据是调用阿里云新闻头条API，使用MUI+Jquery+HTML5</p>
+<span id="more"></span>
+
+<h1 id="MUI简介"><a href="#MUI简介" class="headerlink" title="MUI简介"></a>MUI简介</h1><blockquote>
+<ul>
+<li>MUI-最接近原生App体验的前端框架，真正彻底的跨平台开发</li>
+<li>基于mui，一套HTML5工程，通过前端构建工具（如grunt）条件编译，可同时发行到iOS Appstore、安卓各大应用商店、普通手机浏览器、微信App和流应用。</li>
+<li>并且在每个平台上，都能调用该平台的专有API达到原生体验。</li>
+</ul>
+</blockquote>
+<p>MUI文档：<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/mui">https://dev.dcloud.net.cn/mui</a></p>
+<p>新闻头条API：<a target="_blank" rel="noopener" href="https://market.aliyun.com/products/57126001/cmapi013650.html">https://market.aliyun.com</a></p>
+<h1 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h1><h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p><strong>HBuilder</strong></p>
+<h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><p>调用地址：<a target="_blank" rel="noopener" href="http://toutiao-ali.juheapi.com/toutiao/index"><em>http://toutiao-ali.juheapi.com/toutiao/index</em></a></p>
+<p>编码方式：<strong>UTF-8</strong></p>
+<p>请求方式：<strong>HTTP</strong> <strong>GET</strong></p>
+<p>返回类型：<strong>json</strong></p>
+<p>更新周期：<strong>5-30分钟</strong></p>
+<p><strong>类型</strong></p>
+<ul>
+<li>top(头条，默认)</li>
+<li>shehui(社会)</li>
+<li>guonei(国内)</li>
+<li>guoji(国际)</li>
+<li>yule(娱乐)</li>
+<li>tiyu(体育)</li>
+<li>junshi(军事)</li>
+<li>keji(科技)</li>
+<li>caijing(财经)</li>
+<li>shishang(时尚)</li>
+</ul>
+<h2 id="返回示例"><a href="#返回示例" class="headerlink" title="返回示例"></a>返回示例</h2><pre><code class="json">&#123;
+
+    &quot;reason&quot;: &quot;成功的返回&quot;,
+
+    &quot;result&quot;: &#123;
+
+        &quot;stat&quot;: &quot;1&quot;,
+
+        &quot;data&quot;: [
+
+            &#123;
+
+                &quot;title&quot;: &quot;巫山云雨枉断肠：女摄影师Erika Lust记录的性爱&quot;,/标题/
+
+                &quot;date&quot;: &quot;2016-06-13 10:31&quot;,/时间/
+
+                &quot;author_name&quot;: &quot;POCO摄影&quot;,/作者/
+
+                &quot;thumbnail_pic_s&quot;: &quot;http://xxxxx.jpeg&quot;,/图片1/
+
+                &quot;thumbnail_pic_s02&quot;: &quot;http://xxxxx.jpeg&quot;,/图片2/
+
+                &quot;thumbnail_pic_s03&quot;: &quot;http://xxxxx.jpeg&quot;,/图片3/
+
+                &quot;url&quot;: &quot;http://mini.eastday.com/xxxxxx&quot;,/新闻链接/
+
+                &quot;uniquekey&quot;: &quot;160613103108379&quot;,/唯一标识/
+
+                &quot;type&quot;: &quot;头条&quot;,/类型一/
+
+                &quot;realtype&quot;: &quot;娱乐&quot;/类型二/
+
+            &#125;,
+
+...]&#125;&#125;
+</code></pre>
+<h1 id="APP界面布局"><a href="#APP界面布局" class="headerlink" title="APP界面布局"></a>APP界面布局</h1><h2 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h2><pre><code class="html">    &lt;!-- 头部标题栏 --&gt;
+    &lt;header class=&quot;mui-bar mui-bar-nav&quot;&gt;
+        &lt;h1 class=&quot;mui-title&quot;&gt;每日头条&lt;/h1&gt;
+        &lt;span class=&quot;mui-icon mui-icon-search&quot;&gt;&lt;/span&gt;
+    &lt;/header&gt;
+    &lt;!-- 主体内容 --&gt;
+    &lt;div class=&quot;mui-content&quot;&gt;
+        &lt;div class=&quot;mui-slider&quot;&gt;
+            &lt;!-- 分类栏 --&gt;
+            &lt;div class=&quot;mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted&quot;&gt;
+                &lt;div class=&quot;mui-scroll&quot; id=&quot;tbs&quot;&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;!-- 新闻媒体流 --&gt;
+            &lt;div class=&quot;mui-slider-group&quot; id=&quot;container&quot;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<h2 id="新闻详情页"><a href="#新闻详情页" class="headerlink" title="新闻详情页"></a>新闻详情页</h2><pre><code class="html">    &lt;!-- 头部标题栏 --&gt;
+    &lt;header class=&quot;mui-bar mui-bar-nav&quot;&gt;
+        &lt;a class=&quot;mui-action-back mui-icon mui-icon-left-nav mui-pull-left&quot;&gt;&lt;/a&gt;
+        &lt;h1 class=&quot;mui-title&quot;&gt;新闻详情&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;!-- 主体内容 --&gt;
+    &lt;div class=&quot;mui-content&quot;&gt;
+        &lt;div class=&quot;mui-scroll-wrapper&quot;&gt;
+            &lt;div class=&quot;mui-scroll&quot;&gt;
+                &lt;div class=&quot;mui-card&quot;&gt;
+                    &lt;!--页眉，放置标题--&gt;
+                    &lt;div class=&quot;mui-card-header&quot;&gt;
+                        &lt;h2&gt;新闻标题&lt;/h2&gt;
+                        &lt;p&gt;作者:&lt;span id=&quot;author&quot;&gt;小木豆&lt;/span&gt;&amp;nbsp;&amp;nbsp;/&amp;nbsp;&amp;nbsp;发布日期: &lt;span id=&quot;date&quot;&gt;8818:88:88&lt;/span&gt; &lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;!--内容区--&gt;
+                    &lt;div class=&quot;mui-card-content&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<h2 id="搜索界面"><a href="#搜索界面" class="headerlink" title="搜索界面"></a>搜索界面</h2><pre><code class="html">    &lt;!-- 头部标题 --&gt;
+    &lt;header class=&quot;mui-bar mui-bar-nav&quot;&gt;
+        &lt;a class=&quot;mui-action-back mui-icon mui-icon-left-nav mui-pull-left&quot;&gt;&lt;/a&gt;
+        &lt;h1 class=&quot;mui-title&quot;&gt;搜索&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;div class=&quot;mui-input-row&quot;&gt;
+        &lt;input type=&quot;text&quot; class=&quot;mui-input-speech mui-input-clear&quot; placeholder=&quot;请输入搜索关键词&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;search_active&quot;&gt;
+        &lt;p&gt;20年跳槽2次&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<h1 id="处理代码"><a href="#处理代码" class="headerlink" title="处理代码"></a>处理代码</h1><h2 id="MUI初始化"><a href="#MUI初始化" class="headerlink" title="MUI初始化"></a>MUI初始化</h2><pre><code class="javascript">mui.init()
+</code></pre>
+<h2 id="点击跳转页面并传值"><a href="#点击跳转页面并传值" class="headerlink" title="点击跳转页面并传值"></a>点击跳转页面并传值</h2><pre><code class="javascript">    //搜索跳转
+    $(&#39;.mui-icon-search&#39;).on(&#39;click&#39;, function() &#123;
+        mui.openWindow(&#123;
+            url: &#39;search.html&#39;,
+            styles: &#123;
+                statusbar: &#123;
+                    background: &#39;rgb(212,61,61)&#39; //可以传参数过去
+                &#125;
+            &#125;
+        &#125;)
+    &#125;);
+</code></pre>
+<h2 id="获取分类标签值"><a href="#获取分类标签值" class="headerlink" title="获取分类标签值"></a>获取分类标签值</h2><pre><code class="javascript">//获取点击选项卡标签的索引值
+    $(&#39;.mui-slider&#39;).on(&#39;slide&#39;, function(e) &#123;
+        var index = e.detail.slideNumber;
+        load(index);
+    &#125;);
+    for (var i in types) &#123;
+        var tbs = $(&#39;&lt;a class=&quot;mui-control-item&quot; href=&quot;#item&#39; + i + &#39;&quot;&gt;&#39; + types[i].name + &#39;&lt;/a&gt;&#39;);
+        var container = $(&#39;&lt;div id=&quot;item&#39; + i + &#39;&quot; class=&quot;mui-slider-item mui-control-content&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;mui-scroll-wrapper&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;mui-scroll&quot;&gt;&#39; +
+            &#39; &lt;ul class=&quot;mui-table-view&quot;&gt;&#39; +
+            &#39;&lt;/ul&gt;&#39; +
+            &#39;&lt;/div&gt;&#39; +
+            &#39;&lt;/div&gt;&#39; +
+            &#39;&lt;/div&gt;&#39;);
+        if (i == 0) &#123;
+            tbs.addClass(&#39;mui-active&#39;); //首屏默认添加active
+        &#125;
+        tbs.appendTo(&#39;#tbs&#39;); //添加选项标签文字
+        container.appendTo(&#39;#container&#39;); //添加主要列表
+    &#125;
+</code></pre>
+<h2 id="获取新闻列表（Ajax请求）"><a href="#获取新闻列表（Ajax请求）" class="headerlink" title="获取新闻列表（Ajax请求）"></a>获取新闻列表（Ajax请求）</h2><pre><code class="javascript">/**
+ * 获取新闻列表
+ * @param &#123;String&#125; 新闻类型
+ * @param &#123;Function&#125; 请求数据完毕后的回调函数
+ */
+function getList(typeValue, fn) &#123;
+    $.ajax(&#123;
+        url: &#39;http://toutiao-ali.juheapi.com/toutiao/index&#39;,
+        data: &#123;
+            type: typeValue
+        &#125;,
+        headers: &#123;
+            Authorization: &quot;APPCODE 1c46e6b3d0c347baabac4e54fbab7b2d&quot;
+        &#125;,
+        success: function(data) &#123;
+            fn(data.result.data);
+        &#125;
+    &#125;)
+&#125;
+</code></pre>
+<p><code>typeValue</code>值是JSON格式，在<code>new.js</code></p>
+<h2 id="填充新闻列表（标题、作者、时间）"><a href="#填充新闻列表（标题、作者、时间）" class="headerlink" title="填充新闻列表（标题、作者、时间）"></a>填充新闻列表（标题、作者、时间）</h2><pre><code class="javascript">function load(index) &#123;
+        getList(types[index].value, function(data) &#123;
+            for (var i in data) &#123;
+                var news = $(&#39;&lt;li class=&quot;mui-table-view-cell mui-media&quot;&gt;&#39; +
+                    &#39;&lt;a href=&quot;javascript:;&quot;&gt;&#39; +
+                    &#39;&lt;img class=&quot;mui-media-object mui-pull-right&quot; src=&quot;&#39; + data[i].thumbnail_pic_s + &#39;&quot;&gt;&#39; +
+                    &#39;&lt;div class=&quot;mui-media-body&quot;&gt;&#39; +
+                    data[i].title +
+                    &#39;&lt;p class=&quot;mui-ellipsis&quot;&gt;&#39; + data[i].author_name + &#39;/&#39; + data[i].date + &#39;&lt;/p&gt;&#39; +
+                    &#39;&lt;/div&gt;&#39; +
+                    &#39;&lt;/a&gt;&#39; +
+                    &#39;&lt;/li&gt;&#39;);
+                news.data(&#39;info&#39;, data[i]); //将数据存储到Dom对象上
+                news.on(&#39;tap&#39;, function() &#123;
+                    var info = $(this).data(&#39;info&#39;);
+                    mui.openWindow(&#123;
+                        url: &#39;detail.html&#39;,
+                        extras: &#123; news: info &#125;,
+                        styles: &#123;
+                            statusbar: &#123;
+                                background: &#39;rgb(212,61,61)&#39;
+                            &#125;
+                        &#125;
+                    &#125;)
+                &#125;)
+                news.appendTo(&#39;#item&#39; + index + &#39; .mui-table-view&#39;);
+            &#125;
+        &#125;);
+        mui(&#39;.mui-slider-group .mui-scroll-wrapper&#39;).scroll()[index].scrollTo(0, 0, 100); //滚动条
+    &#125;
+    load(0);
+</code></pre>
+<h2 id="获取链接内新闻文本"><a href="#获取链接内新闻文本" class="headerlink" title="获取链接内新闻文本"></a>获取链接内新闻文本</h2><pre><code class="javascript">function loadPage(url) &#123;
+            $.ajax(&#123;
+                url: url,
+                dataType: &#39;text&#39;,
+                success: function(data) &#123;
+                    var startIndex = data.indexOf(&#39;&lt;article&#39;); //查找&lt;article&gt;标签
+                    var endIndex = data.indexOf(&#39;&lt;/article&gt;&#39;);
+                    var text = data.substring(startIndex, endIndex + 10); //提取内容
+                    var dom = $(text);
+                    dom.find(&#39;#title&#39;).remove();
+                    $(&#39;.mui-card-content&#39;).append(dom);
+                &#125;
+            &#125;)
+        &#125;
+</code></pre>
+<blockquote>
+<p><code>indexOf</code>查找返回的内容，<code>substring(start,end)</code>提取开始到结尾的内容，最后会把<code>&lt;/article&gt;包含进去，所以提取位置加</code>10</p>
+</blockquote>
+<h2 id="下拉阻尼效果"><a href="#下拉阻尼效果" class="headerlink" title="下拉阻尼效果"></a>下拉阻尼效果</h2><pre><code class="javascript">    (function($) &#123;
+        //阻尼系数
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        $(&#39;.mui-scroll-wrapper&#39;).scroll(&#123;
+            bounce: false,
+            indicators: true, //是否显示滚动条
+            deceleration: deceleration
+        &#125;);
+        $.ready(function() &#123;
+            //循环初始化所有下拉刷新，上拉加载。
+            $.each(document.querySelectorAll(&#39;.mui-slider-group .mui-scroll&#39;), function(index, pullRefreshEl) &#123;
+                $(pullRefreshEl).pullToRefresh(&#123;
+                    down: &#123;
+                        style: &#39;circle&#39;,
+                        callback: function() &#123;
+                            //刷新
+                            var self = this;
+                            load(index);
+                            mui.toast(&#39;已刷新&#39;, &#123;
+                                duration: 1000,
+                                type: &#39;div&#39;
+                            &#125;)
+                            self.endPullDownToRefresh();
+                        &#125;
+                    &#125;
+                &#125;);
+            &#125;);
+        &#125;);
+    &#125;)(mui);
+</code></pre>
+<h1 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h1><p>|-js<br>    |- mui.js<br>    |- news.js<br>    |- index.js<br>    |- mui.min.js<br>    |- jquery.min.js<br>    |- mui.pullToRefresh.js    (下拉阻尼效果)<br>    |- mui.pullToRefresh.material.js<br>|- css<br>    |- mui.css<br>    |- style.css    (自定义样式)<br>    |- mui.min.css<br>|- font<br>    |mui.ttf<br>|- index.html        (主页面)<br>|- detail.html        (新闻详情页)<br>|- search.html    (搜索界面)<br>|- manifest.json       (配置文件)<br>|- favicon.ico      (网站图标)</p>
+<h2 id="现有功能"><a href="#现有功能" class="headerlink" title="现有功能"></a>现有功能</h2><ul>
+<li>顶部下拉刷新</li>
+<li>获取各种频道的新闻列表</li>
+<li>查看新闻详情</li>
+</ul>
+<h2 id="演示效果"><a href="#演示效果" class="headerlink" title="演示效果"></a>演示效果</h2><p><img src="https://img.oct1a.cn/20210716111109.gif"></p>
+<h2 id="下载体验"><a href="#下载体验" class="headerlink" title="下载体验"></a>下载体验</h2><p>Android:<a target="_blank" rel="noopener" href="https://github.com/Oct1a/NewsDetail/raw/master/app/android.apk">https://github.com/Oct1a/NewsDetail/raw/master/app/android.apk</a></p>
+<p>iOS:<a target="_blank" rel="noopener" href="https://github.com/Oct1a/NewsDetail/raw/master/app/iphone.ipa">https://github.com/Oct1a/NewsDetail/raw/master/app/iphone.ipa</a></p>
+<h3 id="github地址"><a href="#github地址" class="headerlink" title="github地址"></a>github地址</h3><p><a target="_blank" rel="noopener" href="https://github.com/Oct1a/NewsDetail">https://github.com/Oct1a/NewsDetail</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2017/06/web%E5%89%8D%E7%AB%AF/2017-06-%E5%9F%BA%E4%BA%8Eajax%E5%92%8C%E5%9B%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E7%9A%84%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E6%9C%BA%E5%99%A8%E4%BA%BA.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          基于ajax和图灵机器人开发的自动回复机器人
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-javascript-ajax%E4%BB%BF%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E6%A1%86%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">javascript+ajax仿百度搜索框智能提示</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=基于MUI框架的一个仿今日头条的app - Oct1a&url=https://oct1a.cn/article/2017/06/Android/2017-06-APP-%E4%BB%BF%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1.html">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=基于MUI框架的一个仿今日头条的app - Oct1a&u=https://oct1a.cn/article/2017/06/Android/2017-06-APP-%E4%BB%BF%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=基于MUI框架的一个仿今日头条的app - Oct1a&url=https://oct1a.cn/article/2017/06/Android/2017-06-APP-%E4%BB%BF%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1.html&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/V2ray/" rel="tag">V2ray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-u%E7%9B%98%E4%B8%8D%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BD%AC%E6%8D%A2%E6%A0%BC%E5%BC%8F.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-node%E6%89%A7%E8%A1%8Csql%E8%AF%AD%E5%8F%A5%E5%87%BA%E9%94%99.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-10-Nginx%E7%AC%94%E8%AE%B0.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/Node-js/2021-11-koa%E4%B8%8Ews%E5%85%B1%E4%BA%AB%E7%AB%AF%E5%8F%A3.html">koa与websockect共用一个端口</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-11-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B1%8F%E8%94%BD%E7%89%B9%E5%AE%9A%E7%BD%91%E5%9D%80ip.html">Linux利用iptables屏蔽某些域名</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+        
+
+                
+<script src="/dist/build.js?1632321966441.js"></script>
+
+                    
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
+
+</body>
+
+</html>

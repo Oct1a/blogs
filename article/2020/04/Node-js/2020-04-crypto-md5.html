@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>Node.js-crypto.md5 | Oct1a</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="description" content="Node.js-crypto.md5|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
+    <meta name="author" content="Oct1a_H">
+    <meta name="generator" content="hexo">
+    <meta name="copyright" content="Oct1a_H">
+    
+    
+
+    
+        <meta property="algolia:search" data-application-id="8PAB37PRQA" data-api-key="6be1fd77c1546f943893acc1624e0fbe" data-index-name="blogs">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1632321966441.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1632321966441.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>Oct1a</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/archives">Archives</a>
+                
+                <a href="/photography">Photography</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/Oct1a">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="https://www.jianshu.com/u/c9856b5ce227">
+        <box-icon type='logo' name='firebase'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                    <a href="/photography">Photography</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-ckr61fvo1008mogdd7j1admwq" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Node.js-crypto.md5
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+            </div>
+            
+
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MD5（Message-Digest Algorithm）是计算机安全领域广泛使用的散列函数（又称哈希算法、摘要算法），主要用来确保消息的完整和一致性。常见的应用场景有密码保护、下载文件校验等。</p>
+<p>本文先对MD5的特点与应用进行简要概述，接着重点介绍MD5在密码保护场景下的应用，最后通过例子对MD5碰撞进行简单介绍。</p>
+<span id="more"></span>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>运算速度快：对<code>jquery.js</code>求md5值，57254个字符，耗时1.907ms</li>
+<li>输出长度固定：输入长度不固定，输出长度固定（128位）。</li>
+<li>运算不可逆：已知运算结果的情况下，无法通过通过逆运算得到原始字符串。</li>
+<li>高度离散：输入的微小变化，可导致运算结果差异巨大。</li>
+<li>弱碰撞性：不同输入的散列值可能相同。</li>
+</ol>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
+<li>文件完整性校验：比如从网上下载一个软件，一般网站都会将软件的md5值附在网页上，用户下载完软件后，可对下载到本地的软件进行md5运算，然后跟网站上的md5值进行对比，确保下载的软件是完整的（或正确的）</li>
+<li>密码保护：将md5后的密码保存到数据库，而不是保存明文密码，避免拖库等事件发生后，明文密码外泄。</li>
+<li>防篡改：比如数字证书的防篡改，就用到了摘要算法。（当然还要结合数字签名等手段）</li>
+</ol>
+<h2 id="nodejs中md5运算的例子"><a href="#nodejs中md5运算的例子" class="headerlink" title="nodejs中md5运算的例子"></a>nodejs中md5运算的例子</h2><p>在nodejs中，<code>crypto</code>模块封装了一系列密码学相关的功能，包括摘要运算。基础例子如下，非常简单：</p>
+<pre><code class="js">var crypto = require(&#39;crypto&#39;);
+var md5 = crypto.createHash(&#39;md5&#39;);
+
+var result = md5.update(&#39;a&#39;).digest(&#39;hex&#39;);
+
+// 输出：0cc175b9c0f1b6a831c399e269772661
+console.log(result);
+</code></pre>
+<h2 id="例子：密码保护"><a href="#例子：密码保护" class="headerlink" title="例子：密码保护"></a>例子：密码保护</h2><p>前面提到，将明文密码保存到数据库是很不安全的，最不济也要进行md5后进行保存。比如用户密码是<code>123456</code>，md5运行后，得到<code>输出：e10adc3949ba59abbe56e057f20f883e</code>。</p>
+<p>这样至少有两个好处：</p>
+<ol>
+<li>防内部攻击：网站主人也不知道用户的明文密码，避免网站主人拿着用户明文密码干坏事。</li>
+<li>防外部攻击：如网站被黑客入侵，黑客也只能拿到md5后的密码，而不是用户的明文密码。</li>
+</ol>
+<p>示例代码如下：</p>
+<pre><code class="javascript">var crypto = require(&#39;crypto&#39;);
+
+function cryptPwd(password) &#123;
+    var md5 = crypto.createHash(&#39;md5&#39;);
+    return md5.update(password).digest(&#39;hex&#39;);
+&#125;
+
+var password = &#39;123456&#39;;
+var cryptedPassword = cryptPwd(password);
+
+console.log(cryptedPassword);
+// 输出：e10adc3949ba59abbe56e057f20f883e
+</code></pre>
+<h3 id="单纯对密码进行md5不安全"><a href="#单纯对密码进行md5不安全" class="headerlink" title="单纯对密码进行md5不安全"></a>单纯对密码进行md5不安全</h3><p>前面提到，通过对用户密码进行md5运算来提高安全性。但实际上，这样的安全性是很差的，为什么呢？</p>
+<p>稍微修改下上面的例子，可能你就明白了。相同的明文密码，md5值也是相同的。</p>
+<pre><code class="javascript">var crypto = require(&#39;crypto&#39;);
+
+function cryptPwd(password) &#123;
+    var md5 = crypto.createHash(&#39;md5&#39;);
+    return md5.update(password).digest(&#39;hex&#39;);
+&#125;
+
+var password = &#39;123456&#39;;
+
+console.log( cryptPwd(password) );
+// 输出：e10adc3949ba59abbe56e057f20f883e
+
+console.log( cryptPwd(password) );
+// 输出：e10adc3949ba59abbe56e057f20f883e
+</code></pre>
+<p>也就是说，当攻击者知道算法是md5，且数据库里存储的密码值为<code>e10adc3949ba59abbe56e057f20f883e</code>时，理论上可以可以猜到，用户的明文密码就是<code>123456</code>。</p>
+<p>事实上，彩虹表就是这么进行暴力破解的：事先将常见明文密码的md5值运算好存起来，然后跟网站数据库里存储的密码进行匹配，就能够快速找到用户的明文密码。（这里不探究具体细节）</p>
+<p>那么，有什么办法可以进一步提升安全性呢？答案是：密码加盐。</p>
+<h2 id="密码加盐"><a href="#密码加盐" class="headerlink" title="密码加盐"></a>密码加盐</h2><p>“加盐”这个词看上去很玄乎，其实原理很简单，就是在密码特定位置插入特定字符串后，再对修改后的字符串进行md5运算。</p>
+<p>例子如下。同样的密码，当“盐”值不一样时，md5值的差异非常大。通过密码加盐，可以防止最初级的暴力破解，如果攻击者事先不知道”盐“值，破解的难度就会非常大。</p>
+<pre><code class="javascript">var crypto = require(&#39;crypto&#39;);
+
+function cryptPwd(password, salt) &#123;
+    // 密码“加盐”
+    var saltPassword = password + &#39;:&#39; + salt;
+    console.log(&#39;原始密码：%s&#39;, password);
+    console.log(&#39;加盐后的密码：%s&#39;, saltPassword);
+
+    // 加盐密码的md5值
+    var md5 = crypto.createHash(&#39;md5&#39;);
+    var result = md5.update(saltPassword).digest(&#39;hex&#39;);
+    console.log(&#39;加盐密码的md5值：%s&#39;, result);
+&#125;
+
+cryptPwd(&#39;123456&#39;, &#39;abc&#39;);
+// 输出：
+// 原始密码：123456
+// 加盐后的密码：123456:abc
+// 加盐密码的md5值：51011af1892f59e74baf61f3d4389092
+
+cryptPwd(&#39;123456&#39;, &#39;bcd&#39;);
+// 输出：
+// 原始密码：123456
+// 加盐后的密码：123456:bcd
+// 加盐密码的md5值：55a95bcb6bfbaef6906dbbd264ab4531
+</code></pre>
+<h2 id="密码加盐：随机盐值"><a href="#密码加盐：随机盐值" class="headerlink" title="密码加盐：随机盐值"></a>密码加盐：随机盐值</h2><p>通过密码加盐，密码的安全性已经提高了不少。但其实上面的例子存在不少问题。</p>
+<p>假设字符串拼接算法、盐值已外泄，上面的代码至少存在下面问题：</p>
+<ol>
+<li>短盐值：需要穷举的可能性较少，容易暴力破解，一般采用长盐值来解决。</li>
+<li>盐值固定：类似的，攻击者只需要把常用密码+盐值的hash值表算出来，就完事大吉了。</li>
+</ol>
+<p>短盐值自不必说，应该避免。对于为什么不应该使用固定盐值，这里需要多解释一下。很多时候，我们的盐值是硬编码到我们的代码里的（比如配置文件），一旦坏人通过某种手段获知了盐值，那么，只需要针对这串固定的盐值进行暴力穷举就行了。</p>
+<p>比如上面的代码，当你知道盐值是<code>abc</code>时，立刻就能猜到<code>51011af1892f59e74baf61f3d4389092</code>对应的明文密码是<code>123456</code>。</p>
+<p>那么，该怎么优化呢？答案是：随机盐值。</p>
+<p>示例代码如下。可以看到，密码同样是123456，由于采用了随机盐值，前后运算得出的结果是不同的。这样带来的好处是，多个用户，同样的密码，攻击者需要进行多次运算才能够完全破解。同样是纯数字3位短盐值，随机盐值破解所需的运算量，是固定盐值的1000倍。</p>
+<pre><code class="javascript">var crypto = require(&#39;crypto&#39;);
+
+function getRandomSalt()&#123;
+    return Math.random().toString().slice(2, 5);
+&#125;
+
+function cryptPwd(password, salt) &#123;
+    // 密码“加盐”
+    var saltPassword = password + &#39;:&#39; + salt;
+    console.log(&#39;原始密码：%s&#39;, password);
+    console.log(&#39;加盐后的密码：%s&#39;, saltPassword);
+
+    // 加盐密码的md5值
+    var md5 = crypto.createHash(&#39;md5&#39;);
+    var result = md5.update(saltPassword).digest(&#39;hex&#39;);
+    console.log(&#39;加盐密码的md5值：%s&#39;, result);
+&#125;
+
+var password = &#39;123456&#39;;
+
+cryptPwd(&#39;123456&#39;, getRandomSalt());
+// 输出：
+// 原始密码：123456
+// 加盐后的密码：123456:498
+// 加盐密码的md5值：af3b7d32cc2a254a6bf1ebdcfd700115
+
+cryptPwd(&#39;123456&#39;, getRandomSalt());
+// 输出：
+// 原始密码：123456
+// 加盐后的密码：123456:287
+// 加盐密码的md5值：65d7dd044c2db64c5e658d947578d759
+</code></pre>
+<h2 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h2><p>简单的说，就是两段不同的字符串，经过MD5运算后，得出相同的结果。</p>
+<p>网上有不少例子，这里就不赘述，直接上例子，参考(这里)[<a target="_blank" rel="noopener" href="http://www.mscs.dal.ca/~selinger/md5collision/]">http://www.mscs.dal.ca/~selinger/md5collision/]</a></p>
+<pre><code class="javascript">function getHashResult(hexString)&#123;
+
+    // 转成16进制，比如 0x4d 0xc9 ...
+    hexString = hexString.replace(/(\w&#123;2,2&#125;)/g, &#39;0x$1 &#39;).trim();
+
+    // 转成16进制数组，如 [0x4d, 0xc9, ...]
+    var arr = hexString.split(&#39; &#39;);
+
+    // 转成对应的buffer，如：&lt;Buffer 4d c9 ...&gt;
+    var buff = Buffer.from(arr);
+
+    var crypto = require(&#39;crypto&#39;);
+    var hash = crypto.createHash(&#39;md5&#39;);
+
+    // 计算md5值
+    var result = hash.update(buff).digest(&#39;hex&#39;);
+
+    return result;
+&#125;
+
+var str1 = &#39;d131dd02c5e6eec4693d9a0698aff95c2fcab58712467eab4004583eb8fb7f8955ad340609f4b30283e488832571415a085125e8f7cdc99fd91dbdf280373c5bd8823e3156348f5bae6dacd436c919c6dd53e2b487da03fd02396306d248cda0e99f33420f577ee8ce54b67080a80d1ec69821bcb6a8839396f9652b6ff72a70&#39;;
+var str2 = &#39;d131dd02c5e6eec4693d9a0698aff95c2fcab50712467eab4004583eb8fb7f8955ad340609f4b30283e4888325f1415a085125e8f7cdc99fd91dbd7280373c5bd8823e3156348f5bae6dacd436c919c6dd53e23487da03fd02396306d248cda0e99f33420f577ee8ce54b67080280d1ec69821bcb6a8839396f965ab6ff72a70&#39;;
+
+var result1 = getHashResult(str1);
+var result2 = getHashResult(str2);
+
+if(result1 === result2) &#123;
+    console.log(`Got the same md5 result: $&#123;result1&#125;`);
+&#125;else&#123;
+    console.log(`Not the same md5 result`);
+&#125;
+</code></pre>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>MD5碰撞的一些例子<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/c9089fd5b1ba">http://www.jianshu.com/p/c9089fd5b1ba</a></p>
+<p>MD5 Collision Demo<br><a target="_blank" rel="noopener" href="http://www.mscs.dal.ca/~selinger/md5collision/">http://www.mscs.dal.ca/~selinger/md5collision/</a></p>
+<p>Free Password Hash Cracker<br><a target="_blank" rel="noopener" href="https://crackstation.net/">https://crackstation.net/</a></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+<div class="article-copyright hairline">
+  <p>
+    本作品采用 <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a> 进行许可。
+  </p>
+</div>
+
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/article/2020/04/Node-js/2020-04-debug.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Node.js-debug
+        
+      </div>
+    </a>
+  
+  
+    <a href="/article/2020/04/Node-js/2020-04-dgram.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Node.js-dgram</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Node.js-crypto.md5 - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-crypto-md5.html">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Node.js-crypto.md5 - Oct1a&u=https://oct1a.cn/article/2020/04/Node-js/2020-04-crypto-md5.html">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Node.js-crypto.md5 - Oct1a&url=https://oct1a.cn/article/2020/04/Node-js/2020-04-crypto-md5.html&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/V2ray/" rel="tag">V2ray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-u%E7%9B%98%E4%B8%8D%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BD%AC%E6%8D%A2%E6%A0%BC%E5%BC%8F.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-12-node%E6%89%A7%E8%A1%8Csql%E8%AF%AD%E5%8F%A5%E5%87%BA%E9%94%99.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/12/uncategorized/2021-10-Nginx%E7%AC%94%E8%AE%B0.html">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/Node-js/2021-11-koa%E4%B8%8Ews%E5%85%B1%E4%BA%AB%E7%AB%AF%E5%8F%A3.html">koa与websockect共用一个端口</a>
+          </li>
+        
+          <li>
+            <a href="/article/2021/11/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-11-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B1%8F%E8%94%BD%E7%89%B9%E5%AE%9A%E7%BD%91%E5%9D%80ip.html">Linux利用iptables屏蔽某些域名</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            Oct1a &copy;
+                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                    <br>
+                    <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
+                    <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+                    <a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽公网安备35021102001102号</span></a>
+                    <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn" style="text-decoration:none"><span style="margin-left:8px;user-select:none;-ms-user-select:none;">闽ICP备14018417号-7</span></a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+        
+
+                
+<script src="/dist/build.js?1632321966441.js"></script>
+
+                    
+<script src="/dist/custom.js?1632321966441.js"></script>
+
+
+                        
+
+                                
+
+                                        
+
+</body>
+
+</html>
