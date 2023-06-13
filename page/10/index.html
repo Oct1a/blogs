@@ -131,6 +131,107 @@
   
     
       <article
+id="post-2020-05-crypto-diffie-hellman"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
+<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-crypto-theory"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
+<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
+<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
+<ol>
+<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
+<li>对称加密、非对称加密、电子签名</li>
+<li>分组加密模式
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-05-debug-log"
 class="article article-type-post"
 >
@@ -181,7 +282,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-express-session-deep-in"
+id="post-2020-05-debugLog"
 class="article article-type-post"
 >
 
@@ -192,11 +293,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-express-session-deep-in.html">Node.js-express-session-deep-in</a>
+        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文先简单介绍session跟cookie的区别与联系，接着深入剖析<code>express-session</code>中间件的实现。关于<code>express-session</code>的基础使用，可参见笔者前面的文章。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
         
     </div>
     </div>
@@ -275,7 +379,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-https"
+id="post-2020-05-express-session-deep-in"
 class="article article-type-post"
 >
 
@@ -286,17 +390,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-https</a>
+        <a href="/article/2020/04/Node-js/2020-05-express-session-deep-in.html">Node.js-express-session-deep-in</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
-<ul>
-<li>颁发证书的机构不在操作系统的受信列表里</li>
-<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
-</ul>
-<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
-<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文先简单介绍session跟cookie的区别与联系，接着深入剖析<code>express-session</code>中间件的实现。关于<code>express-session</code>的基础使用，可参见笔者前面的文章。</p>
         
     </div>
     </div>
@@ -432,6 +530,59 @@ class="article article-type-post"
   
     
       <article
+id="post-2020-05-https"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-https</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
+<ul>
+<li>颁发证书的机构不在操作系统的受信列表里</li>
+<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
+</ul>
+<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
+<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-05-stream"
 class="article article-type-post"
 >
@@ -451,161 +602,6 @@ class="article article-type-post"
 <p>模式对比：<br>string/buffer<br>object mode</p>
 <p>缓存：(buffering、highWaterMark)</p>
 <p>两种视角：<br>stream使用<br>stream实现</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-文件上传-multer"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-multer.html">Node.js-文件上传-multer</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。</p>
-<p>常用的开源组件有<strong>multer</strong>、<strong>formidable</strong>等，借助这两个开源组件，可以轻松搞定图片上传。</p>
-<p>本文主要讲解以下内容，后续章节会对技术实现细节进行深入挖掘。本文所有例子均有代码示例，可在<a href="../examples/2016.11.07-advanced-express-multer/">这里</a>查看。</p>
-<ul>
-<li>基础例子：借助express、multer实现单图、多图上传。</li>
-<li>常用API：获取上传的图片的信息。</li>
-<li>进阶使用：自定义保存的图片路径、名称。</li>
-</ul>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-日志模块morgan"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97morgan.html">Node.js-日志模块morgan</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="章节概览"><a href="#章节概览" class="headerlink" title="章节概览"></a>章节概览</h2><p>morgan是express默认的日志中间件，也可以脱离express，作为node.js的日志组件单独使用。本文由浅入深，内容主要包括：</p>
-<ul>
-<li>morgan使用入门例子</li>
-<li>如何将日志保存到本地文件</li>
-<li>核心API使用说明及例子</li>
-<li>进阶使用：1、日志分割 2、将日志写入数据库</li>
-<li>源码剖析：morgan的日志格式以及预编译</li>
-</ul>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-图片地址转成datauri"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%88%90datauri.html">Node.js-图片地址转成datauri</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="将图片转成datauri"><a href="#将图片转成datauri" class="headerlink" title="将图片转成datauri"></a>将图片转成datauri</h2><p>nodejs读取图片，转成base64,也就是把图片转成对应的datauri,这是个很常用的功能。快速实现了个简单的demo，这里顺便记录一下。</p>
         
     </div>
     </div>

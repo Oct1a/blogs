@@ -310,6 +310,53 @@ class="article article-type-post"
   
     
       <article
+id="post-2020-04-child-process"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-child-process.html">Node.js-child_process</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在node中，child_process这个模块非常重要。掌握了它，等于在node的世界开启了一扇新的大门。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-04-buffer"
 class="article article-type-post"
 >
@@ -405,7 +452,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-crypto"
+id="post-2020-04-debug"
 class="article article-type-post"
 >
 
@@ -416,13 +463,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-crypto.html">Node.js-crypto</a>
+        <a href="/article/2020/04/Node-js/2020-04-debug.html">Node.js-debug</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本章节写得差不多了，不过还需要再整理一下（TODO）。</p>
-<h2 id="hash例子"><a href="#hash例子" class="headerlink" title="hash例子"></a>hash例子</h2><p>hash.digest([encoding])：计算摘要。encoding可以是<code>hex</code>、<code>latin1</code>或者<code>base64</code>。如果声明了encoding，那么返回字符串。否则，返回Buffer实例。注意，调用hash.digest()后，hash对象就作废了，再次调用就会出错。</p>
-<p>hash.update(data[, input_encoding])：input_encoding可以是<code>utf8</code>、<code>ascii</code>或者<code>latin1</code>。如果data是字符串，且没有指定 input_encoding，则默认是<code>utf8</code>。注意，hash.update()方法可以调用多次。</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>谈到node断点调试，目前主要有三种方式，通过<code>node内置调试工具</code>、<code>通过IDE（如vscode）</code>、<code>通过node-inspector</code>，三者本质上差不多。本文着重点在于介绍 <strong>如何在本地通过node-inspector 调试远程服务器上的node代码</strong>。</p>
+<p>在进入主题之前，首先会对三种调试方式进行入门讲解，方便新手理解后面的内容。至于老司机们，可以直接跳到主题去。</p>
         
     </div>
     </div>
@@ -501,7 +547,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-debug"
+id="post-2020-04-crypto"
 class="article article-type-post"
 >
 
@@ -512,12 +558,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-debug.html">Node.js-debug</a>
+        <a href="/article/2020/04/Node-js/2020-04-crypto.html">Node.js-crypto</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>谈到node断点调试，目前主要有三种方式，通过<code>node内置调试工具</code>、<code>通过IDE（如vscode）</code>、<code>通过node-inspector</code>，三者本质上差不多。本文着重点在于介绍 <strong>如何在本地通过node-inspector 调试远程服务器上的node代码</strong>。</p>
-<p>在进入主题之前，首先会对三种调试方式进行入门讲解，方便新手理解后面的内容。至于老司机们，可以直接跳到主题去。</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本章节写得差不多了，不过还需要再整理一下（TODO）。</p>
+<h2 id="hash例子"><a href="#hash例子" class="headerlink" title="hash例子"></a>hash例子</h2><p>hash.digest([encoding])：计算摘要。encoding可以是<code>hex</code>、<code>latin1</code>或者<code>base64</code>。如果声明了encoding，那么返回字符串。否则，返回Buffer实例。注意，调用hash.digest()后，hash对象就作废了，再次调用就会出错。</p>
+<p>hash.update(data[, input_encoding])：input_encoding可以是<code>utf8</code>、<code>ascii</code>或者<code>latin1</code>。如果data是字符串，且没有指定 input_encoding，则默认是<code>utf8</code>。注意，hash.update()方法可以调用多次。</p>
         
     </div>
     </div>
@@ -566,53 +613,6 @@ class="article article-type-post"
         
         <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MD5（Message-Digest Algorithm）是计算机安全领域广泛使用的散列函数（又称哈希算法、摘要算法），主要用来确保消息的完整和一致性。常见的应用场景有密码保护、下载文件校验等。</p>
 <p>本文先对MD5的特点与应用进行简要概述，接着重点介绍MD5在密码保护场景下的应用，最后通过例子对MD5碰撞进行简单介绍。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-dgram"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-dgram.html">Node.js-dgram</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>dgram模块是对UDP socket的一层封装，相对net模块简单很多，下面看例子。</p>
         
     </div>
     </div>

@@ -131,6 +131,53 @@
   
     
       <article
+id="post-2020-04-dgram"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-dgram.html">Node.js-dgram</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>dgram模块是对UDP socket的一层封装，相对net模块简单很多，下面看例子。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-04-dns"
 class="article article-type-post"
 >
@@ -178,7 +225,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http-client"
+id="post-2020-04-fs"
 class="article article-type-post"
 >
 
@@ -189,13 +236,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-client.html">Node.js-http.client</a>
+        <a href="/article/2020/04/Node-js/2020-04-fs.html">Node.js-fs</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="ClientRequest概览"><a href="#ClientRequest概览" class="headerlink" title="ClientRequest概览"></a>ClientRequest概览</h2><p>当你调用 http.request(options) 时，会返回 ClientRequest实例，主要用来创建HTTP客户端请求。</p>
-<p>在前面的章节里，已经对http模块的的其他方面进行了不少介绍，如http.Server、http.ServerResponse、http.IncomingMessage。</p>
-<p>有了前面的基础，详细本文不难理解，本文更多的以例子为主。</p>
+        <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2>
         
     </div>
     </div>
@@ -244,55 +289,6 @@ class="article article-type-post"
         
         <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>events模块是node的核心模块之一，几乎所有常用的node模块都继承了events模块，比如http、fs等。</p>
 <p>模块本身非常简单，API虽然也不少，但常用的就那么几个，这里举几个简单例子。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-http"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http.html">Node.js-http</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="http模块概览"><a href="#http模块概览" class="headerlink" title="http模块概览"></a>http模块概览</h2><p>大多数nodejs开发者都是冲着开发web server的目的选择了nodejs。正如官网所展示的，借助http模块，可以几行代码就搞定一个超迷你的web server。</p>
-<p>在nodejs中，<code>http</code>可以说是最核心的模块，同时也是比较复杂的一个模块。上手很简单，但一旦深入学习，不少初学者就会觉得头疼，不知从何入手。</p>
-<p>本文先从一个简单的例子出发，引出<code>http</code>模块最核心的四个实例。看完本文，应该就能够对http模块有个整体的认识。</p>
         
     </div>
     </div>
@@ -374,7 +370,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http-res"
+id="post-2020-04-http"
 class="article article-type-post"
 >
 
@@ -385,11 +381,62 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-res.html">Node.js-http.res</a>
+        <a href="/article/2020/04/Node-js/2020-04-http.html">Node.js-http</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>http模块四剑客之一的<code>res</code>，应该都不陌生了。一个web服务程序，接受到来自客户端的http请求后，向客户端返回正确的响应内容，这就是<code>res</code>的职责。</p>
+        <h2 id="http模块概览"><a href="#http模块概览" class="headerlink" title="http模块概览"></a>http模块概览</h2><p>大多数nodejs开发者都是冲着开发web server的目的选择了nodejs。正如官网所展示的，借助http模块，可以几行代码就搞定一个超迷你的web server。</p>
+<p>在nodejs中，<code>http</code>可以说是最核心的模块，同时也是比较复杂的一个模块。上手很简单，但一旦深入学习，不少初学者就会觉得头疼，不知从何入手。</p>
+<p>本文先从一个简单的例子出发，引出<code>http</code>模块最核心的四个实例。看完本文，应该就能够对http模块有个整体的认识。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-http-client"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-http-client.html">Node.js-http.client</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="ClientRequest概览"><a href="#ClientRequest概览" class="headerlink" title="ClientRequest概览"></a>ClientRequest概览</h2><p>当你调用 http.request(options) 时，会返回 ClientRequest实例，主要用来创建HTTP客户端请求。</p>
+<p>在前面的章节里，已经对http模块的的其他方面进行了不少介绍，如http.Server、http.ServerResponse、http.IncomingMessage。</p>
+<p>有了前面的基础，详细本文不难理解，本文更多的以例子为主。</p>
         
     </div>
     </div>
@@ -468,6 +515,53 @@ class="article article-type-post"
   
     
       <article
+id="post-2020-04-http-res"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-http-res.html">Node.js-http.res</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>http模块四剑客之一的<code>res</code>，应该都不陌生了。一个web服务程序，接受到来自客户端的http请求后，向客户端返回正确的响应内容，这就是<code>res</code>的职责。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-04-https"
 class="article article-type-post"
 >
@@ -485,100 +579,6 @@ class="article article-type-post"
         
         <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>这个模块的重要性，基本不用强调了。在网络安全问题日益严峻的今天，网站采用HTTPS是个必然的趋势。</p>
 <p>在nodejs中，提供了 https 这个模块来完成 HTTPS 相关功能。从官方文档来看，跟 http 模块用法非常相似。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-net"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-net.html">Node.js-net</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>net模块是同样是nodejs的核心模块。在http模块概览里提到，http.Server继承了net.Server，此外，http客户端与http服务端的通信均依赖于socket（net.Socket）。也就是说，做node服务端编程，net基本是绕不开的一个模块。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-process"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-process.html">Node.js-process</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>process是node的全局模块，作用比较直观。可以通过它来获得node进程相关的信息，比如运行node程序时的命令行参数。或者设置进程相关信息，比如设置环境变量。</p>
         
     </div>
     </div>

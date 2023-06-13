@@ -131,6 +131,148 @@
   
     
       <article
+id="post-2020-04-v8"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-v8.html">Node.js-v8</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="v8-getHeapStatistics"><a href="#v8-getHeapStatistics" class="headerlink" title="v8.getHeapStatistics()"></a>v8.getHeapStatistics()</h2><p>用来获取内存使用情况</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-zlib"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-zlib.html">Node.js-zlib</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>做过web性能优化的同学，对性能优化大杀器<strong>gzip</strong>应该不陌生。浏览器向服务器发起资源请求，比如下载一个js文件，服务器先对资源进行压缩，再返回给浏览器，以此节省流量，加快访问速度。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-asymmetric-enc-dec"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-asymmetric-enc-dec</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
+<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-04-文件系统操作-fs"
 class="article article-type-post"
 >
@@ -226,6 +368,57 @@ class="article article-type-post"
   
     
       <article
+id="post-2020-05-body-parser"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-body-parser</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
+<pre><code class="javascript">app.use(bodyParser.json());
+app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
+</code></pre>
+<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2020-05-charset-enc-dec"
 class="article article-type-post"
 >
@@ -275,7 +468,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-asymmetric-enc-dec"
+id="post-2020-05-cluster"
 class="article article-type-post"
 >
 
@@ -286,63 +479,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-asymmetric-enc-dec</a>
+        <a href="/article/2020/04/Node-js/2020-05-cluster.html">Node.js-cluster</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
-<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-body-parser"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-body-parser</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
-<pre><code class="javascript">app.use(bodyParser.json());
-app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
-</code></pre>
-<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p>
+<ol>
+<li>cluster模块如何实现端口共享</li>
+<li>cluster模块如何分发请求
         
     </div>
     </div>
@@ -447,157 +591,6 @@ class="article article-type-post"
 <li>maxAge：</li>
 </ul>
 
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-crypto-diffie-hellman"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
-<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-crypto-theory"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
-<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
-<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
-<ol>
-<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
-<li>对称加密、非对称加密、电子签名</li>
-<li>分组加密模式
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-debugLog"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
-<blockquote>
-<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
-</blockquote>
         
     </div>
     </div>

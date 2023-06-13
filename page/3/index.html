@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2021-08-vscode-sftp问题"
+id="post-2021-08-vue打包部署服务器跨域问题"
 class="article article-type-post"
 >
 
@@ -142,12 +142,16 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/08/web%E5%89%8D%E7%AB%AF/2021-08-vscode-sftp%E9%97%AE%E9%A2%98.html">解决vscode上的sftp插件使用时提示“Error： No such file”</a>
+        <a href="/article/2021/08/web%E5%89%8D%E7%AB%AF/2021-08-vue%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html">解决VUE打包上传服务器产生的跨域问题</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>vscode上的sftp每次上传都会提示文件不存在，虽然不影响最后结果，但每次看到弹窗总感觉是有问题的。</p>
-<p><img src="http://img.oct1a.cn/202109241612094.png"></p>
+        <pre><code>location /api&#123;
+  add_header &quot;Access-Control-Allow-Origin&quot; *;
+  proxy_pass http://xxxx.com/;
+&#125;
+</code></pre>
+
         
     </div>
     </div>
@@ -171,7 +175,7 @@ class="article article-type-post"
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
         </div>
     
     </div>
@@ -282,7 +286,7 @@ server &#123;
   
     
       <article
-id="post-2021-08-vue打包部署服务器跨域问题"
+id="post-2021-08-vscode-sftp问题"
 class="article article-type-post"
 >
 
@@ -293,16 +297,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/08/web%E5%89%8D%E7%AB%AF/2021-08-vue%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html">解决VUE打包上传服务器产生的跨域问题</a>
+        <a href="/article/2021/08/web%E5%89%8D%E7%AB%AF/2021-08-vscode-sftp%E9%97%AE%E9%A2%98.html">解决vscode上的sftp插件使用时提示“Error： No such file”</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <pre><code>location /api&#123;
-  add_header &quot;Access-Control-Allow-Origin&quot; *;
-  proxy_pass http://xxxx.com/;
-&#125;
-</code></pre>
-
+        <p>vscode上的sftp每次上传都会提示文件不存在，虽然不影响最后结果，但每次看到弹窗总感觉是有问题的。</p>
+<p><img src="http://img.oct1a.cn/202109241612094.png"></p>
         
     </div>
     </div>
@@ -326,7 +326,7 @@ class="article article-type-post"
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li></ul>
         </div>
     
     </div>
@@ -612,6 +612,49 @@ class="article article-type-post"
   
     
       <article
+  id="tweet-2021-06-简书迁移博客"
+  class="article article-type-tweet"
+>
+
+    <div class="article-tweet article-type-tweet-inner">
+
+        <box-icon class="article-tweet-quote" type='solid' name='quote-left' color="#CCC"></box-icon>
+
+        <div class="article-tweet-content post-inner-html">
+            
+                <p>已经正式从简书迁移到博客了，之前是比较看重简书在百度的权重，但现在简书已经不太适合发技术文章了，很乱，还是在自己博客写写文章比较舒适。</p>
+
+            
+        </div>
+
+        <footer class="article-footer">
+            <a class="article-footer-common" href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">评论</a>
+            <div class="article-more-info">
+            <div class="article-date">
+  <time datetime="2021-07-03T05:50:58.000Z" itemprop="datePublished">2021-07-03</time>
+</div>
+            
+                <div class="article-category">
+                <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
+                </div>
+            
+            
+            </div>
+        </footer>
+
+        <div class="article-badge">
+            
+            
+        </div>
+
+    </div>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2021-07-Window10如何升级Window11（体验版）详细流程"
 class="article article-type-post"
 >
@@ -718,49 +761,6 @@ class="article article-type-post"
     
     </div>
 </footer>
-
-</article>
-
-    
-  
-    
-      <article
-  id="tweet-2021-06-简书迁移博客"
-  class="article article-type-tweet"
->
-
-    <div class="article-tweet article-type-tweet-inner">
-
-        <box-icon class="article-tweet-quote" type='solid' name='quote-left' color="#CCC"></box-icon>
-
-        <div class="article-tweet-content post-inner-html">
-            
-                <p>已经正式从简书迁移到博客了，之前是比较看重简书在百度的权重，但现在简书已经不太适合发技术文章了，很乱，还是在自己博客写写文章比较舒适。</p>
-
-            
-        </div>
-
-        <footer class="article-footer">
-            <a class="article-footer-common" href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">评论</a>
-            <div class="article-more-info">
-            <div class="article-date">
-  <time datetime="2021-07-03T05:50:58.000Z" itemprop="datePublished">2021-07-03</time>
-</div>
-            
-                <div class="article-category">
-                <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
-                </div>
-            
-            
-            </div>
-        </footer>
-
-        <div class="article-badge">
-            
-            
-        </div>
-
-    </div>
 
 </article>
 

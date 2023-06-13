@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-04-querystring"
+id="post-2020-04-path"
 class="article article-type-post"
 >
 
@@ -142,12 +142,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-querystring.html">Node.js-querystring</a>
+        <a href="/article/2020/04/Node-js/2020-04-path.html">Node.js-path</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>在nodejs中，提供了<strong>querystring</strong>这个模块，用来做url查询参数的解析，使用非常简单。</p>
-<p>模块总共有四个方法，绝大部分时，我们只会用到 **.parse()**、 **.stringify()**两个方法。剩余的方法，感兴趣的同学可自行查看文档。</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在nodejs中，path是个使用频率很高，但却让人又爱又恨的模块。部分因为文档说的不够清晰，部分因为接口的平台差异性。</p>
+<p>将path的接口按照用途归类，仔细琢磨琢磨，也就没那么费解了。</p>
         
     </div>
     </div>
@@ -179,7 +179,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-path"
+id="post-2020-04-net"
 class="article article-type-post"
 >
 
@@ -190,12 +190,58 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-path.html">Node.js-path</a>
+        <a href="/article/2020/04/Node-js/2020-04-net.html">Node.js-net</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在nodejs中，path是个使用频率很高，但却让人又爱又恨的模块。部分因为文档说的不够清晰，部分因为接口的平台差异性。</p>
-<p>将path的接口按照用途归类，仔细琢磨琢磨，也就没那么费解了。</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>net模块是同样是nodejs的核心模块。在http模块概览里提到，http.Server继承了net.Server，此外，http客户端与http服务端的通信均依赖于socket（net.Socket）。也就是说，做node服务端编程，net基本是绕不开的一个模块。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-process"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-process.html">Node.js-process</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>process是node的全局模块，作用比较直观。可以通过它来获得node进程相关的信息，比如运行node程序时的命令行参数。或者设置进程相关信息，比如设置环境变量。</p>
         
     </div>
     </div>
@@ -247,6 +293,54 @@ class="article article-type-post"
 <li>文件逐行读取：比如说进行日志分析。</li>
 <li>自动完成：比如输入npm，自动提示”help init install”。</li>
 <li>命令行工具：比如npm init这种问答式的脚手架工具。
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-querystring"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-querystring.html">Node.js-querystring</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>在nodejs中，提供了<strong>querystring</strong>这个模块，用来做url查询参数的解析，使用非常简单。</p>
+<p>模块总共有四个方法，绝大部分时，我们只会用到 **.parse()**、 **.stringify()**两个方法。剩余的方法，感兴趣的同学可自行查看文档。</p>
         
     </div>
     </div>
@@ -446,100 +540,6 @@ class="article article-type-post"
     <div class="article-entry post-inner-html">
         
         <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>nodejs中，提供了<strong>url</strong>这个非常实用的模块，用来做URL的解析。在做node服务端的开发时会经常用到。使用很简单，总共只有3个方法。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-v8"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-v8.html">Node.js-v8</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="v8-getHeapStatistics"><a href="#v8-getHeapStatistics" class="headerlink" title="v8.getHeapStatistics()"></a>v8.getHeapStatistics()</h2><p>用来获取内存使用情况</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-zlib"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-zlib.html">Node.js-zlib</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>做过web性能优化的同学，对性能优化大杀器<strong>gzip</strong>应该不陌生。浏览器向服务器发起资源请求，比如下载一个js文件，服务器先对资源进行压缩，再返回给浏览器，以此节省流量，加快访问速度。</p>
         
     </div>
     </div>
