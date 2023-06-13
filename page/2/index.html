@@ -6,11 +6,11 @@
     
     <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="keywords" content="Oct1a,全栈,前端,技术,node.js,code,developer">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
-    <meta name="author" content="Oct1a_H">
+    <meta name="author" content="Oct1a">
     <meta name="generator" content="hexo">
-    <meta name="copyright" content="Oct1a_H">
+    <meta name="copyright" content="Oct1a">
     
     
 
@@ -57,7 +57,7 @@
         <div class="header-type">
             
             <div class="header-type-avatar avatar avatar-sm">
-                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+                <img src="/images/oct1a.jpg" alt="Oct1a">
             </div>
             
             <div class="header-type-inner">
@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2021-07-axios请求超时处理"
+id="post-2021-10-Nginx笔记"
 class="article article-type-post"
 >
 
@@ -142,64 +142,518 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-axios%E8%AF%B7%E6%B1%82%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86.html">axios在elecrton请求超时处理办法</a>
+        <a href="/article/2021/10/web%E5%89%8D%E7%AB%AF/2021-10-Nginx%E7%AC%94%E8%AE%B0.html">Nginx知识梳理</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="Nginx知识梳理"><a href="#Nginx知识梳理" class="headerlink" title="Nginx知识梳理"></a>Nginx知识梳理</h1><h2 id="进程模型"><a href="#进程模型" class="headerlink" title="进程模型"></a>进程模型</h2><ul>
+<li><p>master 主进程</p>
+</li>
+<li><p>worker 子进程</p>
+</li>
+</ul>
+<p>默认连接数为1024，具体根据硬件信息配置</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code>vim nginx.conf
+</code></pre>
+<pre><code>events&#123;
+    # 默认使用epoll,可不写
+    use epoll;
+    # 每个worker允许连接的客户端最大连接数
+    worker_connections: 10240;
+&#125;
+</code></pre>
+<p>为何nginx性能会比较高？主要是通过epoll模型处理</p>
+<blockquote>
+<p>其实是类似于一种多路复用的模式</p>
+</blockquote>
+<h2 id="nginx-conf-配置结构"><a href="#nginx-conf-配置结构" class="headerlink" title="nginx.conf 配置结构"></a>nginx.conf 配置结构</h2><blockquote>
+<p>main 全局配置</p>
+</blockquote>
+<blockquote>
+<p>event 配置工作模式以及连接数</p>
+</blockquote>
+<blockquote>
+<p>http http模块相关配置</p>
+<blockquote>
+<p>server 虚拟主机配置，可以有多个</p>
+<blockquote>
+<p>location 路由规则，表达式</p>
+<p>upstream 集群，内网服务器</p>
+</blockquote>
+</blockquote>
+</blockquote>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-06T03:10:58.000Z" itemprop="datePublished">2021-10-06</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2022-01-window解密错误"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/10/Node-js/2022-01-window%E8%A7%A3%E5%AF%86%E9%94%99%E8%AF%AF.html">win32_load:could not load the shared library</a>
     </header>
     <div class="article-entry post-inner-html">
         
         <blockquote>
-<p> 自己开发的一款elecron批量上传商品工具，在使用的过程中，会偶尔出现请求超时问题，无法获取到数据。</p>
+<p>淦，今天终于把这个问题解决了，之前一直很奇怪的bug，只要在window系统上涉及到加密这一块，总会出现这个问题，例如crypto，微信支付，支付宝支付..google也找不到任何答案，但在部署到linux上就没问题，所以后面操作都是同步到服务器上进行修改，这次又遇到这个问题就想给他解决掉。</p>
 </blockquote>
-<pre><code>import axios from &#39;axios&#39;
-import &#123; Message &#125; from &#39;element-ui&#39;
-const serves = axios.create(&#123;
-  baseURL: process.env.BASE_API,
-  timeout: 3000
-&#125;)
+<p>错误信息：</p>
+<h1 id="Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library"><a href="#Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library" class="headerlink" title="Error: error:25078067:DSO support routines:win32_load:could not load the shared library"></a>Error: error:25078067:DSO support routines:win32_load:could not load the shared library</h1><pre><code>Error: error:25078067:DSO support routines:win32_load:could not load the shared library
+    at Sign.sign (node:internal/crypto/sig:131:29)
+    at Pay.sha256WithRsa (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:144:71)
+    at Pay.getSignature (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:107:21)
+    at Pay.init (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:198:30)
+    at Pay.&lt;anonymous&gt; (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:332:46)
+    at step (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:44:23)
+    at Object.next (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:25:53)
+    at xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:19:71
+    at new Promise (&lt;anonymous&gt;)
+    at __awaiter (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:15:12) &#123;
+  opensslErrorStack: [
+    &#39;error:0E076071:configuration file routines:module_run:unknown module name&#39;,
+    &#39;error:0E07506E:configuration file routines:module_load_dso:error loading dso&#39;,
+    &#39;error:25070067:DSO support routines:DSO_load:could not load the shared library&#39;
+  ],
+  library: &#39;DSO support routines&#39;,
+  function: &#39;win32_load&#39;,
+  reason: &#39;could not load the shared library&#39;,
+  code: &#39;ERR_OSSL_DSO_COULD_NOT_LOAD_THE_SHARED_LIBRARY&#39;
+&#125;
+</code></pre>
+<h2 id="为何发生错误："><a href="#为何发生错误：" class="headerlink" title="为何发生错误："></a>为何发生错误：</h2><p>因为我早期需要打包密钥文件，从官网下载了openssl的安装包进行安装，但后面没用到了，就扔在那了，也没去卸载</p>
+<p>因为接入的支付宝和微信支付都会用到crypto这个库，这个库会调用系统的openssl进行编译？但我自行安装的可能有点问题或者就是无法版本不对，导致无法调用。</p>
+<p>解决方法：</p>
+<ol>
+<li>如果系统上已经有安装了openssl，如何判断已经有安装？卸载掉，或者删除系统环境变量（找到openssl）</li>
+<li>安装git（一般程序员系统都自带这个了，可忽略）</li>
+<li>添加系统环境变量（Path）<pre><code>git的安装目录\usr\bin 例如：D:\System\Git\usr\bin
+</code></pre>
+测试命令操作符窗口中输入<code>openssl</code>，查看是否可以使用</li>
+</ol>
+<p>这样就可以了，这样我们就是直接调用git自带的openssl，就不用自己手动安装，免得出各种问题。如果也能帮到你的话，记得赏我杯咖啡…</p>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50625283/how-to-install-openssl-in-windows-10">ssl - How to install OpenSSL in windows 10? - Stack Overflow</a></p>
 
-// 设置请求次数，请求间隔
-serves.defaults.retry = 4;
-serves.defaults.retryDelay = 800;
+        
+    </div>
+    </div>
 
-axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) &#123;
-  var config = err.config;
-  // If config does not exist or the retry option is not set, reject
-  if (!config || !config.retry) return Promise.reject(err);
+    <div class="article-badge">
+        
+        
+    </div>
 
-  // Set the variable for keeping track of the retry count
-  config.__retryCount = config.__retryCount || 0;
+</div>
 
-  // Check if we&#39;ve maxed out the total number of retries
-  if (config.__retryCount &gt;= config.retry) &#123;
-    // Reject with the error
-    Message.error(&#39;网络请求超时，请稍后再试&#39;)
-    return Promise.reject(err);
-  &#125;
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-06T03:10:58.000Z" itemprop="datePublished">2021-10-06</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
 
-  // Increase the retry count
-  config.__retryCount += 1;
+</article>
 
-  // Create new promise to handle exponential backoff
-  var backoff = new Promise(function(resolve) &#123;
-    setTimeout(function() &#123;
-      resolve();
-    &#125;, config.retryDelay || 1);
-  &#125;);
-
-  // Return the promise in which recalls axios to retry the request
-  return backoff.then(function() &#123;
-    return axios(config);
-  &#125;);
-&#125;);
+    
+  
+    
+      <article
+id="post-2021-10-动态路由"
+class="article article-type-post"
+>
 
 
-// 设置请求发送之前的拦截器
-serves.interceptors.request.use(config =&gt; &#123;
-  config.headers.action = localStorage.getItem(&#39;name&#39;)
-  return config
-&#125;, err =&gt; Promise.reject(err))
 
-// 将serves抛出去
-export default serves
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/10/web%E5%89%8D%E7%AB%AF/2021-10-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1.html">Vue 动态路由的实现</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="Vue-中后台鉴权的另一种方案-动态路由"><a href="#Vue-中后台鉴权的另一种方案-动态路由" class="headerlink" title="Vue 中后台鉴权的另一种方案 - 动态路由"></a>Vue 中后台鉴权的另一种方案 - 动态路由</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在今年年初在掘金发布了一篇文章<a target="_blank" rel="noopener" href="https://juejin.im/post/5c4a8a05e51d4506953e389b">记一次 Vue 动态渲染路由的实现</a>,现在代码经过不断的 Review</p>
+<p>现在完全优化了之前的实现方法,代码量减少很多,逻辑更加简单,同时也更加稳定</p>
+<p>demo 已经部署到 github,欢迎体验~~ <a target="_blank" rel="noopener" href="https://github.com/vkcyan/vue-element-asyncLogin">vue-element-asyncLogin</a>, 你的 start 是我的动力!</p>
+<h3 id="鉴权-前端路由-VS-鉴权-动态路由"><a href="#鉴权-前端路由-VS-鉴权-动态路由" class="headerlink" title="鉴权-前端路由 VS 鉴权-动态路由"></a>鉴权-前端路由 VS 鉴权-动态路由</h3><p> 前端路由鉴权相信只要了解过<a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/">vue-element-admin</a>的都知道,前端鉴权方案是完全可行的,思路清晰,难度适中,项目中完全可以使用,那么相对来说动态路由优势在什么地方呢</p>
+<ol>
+<li>前端鉴权不够灵活,线上版本每次修改权限页面,都需要重新打包项目</li>
+<li>中小型项目中 <code>前端鉴权</code>明显更加好用,成本更低,程序员们也不用 996 了(雾),但是对于权限等级很多,并且比较大的项目,维护这一套鉴权路由,毫无疑问是一个大工程,并且面对频繁变更的需求,bug 会出现的更加频繁,前端工程师工作量大大增加,这时候似乎前端鉴权就不再是好的方案</li>
+<li>动态路由并不是回归到刀耕火种的时代,而是一种新的思路,路由配置还是由前端完成,仅仅将状态交给了后端,不同角色的路由显示交给后端控制,前端不需要管理路由,最多只需要管理权限颗粒化的问题</li>
+</ol>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-06T03:10:58.000Z" itemprop="datePublished">2021-10-06</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-09-滚动条置顶"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-09-%E6%BB%9A%E5%8A%A8%E6%9D%A1%E7%BD%AE%E9%A1%B6.html">layui纯css表格顶部显示控制滚动条</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p><img src="http://img.oct1a.cn/202112042333802.png" alt="image-20211204233313602"></p>
+<p>因表格字段过多，每次浏览需要滑到底部才能滚动查看其他字段，所以要求将滚动条置顶显示</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>更换更大的屏幕（不是 </li>
+<li>隐藏底部滚动条，顶部自定义滚动条，增加滚动事件</li>
+<li>翻转画布</li>
+</ol>
+<p>后面选择了第三种方式，</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>将画面翻转，内容再按原角度翻转回去，就达到这种效果了</p>
+<pre><code class="html">&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        div &#123;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            margin: 15px;
+        &#125;
+        
+        #vertical &#123;
+            direction: rtl;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background: gold;
+        &#125;
+        
+        #vertical p &#123;
+            direction: ltr;
+            margin-bottom: 0;
+        &#125;
+        
+        #horizontal &#123;
+            direction: rtl;
+            transform: rotate(180deg);
+            overflow-y: hidden;
+            overflow-x: scroll;
+            background: tomato;
+            padding-top: 30px;
+        &#125;
+        
+        #horizontal span &#123;
+            direction: ltr;
+            display: inline-block;
+            transform: rotate(-180deg);
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;div id=&quot;vertical&quot;&gt;
+        &lt;p&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content
+            &lt;br&gt;content&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;horizontal&quot;&gt;&lt;span&gt; content_content_content_content_content_content_content_content_content_content_content_content_content_content&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<p>还可以设置翻转到左边</p>
+<p><img src="http://img.oct1a.cn/202204012309983.png"></p>
+<h2 id="layui添加样式"><a href="#layui添加样式" class="headerlink" title="layui添加样式"></a>layui添加样式</h2><pre><code class="css"> .layui-card-body&#123;
+  direction: rtl;
+  transform: rotate(180deg);
+  overflow-y: hidden;
+  overflow-x: scroll;
+&#125;
+.layui-table-view&#123;
+  direction: ltr;
+  display: inline-block;
+  transform: rotate(-180deg);
+&#125; 
+</code></pre>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/18997724/how-to-change-scroll-bar-position-with-css">how-to-change-scroll-bar-position-with-css</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-27T04:49:01.000Z" itemprop="datePublished">2021-09-27</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-09-dns解析问题"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>之前域名绑定一台测试服务器，但后面没继续续费过期了，需要重新解析新的服务器IP上，本以为就很简单的绑定解析，然后提交百度收录时，发现网页无法打开，习惯性的ping了下域名，发现ip不对，一开始以为是本地没刷新，本地刷新后没有变化，排查了本地的host文件，后来重新ping一次是正常，但很玄学，有时候是解析到新的IP，有时候又是旧的IP，网上是说DNS解析没这么快同步，等了一天左右，还是一样，但使用部分设备访问是可以正常解析的，更改了本地网络的dns，发现正常，所以可以肯定的是因为部分DNS没同步问题，</p>
+<blockquote>
+<p>47.103.xxx.181 -&gt; 过期服务器<br>120.77.xxx.247 -&gt; 新服务器（需要解析到这个IP)</p>
+</blockquote>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-15T06:00:50.058Z" itemprop="datePublished">2021-09-15</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Server/" rel="tag">Server</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-09-更改实例密码导致redis无法启动"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="问题源头"><a href="#问题源头" class="headerlink" title="问题源头"></a>问题源头</h2><p>更改了阿里云ECS实例的远程桌面密码后，它会自动重启服务器，重启后发现redis无法启动，手动在任务管理器启动服务时，一直报错：“<strong>服务器上出现1069错误（由于登录失败而无法启动服务）</strong>”，在网上无法找到对应答案，都是说账号密码错了的问题，但当我使用命令直接启动redis是正常的，但就是无法在服务中启动，虽然是解决了问题，但这样每次是无法跟随系统自启动就很郁闷了，在我重新排查了一遍，因为服务是使用宝塔面板安装的，首先先找宝塔面板查看对应配置，发现有个<strong>运行用户</strong>选项，而我在系统中也发现存在该用户，所以知道问题所在了。</p>
+<p>宝塔是有单独新建各种用户来运行服务的，比如mysql,www,redis，所以当我使用<strong>administrator</strong>用户登录时，没有redis用户的配置或者权限，无法启动该服务，解决办法可以把原先服务中的redis删除，重新命令创建即可。但这样后面宝塔面板就感觉容易错乱掉，所以还是得用宝塔面板来解决。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在选项还是redis用户的情况下，直接再次点击切换即可！</p>
+<blockquote>
+<p>貌似原理就是会给redis用户自动再生成密码，重新运行redis</p>
+</blockquote>
+<p><img src="http://img.oct1a.cn/202109231635763.png"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-15T06:00:50.058Z" itemprop="datePublished">2021-09-15</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Server/" rel="tag">Server</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-08-Canvas-模糊问题解析和解决"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>首先我需要了解一个属性 <code>devicePixelRatio</code> 屏幕像素比</p>
+<p>在高清显示屏出现之前，比如屏幕宽度为1000px 那么其宽度上的物理像素也是1000px，而在高清屏出现之后，屏幕宽度为 1000px 时，物理像素有可能达到 2000px 或者更高</p>
+<p>为了方便查询物理像素和屏幕像素的比值，在 window 对象上增加了一个属性 <code>devicePixelRatio</code> 来表示这个比值。</p>
+<p>比如在 <code>devicePixelRatio</code> 为2的设备上，当我们使用 CSS 绘制一条 1px 的线时，为了保证绘制的大小，物理像素实际上会使用 2px 来绘制这一条线，而这样的转换是浏览器自动处理的，所以对开发者来说并没有太大的困扰</p>
+<p>那么上面既然说了浏览器在渲染的时候会自动处理像素比的问题，CSS 绘制的图像经过转换之后不会出现模糊的问题，但 canvas 上怎么就出现了呢？</p>
+<p>因为在 canvas 标签上定义的 <code>width</code> 和 <code>height</code> 的值并不会被转换，100px 就会被渲染成 100px 的物理像素，但是设备要求的是 200px，这时浏览器只能智能地填充像素之间的空白，以适应要求的大小。这就是 canvas 绘制的图片出现模糊的原因</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>第一步：获取像素比</li>
+<li>第二步：将 canvas 标签上的宽高属性设置为 显示大小 * 像素比</li>
+<li>第三步：将 canvas 样式宽高设置为 显示大小</li>
+<li>第四步：使用 <code>scale</code> 方法设置比值</li>
+<li>第五步：绘制 canvas 图形</li>
+</ul>
+<pre><code class="javascript">function createHDCanvas (canvas, w, h) &#123;
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = w * ratio; // 实际渲染像素
+  canvas.height = h * ratio; // 实际渲染像素
+  canvas.style.width = `$&#123;w&#125;px`; // 控制显示大小
+  canvas.style.height = `$&#123;h&#125;px`; // 控制显示大小
+  const ctx = canvas.getContext(&#39;2d&#39;)
+  ctx.scale(ratio, ratio)
+  // canvas 绘制
+  return canvas;
+&#125;
 </code></pre>
 
         
@@ -216,7 +670,7 @@ export default serves
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-07-19T03:50:58.000Z" itemprop="datePublished">2021-07-19</time>
+  <time datetime="2021-09-04T04:00:50.058Z" itemprop="datePublished">2021-09-04</time>
 </div>
     
         <div class="article-category">
@@ -225,7 +679,7 @@ export default serves
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li></ul>
         </div>
     
     </div>
@@ -237,7 +691,7 @@ export default serves
   
     
       <article
-id="post-2021-07-前端网页字体优化指南"
+id="post-2021-08-image图片转PDF"
 class="article article-type-post"
 >
 
@@ -248,77 +702,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E5%89%8D%E7%AB%AF%E7%BD%91%E9%A1%B5%E5%AD%97%E4%BD%93%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97.html">前端网页字体优化的4种方案</a>
+        <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>日常开发网页经常会使用一些特殊字体，比如思源黑体、苹方字体等，因为这些字体在一般的宿主环境中是不存在的，需要通过 css 的 <code>@font-face</code> 定义，并从服务器中加载对应的字体文件，而字体文件一般都是比较大的，甚至有时候一个字体比其他所有的资源（js、css、图片）加起来还要大，对网页的加载性能起到非常关键的影响，因此有必要对字体进行一些优化。 本文主要从字体格式、按需提取、统一渲染三个方面来谈谈优化字体的常用技巧。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-            <div class="article-repost">
-                <box-icon name='repost' color='#ffffff' size='xs'></box-icon>
-            </div>
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-11T05:50:58.000Z" itemprop="datePublished">2021-07-11</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/font/" rel="tag">font</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-07-Window10如何升级Window11（体验版）详细流程"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-    <div class="article-feature">
-        <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">
-            <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3C/svg%3E"
-                data-src="https://img.oct1a.cn/20210717105752.png"
-                alt="item.title"
-                class="lazy"
-            />
-        </a>
-    </div>
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/07/Windows/2021-07-Window10%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7Window11%EF%BC%88%E4%BD%93%E9%AA%8C%E7%89%88%EF%BC%89%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B.html">Window10升级Window11（体验版dev）详细流程</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>加入“WINDOWS 预览体验计划”的操作步骤</p>
+        <p><img src="http://img.oct1a.cn/20210810112917.png" alt="image-20210810112909768"></p>
+<p>应之前一个<code>txt转word</code>插件下的评论一个需求，顺手做个转换插件。</p>
         
     </div>
     </div>
@@ -333,16 +722,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-07-03T05:50:58.000Z" itemprop="datePublished">2021-07-03</time>
+  <time datetime="2021-08-09T03:50:58.000Z" itemprop="datePublished">2021-08-09</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/Windows/">Windows</a>
+        <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utools/" rel="tag">utools</a></li></ul>
         </div>
     
     </div>
@@ -354,7 +743,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2021-07-密钥升级windows专业版升级密钥丢失问题"
+id="post-2021-08-同义词反义词插件"
 class="article article-type-post"
 >
 
@@ -365,11 +754,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/07/Windows/2021-07-%E5%AF%86%E9%92%A5%E5%8D%87%E7%BA%A7windows%E4%B8%93%E4%B8%9A%E7%89%88%E5%8D%87%E7%BA%A7%E5%AF%86%E9%92%A5%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98.html">密钥升级windows专业版，升级失败，之前密钥丢失问题</a>
+        <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>升级了windows11了，但他的设置面板中文还未完善，有点中英文混合的样子，然后想更改系统语言的，才想起来自己新的电脑还没重装过系统，默认就是家庭中文版的，无法更改系统语言。</p>
+        <p><img src="http://img.oct1a.cn/202109031045842.png"></p>
         
     </div>
     </div>
@@ -384,16 +773,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-07-03T05:50:58.000Z" itemprop="datePublished">2021-07-03</time>
+  <time datetime="2021-08-04T04:00:50.058Z" itemprop="datePublished">2021-08-04</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/Windows/">Windows</a>
+        <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li></ul>
         </div>
     
     </div>
@@ -405,50 +794,7 @@ class="article article-type-post"
   
     
       <article
-  id="tweet-2021-06-简书迁移博客"
-  class="article article-type-tweet"
->
-
-    <div class="article-tweet article-type-tweet-inner">
-
-        <box-icon class="article-tweet-quote" type='solid' name='quote-left' color="#CCC"></box-icon>
-
-        <div class="article-tweet-content post-inner-html">
-            
-                <p>已经正式从简书迁移到博客了，之前是比较看重简书在百度的权重，但现在简书已经不太适合发技术文章了，很乱，还是在自己博客写写文章比较舒适。</p>
-
-            
-        </div>
-
-        <footer class="article-footer">
-            <a class="article-footer-common" href="/article/2021/07/%E5%85%B6%E5%AE%83/2021-06-%E7%AE%80%E4%B9%A6%E8%BF%81%E7%A7%BB%E5%8D%9A%E5%AE%A2.html">评论</a>
-            <div class="article-more-info">
-            <div class="article-date">
-  <time datetime="2021-07-03T05:50:58.000Z" itemprop="datePublished">2021-07-03</time>
-</div>
-            
-                <div class="article-category">
-                <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
-                </div>
-            
-            
-            </div>
-        </footer>
-
-        <div class="article-badge">
-            
-            
-        </div>
-
-    </div>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-06-应用宝上架指南"
+id="post-2021-08-cmd的一些命令用法"
 class="article article-type-post"
 >
 
@@ -459,11 +805,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E5%BA%94%E7%94%A8%E5%AE%9D%E4%B8%8A%E6%9E%B6%E6%8C%87%E5%8D%97.html">应用宝上架指南【详细教程】</a>
+        <a href="/article/2021/08/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2021-08-cmd%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95.html">自动化助手帮助一键快速运行hexo服务</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>应用宝(Android)是腾讯应用中心倾力打造的手机应用商店</p>
+        <p>因最近使用<code>utools</code>工具比较频繁，插件有自动化工具，刚好想解决每次一个比较繁琐的问题，hexo的启动已经一些命令，通常是要找到自己的博客文件路径，进行打开终端运行，有点麻烦。本次借用utools的自动化助手插件解决该问题。</p>
+<p><img src="http://img.oct1a.cn/blog/20210816113721.png"></p>
         
     </div>
     </div>
@@ -478,225 +825,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-06-18T08:50:58.000Z" itemprop="datePublished">2021-06-18</time>
+  <time datetime="2021-08-02T08:50:58.000Z" itemprop="datePublished">2021-08-02</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-06-浏览器控制台调试技巧"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/06/%E5%85%B6%E5%AE%83/2021-06-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7.html">浏览器控制台调试技巧</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <blockquote>
-<p>“DevTools是一款功能强大的软件，很容易被忽视， 它隐藏着许多我们甚至常常怀疑是否需要的那些功能”</p>
-</blockquote>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-06-08T08:50:58.000Z" itemprop="datePublished">2021-06-08</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-04-JavaScript中的文档碎片-DocumentFragement"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/04/web%E5%89%8D%E7%AB%AF/2021-04-JavaScript%E4%B8%AD%E7%9A%84%E6%96%87%E6%A1%A3%E7%A2%8E%E7%89%87-DocumentFragement.html">DocumentFragement-关于文档碎片的理解</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>今天看到一道面试题：如果后端一次性发送10万条数据，前端需要如何优雅的显示？</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-04-08T05:50:58.000Z" itemprop="datePublished">2021-04-08</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-03-阿里云申请软件著作权流程"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E9%98%BF%E9%87%8C%E4%BA%91%E7%94%B3%E8%AF%B7%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E6%B5%81%E7%A8%8B.html">阿里云申请软件著作权流程</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>因为自己主动去申请的话太麻烦了，详情可以看我上一篇申请文章，所以后面使用阿里云服务，他们会帮忙审查，因新人优惠好像只花了270，然后等待三十天下证。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-03-06T03:10:58.000Z" itemprop="datePublished">2021-03-06</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-03-软件著作权申请指南"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/03/%E5%85%B6%E5%AE%83/2021-03-%E8%BD%AF%E4%BB%B6%E8%91%97%E4%BD%9C%E6%9D%83%E7%94%B3%E8%AF%B7%E6%8C%87%E5%8D%97.html">软著 ICP 证书申请流程-软件著作权申请指南</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <blockquote>
-<p>计算机软件著作权是著作权的一种,其不同于传统的作品如美术作品、文字作品、摄影作品等。计算机软件著作权是软件开发者对其开发的软件所享有的权利。</p>
-</blockquote>
-<p>因为上架APP，通常都需要软著才行，这边将一些收集的资料以及流程记录下来</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-03-05T08:50:58.000Z" itemprop="datePublished">2021-03-05</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
         </div>
     
     </div>
@@ -709,7 +847,7 @@ class="article article-type-post"
 
   
     <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/3/">Next</a>
+        <a class="extend prev" rel="prev" href="/">Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/">Next</a>
     </nav>
   
 </div>
@@ -740,7 +878,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -750,7 +888,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U%E7%9B%98/" rel="tag">U盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -763,23 +901,23 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+            <a href="/article/2022/04/uncategorized/2022-01-Redis%E7%AC%94%E8%AE%B0.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+            <a href="/article/2022/03/web%E5%89%8D%E7%AB%AF/2022-03-vue%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86.html">Vue网站数据传输加密</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
+            <a href="/article/2022/02/uncategorized/2021-12-2021.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
+            <a href="/article/2022/02/uncategorized/2022-01-%E5%BE%AE%E4%BF%A1%E8%A7%A3%E5%AF%86%E5%9B%9E%E8%B0%83%E9%94%99%E8%AF%AF.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
+            <a href="/article/2022/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2022-01-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86.html">服务器反向代理</a>
           </li>
         
       </ul>
@@ -791,7 +929,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
     </div>
   </div>
 
@@ -813,7 +951,7 @@ class="article article-type-post"
     <div class="footer-wrap">
         <div class="footer-inner">
             Oct1a &copy;
-                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                2023<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
                     <br>
                     <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
                     <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">

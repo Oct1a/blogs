@@ -6,11 +6,11 @@
     
     <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="keywords" content="Oct1a,全栈,前端,技术,node.js,code,developer">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
-    <meta name="author" content="Oct1a_H">
+    <meta name="author" content="Oct1a">
     <meta name="generator" content="hexo">
-    <meta name="copyright" content="Oct1a_H">
+    <meta name="copyright" content="Oct1a">
     
     
 
@@ -57,7 +57,7 @@
         <div class="header-type">
             
             <div class="header-type-avatar avatar avatar-sm">
-                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+                <img src="/images/oct1a.jpg" alt="Oct1a">
             </div>
             
             <div class="header-type-inner">
@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2021-09-dns解析问题"
+id="post-2022-01-Redis笔记"
 class="article article-type-post"
 >
 
@@ -142,453 +142,410 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+        <a href="/article/2022/04/uncategorized/2022-01-Redis%E7%AC%94%E8%AE%B0.html"></a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>之前域名绑定一台测试服务器，但后面没继续续费过期了，需要重新解析新的服务器IP上，本以为就很简单的绑定解析，然后提交百度收录时，发现网页无法打开，习惯性的ping了下域名，发现ip不对，一开始以为是本地没刷新，本地刷新后没有变化，排查了本地的host文件，后来重新ping一次是正常，但很玄学，有时候是解析到新的IP，有时候又是旧的IP，网上是说DNS解析没这么快同步，等了一天左右，还是一样，但使用部分设备访问是可以正常解析的，更改了本地网络的dns，发现正常，所以可以肯定的是因为部分DNS没同步问题，</p>
-<blockquote>
-<p>47.103.xxx.181 -&gt; 过期服务器<br>120.77.xxx.247 -&gt; 新服务器（需要解析到这个IP)</p>
+        <h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><p><strong>简单测试：</strong></p>
+<pre><code class="bash"># 测试：100个并发连接 100000请求
+redis-benchmark -h localhost -p 6379 -c 100 -n 100000
+</code></pre>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><blockquote>
+<p>redis默认有16个数据库</p>
 </blockquote>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-09-15T06:00:50.058Z" itemprop="datePublished">2021-09-15</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Server/" rel="tag">Server</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-09-更改实例密码导致redis无法启动"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="问题源头"><a href="#问题源头" class="headerlink" title="问题源头"></a>问题源头</h2><p>更改了阿里云ECS实例的远程桌面密码后，它会自动重启服务器，重启后发现redis无法启动，手动在任务管理器启动服务时，一直报错：“<strong>服务器上出现1069错误（由于登录失败而无法启动服务）</strong>”，在网上无法找到对应答案，都是说账号密码错了的问题，但当我使用命令直接启动redis是正常的，但就是无法在服务中启动，虽然是解决了问题，但这样每次是无法跟随系统自启动就很郁闷了，在我重新排查了一遍，因为服务是使用宝塔面板安装的，首先先找宝塔面板查看对应配置，发现有个<strong>运行用户</strong>选项，而我在系统中也发现存在该用户，所以知道问题所在了。</p>
-<p>宝塔是有单独新建各种用户来运行服务的，比如mysql,www,redis，所以当我使用<strong>administrator</strong>用户登录时，没有redis用户的配置或者权限，无法启动该服务，解决办法可以把原先服务中的redis删除，重新命令创建即可。但这样后面宝塔面板就感觉容易错乱掉，所以还是得用宝塔面板来解决。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在选项还是redis用户的情况下，直接再次点击切换即可！</p>
+<p>默认使用的第0个;</p>
+<p>16个数据库为：DB 0~DB 15<br>默认使用DB 0 </p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>**keys ***</td>
+<td>查看当前数据库中所有的key</td>
+</tr>
+<tr>
+<td><strong>flushdb</strong></td>
+<td>清空当前数据库中的键值对</td>
+</tr>
+<tr>
+<td><strong>flushall</strong></td>
+<td>清空所有数据库的键值对</td>
+</tr>
+<tr>
+<td><strong>select</strong> db_number</td>
+<td>切换数据库</td>
+</tr>
+<tr>
+<td><strong>DBSIZE</strong></td>
+<td>当前数据库大小， size和key个数相关</td>
+</tr>
+</tbody></table>
 <blockquote>
-<p>貌似原理就是会给redis用户自动再生成密码，重新运行redis</p>
+<p><strong>Redis是单线程的，Redis是基于内存操作的。</strong> </p>
 </blockquote>
-<p><img src="http://img.oct1a.cn/202109231635763.png"></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-09-15T06:00:50.058Z" itemprop="datePublished">2021-09-15</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Server/" rel="tag">Server</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-Canvas-模糊问题解析和解决"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>首先我需要了解一个属性 <code>devicePixelRatio</code> 屏幕像素比</p>
-<p>在高清显示屏出现之前，比如屏幕宽度为1000px 那么其宽度上的物理像素也是1000px，而在高清屏出现之后，屏幕宽度为 1000px 时，物理像素有可能达到 2000px 或者更高</p>
-<p>为了方便查询物理像素和屏幕像素的比值，在 window 对象上增加了一个属性 <code>devicePixelRatio</code> 来表示这个比值。</p>
-<p>比如在 <code>devicePixelRatio</code> 为2的设备上，当我们使用 CSS 绘制一条 1px 的线时，为了保证绘制的大小，物理像素实际上会使用 2px 来绘制这一条线，而这样的转换是浏览器自动处理的，所以对开发者来说并没有太大的困扰</p>
-<p>那么上面既然说了浏览器在渲染的时候会自动处理像素比的问题，CSS 绘制的图像经过转换之后不会出现模糊的问题，但 canvas 上怎么就出现了呢？</p>
-<p>因为在 canvas 标签上定义的 <code>width</code> 和 <code>height</code> 的值并不会被转换，100px 就会被渲染成 100px 的物理像素，但是设备要求的是 200px，这时浏览器只能智能地填充像素之间的空白，以适应要求的大小。这就是 canvas 绘制的图片出现模糊的原因</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
-<li>第一步：获取像素比</li>
-<li>第二步：将 canvas 标签上的宽高属性设置为 显示大小 * 像素比</li>
-<li>第三步：将 canvas 样式宽高设置为 显示大小</li>
-<li>第四步：使用 <code>scale</code> 方法设置比值</li>
-<li>第五步：绘制 canvas 图形</li>
+<p>所以Redis的性能瓶颈不是CPU,而是机器内存和网络带宽。</p>
+<p>那么为什么Redis的速度如此快呢，性能这么高呢？QPS达到10W+</p>
+<blockquote>
+<p><strong>Redis为什么单线程还这么快？</strong></p>
+</blockquote>
+<ul>
+<li>误区1：高性能的服务器一定是多线程的？</li>
+<li>误区2：多线程（CPU上下文会切换！）一定比单线程效率高！</li>
 </ul>
-<pre><code class="javascript">function createHDCanvas (canvas, w, h) &#123;
-  const ratio = window.devicePixelRatio || 1;
-  canvas.width = w * ratio; // 实际渲染像素
-  canvas.height = h * ratio; // 实际渲染像素
-  canvas.style.width = `$&#123;w&#125;px`; // 控制显示大小
-  canvas.style.height = `$&#123;h&#125;px`; // 控制显示大小
-  const ctx = canvas.getContext(&#39;2d&#39;)
-  ctx.scale(ratio, ratio)
-  // canvas 绘制
-  return canvas;
-&#125;
-</code></pre>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-09-04T04:00:50.058Z" itemprop="datePublished">2021-09-04</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-image图片转PDF"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><img src="http://img.oct1a.cn/20210810112917.png" alt="image-20210810112909768"></p>
-<p>应之前一个<code>txt转word</code>插件下的评论一个需求，顺手做个转换插件。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-08-09T03:50:58.000Z" itemprop="datePublished">2021-08-09</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utools/" rel="tag">utools</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-同义词反义词插件"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><img src="http://img.oct1a.cn/202109031045842.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-08-04T04:00:50.058Z" itemprop="datePublished">2021-08-04</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-cmd的一些命令用法"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/08/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2021-08-cmd%E7%9A%84%E4%B8%80%E4%BA%9B%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95.html">自动化助手帮助一键快速运行hexo服务</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>因最近使用<code>utools</code>工具比较频繁，插件有自动化工具，刚好想解决每次一个比较繁琐的问题，hexo的启动已经一些命令，通常是要找到自己的博客文件路径，进行打开终端运行，有点麻烦。本次借用utools的自动化助手插件解决该问题。</p>
-<p><img src="http://img.oct1a.cn/blog/20210816113721.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-08-02T08:50:58.000Z" itemprop="datePublished">2021-08-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-vscode-sftp问题"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/08/web%E5%89%8D%E7%AB%AF/2021-08-vscode-sftp%E9%97%AE%E9%A2%98.html">解决vscode上的sftp插件使用时提示“Error： No such file”</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>vscode上的sftp每次上传都会提示文件不存在，虽然不影响最后结果，但每次看到弹窗总感觉是有问题的。</p>
-<p><img src="http://img.oct1a.cn/202109241612094.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-08-02T04:50:58.000Z" itemprop="datePublished">2021-08-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-08-服务器限制ip或设备访问"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/08/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-08-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%99%90%E5%88%B6ip%E6%88%96%E8%AE%BE%E5%A4%87%E8%AE%BF%E9%97%AE.html">服务器Nginx设置限制IP或设备访问网站</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="限制IP访问"><a href="#限制IP访问" class="headerlink" title="限制IP访问"></a>限制IP访问</h2><pre><code>server&#123;
-    allow 127.0.0.1/16; //allow:允许访问
-    deny all; //拒绝访问
-&#125;
-</code></pre>
+<p>核心：Redis是将所有的数据放在内存中的，所以说使用单线程去操作效率就是最高的，多线程（CPU上下文会切换：耗时的操作！），对于内存系统来说，如果没有上下文切换效率就是最高的，多次读写都是在一个CPU上的，在内存存储数据情况下，单线程就是最佳的方案。</p>
+<h2 id="二、五大数据类型"><a href="#二、五大数据类型" class="headerlink" title="二、五大数据类型"></a>二、五大数据类型</h2><blockquote>
+<p>Redis是一个开源（BSD许可），内存存储的数据结构服务器，可用作数据库，高速缓存和消息队列代理。它支持字符串、哈希表、列表、集合、有序集合，位图，hyperloglogs等数据类型。内置复制、Lua脚本、LRU收回、事务以及不同级别磁盘持久化功能，同时通过Redis Sentinel提供高可用，通过Redis Cluster提供自动分区。</p>
+</blockquote>
+<h3 id="Redis-key"><a href="#Redis-key" class="headerlink" title="Redis-key"></a>Redis-key</h3><blockquote>
+<p>在redis中无论什么数据类型，在数据库中都是以key-value形式保存，通过进行对Redis-key的操作，来完成对数据库中数据的操作。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>exists</strong> key</td>
+<td>判断键是否存在</td>
+</tr>
+<tr>
+<td><strong>del</strong> key</td>
+<td>删除键值对</td>
+</tr>
+<tr>
+<td><strong>move</strong> key db</td>
+<td>将键值对移动到指定数据库</td>
+</tr>
+<tr>
+<td><strong>expire</strong> key second</td>
+<td>设置键值对的过期时间</td>
+</tr>
+<tr>
+<td><strong>ttl</strong> key</td>
+<td>查看key的过期剩余时间*</td>
+</tr>
+<tr>
+<td><strong>type</strong> key</td>
+<td>查看value的数据类型</td>
+</tr>
+</tbody></table>
+<p>关于<code>TTL</code>命令</p>
+<p>Redis的key，通过TTL命令返回key的过期时间，一般来说有3种：</p>
+<ol>
+<li>当前key没有设置过期时间，所以会返回-1.</li>
+<li>当前key有设置过期时间，而且key已经过期，所以会返回-2.</li>
+<li>当前key有设置过期时间，且key还没有过期，故会返回key的正常剩余时间.</li>
+</ol>
+<p>关于重命名<code>RENAME</code>和<code>RENAMENX</code></p>
+<ul>
+<li><code>RENAME key newkey</code>修改 key 的名称</li>
+<li><code>RENAMENX key newkey</code>仅当 newkey 不存在时，将 key 改名为 newkey 。</li>
+</ul>
+<h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String(字符串)"></a>String(字符串)</h3><p>普通的set、get直接略过。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>APPEND</strong> key value</td>
+<td>向指定的key的value后<strong>追加</strong>字符串</td>
+</tr>
+<tr>
+<td><strong>DECR</strong>/<strong>INCR</strong> key</td>
+<td>将指定key的value数值进行**+1/-1**(仅对于数字)</td>
+</tr>
+<tr>
+<td><strong>INCRBY</strong>/<strong>DECRBY</strong> key n</td>
+<td>按指定的<strong>步长</strong>对数值进行<strong>加减</strong></td>
+</tr>
+<tr>
+<td><strong>INCRBYFLOAT</strong> key n</td>
+<td>为数值加上<strong>浮点型</strong>数值</td>
+</tr>
+<tr>
+<td><strong>STRLEN</strong> key</td>
+<td>获取key保存值的<strong>字符串长度</strong></td>
+</tr>
+<tr>
+<td><strong>GETRANGE</strong> key start end</td>
+<td>按起止位置获取字符串（闭区间，起止位置都取）</td>
+</tr>
+<tr>
+<td><strong>SETRANGE</strong> key offset value</td>
+<td>用指定的value 替换key中 offset开始的值</td>
+</tr>
+<tr>
+<td><strong>GETSET</strong> key value</td>
+<td>将给定 key 的值设为 value ，并返回 key 的旧值(old value)。如果不存在值，则返回nil</td>
+</tr>
+<tr>
+<td><strong>SETNX</strong> key value</td>
+<td>仅当key不存在时进行set</td>
+</tr>
+<tr>
+<td><strong>SETEX</strong> key seconds value</td>
+<td>set 键值对并设置过期时间</td>
+</tr>
+<tr>
+<td><strong>MSET</strong> key1 value1 [key2 value2..]</td>
+<td><strong>批量</strong>set键值对</td>
+</tr>
+<tr>
+<td><strong>MSETNX</strong> key1 value1 [key2 value2..]</td>
+<td><strong>批量</strong>设置键值对，仅当参数中所有的key都不存在时执行</td>
+</tr>
+<tr>
+<td><strong>MGET</strong> key1 [key2..]</td>
+<td><strong>批量</strong>获取多个key保存的值</td>
+</tr>
+<tr>
+<td><strong>PSETEX</strong> key milliseconds value</td>
+<td>和 SETEX 命令相似，但它以毫秒为单位设置 key 的生存时间，</td>
+</tr>
+</tbody></table>
+<p>String类似的使用场景：value除了是字符串还可以是数字，用途举例：</p>
+<ul>
+<li>计数器</li>
+<li>统计多单位的数量：uid:123666：follow 0</li>
+<li>粉丝数</li>
+<li>对象存储缓存</li>
+</ul>
+<h3 id="List-列表"><a href="#List-列表" class="headerlink" title="List(列表)"></a>List(列表)</h3><blockquote>
+<p>Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<p>一个列表最多可以包含 232 - 1 个元素 (4294967295, 每个列表超过40亿个元素)。</p>
+</blockquote>
+<p>首先我们列表，可以经过规则定义将其变为队列、栈、双端队列等</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>LPUSH</strong>/<strong>RPUSH</strong> key value1[value2..]</td>
+<td>从左边/右边向列表中PUSH值(一个或者多个)。</td>
+</tr>
+<tr>
+<td><strong>LRANGE</strong> key start end</td>
+<td>获取list 起止元素==（索引从左往右 递增）==</td>
+</tr>
+<tr>
+<td><strong>LPUSHX</strong>/<strong>RPUSHX</strong> key value</td>
+<td>向已存在的列名中push值（一个或者多个）</td>
+</tr>
+<tr>
+<td><strong>LINSERT</strong> key BEFORE|AFTER pivot value</td>
+<td>在指定列表元素的前/后 插入value</td>
+</tr>
+<tr>
+<td><strong>LLEN</strong> key</td>
+<td>查看列表长度</td>
+</tr>
+<tr>
+<td><strong>LINDEX</strong> key index</td>
+<td>通过索引获取列表元素</td>
+</tr>
+<tr>
+<td><strong>LSET</strong> key index value</td>
+<td>通过索引为元素设值</td>
+</tr>
+<tr>
+<td><strong>LPOP</strong>/<strong>RPOP</strong> key</td>
+<td>从最左边/最右边移除值 并返回</td>
+</tr>
+<tr>
+<td><strong>RPOPLPUSH</strong> source destination</td>
+<td>将列表的尾部(右)最后一个值弹出，并返回，然后加到另一个列表的头部</td>
+</tr>
+<tr>
+<td><strong>LTRIM</strong> key start end</td>
+<td>通过下标截取指定范围内的列表</td>
+</tr>
+<tr>
+<td><strong>LREM</strong> key count value</td>
+<td>List中是允许value重复的 <code>count &gt; 0</code>：从头部开始搜索 然后删除指定的value 至多删除count个 <code>count &lt; 0</code>：从尾部开始搜索… <code>count = 0</code>：删除列表中所有的指定value。</td>
+</tr>
+<tr>
+<td><strong>BLPOP</strong>/<strong>BRPOP</strong> key1[key2] timout</td>
+<td>移出并获取列表的第一个/最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</td>
+</tr>
+<tr>
+<td><strong>BRPOPLPUSH</strong> source destination timeout</td>
+<td>和<code>RPOPLPUSH</code>功能相同，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止。</td>
+</tr>
+</tbody></table>
+<ul>
+<li>list实际上是一个链表，before Node after , left, right 都可以插入值</li>
+<li><strong>如果key不存在，则创建新的链表</strong></li>
+<li>如果key存在，新增内容</li>
+<li>如果移除了所有值，空链表，也代表不存在</li>
+<li>在两边插入或者改动值，效率最高！修改中间元素，效率相对较低</li>
+</ul>
+<p><strong>应用：</strong></p>
+<p>​    <strong>消息排队！消息队列（Lpush Rpop）,栈（Lpush Lpop）</strong></p>
+<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a>Set(集合)</h3><blockquote>
+<p>Redis的Set是string类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。</p>
+<p>Redis 中 集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。</p>
+<p>集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SADD</strong> key member1[member2..]</td>
+<td>向集合中无序增加一个/多个成员</td>
+</tr>
+<tr>
+<td><strong>SCARD</strong> key</td>
+<td>获取集合的成员数</td>
+</tr>
+<tr>
+<td><strong>SMEMBERS</strong> key</td>
+<td>返回集合中所有的成员</td>
+</tr>
+<tr>
+<td><strong>SISMEMBER</strong> key member</td>
+<td>查询member元素是否是集合的成员,结果是无序的</td>
+</tr>
+<tr>
+<td><strong>SRANDMEMBER</strong> key [count]</td>
+<td>随机返回集合中count个成员，count缺省值为1</td>
+</tr>
+<tr>
+<td><strong>SPOP</strong> key [count]</td>
+<td>随机移除并返回集合中count个成员，count缺省值为1</td>
+</tr>
+<tr>
+<td><strong>SMOVE</strong> source destination member</td>
+<td>将source集合的成员member移动到destination集合</td>
+</tr>
+<tr>
+<td><strong>SREM</strong> key member1[member2..]</td>
+<td>移除集合中一个/多个成员</td>
+</tr>
+<tr>
+<td><strong>SDIFF</strong> key1[key2..]</td>
+<td>返回所有集合的差集 key1- key2 - …</td>
+</tr>
+<tr>
+<td><strong>SDIFFSTORE</strong> destination key1[key2..]</td>
+<td>在SDIFF的基础上，将结果保存到集合中==(覆盖)==。不能保存到其他类型key噢！</td>
+</tr>
+<tr>
+<td><strong>SINTER</strong> key1 [key2..]</td>
+<td>返回所有集合的交集</td>
+</tr>
+<tr>
+<td><strong>SINTERSTORE</strong> destination key1[key2..]</td>
+<td>在SINTER的基础上，存储结果到集合中。覆盖</td>
+</tr>
+<tr>
+<td><strong>SUNION</strong> key1 [key2..]</td>
+<td>返回所有集合的并集</td>
+</tr>
+<tr>
+<td><strong>SUNIONSTORE</strong> destination key1 [key2..]</td>
+<td>在SUNION的基础上，存储结果到及和张。覆盖</td>
+</tr>
+<tr>
+<td><strong>SSCAN</strong> KEY [MATCH pattern] [COUNT count]</td>
+<td>在大量数据环境下，使用此命令遍历集合中元素，每次遍历部分</td>
+</tr>
+</tbody></table>
+<h3 id="Hash（哈希）"><a href="#Hash（哈希）" class="headerlink" title="Hash（哈希）"></a>Hash（哈希）</h3><blockquote>
+<p>Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。</p>
+<p>Set就是一种简化的Hash,只变动key,而value使用默认值填充。可以将一个Hash表作为一个对象进行存储，表中存放对象的信息。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HSET</strong> key field value</td>
+<td>将哈希表 key 中的字段 field 的值设为 value 。重复设置同一个field会覆盖,返回0</td>
+</tr>
+<tr>
+<td><strong>HMSET</strong> key field1 value1 [field2 value2..]</td>
+<td>同时将多个 field-value (域-值)对设置到哈希表 key 中。</td>
+</tr>
+<tr>
+<td><strong>HSETNX</strong> key field value</td>
+<td>只有在字段 field 不存在时，设置哈希表字段的值。</td>
+</tr>
+<tr>
+<td><strong>HEXISTS</strong> key field</td>
+<td>查看哈希表 key 中，指定的字段是否存在。</td>
+</tr>
+<tr>
+<td><strong>HGET</strong> key field value</td>
+<td>获取存储在哈希表中指定字段的值</td>
+</tr>
+<tr>
+<td><strong>HMGET</strong> key field1 [field2..]</td>
+<td>获取所有给定字段的值</td>
+</tr>
+<tr>
+<td><strong>HGETALL</strong> key</td>
+<td>获取在哈希表key 的所有字段和值</td>
+</tr>
+<tr>
+<td><strong>HKEYS</strong> key</td>
+<td>获取哈希表key中所有的字段</td>
+</tr>
+<tr>
+<td><strong>HLEN</strong> key</td>
+<td>获取哈希表中字段的数量</td>
+</tr>
+<tr>
+<td><strong>HVALS</strong> key</td>
+<td>获取哈希表中所有值</td>
+</tr>
+<tr>
+<td><strong>HDEL</strong> key field1 [field2..]</td>
+<td>删除哈希表key中一个/多个field字段</td>
+</tr>
+<tr>
+<td><strong>HINCRBY</strong> key field n</td>
+<td>为哈希表 key 中的指定字段的整数值加上增量n，并返回增量后结果 一样只适用于整数型字段</td>
+</tr>
+<tr>
+<td><strong>HINCRBYFLOAT</strong> key field n</td>
+<td>为哈希表 key 中的指定字段的浮点数值加上增量 n</td>
+</tr>
+<tr>
+<td><strong>HSCAN</strong> key cursor [MATCH pattern] [COUNT count]</td>
+<td>迭代哈希表中的键值对。</td>
+</tr>
+</tbody></table>
+<p>Hash变更的数据user name age，尤其是用户信息之类的，经常变动的信息！<strong>Hash更适合于对象的存储，Sring更加适合字符串存储！</strong></p>
+<h3 id="Zset（有序集合）"><a href="#Zset（有序集合）" class="headerlink" title="Zset（有序集合）"></a>Zset（有序集合）</h3><blockquote>
+<p>不同的是每个元素都会关联一个double类型的分数（score）。redis正是通过分数来为集合中的成员进行从小到大的排序。</p>
+<p>score相同：按字典顺序排序</p>
+<p>有序集合的成员是唯一的,但分数(score)却可以重复。</p>
+</blockquote>
+<p><strong>有效经纬度</strong></p>
 <blockquote>
-<p>不懂IP段如何计算，这个工具不错：<a target="_blank" rel="noopener" href="https://ipjisuanqi.com/">ip计算器 ip地址计算器</a></p>
+<ul>
+<li>有效的经度从-180度到180度。</li>
+<li>有效的纬度从-85.05112878度到85.05112878度。</li>
+</ul>
 </blockquote>
-<h2 id="限制设备型号访问"><a href="#限制设备型号访问" class="headerlink" title="限制设备型号访问"></a>限制设备型号访问</h2><pre><code>server&#123;
-  location /&#123;
-    if($http_user_agent ~&quot;(HUAWEIVNS-AL00)|(可添加其他关键字)&quot;)&#123;
-      proxy_pass http://www.xxxx.com
-    &#125;
-    return 403
-  &#125;
-&#125;
-</code></pre>
-<h2 id="限制访问的host头"><a href="#限制访问的host头" class="headerlink" title="限制访问的host头"></a>限制访问的host头</h2><pre><code>server&#123;
-  location /&#123;
-    if($host ==&#39;www.xxxx.com&#39;)&#123;
-      proxy_pass http://www.xxxx.com
-    &#125;
-    return 404
-  &#125;
-&#125;
-</code></pre>
-<h2 id="限制爬虫-重定向"><a href="#限制爬虫-重定向" class="headerlink" title="限制爬虫,重定向"></a>限制爬虫,重定向</h2><pre><code>server&#123;
-  if ($http_user_agent ~* (baiduspider|googlebot|Googlebot|soso|bing|sogou|yahoo|sohu-search|yodao|YoudaoBot|robozilla|msnbot)) &#123;
-    rewrite ^/(.*)$ https://www.baidu.com permanent;
-  &#125;
-&#125;
-</code></pre>
-<h2 id="使用map批量设置"><a href="#使用map批量设置" class="headerlink" title="使用map批量设置"></a>使用map批量设置</h2><blockquote>
-<p>下面代码来源：<a target="_blank" rel="noopener" href="https://serverfault.com/questions/775463/nginx-redirect-based-on-user-agent">stackExchange</a></p>
-</blockquote>
-<pre><code>map &quot;$host:$http_user_agent&quot; $my_domain_map_host &#123;
-  default                             0;
-  &quot;~*^www.domain.com:Agent.*$&quot;        http://www.domain2.com;
-  &quot;~*^www.domain2.com:Other Agent$&quot;   http://www.domain3.com;
-&#125;
-
-server &#123;
-  if ($my_domain_map_host) &#123;
-    return 302 $my_domain_map_host$request_uri;
-  &#125;
-&#125;
-</code></pre>
-<p>设备UA限制代码批量生成，这网站不错<br><a target="_blank" rel="noopener" href="http://detectmobilebrowsers.com/">http://detectmobilebrowsers.com/</a></p>
 
         
     </div>
@@ -604,17 +561,9 @@ server &#123;
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-08-02T04:50:58.000Z" itemprop="datePublished">2021-08-02</time>
+  <time datetime="2022-04-06T14:30:41.171Z" itemprop="datePublished">2022-04-06</time>
 </div>
     
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li></ul>
-        </div>
     
     </div>
 </footer>
@@ -625,7 +574,7 @@ server &#123;
   
     
       <article
-id="post-2021-08-vue打包部署服务器跨域问题"
+id="post-2022-03-vue数据传输加密"
 class="article article-type-post"
 >
 
@@ -636,15 +585,85 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/08/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/2021-08-vue%E6%89%93%E5%8C%85%E9%83%A8%E7%BD%B2%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98.html">解决VUE打包上传服务器产生的跨域问题</a>
+        <a href="/article/2022/03/web%E5%89%8D%E7%AB%AF/2022-03-vue%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86.html">Vue网站数据传输加密</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <pre><code>location /api&#123;
-  add_header &quot;Access-Control-Allow-Origin&quot; *;
-  proxy_pass http://xxxx.com/;
+        <p>为了数据安全，防止被黑客模拟字段恶意发请求攻击，决定在前端，服务端，脚本上都对数据传输进行加解密</p>
+<p>为了都能加解密，所需要的库也是要一样的，否则算法不一致就无法解密，目前 使用的是非对称密钥加密，库使用<code>crypto</code></p>
+<h2 id="网站前端："><a href="#网站前端：" class="headerlink" title="网站前端："></a>网站前端：</h2><p>iv 偏移量使用当前时间戳进行截取前六位数，为了严谨是可以多截取几位，但不能太多，否则在59分到00分时，会出现偏移量不一致无法解密，然后再补齐至16位数</p>
+<pre><code class="javascript">const crypto = require(&#39;crypto&#39;)
+const iv = new Buffer(String(new Date().getTime()).slice(0, 6) + &#39;0000000000&#39;) // 要16位才转buffer
+const key = window.location.hostname
+
+export function encryp(data) &#123;
+  if (!data || data.length &lt;= 0) &#123;
+    return data
+  &#125;
+  if (typeof data === &#39;object&#39;) &#123;
+    // 如果传入的data是json对象，先转义为json字符串
+    try &#123;
+      data = JSON.stringify(data)
+    &#125; catch (error) &#123;
+      console.log(&#39;error:&#39;, error)
+    &#125;
+  &#125;
+  const decodeKey = crypto.createHash(&#39;sha256&#39;).update(key, &#39;utf-8&#39;).digest()
+  const cipher = crypto.createCipheriv(&#39;aes-256-cbc&#39;, decodeKey, iv)
+  return cipher.update(data, &#39;utf8&#39;, &#39;base64&#39;) + cipher.final(&#39;base64&#39;)
+&#125;
+
+export function decrypt(data) &#123;
+  const encodeKey = crypto.createHash(&#39;sha256&#39;).update(key, &#39;utf-8&#39;).digest()
+  const cipher = crypto.createDecipheriv(&#39;aes-256-cbc&#39;, encodeKey, iv)
+  return cipher.update(data, &#39;base64&#39;, &#39;utf8&#39;) + cipher.final(&#39;utf8&#39;)
 &#125;
 </code></pre>
+<p>工具库写完后，需要在全局发送请求与接收请求上对数据进行加解密</p>
+<pre><code class="javascript">import &#123; encryp, decrypt &#125; from &#39;@/utils/crypto&#39;
+service.interceptors.request.use(
+  (config) =&gt; &#123;
+    if (store.getters.token) &#123;
+      // 头部增加token验证
+      config.headers[&#39;X-Token&#39;] = getToken()
+    &#125;
+    if (config.data !== undefined || config.data) &#123;
+      // 设置请求头为 表单提交头
+      config.headers[&#39;Content-Type&#39;] = &#39;application/x-www-form-urlencoded&#39;
+      // 设置提交数据为form表单格式
+      const formData = new FormData()
+      const encrypts = encryp(config.data)
+      formData.append(&#39;p&#39;, encrypts) // 对请求参数数据进行加密
+      config.data = formData
+    &#125;
+    return config
+  &#125;,
+  (error) =&gt; &#123;
+    return Promise.reject(error)
+  &#125;
+)
+
+service.interceptors.response.use(
+  (response) =&gt; &#123;
+    let res = response.data
+    // 由于站内有些请求是第三方网站的，所以这边加了字段判断，
+    // 也可以根据response.config的网站进行判断是否属于自身网站请求
+    if (res.b) &#123;
+      // 对返回数据进行解密
+      res = JSON.parse(decrypt(response.data.b))
+    &#125;
+  &#125;,
+  (error) =&gt; &#123;
+    Message(&#123;
+      message: error.message,
+      type: &#39;error&#39;,
+      duration: 5 * 1000
+    &#125;)
+    return Promise.reject(error)
+  &#125;
+)
+</code></pre>
+<p>网站后端：</p>
 
         
     </div>
@@ -660,61 +679,7 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-08-02T04:50:58.000Z" itemprop="datePublished">2021-08-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2021-07-根据网页内容查找dom元素"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/07/web%E5%89%8D%E7%AB%AF/2021-07-%E6%A0%B9%E6%8D%AE%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E6%9F%A5%E6%89%BEdom%E5%85%83%E7%B4%A0.html">根据网页内容查找dom元素进行操作的四种方式</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <blockquote>
-<p>比如网页有倒计时功能，只有倒计时结束按钮才出来，这个时候需要js快速进行判断点击，已知条件只有按钮文本的情况下，要进行代码实现。</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/08/16/IsaHgtfxiFWUN1Z.png" alt="image-20210816105438610"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-28T04:50:58.000Z" itemprop="datePublished">2021-07-28</time>
+  <time datetime="2022-03-06T03:10:58.000Z" itemprop="datePublished">2022-03-06</time>
 </div>
     
         <div class="article-category">
@@ -723,7 +688,434 @@ class="article article-type-post"
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-12-2021"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2022/02/uncategorized/2021-12-2021.html"></a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-02-21T07:17:06.242Z" itemprop="datePublished">2022-02-21</time>
+</div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2022-01-微信解密回调错误"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2022/02/uncategorized/2022-01-%E5%BE%AE%E4%BF%A1%E8%A7%A3%E5%AF%86%E5%9B%9E%E8%B0%83%E9%94%99%E8%AF%AF.html"></a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="Unsupported-state-or-unable-to-authenticate-data"><a href="#Unsupported-state-or-unable-to-authenticate-data" class="headerlink" title="Unsupported state or unable to authenticate data"></a>Unsupported state or unable to authenticate data</h1><pre><code>node:internal/crypto/cipher:193
+  const ret = this[kHandle].final();
+                            ^
+
+Error: Unsupported state or unable to authenticate data
+</code></pre>
+<p><img src="http://img.oct1a.cn/202202101708383.png" alt="image-20220210170829291"></p>
+<p>因解密的密钥错误，重新申请一个即可</p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-02-10T09:08:13.720Z" itemprop="datePublished">2022-02-10</time>
+</div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2022-01-服务器反向代理"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2022/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2022-01-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86.html">服务器反向代理</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>Nginx的配置还是比较简单的，如：</p>
+<pre><code>location ~ /* ``&#123;``proxy_pass http://127.0.0.1:8008;``&#125;
+</code></pre>
+<p>或者可以</p>
+<pre><code>location /``&#123;``proxy_pass http://127.0.0.1:8008;``&#125;
+</code></pre>
+<p>Apache2的反向代理的配置是：</p>
+<pre><code>ProxyPass /ysz/ http://localhost:8080/
+</code></pre>
+<p>然而，如果要配置一个相对复杂的反向代理<br>Nginx相对Apache2就要麻烦一些了<br>比如，将url中以/wap/开头的请求转发到后台对应的某台server上<br>可以再Nginx里设置一个变量，来临时保存/wap/后面的路径信息</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-11T03:10:58.000Z" itemprop="datePublished">2022-01-11</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-12-node执行sql语句出错"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/12/uncategorized/2021-12-node%E6%89%A7%E8%A1%8Csql%E8%AF%AD%E5%8F%A5%E5%87%BA%E9%94%99.html"></a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="node-创建触发器出现check-the-manual-that-corressponds-to-yours-Mysql-server-version-for-the-right-syntax-to-use-near-‘DELIMITER-‘"><a href="#node-创建触发器出现check-the-manual-that-corressponds-to-yours-Mysql-server-version-for-the-right-syntax-to-use-near-‘DELIMITER-‘" class="headerlink" title="node 创建触发器出现check the manual that corressponds to yours Mysql server version for the right syntax to use near ‘DELIMITER //‘"></a>node 创建触发器出现check the manual that corressponds to yours Mysql server version for the right syntax to use near ‘DELIMITER //‘</h2><pre><code>
+code: &#39;ER_PARSE_ERROR&#39;,
+  errno: 1064,
+  sqlMessage: &quot;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;DELIMITER //\r\n&quot; +
+    &quot;CREATE TRIGGER `device_group_before_insert` BEFORE INSERT ON `devi&#39; at line 1&quot;,
+  sqlState: &#39;42000&#39;,
+  index: 73,
+</code></pre>
+<p>原本想通过node来动态创建数据库，因为数据库中有触发器，导致出现触发器无法创建的错误</p>
+<p><img src="http://img.oct1a.cn/202112231746577.png" alt="image-20211223174603459"></p>
+<h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>将<code>DELIMITER //</code> 替换为空即可</p>
+<blockquote>
+<p>按自己理解的话，可能是因为DELITMITER是关键字，mysql库在解析的时候出现错误了，直接删除该句是不影响创建的</p>
+</blockquote>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-12-23T09:44:07.182Z" itemprop="datePublished">2021-12-23</time>
+</div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-12-u盘不用格式化转换格式"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/12/%E5%85%B6%E5%AE%83/2021-12-u%E7%9B%98%E4%B8%8D%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BD%AC%E6%8D%A2%E6%A0%BC%E5%BC%8F.html">U盘无法传输单个大文件，无需格式化解决</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="U盘无法传输单个大文件，无需格式化解决"><a href="#U盘无法传输单个大文件，无需格式化解决" class="headerlink" title="U盘无法传输单个大文件，无需格式化解决"></a>U盘无法传输单个大文件，无需格式化解决</h1><p>因需要U盘传输一个大文件，但文件太大，出现无法传输的情况，因为U盘默认FAT32格式最大只能传输4G以内大小的单文件，超过系统就会弹出窗口提示“对于目标文件系统，文件XXX过大”，但为何电脑硬盘可以传输呢， 因为电脑硬盘默认格式是用NTFS，支持大文件，所以我们只需更改u盘文件格式转为NTFS即可。</p>
+<p>这篇只介绍不格式化U盘达到转换格式方法。</p>
+<h2 id="1-检查盘符并修复"><a href="#1-检查盘符并修复" class="headerlink" title="1. 检查盘符并修复"></a>1. 检查盘符并修复</h2><blockquote>
+<p>直接运行更改格式指令，出现卷的文件错误，所以建议先运行检查并修复命令，再进行第二步操作</p>
+</blockquote>
+<p>打开cmd，运行：<code>CHKDSK F: /R</code>   </p>
+<blockquote>
+<p>F为自身盘符名称，自行替换</p>
+</blockquote>
+<h3 id="2-格式转换"><a href="#2-格式转换" class="headerlink" title="2.格式转换"></a>2.格式转换</h3><p>输入<code>covert f: /fs:ntfs /x</code></p>
+<blockquote>
+<p>covert f 的f为盘符，自行替换，注意中间有空格，运行后我们可以看到整个处理过程，等待结束就可以了</p>
+</blockquote>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-12-06T03:10:58.000Z" itemprop="datePublished">2021-12-06</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/U%E7%9B%98/" rel="tag">U盘</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-11-koa与ws共享端口"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/11/Node-js/2021-11-koa%E4%B8%8Ews%E5%85%B1%E4%BA%AB%E7%AB%AF%E5%8F%A3.html">koa与websockect共用一个端口</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>记录下如何在koa中共享http与websocket服务端口</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-11-20T04:49:01.000Z" itemprop="datePublished">2021-11-20</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-11-服务器屏蔽特定网址ip"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/11/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-11-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B1%8F%E8%94%BD%E7%89%B9%E5%AE%9A%E7%BD%91%E5%9D%80ip.html">Linux利用iptables屏蔽某些域名</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>一般 iptables 自带的都有 string 模块，这个模块的作用就是匹配字符串，匹配到泛域名的URL，然后就把数据包丢弃，就实现了屏蔽泛域名的功能。比如可以限制SS访问youtube.com</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-11-20T04:49:01.000Z" itemprop="datePublished">2021-11-20</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2021-10-cmd快速添加开机项"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/10/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-10-cmd%E5%BF%AB%E9%80%9F%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E9%A1%B9.html">基于node.js的sudo-prompt库控制系统开机项</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>因utools自带node.js，所以</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-15T04:49:01.000Z" itemprop="datePublished">2021-10-15</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
         </div>
     
     </div>
@@ -736,7 +1128,7 @@ class="article article-type-post"
 
   
     <nav class="pagination">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/">Next</a>
     </nav>
   
 </div>
@@ -767,7 +1159,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -777,7 +1169,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U%E7%9B%98/" rel="tag">U盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -790,23 +1182,23 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+            <a href="/article/2022/04/uncategorized/2022-01-Redis%E7%AC%94%E8%AE%B0.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+            <a href="/article/2022/03/web%E5%89%8D%E7%AB%AF/2022-03-vue%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86.html">Vue网站数据传输加密</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
+            <a href="/article/2022/02/uncategorized/2021-12-2021.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
+            <a href="/article/2022/02/uncategorized/2022-01-%E5%BE%AE%E4%BF%A1%E8%A7%A3%E5%AF%86%E5%9B%9E%E8%B0%83%E9%94%99%E8%AF%AF.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
+            <a href="/article/2022/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2022-01-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86.html">服务器反向代理</a>
           </li>
         
       </ul>
@@ -818,7 +1210,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
     </div>
   </div>
 
@@ -840,7 +1232,7 @@ class="article article-type-post"
     <div class="footer-wrap">
         <div class="footer-inner">
             Oct1a &copy;
-                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                2023<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
                     <br>
                     <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
                     <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">

@@ -6,11 +6,11 @@
     
     <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="keywords" content="Oct1a,全栈,前端,技术,node.js,code,developer">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
-    <meta name="author" content="Oct1a_H">
+    <meta name="author" content="Oct1a">
     <meta name="generator" content="hexo">
-    <meta name="copyright" content="Oct1a_H">
+    <meta name="copyright" content="Oct1a">
     
     
 
@@ -57,7 +57,7 @@
         <div class="header-type">
             
             <div class="header-type-avatar avatar avatar-sm">
-                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+                <img src="/images/oct1a.jpg" alt="Oct1a">
             </div>
             
             <div class="header-type-inner">
@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2016-03-hexo-搭建简明教程"
+id="post-2018-01-ArchLinuxManjaro-安装MySQLMariaDB"
 class="article article-type-post"
 >
 
@@ -142,11 +142,21 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2016/03/Hexo/2016-03-hexo-%E6%90%AD%E5%BB%BA%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B.html">搭建hexo简明教程</a>
+        <a href="/article/2018/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2018-01-ArchLinuxManjaro-%E5%AE%89%E8%A3%85MySQLMariaDB.html">ArchLinux/Manjaro 安装MySQL/MariaDB</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p><img src="https://img.oct1a.cn/20180726230337.png"></p>
+        <h2 id="1-安装-与Ubuntu不同，arch默认已经不再支持MySQL，但是可以安装MariaDB，其比MySQL的性能更好且操作基本相同。-输入下面命令安装："><a href="#1-安装-与Ubuntu不同，arch默认已经不再支持MySQL，但是可以安装MariaDB，其比MySQL的性能更好且操作基本相同。-输入下面命令安装：" class="headerlink" title="1. 安装 与Ubuntu不同，arch默认已经不再支持MySQL，但是可以安装MariaDB，其比MySQL的性能更好且操作基本相同。 输入下面命令安装："></a>1. 安装 与Ubuntu不同，arch默认已经不再支持MySQL，但是可以安装MariaDB，其比MySQL的性能更好且操作基本相同。 输入下面命令安装：</h2><pre><code class="powershell">&gt;&gt; systemctl stop mysqld    //停止mysql服务
+&gt;&gt; sudo pacman -S mariadb libmariadbclient mariadb-clients    //安装mariadb
+&gt;&gt; sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+</code></pre>
+<h2 id="2-启动"><a href="#2-启动" class="headerlink" title="2. 启动"></a>2. 启动</h2><pre><code class="powershell">&gt;&gt; systemctl start mariadb
+&gt;&gt; mysql_secure_installation    //设置密码等管理操作
+&gt;&gt; systemctl restart mariadb
+</code></pre>
+<h2 id="3-登录："><a href="#3-登录：" class="headerlink" title="3. 登录："></a>3. 登录：</h2><pre><code class="powershell">&gt;&gt; mysql -u root -p
+</code></pre>
+
         
     </div>
     </div>
@@ -161,63 +171,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2016-03-15T23:23:25.000Z" itemprop="datePublished">2016-03-16</time>
+  <time datetime="2018-01-20T12:12:31.000Z" itemprop="datePublished">2018-01-20</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2016-03-hexo-常用命令笔记"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2016/03/Hexo/2016-03-hexo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0.html">hexo常用命令笔记</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><img src="https://img.oct1a.cn/20180726225234.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2016-03-14T13:35:34.000Z" itemprop="datePublished">2016-03-14</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+        <a class="article-category-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li></ul>
         </div>
     
     </div>
@@ -229,7 +192,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2016-03-浅谈XHTML"
+id="post-2017-08-工具使用-git常用操作总结"
 class="article article-type-post"
 >
 
@@ -240,16 +203,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2016/03/web%E5%89%8D%E7%AB%AF/2016-03-%E6%B5%85%E8%B0%88XHTML.html">为什么要使用XHTML？</a>
+        <a href="/article/2017/08/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-08-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93.html">git常用操作总结</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <pre><code>XML 是一种标记化语言，其中所有的东西都要被正确的标记，以产生形式良好的文档。 
-XML 用来描述数据，而 HTML 则用来显示数据。
-</code></pre>
-<blockquote>
-<p>今天的市场中存在着不同的浏览器技术，某些浏览器运行在计算机中，某些浏览器则运行在移动电话和手持设备上。而后者没有能力和手段来解释糟糕的标记语言。<br>因此，通过把 HTML 和 XML 各自的长处加以结合，我们得到了在现在和未来都能派上用场的标记语言 - XHTML。</p>
-</blockquote>
+        <p><img src="https://img.oct1a.cn/20210716111129.jpeg"></p>
         
     </div>
     </div>
@@ -264,7 +222,60 @@ XML 用来描述数据，而 HTML 则用来显示数据。
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2016-03-05T23:23:25.000Z" itemprop="datePublished">2016-03-06</time>
+  <time datetime="2017-08-02T05:50:58.000Z" itemprop="datePublished">2017-08-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2017-06-基于ajax和图灵机器人开发的自动回复机器人"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2017/06/web%E5%89%8D%E7%AB%AF/2017-06-%E5%9F%BA%E4%BA%8Eajax%E5%92%8C%E5%9B%BE%E7%81%B5%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E7%9A%84%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E6%9C%BA%E5%99%A8%E4%BA%BA.html">基于ajax和图灵机器人开发的自动回复机器人</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>用JS||JQ简单实现了自动回复功能，这里使用了<a target="_blank" rel="noopener" href="http://www.tuling123.com/">图灵机器人</a>的接口</p>
+<p>效果图如下：</p>
+<p><img src="https://img.oct1a.cn/20180725173443.png"></p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2017-06-25T09:27:53.000Z" itemprop="datePublished">2017-06-25</time>
 </div>
     
         <div class="article-category">
@@ -273,7 +284,7 @@ XML 用来描述数据，而 HTML 则用来显示数据。
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li></ul>
         </div>
     
     </div>
@@ -285,7 +296,7 @@ XML 用来描述数据，而 HTML 则用来显示数据。
   
     
       <article
-id="post-2016-03-Hexo-重装系统后，Hexo博客如何快速恢复"
+id="post-2017-06-APP-仿今日头条"
 class="article article-type-post"
 >
 
@@ -296,11 +307,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2016/03/Hexo/2016-03-Hexo-%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%90%8E%EF%BC%8CHexo%E5%8D%9A%E5%AE%A2%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D.html">重装系统后，Hexo博客如何快速恢复</a>
+        <a href="/article/2017/06/Android/2017-06-APP-%E4%BB%BF%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1.html">基于MUI框架的一个仿今日头条的app</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p><img src="https://img.oct1a.cn/20181007143846.png"></p>
+        <p><img src="https://img.oct1a.cn/20180727100526.png"></p>
+<p>仿今日头条界面，数据是调用阿里云新闻头条API，使用MUI+Jquery+HTML5</p>
         
     </div>
     </div>
@@ -315,170 +327,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2016-03-04T16:43:09.000Z" itemprop="datePublished">2016-03-05</time>
+  <time datetime="2017-06-17T08:30:03.000Z" itemprop="datePublished">2017-06-17</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2016-03-Hexo中分类和标签无法显示"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2016/03/Hexo/2016-03-Hexo%E4%B8%AD%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA.html">Hexo中分类和标签无法显示</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>初步弄完博客后发现分类和标签不存在，显示不出来，琢磨了半天，才搞定。(@﹏@)~</p>
-<h2 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h2><ul>
-<li><p>新建一个页面，命名为tags。命令如下：</p>
-<blockquote>
-<p>$hexo new page “tags”</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h2><ul>
-<li><p>这时会在**sources/tags/**里面有个index.md的文件，打开这个文件编辑内容为:</p>
-<blockquote>
-<p>title: Tagcloud<br>date: 2015-12-22 12:39:04<br>type: “tags”<br>-–</p>
-</blockquote>
-</li>
-<li><p>注意：如果有启用评论，默认页面也会带有评论，需要关闭的话，要把字段comments设为false 如：</p>
-<blockquote>
-<p>title: Tagcloud<br>date: 2015-12-22 12:39:04<br>type: “tags”<br>comments: false<br>-–</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h2><ul>
-<li><p>在菜单中添加链接，编辑<strong>主题配置文件</strong>，找到menu，去掉tags与comments前的注释 如：</p>
-<blockquote>
-<p>menu:<br>       home: /<br>       archives: /archives<br>       tags: /tags</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="添加其他页面设置"><a href="#添加其他页面设置" class="headerlink" title="添加其他页面设置"></a>添加其他页面设置</h2><h3 id="创建-“关于我”-页面"><a href="#创建-“关于我”-页面" class="headerlink" title="创建-“关于我”-页面"></a><a href="">创建-“关于我”-页面</a></h3><h3 id="创建分类页面"><a href="#创建分类页面" class="headerlink" title="创建分类页面"></a><a href="">创建分类页面</a></h3><h3 id="创建标签云页面"><a href="#创建标签云页面" class="headerlink" title="创建标签云页面"></a><a href="">创建标签云页面</a></h3>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2016-03-01T23:23:25.000Z" itemprop="datePublished">2016-03-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2016-03-hexo部署至Git遇到的坑"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2016/03/Hexo/2016-03-hexo%E9%83%A8%E7%BD%B2%E8%87%B3Git%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91.html">hexo部署至Git遇到的坑</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h3 id="TypeError-Cannot-set-property-‘lastIndex’-of-undefined"><a href="#TypeError-Cannot-set-property-‘lastIndex’-of-undefined" class="headerlink" title="TypeError: Cannot set property ‘lastIndex’ of undefined"></a>TypeError: Cannot set property ‘lastIndex’ of undefined</h3><p>解决方法：把<strong>hexo</strong> 主题中的**_config.yml<strong>中的高亮插件 <em>auto_detect</em> 设置为</strong>false**</p>
-<pre><code>highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace:
-</code></pre>
-<blockquote>
-<p>命令 git branch 的错误</p>
-</blockquote>
-<h3 id="fatal-Not-a-git-repository-or-any-of-the-parent-directories-git"><a href="#fatal-Not-a-git-repository-or-any-of-the-parent-directories-git" class="headerlink" title="fatal: Not a git repository (or any of the parent directories): .git"></a>fatal: Not a git repository (or any of the parent directories): .git</h3><blockquote>
-<p>git init 的错误</p>
-</blockquote>
-<p>使用</p>
-<pre><code>install hexo-deployer-git --save```
-</code></pre>
-<h3 id="npm-WARN-optional-Skipping-failed-optional-dependency-chokidar-fsevents"><a href="#npm-WARN-optional-Skipping-failed-optional-dependency-chokidar-fsevents" class="headerlink" title="npm WARN optional Skipping failed optional dependency /chokidar/fsevents:"></a>npm WARN optional Skipping failed optional dependency /chokidar/fsevents:</h3><p>解决方法：更新 npm 版本即可，执行如下命令</p>
-<pre><code>npm i npm -g
-</code></pre>
-<h3 id="fatal-unable-to-access-‘https-xxx-error-setting-certificate-verify-locations"><a href="#fatal-unable-to-access-‘https-xxx-error-setting-certificate-verify-locations" class="headerlink" title="fatal: unable to access ‘https://xxx: error setting certificate verify locations"></a>fatal: unable to access ‘<a target="_blank" rel="noopener" href="https://xxx/">https://xxx</a>: error setting certificate verify locations</h3><h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>先打开git bash窗口<br>执行命令：</p>
-<pre><code>
-git config –system http.sslcainfo “C:\Program Files (x86)\git\bin\curl-ca-bundle.crt”1
-</code></pre>
-<p>（注意修改为正确的文件路径）或</p>
-<pre><code>
-git config –system http.sslverify false1
-</code></pre>
-<p><strong>我使用 <code>git config --system http.sslverify false </code>命令解决问题。</strong></p>
-<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3778042/github-error-cloning-my-private-repository">Github: error cloning my private repository</a></p>
-<h3 id="hexo-d-把整个目录都给提交上去了"><a href="#hexo-d-把整个目录都给提交上去了" class="headerlink" title="hexo d 把整个目录都给提交上去了"></a>hexo d 把整个目录都给提交上去了</h3><p>解决方法：删除根目录的 ** .git ** 文件夹</p>
-<p>因为进行了git init操作</p>
-<h3 id="hexo-d-提交不上去-nothing-to-commit-working-tree-clean"><a href="#hexo-d-提交不上去-nothing-to-commit-working-tree-clean" class="headerlink" title="hexo d 提交不上去 nothing to commit,working tree clean"></a>hexo d 提交不上去 nothing to commit,working tree clean</h3><p>测试Git连通 ```ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a></p>
-<p>```<br>将 <strong>id_rsa.pub</strong> 内的key复制到账户设置key 中，不是复制在项目设置内</p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2016-03-01T23:23:25.000Z" itemprop="datePublished">2016-03-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+        <a class="article-category-link" href="/categories/Android/">Android</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li></ul>
         </div>
     
     </div>
@@ -490,7 +348,7 @@ git config –system http.sslverify false1
   
     
       <article
-id="post-2015-11-2015-总结"
+id="post-2017-05-javascript-ajax仿百度搜索框智能提示"
 class="article article-type-post"
 >
 
@@ -501,13 +359,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2015/11/%E5%85%B6%E5%AE%83/2015-11-2015-%E6%80%BB%E7%BB%93.html">2015 年末总结</a>
+        <a href="/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-javascript-ajax%E4%BB%BF%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2%E6%A1%86%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA.html">javascript+ajax仿百度搜索框智能提示</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <blockquote>
-<p>今天是2015年的最后一天，其实也没什么特殊的，但是再过一天就是新的2016年了，可能人只有长大后才发觉时间流逝的那么快，试着总结下今年的心得吧！</p>
-</blockquote>
+        <p><img src="https://img.oct1a.cn/20180725162544.png"></p>
+<p>输入框内输入内容，实时显示搜索内容</p>
+<p><img src="https://img.oct1a.cn/20180725162816.png"></p>
         
     </div>
     </div>
@@ -522,16 +380,16 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2015-11-02T08:39:09.000Z" itemprop="datePublished">2015-11-02</time>
+  <time datetime="2017-05-23T06:40:37.000Z" itemprop="datePublished">2017-05-23</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a>
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
         </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
         </div>
     
     </div>
@@ -543,7 +401,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2015-03-if与switch"
+id="post-2017-05-CSS-PigPeggy"
 class="article article-type-post"
 >
 
@@ -554,27 +412,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2015/03/uncategorized/2015-03-if%E4%B8%8Eswitch.html">if与switch对比</a>
+        <a href="/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-CSS-PigPeggy.html">用纯Css画小猪佩奇</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="if与switch"><a href="#if与switch" class="headerlink" title="if与switch"></a>if与switch</h2><blockquote>
+        <p><img src="https://img.oct1a.cn/20180709233958.png"></p>
 <blockquote>
-<p>IF 和 Switch语句很像<br>具体什么场景下，使用哪个语句呢？</p>
+<p>突发奇想，想用CSS来画个东西，画啥好勒？？又简单点的。。那就小猪佩奇吧，最近也比较火</p>
 </blockquote>
-</blockquote>
-<h4 id="如果判断的具体数值不多，而是符合byte，short，int，char这四种类型。"><a href="#如果判断的具体数值不多，而是符合byte，short，int，char这四种类型。" class="headerlink" title="如果判断的具体数值不多，而是符合byte，short，int，char这四种类型。"></a>如果判断的具体数值不多，而是符合byte，short，int，char这四种类型。</h4><h4 id="虽然两种语句都可以使用，建议使用switch语句，因为效率高。"><a href="#虽然两种语句都可以使用，建议使用switch语句，因为效率高。" class="headerlink" title="虽然两种语句都可以使用，建议使用switch语句，因为效率高。"></a>虽然两种语句都可以使用，建议使用switch语句，因为效率高。</h4><h4 id="其他情况：对区间判断，对结果为boolean类型判断，使用if，if的使用范围更广。"><a href="#其他情况：对区间判断，对结果为boolean类型判断，使用if，if的使用范围更广。" class="headerlink" title="其他情况：对区间判断，对结果为boolean类型判断，使用if，if的使用范围更广。"></a>其他情况：对区间判断，对结果为boolean类型判断，使用if，if的使用范围更广。</h4><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="for与while"><a href="#for与while" class="headerlink" title="for与while"></a>for与while</h2><ul>
-<li><h4 id="变量有自己的作用域。对于for来讲：如果将用于控制循环的增量定义在for语句中，那么该变量只在for语句内有效。"><a href="#变量有自己的作用域。对于for来讲：如果将用于控制循环的增量定义在for语句中，那么该变量只在for语句内有效。" class="headerlink" title="变量有自己的作用域。对于for来讲：如果将用于控制循环的增量定义在for语句中，那么该变量只在for语句内有效。"></a>变量有自己的作用域。对于for来讲：如果将用于控制循环的增量定义在for语句中，那么该变量只在for语句内有效。</h4><h4 id="for语句执行完毕，该变量在内存中被释放。"><a href="#for语句执行完毕，该变量在内存中被释放。" class="headerlink" title="for语句执行完毕，该变量在内存中被释放。"></a>for语句执行完毕，该变量在内存中被释放。</h4></li>
-<li><h4 id="for和while可以进行互换，如果需要定义循环增量，用for更为合适。"><a href="#for和while可以进行互换，如果需要定义循环增量，用for更为合适。" class="headerlink" title="for和while可以进行互换，如果需要定义循环增量，用for更为合适。"></a>for和while可以进行互换，如果需要定义循环增量，用for更为合适。</h4></li>
-</ul>
-<p><strong>总结</strong></p>
-<blockquote>
-<p>什么时候使用循环结构？</p>
-<blockquote>
-<p>当要对某些语句执行很多次时，就使用循环结构。</p>
-</blockquote>
-</blockquote>
-
         
     </div>
     </div>
@@ -589,9 +434,246 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2015-03-12T23:23:25.000Z" itemprop="datePublished">2015-03-13</time>
+  <time datetime="2017-05-11T15:34:49.000Z" itemprop="datePublished">2017-05-11</time>
 </div>
     
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2017-05-HTML5音乐播放器"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2017/05/web%E5%89%8D%E7%AB%AF/2017-05-HTML5%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8.html">HTML5音乐播放器</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p><img src="https://img.oct1a.cn/20180709232627.png" alt="首页效果"></p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2017-05-09T15:28:19.000Z" itemprop="datePublished">2017-05-09</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2017-04-秒申请华为解锁码"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2017/04/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/2017-04-%E7%A7%92%E7%94%B3%E8%AF%B7%E5%8D%8E%E4%B8%BA%E8%A7%A3%E9%94%81%E7%A0%81.html">秒申请华为解锁码</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <ul>
+<li><h3 id="为什么要解锁？？"><a href="#为什么要解锁？？" class="headerlink" title="为什么要解锁？？"></a>为什么要解锁？？</h3></li>
+</ul>
+<p>手机解锁后可以刷第三方固件</p>
+<ul>
+<li><h3 id="解锁注意事项"><a href="#解锁注意事项" class="headerlink" title="解锁注意事项"></a><strong>解锁注意事项</strong></h3></li>
+</ul>
+<blockquote>
+<p>1：解锁之后也许会对手机造成不可预估的影响，结果是用户自负的</p>
+<p>2：解锁成功第三方固件有可能会使华为部分手机功能没办法实现，对手机硬件有可能造成一定程度的影响</p>
+<p>3：手机上个人安全私密有可能会造成泄漏，安全得不到保障。</p>
+<p>4：解锁之后，手机会相当于恢复出厂设置，建议提前<strong>备份数据</strong></p>
+</blockquote>
+<p><strong>解锁有风险，建议谨慎选择</strong></p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2017-04-10T13:16:50.000Z" itemprop="datePublished">2017-04-10</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2017-02-Apache配置虚拟主机"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2017/02/uncategorized/2017-02-Apache%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA.html">Apache配置虚拟主机</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="流程解说"><a href="#流程解说" class="headerlink" title="流程解说"></a>流程解说</h2><blockquote>
+<p>Apache加载配置时会首先加载apache.conf文件（配置文件的入口）<br>apache.conf文件以include关键字将其他配置文件包含在其中.</p>
+<ol>
+<li>有助于修改配置</li>
+<li>按属性分开放置，配置灵活</li>
+</ol>
+</blockquote>
+<h3 id="核心配置："><a href="#核心配置：" class="headerlink" title="核心配置："></a>核心配置：</h3><blockquote>
+<p><strong>mods-*</strong> 存放Apache模块配置文件sites-*** 存放虚拟主机的配置文件**</p>
+<blockquote>
+<p>关键词available表示可以使用；enabled表示已启用的</p>
+</blockquote>
+</blockquote>
+<p><strong>enabled通过ln -s命令建立available的软连接</strong></p>
+<blockquote>
+<p>Apache会在加载配置过程中将所有软连接一次性全部加载，以方便软连接误删时再次建立软连接启动模块</p>
+</blockquote>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2017-02-15T09:22:30.000Z" itemprop="datePublished">2017-02-15</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2017-01-工具使用-Markdown语法"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2017/01/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-01-%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-Markdown%E8%AF%AD%E6%B3%95.html">Markdown语法</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p><img src="https://img.oct1a.cn/20180726230614.png"></p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2017-01-16T23:23:25.000Z" itemprop="datePublished">2017-01-17</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li></ul>
+        </div>
     
     </div>
 </footer>
@@ -603,7 +685,7 @@ class="article article-type-post"
 
   
     <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/page/16/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span>
+        <a class="extend prev" rel="prev" href="/page/16/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/18/">Next</a>
     </nav>
   
 </div>
@@ -634,7 +716,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -644,7 +726,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U%E7%9B%98/" rel="tag">U盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -657,23 +739,23 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+            <a href="/article/2022/04/uncategorized/2022-01-Redis%E7%AC%94%E8%AE%B0.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+            <a href="/article/2022/03/web%E5%89%8D%E7%AB%AF/2022-03-vue%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86.html">Vue网站数据传输加密</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
+            <a href="/article/2022/02/uncategorized/2021-12-2021.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
+            <a href="/article/2022/02/uncategorized/2022-01-%E5%BE%AE%E4%BF%A1%E8%A7%A3%E5%AF%86%E5%9B%9E%E8%B0%83%E9%94%99%E8%AF%AF.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
+            <a href="/article/2022/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2022-01-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86.html">服务器反向代理</a>
           </li>
         
       </ul>
@@ -685,7 +767,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
     </div>
   </div>
 
@@ -707,7 +789,7 @@ class="article article-type-post"
     <div class="footer-wrap">
         <div class="footer-inner">
             Oct1a &copy;
-                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                2023<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
                     <br>
                     <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
                     <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">

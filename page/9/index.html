@@ -6,11 +6,11 @@
     
     <title>Oct1a</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Oct1a,Oct1a_H,前端,技术,code">
+    <meta name="keywords" content="Oct1a,全栈,前端,技术,node.js,code,developer">
     <meta name="description" content="|为API生，为框架死，为debug奋斗一辈子o((&gt;ω&lt; ))o">
-    <meta name="author" content="Oct1a_H">
+    <meta name="author" content="Oct1a">
     <meta name="generator" content="hexo">
-    <meta name="copyright" content="Oct1a_H">
+    <meta name="copyright" content="Oct1a">
     
     
 
@@ -57,7 +57,7 @@
         <div class="header-type">
             
             <div class="header-type-avatar avatar avatar-sm">
-                <img src="/images/oct1a.jpg" alt="Oct1a_H">
+                <img src="/images/oct1a.jpg" alt="Oct1a">
             </div>
             
             <div class="header-type-inner">
@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-05-图片地址转成datauri"
+id="post-2020-04-文件系统操作-fs"
 class="article article-type-post"
 >
 
@@ -142,11 +142,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%88%90datauri.html">Node.js-图片地址转成datauri</a>
+        <a href="/article/2020/04/Node-js/2020-04-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C-fs.html">Node.js-d</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="将图片转成datauri"><a href="#将图片转成datauri" class="headerlink" title="将图片转成datauri"></a>将图片转成datauri</h2><p>nodejs读取图片，转成base64,也就是把图片转成对应的datauri,这是个很常用的功能。快速实现了个简单的demo，这里顺便记录一下。</p>
+        <p>node 的<code>fs</code>文档密密麻麻的 api 非常多，毕竟全面支持对文件系统的操作。文档组织的很好，操作基本分为文件操作、目录操作、文件信息、流这个大方面，编程方式也支持同步、异步和 Promise。</p>
         
     </div>
     </div>
@@ -178,7 +178,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-child-process"
+id="post-2020-05-buffer"
 class="article article-type-post"
 >
 
@@ -189,11 +189,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-child-process.html">Node.js-child_process</a>
+        <a href="/article/2020/04/Node-js/2020-05-buffer.html">Node.js-buffer</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在node中，child_process这个模块非常重要。掌握了它，等于在node的世界开启了一扇新的大门。</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>js最初并没有读写二进制的API，Node.js引入了Buffer类，以便开发者能够对二进制数据进行操作，比如网络请求、文件操作等。</p>
+<p>随着ES6规范里TypedArray的增加，Node.js的Buffer类也实现了 Uint8Array 的API。。。</p>
         
     </div>
     </div>
@@ -225,7 +226,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-fs"
+id="post-2020-05-charset-enc-dec"
 class="article article-type-post"
 >
 
@@ -236,11 +237,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-fs.html">Node.js-fs</a>
+        <a href="/article/2020/04/Node-js/2020-05-charset-enc-dec.html">Node.js-charset-enc-dec</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在web服务端开发中，字符的编解码几乎每天都要打交道。编解码一旦处理不当，就会出现令人头疼的乱码问题。</p>
+<p>不少从事node服务端开发的同学，由于对字符编码码相关知识了解不足，遇到问题时，经常会一筹莫展，花大量的时间在排查、解决问题。</p>
+<p>文本先对字符编解码的基础知识进行简单介绍，然后举例说明如何在node中进行编解码，最后是服务端的代码案例。</p>
         
     </div>
     </div>
@@ -272,7 +275,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-cluster"
+id="post-2020-05-asymmetric-enc-dec"
 class="article article-type-post"
 >
 
@@ -283,14 +286,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-cluster.html">Node.js-cluster</a>
+        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-asymmetric-enc-dec</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p>
-<ol>
-<li>cluster模块如何实现端口共享</li>
-<li>cluster模块如何分发请求
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
+<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
         
     </div>
     </div>
@@ -322,7 +323,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-03-深度玩转CSS-marker"
+id="post-2020-05-body-parser"
 class="article article-type-post"
 >
 
@@ -333,70 +334,15 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/03/web%E5%89%8D%E7%AB%AF/2020-03-%E6%B7%B1%E5%BA%A6%E7%8E%A9%E8%BD%ACCSS-marker.html">你不知道的css ::marker用法</a>
+        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-body-parser</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>本文将介绍 CSS 中一个比较有意思的伪元素 <code>::marker</code>，利用它，我们可以让我们的文字序号变得更加的有意思！</p>
-<h2 id="什么是-marker"><a href="#什么是-marker" class="headerlink" title="什么是 ::marker"></a>什么是 ::marker</h2><p>CSS 伪元素 <code>::marker</code> 是从 <a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-lists-3/#marker-pseudo">CSS Pseudo-Elements Level 3</a> 开始新增，<a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-pseudo-4/#marker-pseudo">CSS Pseudo-Elements Level 4</a> 中完善的一个比较新的伪元素，从 Chrome 86+ 开始得到浏览器的支持。</p>
-<p>利用它，我们可以给元素添加一个伪元素，用于生成一个项目符号或者数字。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-03-05T08:50:58.000Z" itemprop="datePublished">2020-03-05</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-美化console-log的文本"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/web%E5%89%8D%E7%AB%AF/2020-01-%E7%BE%8E%E5%8C%96console-log%E7%9A%84%E6%96%87%E6%9C%AC.html">美化console.log的文本</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="美化console-log的文本"><a href="#美化console-log的文本" class="headerlink" title="美化console.log的文本"></a>美化console.log的文本</h2><p>使用非常简单有意思：</p>
-<pre><code>console.log(&quot;%c css88.com&quot;, &quot;font-size:20pt&quot;)
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
+<pre><code class="javascript">app.use(bodyParser.json());
+app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
 </code></pre>
-<p>以%c开头，后面的文字就打印的信息，后面一个参数就是样式属性；</p>
-<p>可以尝试多个样式，每碰到一个%c开头就会应用对应的样式：</p>
-<pre><code>console.log(&quot;%c 前端开发 %c css88.com %c 愚人码头&quot;, &quot;color:red&quot;,&quot;&quot;,&quot;color:orange;font-weight:bold&quot;)
-</code></pre>
+<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
         
     </div>
     </div>
@@ -411,105 +357,7 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2020-01-22T13:27:14.000Z" itemprop="datePublished">2020-01-22</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-你所知道的background-position"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/web%E5%89%8D%E7%AB%AF/2020-01-%E4%BD%A0%E6%89%80%E7%9F%A5%E9%81%93%E7%9A%84background-position.html">你所知道的background-position（转载）</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><code>background</code>属性是<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css3-background/">CSS中最常见的属性之一</a>，它是一个简写属性，其包含<code>background-color</code>、<code>background-image</code>、<code>background-repeat</code>、<code>background-attachment</code>、<code>background-position</code>、<code>background-clip</code>、<code>background-origin</code>和<code>background-size</code>。你可能会说，这些属性再简单不过了，没有可讲的。这篇文章接下来要介绍的不是所有有关于<code>background</code>里面的属性，而是说说<code>background-position</code>属性。在详细介绍<code>background-position</code>之前，先要问大家，你真的了解这个属性吗？言外之意，接下来介绍是你所不了解的<code>background-position</code>相关细节。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-01-20T12:17:43.000Z" itemprop="datePublished">2020-01-20</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-01-socket-io安装失败"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/01/Node-js/2020-01-socket-io%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5.html">Nodejs npm安装socket.io报错解决办法</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p><img src="https://img.oct1a.cn/20181007184029.png"></p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-01-02T05:50:58.000Z" itemprop="datePublished">2020-01-02</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
@@ -517,10 +365,6 @@ class="article article-type-post"
         </div>
     
     
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li></ul>
-        </div>
-    
     </div>
 </footer>
 
@@ -530,7 +374,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2019-11-微信小程序"
+id="post-2020-05-cookie-parser-deep-in"
 class="article article-type-post"
 >
 
@@ -541,11 +385,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2019/11/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/2019-11-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F.html">微信小程序云开发</a>
+        <a href="/article/2020/04/Node-js/2020-05-cookie-parser-deep-in.html">Node.js-cookie-parser-deep-in</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p><img src="https://img.oct1a.cn/20181007144239.png"></p>
+        <h2 id="文章导读"><a href="#文章导读" class="headerlink" title="文章导读"></a>文章导读</h2><p><code>cookie-parser</code>是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。</p>
+<p>它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对<code>Express + cookie-parser</code>的签名、验证机制不了解导致的。</p>
+<p>本文深入讲解<code>Express + cookie-parser</code>的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。</p>
         
     </div>
     </div>
@@ -560,17 +406,13 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2019-11-12T08:10:23.000Z" itemprop="datePublished">2019-11-12</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
         </div>
     
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li></ul>
-        </div>
     
     </div>
 </footer>
@@ -581,7 +423,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2019-11-使用Fiddler抓取移动端App请求"
+id="post-2020-05-cookie"
 class="article article-type-post"
 >
 
@@ -592,16 +434,19 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2019/11/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2019-11-%E4%BD%BF%E7%94%A8Fiddler%E6%8A%93%E5%8F%96%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82.html">【保姆级】教你如何使用Fiddler抓取移动端App请求</a>
+        <a href="/article/2020/04/Node-js/2020-05-cookie.html">Node.js-cookie</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>目录</p>
-<ul>
-<li>  <a href="#1%E3%80%81%E6%8A%93%E5%8F%96Android%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82">1、抓取Android移动端App请求</a></li>
-<li>  <a href="#2%E3%80%81%E6%8A%93%E5%8F%96IOS%E7%A7%BB%E5%8A%A8%E7%AB%AFApp%E8%AF%B7%E6%B1%82">2、抓取IOS移动端App请求</a></li>
-<li>  <a href="#3%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A">3、总结</a></li>
+        <h2 id="入门基础"><a href="#入门基础" class="headerlink" title="入门基础"></a>入门基础</h2><ul>
+<li>domain：cookie属于哪个域，如果不显示声明，则限制只有当前域可以访问。比如当前域名为id.qq.com，那么默认当前域下的cookie <a target="_blank" rel="noopener" href="http://www.qq.com无法访问.如果某个cookie申明domain为qq.com,那么,只要是qq.com域下,都可以访问该cookie./">www.qq.com无法访问。如果某个cookie申明domain为qq.com，那么，只要是qq.com域下，都可以访问该cookie。</a></li>
+<li>path：cookie所属的路径，比如声明path＝/，那么，所有路径下的页面都可以访问该cookie。如果声明cookie所属的path为/test，那么/test/sub-test/下的页面也可以访问该cookie，而/hello下的页面则无法访问该cookie。</li>
+<li>httpOnly：页面的js无法读写该cookie。</li>
+<li>secure：该cookie只能在https环境下使用。</li>
+<li>expires：过期时间</li>
+<li>maxAge：</li>
 </ul>
+
         
     </div>
     </div>
@@ -616,17 +461,164 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2019-11-02T05:50:58.000Z" itemprop="datePublished">2019-11-02</time>
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
 </div>
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
         </div>
     
     
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li></ul>
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-crypto-diffie-hellman"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
+<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
         </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-crypto-theory"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
+<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
+<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
+<ol>
+<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
+<li>对称加密、非对称加密、电子签名</li>
+<li>分组加密模式
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-debugLog"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
     
     </div>
 </footer>
@@ -638,7 +630,7 @@ class="article article-type-post"
 
   
     <nav class="pagination">
-        <a class="extend prev" rel="prev" href="/page/8/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/10/">Next</a>
+        <a class="extend prev" rel="prev" href="/page/8/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/">Next</a>
     </nav>
   
 </div>
@@ -669,7 +661,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/web%E5%89%8D%E7%AB%AF/">web前端</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Auto-js/">Auto.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%89%8D%E7%AB%AF/">web前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E5%AE%83/">其它</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%98%E8%85%BE%E6%89%8B%E6%9C%BA/">折腾手机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/">插件开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/">玩转服务器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">自动化测试</a></li></ul>
     </div>
   </div>
 
@@ -679,7 +671,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWSC/" rel="tag">AWSC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Stuido/" rel="tag">Android Stuido</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Auto-js/" rel="tag">Auto.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/" rel="tag">Canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/" rel="tag">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevTools/" rel="tag">DevTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Esc/" rel="tag">Esc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/G-140W-CS/" rel="tag">G-140W-CS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/" rel="tag">HTML5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/" rel="tag">HTTP状态码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HUAWEI/" rel="tag">HUAWEI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Html/" rel="tag">Html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICP/" rel="tag">ICP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jquery/" rel="tag">Jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/" rel="tag">Koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/" rel="tag">LAMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lodash/" rel="tag">Lodash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MD5/" rel="tag">MD5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MUI/" rel="tag">MUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyInstaller/" rel="tag">PyInstaller</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reg/" rel="tag">Reg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEM/" rel="tag">SEM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL%E8%AF%81%E4%B9%A6/" rel="tag">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scheme/" rel="tag">Scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Selenium/" rel="tag">Selenium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Server/" rel="tag">Server</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TS/" rel="tag">TS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U%E7%9B%98/" rel="tag">U盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCODE/" rel="tag">VSCODE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebSockect/" rel="tag">WebSockect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/" rel="tag">Webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XHTML/" rel="tag">XHTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YOLO/" rel="tag">YOLO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/" rel="tag">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app%E4%B8%8A%E6%9E%B6/" rel="tag">app上架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/axios/" rel="tag">axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/darkflow/" rel="tag">darkflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elecrton/" rel="tag">elecrton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/express/" rel="tag">express</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/font/" rel="tag">font</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pacman/" rel="tag">pacman</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/" rel="tag">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pm2/" rel="tag">pm2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scheme/" rel="tag">scheme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket-io/" rel="tag">socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/" rel="tag">turtle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utools/" rel="tag">utools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows11/" rel="tag">windows11</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordcloud/" rel="tag">wordcloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B4%E6%9C%AB%E6%80%BB%E7%BB%93/" rel="tag">年末总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%93%E5%8C%85/" rel="tag">抓包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%92%E4%BB%B6/" rel="tag">插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/" rel="tag">虚拟主机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%91%97/" rel="tag">软著</a></li></ul>
     </div>
   </div>
 
@@ -692,23 +684,23 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+            <a href="/article/2022/04/uncategorized/2022-01-Redis%E7%AC%94%E8%AE%B0.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+            <a href="/article/2022/03/web%E5%89%8D%E7%AB%AF/2022-03-vue%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8A%A0%E5%AF%86.html">Vue网站数据传输加密</a>
           </li>
         
           <li>
-            <a href="/article/2021/09/web%E5%89%8D%E7%AB%AF/2021-08-Canvas-%E6%A8%A1%E7%B3%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3.html">Canvas绘制模糊问题</a>
+            <a href="/article/2022/02/uncategorized/2021-12-2021.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-image%E5%9B%BE%E7%89%87%E8%BD%ACPDF.html">utools插件开发-图片批量转PDF格式</a>
+            <a href="/article/2022/02/uncategorized/2022-01-%E5%BE%AE%E4%BF%A1%E8%A7%A3%E5%AF%86%E5%9B%9E%E8%B0%83%E9%94%99%E8%AF%AF.html">(no title)</a>
           </li>
         
           <li>
-            <a href="/article/2021/08/%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/2021-08-%E5%90%8C%E4%B9%89%E8%AF%8D%E5%8F%8D%E4%B9%89%E8%AF%8D%E6%8F%92%E4%BB%B6.html">utools插件开发-查询同义词和反义词插件</a>
+            <a href="/article/2022/01/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2022-01-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86.html">服务器反向代理</a>
           </li>
         
       </ul>
@@ -720,7 +712,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li></ul>
     </div>
   </div>
 
@@ -742,7 +734,7 @@ class="article article-type-post"
     <div class="footer-wrap">
         <div class="footer-inner">
             Oct1a &copy;
-                2021<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+                2023<br> Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
                     <br>
                     <img width="15" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif">
                     <img width="15" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
