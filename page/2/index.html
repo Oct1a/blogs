@@ -131,6 +131,95 @@
   
     
       <article
+id="post-2022-01-window解密错误"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2021/10/Node-js/2022-01-window%E8%A7%A3%E5%AF%86%E9%94%99%E8%AF%AF.html">win32_load:could not load the shared library</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <blockquote>
+<p>淦，今天终于把这个问题解决了，之前一直很奇怪的bug，只要在window系统上涉及到加密这一块，总会出现这个问题，例如crypto，微信支付，支付宝支付..google也找不到任何答案，但在部署到linux上就没问题，所以后面操作都是同步到服务器上进行修改，这次又遇到这个问题就想给他解决掉。</p>
+</blockquote>
+<p>错误信息：</p>
+<h1 id="Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library"><a href="#Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library" class="headerlink" title="Error: error:25078067:DSO support routines:win32_load:could not load the shared library"></a>Error: error:25078067:DSO support routines:win32_load:could not load the shared library</h1><pre><code>Error: error:25078067:DSO support routines:win32_load:could not load the shared library
+    at Sign.sign (node:internal/crypto/sig:131:29)
+    at Pay.sha256WithRsa (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:144:71)
+    at Pay.getSignature (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:107:21)
+    at Pay.init (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:198:30)
+    at Pay.&lt;anonymous&gt; (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:332:46)
+    at step (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:44:23)
+    at Object.next (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:25:53)
+    at xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:19:71
+    at new Promise (&lt;anonymous&gt;)
+    at __awaiter (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:15:12) &#123;
+  opensslErrorStack: [
+    &#39;error:0E076071:configuration file routines:module_run:unknown module name&#39;,
+    &#39;error:0E07506E:configuration file routines:module_load_dso:error loading dso&#39;,
+    &#39;error:25070067:DSO support routines:DSO_load:could not load the shared library&#39;
+  ],
+  library: &#39;DSO support routines&#39;,
+  function: &#39;win32_load&#39;,
+  reason: &#39;could not load the shared library&#39;,
+  code: &#39;ERR_OSSL_DSO_COULD_NOT_LOAD_THE_SHARED_LIBRARY&#39;
+&#125;
+</code></pre>
+<h2 id="为何发生错误："><a href="#为何发生错误：" class="headerlink" title="为何发生错误："></a>为何发生错误：</h2><p>因为我早期需要打包密钥文件，从官网下载了openssl的安装包进行安装，但后面没用到了，就扔在那了，也没去卸载</p>
+<p>因为接入的支付宝和微信支付都会用到crypto这个库，这个库会调用系统的openssl进行编译？但我自行安装的可能有点问题或者就是无法版本不对，导致无法调用。</p>
+<p>解决方法：</p>
+<ol>
+<li>如果系统上已经有安装了openssl，如何判断已经有安装？卸载掉，或者删除系统环境变量（找到openssl）</li>
+<li>安装git（一般程序员系统都自带这个了，可忽略）</li>
+<li>添加系统环境变量（Path）<pre><code>git的安装目录\usr\bin 例如：D:\System\Git\usr\bin
+</code></pre>
+测试命令操作符窗口中输入<code>openssl</code>，查看是否可以使用</li>
+</ol>
+<p>这样就可以了，这样我们就是直接调用git自带的openssl，就不用自己手动安装，免得出各种问题。如果也能帮到你的话，记得赏我杯咖啡…</p>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50625283/how-to-install-openssl-in-windows-10">ssl - How to install OpenSSL in windows 10? - Stack Overflow</a></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-06T03:10:58.000Z" itemprop="datePublished">2021-10-06</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
 id="post-2021-10-Nginx笔记"
 class="article article-type-post"
 >
@@ -265,95 +354,6 @@ class="article article-type-post"
     
         <div class="article-tag">
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2022-01-window解密错误"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2021/10/Node-js/2022-01-window%E8%A7%A3%E5%AF%86%E9%94%99%E8%AF%AF.html">win32_load:could not load the shared library</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <blockquote>
-<p>淦，今天终于把这个问题解决了，之前一直很奇怪的bug，只要在window系统上涉及到加密这一块，总会出现这个问题，例如crypto，微信支付，支付宝支付..google也找不到任何答案，但在部署到linux上就没问题，所以后面操作都是同步到服务器上进行修改，这次又遇到这个问题就想给他解决掉。</p>
-</blockquote>
-<p>错误信息：</p>
-<h1 id="Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library"><a href="#Error-error-25078067-DSO-support-routines-win32-load-could-not-load-the-shared-library" class="headerlink" title="Error: error:25078067:DSO support routines:win32_load:could not load the shared library"></a>Error: error:25078067:DSO support routines:win32_load:could not load the shared library</h1><pre><code>Error: error:25078067:DSO support routines:win32_load:could not load the shared library
-    at Sign.sign (node:internal/crypto/sig:131:29)
-    at Pay.sha256WithRsa (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:144:71)
-    at Pay.getSignature (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:107:21)
-    at Pay.init (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:198:30)
-    at Pay.&lt;anonymous&gt; (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:332:46)
-    at step (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:44:23)
-    at Object.next (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:25:53)
-    at xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:19:71
-    at new Promise (&lt;anonymous&gt;)
-    at __awaiter (xxxxxxxx\node_modules\wechatpay-node-v3\dist\index.js:15:12) &#123;
-  opensslErrorStack: [
-    &#39;error:0E076071:configuration file routines:module_run:unknown module name&#39;,
-    &#39;error:0E07506E:configuration file routines:module_load_dso:error loading dso&#39;,
-    &#39;error:25070067:DSO support routines:DSO_load:could not load the shared library&#39;
-  ],
-  library: &#39;DSO support routines&#39;,
-  function: &#39;win32_load&#39;,
-  reason: &#39;could not load the shared library&#39;,
-  code: &#39;ERR_OSSL_DSO_COULD_NOT_LOAD_THE_SHARED_LIBRARY&#39;
-&#125;
-</code></pre>
-<h2 id="为何发生错误："><a href="#为何发生错误：" class="headerlink" title="为何发生错误："></a>为何发生错误：</h2><p>因为我早期需要打包密钥文件，从官网下载了openssl的安装包进行安装，但后面没用到了，就扔在那了，也没去卸载</p>
-<p>因为接入的支付宝和微信支付都会用到crypto这个库，这个库会调用系统的openssl进行编译？但我自行安装的可能有点问题或者就是无法版本不对，导致无法调用。</p>
-<p>解决方法：</p>
-<ol>
-<li>如果系统上已经有安装了openssl，如何判断已经有安装？卸载掉，或者删除系统环境变量（找到openssl）</li>
-<li>安装git（一般程序员系统都自带这个了，可忽略）</li>
-<li>添加系统环境变量（Path）<pre><code>git的安装目录\usr\bin 例如：D:\System\Git\usr\bin
-</code></pre>
-测试命令操作符窗口中输入<code>openssl</code>，查看是否可以使用</li>
-</ol>
-<p>这样就可以了，这样我们就是直接调用git自带的openssl，就不用自己手动安装，免得出各种问题。如果也能帮到你的话，记得赏我杯咖啡…</p>
-<p>参考资料：<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50625283/how-to-install-openssl-in-windows-10">ssl - How to install OpenSSL in windows 10? - Stack Overflow</a></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-10-06T03:10:58.000Z" itemprop="datePublished">2021-10-06</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Crypto/" rel="tag">Crypto</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" rel="tag">微信支付</a></li></ul>
         </div>
     
     </div>
@@ -503,7 +503,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2021-09-dns解析问题"
+id="post-2021-09-更改实例密码导致redis无法启动"
 class="article article-type-post"
 >
 
@@ -514,14 +514,18 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
+        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>之前域名绑定一台测试服务器，但后面没继续续费过期了，需要重新解析新的服务器IP上，本以为就很简单的绑定解析，然后提交百度收录时，发现网页无法打开，习惯性的ping了下域名，发现ip不对，一开始以为是本地没刷新，本地刷新后没有变化，排查了本地的host文件，后来重新ping一次是正常，但很玄学，有时候是解析到新的IP，有时候又是旧的IP，网上是说DNS解析没这么快同步，等了一天左右，还是一样，但使用部分设备访问是可以正常解析的，更改了本地网络的dns，发现正常，所以可以肯定的是因为部分DNS没同步问题，</p>
+        <h2 id="问题源头"><a href="#问题源头" class="headerlink" title="问题源头"></a>问题源头</h2><p>更改了阿里云ECS实例的远程桌面密码后，它会自动重启服务器，重启后发现redis无法启动，手动在任务管理器启动服务时，一直报错：“<strong>服务器上出现1069错误（由于登录失败而无法启动服务）</strong>”，在网上无法找到对应答案，都是说账号密码错了的问题，但当我使用命令直接启动redis是正常的，但就是无法在服务中启动，虽然是解决了问题，但这样每次是无法跟随系统自启动就很郁闷了，在我重新排查了一遍，因为服务是使用宝塔面板安装的，首先先找宝塔面板查看对应配置，发现有个<strong>运行用户</strong>选项，而我在系统中也发现存在该用户，所以知道问题所在了。</p>
+<p>宝塔是有单独新建各种用户来运行服务的，比如mysql,www,redis，所以当我使用<strong>administrator</strong>用户登录时，没有redis用户的配置或者权限，无法启动该服务，解决办法可以把原先服务中的redis删除，重新命令创建即可。但这样后面宝塔面板就感觉容易错乱掉，所以还是得用宝塔面板来解决。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在选项还是redis用户的情况下，直接再次点击切换即可！</p>
 <blockquote>
-<p>47.103.xxx.181 -&gt; 过期服务器<br>120.77.xxx.247 -&gt; 新服务器（需要解析到这个IP)</p>
+<p>貌似原理就是会给redis用户自动再生成密码，重新运行redis</p>
 </blockquote>
+<p><img src="http://img.oct1a.cn/202109231635763.png"></p>
+
         
     </div>
     </div>
@@ -557,7 +561,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2021-09-更改实例密码导致redis无法启动"
+id="post-2021-09-dns解析问题"
 class="article article-type-post"
 >
 
@@ -568,18 +572,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-%E6%9B%B4%E6%94%B9%E5%AE%9E%E4%BE%8B%E5%AF%86%E7%A0%81%E5%AF%BC%E8%87%B4redis%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8.html">更改实例密码导致redis无法启动</a>
+        <a href="/article/2021/09/%E7%8E%A9%E8%BD%AC%E6%9C%8D%E5%8A%A1%E5%99%A8/2021-09-dns%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98.html">域名无法正确解析|DNS解析显示多个|域名解析长时间不生效解决</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="问题源头"><a href="#问题源头" class="headerlink" title="问题源头"></a>问题源头</h2><p>更改了阿里云ECS实例的远程桌面密码后，它会自动重启服务器，重启后发现redis无法启动，手动在任务管理器启动服务时，一直报错：“<strong>服务器上出现1069错误（由于登录失败而无法启动服务）</strong>”，在网上无法找到对应答案，都是说账号密码错了的问题，但当我使用命令直接启动redis是正常的，但就是无法在服务中启动，虽然是解决了问题，但这样每次是无法跟随系统自启动就很郁闷了，在我重新排查了一遍，因为服务是使用宝塔面板安装的，首先先找宝塔面板查看对应配置，发现有个<strong>运行用户</strong>选项，而我在系统中也发现存在该用户，所以知道问题所在了。</p>
-<p>宝塔是有单独新建各种用户来运行服务的，比如mysql,www,redis，所以当我使用<strong>administrator</strong>用户登录时，没有redis用户的配置或者权限，无法启动该服务，解决办法可以把原先服务中的redis删除，重新命令创建即可。但这样后面宝塔面板就感觉容易错乱掉，所以还是得用宝塔面板来解决。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在选项还是redis用户的情况下，直接再次点击切换即可！</p>
+        <h2 id="原因解析"><a href="#原因解析" class="headerlink" title="原因解析"></a>原因解析</h2><p>之前域名绑定一台测试服务器，但后面没继续续费过期了，需要重新解析新的服务器IP上，本以为就很简单的绑定解析，然后提交百度收录时，发现网页无法打开，习惯性的ping了下域名，发现ip不对，一开始以为是本地没刷新，本地刷新后没有变化，排查了本地的host文件，后来重新ping一次是正常，但很玄学，有时候是解析到新的IP，有时候又是旧的IP，网上是说DNS解析没这么快同步，等了一天左右，还是一样，但使用部分设备访问是可以正常解析的，更改了本地网络的dns，发现正常，所以可以肯定的是因为部分DNS没同步问题，</p>
 <blockquote>
-<p>貌似原理就是会给redis用户自动再生成密码，重新运行redis</p>
+<p>47.103.xxx.181 -&gt; 过期服务器<br>120.77.xxx.247 -&gt; 新服务器（需要解析到这个IP)</p>
 </blockquote>
-<p><img src="http://img.oct1a.cn/202109231635763.png"></p>
-
         
     </div>
     </div>

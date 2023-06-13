@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-04-v8"
+id="post-2020-04-dgram"
 class="article article-type-post"
 >
 
@@ -142,11 +142,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-v8.html">Node.js-v8</a>
+        <a href="/article/2020/04/Node-js/2020-04-dgram.html">Node.js-dgram</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="v8-getHeapStatistics"><a href="#v8-getHeapStatistics" class="headerlink" title="v8.getHeapStatistics()"></a>v8.getHeapStatistics()</h2><p>用来获取内存使用情况</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>dgram模块是对UDP socket的一层封装，相对net模块简单很多，下面看例子。</p>
         
     </div>
     </div>
@@ -178,7 +178,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-zlib"
+id="post-2020-04-dns"
 class="article article-type-post"
 >
 
@@ -189,11 +189,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-zlib.html">Node.js-zlib</a>
+        <a href="/article/2020/04/Node-js/2020-04-dns.html">Node.js-dns</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>做过web性能优化的同学，对性能优化大杀器<strong>gzip</strong>应该不陌生。浏览器向服务器发起资源请求，比如下载一个js文件，服务器先对资源进行压缩，再返回给浏览器，以此节省流量，加快访问速度。</p>
+        <h2 id="域名解析：dns-lookup"><a href="#域名解析：dns-lookup" class="headerlink" title="域名解析：dns.lookup()"></a>域名解析：dns.lookup()</h2><p>比如我们要查询域名 <a target="_blank" rel="noopener" href="http://www.qq.com/">www.qq.com</a> 对应的ip，可以通过 dns.lookup() 。</p>
         
     </div>
     </div>
@@ -225,7 +225,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-asymmetric-enc-dec"
+id="post-2020-04-fs"
 class="article article-type-post"
 >
 
@@ -236,12 +236,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-asymmetric-enc-dec.html">Node.js-asymmetric-enc-dec</a>
+        <a href="/article/2020/04/Node-js/2020-04-fs.html">Node.js-fs</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刚回答了SegmentFault上一个兄弟提的问题<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000013016668/a-1020000013017090" title="《非对称解密出错》">《非对称解密出错》</a>。这个属于Node.js在安全上的应用，遇到同样问题的人应该不少，基于回答的问题，这里简单总结下。</p>
-<p>非对称加密的理论知识，可以参考笔者前面的文章<a target="_blank" rel="noopener" href="https://www.chyingp.com/nodejs%E8%BF%9B%E9%98%B6%EF%BC%9Acrypto%E6%A8%A1%E5%9D%97%E4%B9%8B%E7%90%86%E8%AE%BA%E7%AF%87/" title="《NODEJS进阶：CRYPTO模块之理论篇》">《NODEJS进阶：CRYPTO模块之理论篇》</a>。</p>
+        <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2>
         
     </div>
     </div>
@@ -273,7 +272,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-文件系统操作-fs"
+id="post-2020-04-events"
 class="article article-type-post"
 >
 
@@ -284,11 +283,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C-fs.html">Node.js-d</a>
+        <a href="/article/2020/04/Node-js/2020-04-events.html">Node.js-events</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>node 的<code>fs</code>文档密密麻麻的 api 非常多，毕竟全面支持对文件系统的操作。文档组织的很好，操作基本分为文件操作、目录操作、文件信息、流这个大方面，编程方式也支持同步、异步和 Promise。</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>events模块是node的核心模块之一，几乎所有常用的node模块都继承了events模块，比如http、fs等。</p>
+<p>模块本身非常简单，API虽然也不少，但常用的就那么几个，这里举几个简单例子。</p>
         
     </div>
     </div>
@@ -320,7 +320,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-buffer"
+id="post-2020-04-http-client"
 class="article article-type-post"
 >
 
@@ -331,12 +331,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-buffer.html">Node.js-buffer</a>
+        <a href="/article/2020/04/Node-js/2020-04-http-client.html">Node.js-http.client</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>js最初并没有读写二进制的API，Node.js引入了Buffer类，以便开发者能够对二进制数据进行操作，比如网络请求、文件操作等。</p>
-<p>随着ES6规范里TypedArray的增加，Node.js的Buffer类也实现了 Uint8Array 的API。。。</p>
+        <h2 id="ClientRequest概览"><a href="#ClientRequest概览" class="headerlink" title="ClientRequest概览"></a>ClientRequest概览</h2><p>当你调用 http.request(options) 时，会返回 ClientRequest实例，主要用来创建HTTP客户端请求。</p>
+<p>在前面的章节里，已经对http模块的的其他方面进行了不少介绍，如http.Server、http.ServerResponse、http.IncomingMessage。</p>
+<p>有了前面的基础，详细本文不难理解，本文更多的以例子为主。</p>
         
     </div>
     </div>
@@ -368,7 +369,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-body-parser"
+id="post-2020-04-http-req"
 class="article article-type-post"
 >
 
@@ -379,15 +380,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-body-parser.html">Node.js-body-parser</a>
+        <a href="/article/2020/04/Node-js/2020-04-http-req.html">Node.js-http.req</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p><code>body-parser</code>是非常常用的一个<code>express</code>中间件，作用是对http请求体进行解析。使用非常简单，以下两行代码已经覆盖了大部分的使用场景。</p>
-<pre><code class="javascript">app.use(bodyParser.json());
-app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
-</code></pre>
-<p>本文从简单的例子出发，探究<code>body-parser</code>的内部实现。至于<code>body-parser</code>如何使用，感兴趣的同学可以参考<a target="_blank" rel="noopener" href="https://github.com/expressjs/body-parser/">官方文档</a>。</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>本文的重点会放在<code>req</code>这个对象上。前面已经提到，它其实是http.IncomingMessage实例，在服务端、客户端作用略微有差异</p>
+<ul>
+<li>服务端处：获取请求方的相关信息，如request header等。</li>
+<li>客户端处：获取响应方返回的相关信息，如statusCode等。
         
     </div>
     </div>
@@ -419,7 +419,7 @@ app.use(bodyParser.urlencoded(&#123; extended: false &#125;));
   
     
       <article
-id="post-2020-05-charset-enc-dec"
+id="post-2020-04-http"
 class="article article-type-post"
 >
 
@@ -430,13 +430,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-charset-enc-dec.html">Node.js-charset-enc-dec</a>
+        <a href="/article/2020/04/Node-js/2020-04-http.html">Node.js-http</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>在web服务端开发中，字符的编解码几乎每天都要打交道。编解码一旦处理不当，就会出现令人头疼的乱码问题。</p>
-<p>不少从事node服务端开发的同学，由于对字符编码码相关知识了解不足，遇到问题时，经常会一筹莫展，花大量的时间在排查、解决问题。</p>
-<p>文本先对字符编解码的基础知识进行简单介绍，然后举例说明如何在node中进行编解码，最后是服务端的代码案例。</p>
+        <h2 id="http模块概览"><a href="#http模块概览" class="headerlink" title="http模块概览"></a>http模块概览</h2><p>大多数nodejs开发者都是冲着开发web server的目的选择了nodejs。正如官网所展示的，借助http模块，可以几行代码就搞定一个超迷你的web server。</p>
+<p>在nodejs中，<code>http</code>可以说是最核心的模块，同时也是比较复杂的一个模块。上手很简单，但一旦深入学习，不少初学者就会觉得头疼，不知从何入手。</p>
+<p>本文先从一个简单的例子出发，引出<code>http</code>模块最核心的四个实例。看完本文，应该就能够对http模块有个整体的认识。</p>
         
     </div>
     </div>
@@ -468,7 +468,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-cluster"
+id="post-2020-04-http-res"
 class="article article-type-post"
 >
 
@@ -479,14 +479,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-cluster.html">Node.js-cluster</a>
+        <a href="/article/2020/04/Node-js/2020-04-http-res.html">Node.js-http.res</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p>
-<ol>
-<li>cluster模块如何实现端口共享</li>
-<li>cluster模块如何分发请求
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>http模块四剑客之一的<code>res</code>，应该都不陌生了。一个web服务程序，接受到来自客户端的http请求后，向客户端返回正确的响应内容，这就是<code>res</code>的职责。</p>
         
     </div>
     </div>
@@ -518,7 +515,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-cookie-parser-deep-in"
+id="post-2020-04-http-server"
 class="article article-type-post"
 >
 
@@ -529,13 +526,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-cookie-parser-deep-in.html">Node.js-cookie-parser-deep-in</a>
+        <a href="/article/2020/04/Node-js/2020-04-http-server.html">Node.js-http.server</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="文章导读"><a href="#文章导读" class="headerlink" title="文章导读"></a>文章导读</h2><p><code>cookie-parser</code>是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。</p>
-<p>它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对<code>Express + cookie-parser</code>的签名、验证机制不了解导致的。</p>
-<p>本文深入讲解<code>Express + cookie-parser</code>的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。</p>
+        <h2 id="http服务端概览"><a href="#http服务端概览" class="headerlink" title="http服务端概览"></a>http服务端概览</h2>
         
     </div>
     </div>
@@ -567,7 +562,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-cookie"
+id="post-2020-04-https"
 class="article article-type-post"
 >
 
@@ -578,19 +573,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-cookie.html">Node.js-cookie</a>
+        <a href="/article/2020/04/Node-js/2020-04-https.html">Node.js-https</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="入门基础"><a href="#入门基础" class="headerlink" title="入门基础"></a>入门基础</h2><ul>
-<li>domain：cookie属于哪个域，如果不显示声明，则限制只有当前域可以访问。比如当前域名为id.qq.com，那么默认当前域下的cookie <a target="_blank" rel="noopener" href="http://www.qq.com无法访问.如果某个cookie申明domain为qq.com,那么,只要是qq.com域下,都可以访问该cookie./">www.qq.com无法访问。如果某个cookie申明domain为qq.com，那么，只要是qq.com域下，都可以访问该cookie。</a></li>
-<li>path：cookie所属的路径，比如声明path＝/，那么，所有路径下的页面都可以访问该cookie。如果声明cookie所属的path为/test，那么/test/sub-test/下的页面也可以访问该cookie，而/hello下的页面则无法访问该cookie。</li>
-<li>httpOnly：页面的js无法读写该cookie。</li>
-<li>secure：该cookie只能在https环境下使用。</li>
-<li>expires：过期时间</li>
-<li>maxAge：</li>
-</ul>
-
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>这个模块的重要性，基本不用强调了。在网络安全问题日益严峻的今天，网站采用HTTPS是个必然的趋势。</p>
+<p>在nodejs中，提供了 https 这个模块来完成 HTTPS 相关功能。从官方文档来看，跟 http 模块用法非常相似。</p>
         
     </div>
     </div>

@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-05-crypto-diffie-hellman"
+id="post-2020-04-path"
 class="article article-type-post"
 >
 
@@ -142,12 +142,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
+        <a href="/article/2020/04/Node-js/2020-04-path.html">Node.js-path</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
-<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在nodejs中，path是个使用频率很高，但却让人又爱又恨的模块。部分因为文档说的不够清晰，部分因为接口的平台差异性。</p>
+<p>将path的接口按照用途归类，仔细琢磨琢磨，也就没那么费解了。</p>
         
     </div>
     </div>
@@ -179,7 +179,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-crypto-theory"
+id="post-2020-04-net"
 class="article article-type-post"
 >
 
@@ -190,17 +190,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
+        <a href="/article/2020/04/Node-js/2020-04-net.html">Node.js-net</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
-<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
-<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
-<ol>
-<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
-<li>对称加密、非对称加密、电子签名</li>
-<li>分组加密模式
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>net模块是同样是nodejs的核心模块。在http模块概览里提到，http.Server继承了net.Server，此外，http客户端与http服务端的通信均依赖于socket（net.Socket）。也就是说，做node服务端编程，net基本是绕不开的一个模块。</p>
         
     </div>
     </div>
@@ -232,7 +226,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-debug-log"
+id="post-2020-04-process"
 class="article article-type-post"
 >
 
@@ -243,14 +237,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-debug-log.html">Node.js-debug-log</a>
+        <a href="/article/2020/04/Node-js/2020-04-process.html">Node.js-process</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，比如express框架中就用到了。下文简单举几个例子进行说明。</p>
-<blockquote>
-<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
-</blockquote>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>process是node的全局模块，作用比较直观。可以通过它来获得node进程相关的信息，比如运行node程序时的命令行参数。或者设置进程相关信息，比如设置环境变量。</p>
         
     </div>
     </div>
@@ -282,7 +273,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-debugLog"
+id="post-2020-04-readline"
 class="article article-type-post"
 >
 
@@ -293,265 +284,15 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
+        <a href="/article/2020/04/Node-js/2020-04-readline.html">Node.js-readline</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
-<blockquote>
-<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
-</blockquote>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-express-session实现简易身份认证"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-express-session%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.html">Node.js-express+session实现简易身份认证</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-express-session-deep-in"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-express-session-deep-in.html">Node.js-express-session-deep-in</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文先简单介绍session跟cookie的区别与联系，接着深入剖析<code>express-session</code>中间件的实现。关于<code>express-session</code>的基础使用，可参见笔者前面的文章。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-log4js"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-log4js.html">Node.js-log4js</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>对于线上项目用来说，日志是非常重要的一环。log4js是使用得比较多的一个日志组件，经常跟Express一起配合使用。本文从入门实例开始，讲解log4js的使用，以及如何跟Express进行整合。</p>
-<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>输出日志如下，包括日志打印时间、日志级别、日志分类、日志内容。</p>
-<pre><code class="javascript">// started.js
-var log4js = require(&#39;log4js&#39;);
-var logger = log4js.getLogger();
-logger.debug(&#39;hello world&#39;);
-
-// 输出：
-// [2017-02-28 21:28:22.853] [DEBUG] [default] - hello world
-</code></pre>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-node8-napi"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-node8-napi.html">Node.js-node8-napi</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="N-API简介"><a href="#N-API简介" class="headerlink" title="N-API简介"></a>N-API简介</h2><p>Node.js 8.0 在2017年6月份发布，升级的特性中，包含了N-API。编写过或者使用过 node扩展的同学，不少都遇到过升级node版本，node扩展编译失败的情况。因为node扩展严重依赖于V8暴露的API，而node不同版本依赖的V8版本可能不同，一旦升级node版本，原先运行正常的node扩展就编译失败了。</p>
-<p>这种情况对node生态圈无疑是不利的，N-API的引入正是试图改善这种情况的一种尝试。它跟底层JS引擎无关，只要N-API暴露的API足够稳定，那么node扩展的编写者就不用过分担忧node的升级问题。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-05-https"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-https</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>readline是个非常实用的模块。如名字所示，主要用来实现逐行读取，比如读取用户输入，或者读取文件内容。常见使用场景有下面几种，本文会逐一举例说明。</p>
 <ul>
-<li>颁发证书的机构不在操作系统的受信列表里</li>
-<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
-</ul>
-<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
-<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
+<li>文件逐行读取：比如说进行日志分析。</li>
+<li>自动完成：比如输入npm，自动提示”help init install”。</li>
+<li>命令行工具：比如npm init这种问答式的脚手架工具。
         
     </div>
     </div>
@@ -583,7 +324,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-05-stream"
+id="post-2020-04-querystring"
 class="article article-type-post"
 >
 
@@ -594,14 +335,258 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-05-stream.html">Node.js-stream</a>
+        <a href="/article/2020/04/Node-js/2020-04-querystring.html">Node.js-querystring</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>类型：<br>自定义 ReadStream<br>自定义 WriteStream<br>自定义 DuplexStream<br>自定义 TransformStrem</p>
-<p>模式对比：<br>string/buffer<br>object mode</p>
-<p>缓存：(buffering、highWaterMark)</p>
-<p>两种视角：<br>stream使用<br>stream实现</p>
+        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>在nodejs中，提供了<strong>querystring</strong>这个模块，用来做url查询参数的解析，使用非常简单。</p>
+<p>模块总共有四个方法，绝大部分时，我们只会用到 **.parse()**、 **.stringify()**两个方法。剩余的方法，感兴趣的同学可自行查看文档。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-stream"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-stream.html">Node.js-stream</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>nodejs的核心模块，基本上都是stream的的实例，比如process.stdout、http.clientRequest。</p>
+<p>对于大部分的nodejs开发者来说，平常并不会直接用到stream模块，只需要了解stream的运行机制即可（非常重要）。</p>
+<p>而对于想要实现自定义stream实例的开发者来说，就得好好研究stream的扩展API了，比如gulp的内部实现就大量用到了自定义的stream类型。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-stream-readable"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-stream-readable.html">Node.js-stream.readable</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>flowing mode + paused mode</p>
+<p>默认：paused mode（刚创建时）</p>
+<p>paused mode -&gt; flowing mode 几种方式</p>
+<ol>
+<li>添加 stream.on(‘data’, fn) 事件监听</li>
+<li>调用 stream.resume()</li>
+<li>调用 stream.pipe()</li>
+</ol>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-string-decoder"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-string-decoder.html">Node.js-string_decoder</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h2><p><code>string_decoder</code>模块用于将Buffer转成对应的字符串。使用者通过调用<code>stringDecoder.write(buffer)</code>，可以获得buffer对应的字符串。</p>
+<p>它的特殊之处在于，当传入的buffer不完整（比如三个字节的字符，只传入了两个），内部会维护一个internal buffer将不完整的字节cache住，等到使用者再次调用<code>stringDecoder.write(buffer)</code>传入剩余的字节，来拼成完整的字符。</p>
+<p>这样可以有效避免buffer不完整带来的错误，对于很多场景，比如网络请求中的包体解析等，非常有用。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-v8"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-v8.html">Node.js-v8</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="v8-getHeapStatistics"><a href="#v8-getHeapStatistics" class="headerlink" title="v8.getHeapStatistics()"></a>v8.getHeapStatistics()</h2><p>用来获取内存使用情况</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-url"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-url.html">Node.js-url</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>nodejs中，提供了<strong>url</strong>这个非常实用的模块，用来做URL的解析。在做node服务端的开发时会经常用到。使用很简单，总共只有3个方法。</p>
         
     </div>
     </div>

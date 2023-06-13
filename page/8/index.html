@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-04-path"
+id="post-2020-05-图片地址转成datauri"
 class="article article-type-post"
 >
 
@@ -142,12 +142,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-path.html">Node.js-path</a>
+        <a href="/article/2020/04/Node-js/2020-05-%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%88%90datauri.html">Node.js-图片地址转成datauri</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在nodejs中，path是个使用频率很高，但却让人又爱又恨的模块。部分因为文档说的不够清晰，部分因为接口的平台差异性。</p>
-<p>将path的接口按照用途归类，仔细琢磨琢磨，也就没那么费解了。</p>
+        <h2 id="将图片转成datauri"><a href="#将图片转成datauri" class="headerlink" title="将图片转成datauri"></a>将图片转成datauri</h2><p>nodejs读取图片，转成base64,也就是把图片转成对应的datauri,这是个很常用的功能。快速实现了个简单的demo，这里顺便记录一下。</p>
         
     </div>
     </div>
@@ -179,7 +178,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-net"
+id="post-2020-05-日志模块morgan"
 class="article article-type-post"
 >
 
@@ -190,109 +189,18 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-net.html">Node.js-net</a>
+        <a href="/article/2020/04/Node-js/2020-05-%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97morgan.html">Node.js-日志模块morgan</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>net模块是同样是nodejs的核心模块。在http模块概览里提到，http.Server继承了net.Server，此外，http客户端与http服务端的通信均依赖于socket（net.Socket）。也就是说，做node服务端编程，net基本是绕不开的一个模块。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-process"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-process.html">Node.js-process</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>process是node的全局模块，作用比较直观。可以通过它来获得node进程相关的信息，比如运行node程序时的命令行参数。或者设置进程相关信息，比如设置环境变量。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-readline"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-readline.html">Node.js-readline</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>readline是个非常实用的模块。如名字所示，主要用来实现逐行读取，比如读取用户输入，或者读取文件内容。常见使用场景有下面几种，本文会逐一举例说明。</p>
+        <h2 id="章节概览"><a href="#章节概览" class="headerlink" title="章节概览"></a>章节概览</h2><p>morgan是express默认的日志中间件，也可以脱离express，作为node.js的日志组件单独使用。本文由浅入深，内容主要包括：</p>
 <ul>
-<li>文件逐行读取：比如说进行日志分析。</li>
-<li>自动完成：比如输入npm，自动提示”help init install”。</li>
-<li>命令行工具：比如npm init这种问答式的脚手架工具。
+<li>morgan使用入门例子</li>
+<li>如何将日志保存到本地文件</li>
+<li>核心API使用说明及例子</li>
+<li>进阶使用：1、日志分割 2、将日志写入数据库</li>
+<li>源码剖析：morgan的日志格式以及预编译</li>
+</ul>
         
     </div>
     </div>
@@ -324,7 +232,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-querystring"
+id="post-2020-05-文件上传-multer"
 class="article article-type-post"
 >
 
@@ -335,12 +243,18 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-querystring.html">Node.js-querystring</a>
+        <a href="/article/2020/04/Node-js/2020-05-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-multer.html">Node.js-文件上传-multer</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>在nodejs中，提供了<strong>querystring</strong>这个模块，用来做url查询参数的解析，使用非常简单。</p>
-<p>模块总共有四个方法，绝大部分时，我们只会用到 **.parse()**、 **.stringify()**两个方法。剩余的方法，感兴趣的同学可自行查看文档。</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>图片上传是web开发中经常用到的功能，node社区在这方面也有了相对完善的支持。</p>
+<p>常用的开源组件有<strong>multer</strong>、<strong>formidable</strong>等，借助这两个开源组件，可以轻松搞定图片上传。</p>
+<p>本文主要讲解以下内容，后续章节会对技术实现细节进行深入挖掘。本文所有例子均有代码示例，可在<a href="../examples/2016.11.07-advanced-express-multer/">这里</a>查看。</p>
+<ul>
+<li>基础例子：借助express、multer实现单图、多图上传。</li>
+<li>常用API：获取上传的图片的信息。</li>
+<li>进阶使用：自定义保存的图片路径、名称。</li>
+</ul>
         
     </div>
     </div>
@@ -372,7 +286,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-stream"
+id="post-2020-04-buffer"
 class="article article-type-post"
 >
 
@@ -383,13 +297,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-stream.html">Node.js-stream</a>
+        <a href="/article/2020/04/Node-js/2020-04-buffer.html">Node.js-buffer</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>nodejs的核心模块，基本上都是stream的的实例，比如process.stdout、http.clientRequest。</p>
-<p>对于大部分的nodejs开发者来说，平常并不会直接用到stream模块，只需要了解stream的运行机制即可（非常重要）。</p>
-<p>而对于想要实现自定义stream实例的开发者来说，就得好好研究stream的扩展API了，比如gulp的内部实现就大量用到了自定义的stream类型。</p>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>Buffer是node的核心模块，开发者可以利用它来处理二进制数据，比如文件流的读写、网络请求数据的处理等。</p>
+<p>Buffer的API非常多，本文仅挑选 比较常用/容易理解 的API进行讲解，包括Buffer实例的创建、比较、连接、拷贝、查找、遍历、类型转换、截取、编码转换等。</p>
         
     </div>
     </div>
@@ -421,7 +334,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-string-decoder"
+id="post-2020-04-crypto"
 class="article article-type-post"
 >
 
@@ -432,13 +345,13 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-string-decoder.html">Node.js-string_decoder</a>
+        <a href="/article/2020/04/Node-js/2020-04-crypto.html">Node.js-crypto</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h2><p><code>string_decoder</code>模块用于将Buffer转成对应的字符串。使用者通过调用<code>stringDecoder.write(buffer)</code>，可以获得buffer对应的字符串。</p>
-<p>它的特殊之处在于，当传入的buffer不完整（比如三个字节的字符，只传入了两个），内部会维护一个internal buffer将不完整的字节cache住，等到使用者再次调用<code>stringDecoder.write(buffer)</code>传入剩余的字节，来拼成完整的字符。</p>
-<p>这样可以有效避免buffer不完整带来的错误，对于很多场景，比如网络请求中的包体解析等，非常有用。</p>
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本章节写得差不多了，不过还需要再整理一下（TODO）。</p>
+<h2 id="hash例子"><a href="#hash例子" class="headerlink" title="hash例子"></a>hash例子</h2><p>hash.digest([encoding])：计算摘要。encoding可以是<code>hex</code>、<code>latin1</code>或者<code>base64</code>。如果声明了encoding，那么返回字符串。否则，返回Buffer实例。注意，调用hash.digest()后，hash对象就作废了，再次调用就会出错。</p>
+<p>hash.update(data[, input_encoding])：input_encoding可以是<code>utf8</code>、<code>ascii</code>或者<code>latin1</code>。如果data是字符串，且没有指定 input_encoding，则默认是<code>utf8</code>。注意，hash.update()方法可以调用多次。</p>
         
     </div>
     </div>
@@ -470,7 +383,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-stream-readable"
+id="post-2020-04-child-process"
 class="article article-type-post"
 >
 
@@ -481,18 +394,11 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-stream-readable.html">Node.js-stream.readable</a>
+        <a href="/article/2020/04/Node-js/2020-04-child-process.html">Node.js-child_process</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>flowing mode + paused mode</p>
-<p>默认：paused mode（刚创建时）</p>
-<p>paused mode -&gt; flowing mode 几种方式</p>
-<ol>
-<li>添加 stream.on(‘data’, fn) 事件监听</li>
-<li>调用 stream.resume()</li>
-<li>调用 stream.pipe()</li>
-</ol>
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>在node中，child_process这个模块非常重要。掌握了它，等于在node的世界开启了一扇新的大门。</p>
         
     </div>
     </div>
@@ -524,7 +430,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-url"
+id="post-2020-04-crypto-md5"
 class="article article-type-post"
 >
 
@@ -535,11 +441,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-url.html">Node.js-url</a>
+        <a href="/article/2020/04/Node-js/2020-04-crypto-md5.html">Node.js-crypto.md5</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概述"><a href="#模块概述" class="headerlink" title="模块概述"></a>模块概述</h2><p>nodejs中，提供了<strong>url</strong>这个非常实用的模块，用来做URL的解析。在做node服务端的开发时会经常用到。使用很简单，总共只有3个方法。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>MD5（Message-Digest Algorithm）是计算机安全领域广泛使用的散列函数（又称哈希算法、摘要算法），主要用来确保消息的完整和一致性。常见的应用场景有密码保护、下载文件校验等。</p>
+<p>本文先对MD5的特点与应用进行简要概述，接着重点介绍MD5在密码保护场景下的应用，最后通过例子对MD5碰撞进行简单介绍。</p>
         
     </div>
     </div>
@@ -571,7 +478,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-util"
+id="post-2020-04-cluster"
 class="article article-type-post"
 >
 
@@ -582,11 +489,106 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-util.html">Node.js-util</a>
+        <a href="/article/2020/04/Node-js/2020-04-cluster.html">Node.js-cluster</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="debuglog-section"><a href="#debuglog-section" class="headerlink" title="debuglog(section)"></a>debuglog(section)</h2><p>很有用的调试方法。可以通过 util.debuglog(name) 来创建一个调试fn，这个fn的特点是，只有在运行程序时候，声明环境变量NODE_DEBUG=name，才会打印出调试信息。</p>
+        <h2 id="cluster模块概览"><a href="#cluster模块概览" class="headerlink" title="cluster模块概览"></a>cluster模块概览</h2><p>node实例是单线程作业的。在服务端编程中，通常会创建多个node实例来处理客户端的请求，以此提升系统的吞吐率。对这样多个node实例，我们称之为cluster（集群）。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-console"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-console.html">Node.js-console</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>console模块提供了基础的调试功能。使用很简单，常用的API主要有 console.log()、console.error()。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-04-debug"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-04-debug.html">Node.js-debug</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>谈到node断点调试，目前主要有三种方式，通过<code>node内置调试工具</code>、<code>通过IDE（如vscode）</code>、<code>通过node-inspector</code>，三者本质上差不多。本文着重点在于介绍 <strong>如何在本地通过node-inspector 调试远程服务器上的node代码</strong>。</p>
+<p>在进入主题之前，首先会对三种调试方式进行入门讲解，方便新手理解后面的内容。至于老司机们，可以直接跳到主题去。</p>
         
     </div>
     </div>

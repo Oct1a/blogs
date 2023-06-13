@@ -131,7 +131,7 @@
   
     
       <article
-id="post-2020-04-dgram"
+id="post-2020-05-crypto-theory"
 class="article article-type-post"
 >
 
@@ -142,11 +142,17 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-dgram.html">Node.js-dgram</a>
+        <a href="/article/2020/04/Node-js/2020-05-crypto-theory.html">Node.js进阶-crypto模块之理论篇</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>dgram模块是对UDP socket的一层封装，相对net模块简单很多，下面看例子。</p>
+        <h2 id="一、-文章概述"><a href="#一、-文章概述" class="headerlink" title="一、 文章概述"></a>一、 文章概述</h2><p>互联网时代，网络上的数据量每天都在以惊人的速度增长。同时，各类网络安全问题层出不穷。在信息安全重要性日益凸显的今天，作为一名开发者，需要加强对安全的认识，并通过技术手段增强服务的安全性。</p>
+<p><code>crypto</code>模块是nodejs的核心模块之一，它提供了安全相关的功能，如摘要运算、加密、电子签名等。很多初学者对着长长的API列表，不知如何上手，因此它背后涉及了大量安全领域的知识。</p>
+<p>本文重点讲解API背后的理论知识，主要包括如下内容：</p>
+<ol>
+<li>摘要（hash）、基于摘要的消息验证码（HMAC）</li>
+<li>对称加密、非对称加密、电子签名</li>
+<li>分组加密模式
         
     </div>
     </div>
@@ -178,7 +184,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-dns"
+id="post-2020-05-crypto-diffie-hellman"
 class="article article-type-post"
 >
 
@@ -189,11 +195,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-dns.html">Node.js-dns</a>
+        <a href="/article/2020/04/Node-js/2020-05-crypto-diffie-hellman.html">Node.js-crypto-diffie-hellman</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="域名解析：dns-lookup"><a href="#域名解析：dns-lookup" class="headerlink" title="域名解析：dns.lookup()"></a>域名解析：dns.lookup()</h2><p>比如我们要查询域名 <a target="_blank" rel="noopener" href="http://www.qq.com/">www.qq.com</a> 对应的ip，可以通过 dns.lookup() 。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Diffie-Hellman（简称DH）是密钥交换算法之一，它的作用是保证通信双方在非安全的信道中安全地交换密钥。目前DH最重要的应用场景之一，就是在HTTPS的握手阶段，客户端、服务端利用DH算法交换对称密钥。</p>
+<p>下面会先简单介绍DH的数理基础，然后举例说明如何在nodejs中使用DH相关的API。</p>
         
     </div>
     </div>
@@ -225,7 +232,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-fs"
+id="post-2020-05-debug-log"
 class="article article-type-post"
 >
 
@@ -236,11 +243,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-fs.html">Node.js-fs</a>
+        <a href="/article/2020/04/Node-js/2020-05-debug-log.html">Node.js-debug-log</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，比如express框架中就用到了。下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
         
     </div>
     </div>
@@ -272,7 +282,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-events"
+id="post-2020-05-debugLog"
 class="article article-type-post"
 >
 
@@ -283,12 +293,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-events.html">Node.js-events</a>
+        <a href="/article/2020/04/Node-js/2020-05-debugLog.html">Node.js-debugLog</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>events模块是node的核心模块之一，几乎所有常用的node模块都继承了events模块，比如http、fs等。</p>
-<p>模块本身非常简单，API虽然也不少，但常用的就那么几个，这里举几个简单例子。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在node程序开发中时，经常需要打印调试日志。用的比较多的是debug模块，下文简单举几个例子进行说明。</p>
+<blockquote>
+<p>备注：node在0.11.3版本也加入了util.debuglog()用于打印调试日志，使用方法跟debug模块大同小异。</p>
+</blockquote>
         
     </div>
     </div>
@@ -320,7 +332,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http-req"
+id="post-2020-05-express-session实现简易身份认证"
 class="article article-type-post"
 >
 
@@ -331,14 +343,111 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-req.html">Node.js-http.req</a>
+        <a href="/article/2020/04/Node-js/2020-05-express-session%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81.html">Node.js-express+session实现简易身份认证</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>本文的重点会放在<code>req</code>这个对象上。前面已经提到，它其实是http.IncomingMessage实例，在服务端、客户端作用略微有差异</p>
+        <h2 id="文档概览"><a href="#文档概览" class="headerlink" title="文档概览"></a>文档概览</h2><p>本文基于express、express-session实现了简易的登录/登出功能。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-express-session-deep-in"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-express-session-deep-in.html">Node.js-express-session-deep-in</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>本文先简单介绍session跟cookie的区别与联系，接着深入剖析<code>express-session</code>中间件的实现。关于<code>express-session</code>的基础使用，可参见笔者前面的文章。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+        </div>
+    
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-2020-05-https"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/article/2020/04/Node-js/2020-05-https.html">Node.js-https</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="客户端例子：不受信任的证书"><a href="#客户端例子：不受信任的证书" class="headerlink" title="客户端例子：不受信任的证书"></a>客户端例子：不受信任的证书</h2><p>我们知道，有些网站的HTTPS证书会被浏览器标识为不受信任，有可能是以下情况导致的：</p>
 <ul>
-<li>服务端处：获取请求方的相关信息，如request header等。</li>
-<li>客户端处：获取响应方返回的相关信息，如statusCode等。
+<li>颁发证书的机构不在操作系统的受信列表里</li>
+<li>办法证书的机构在操作系统的受信列表里，但证书的安全级别不够</li>
+</ul>
+<p>比如我们访问<a target="_blank" rel="noopener" href="https://kyfw.12306.cn/otn/regist/init">12306</a>，chrome就会提示你“您的连接不是私密连接，攻击者可能会试图从kyfw.12306.cn窃取您的信息”。</p>
+<p>那么，当我们用node向12306发起请求时，又会是什么状况呢？下面就来试下</p>
         
     </div>
     </div>
@@ -370,7 +479,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http"
+id="post-2020-05-log4js"
 class="article article-type-post"
 >
 
@@ -381,13 +490,20 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http.html">Node.js-http</a>
+        <a href="/article/2020/04/Node-js/2020-05-log4js.html">Node.js-log4js</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="http模块概览"><a href="#http模块概览" class="headerlink" title="http模块概览"></a>http模块概览</h2><p>大多数nodejs开发者都是冲着开发web server的目的选择了nodejs。正如官网所展示的，借助http模块，可以几行代码就搞定一个超迷你的web server。</p>
-<p>在nodejs中，<code>http</code>可以说是最核心的模块，同时也是比较复杂的一个模块。上手很简单，但一旦深入学习，不少初学者就会觉得头疼，不知从何入手。</p>
-<p>本文先从一个简单的例子出发，引出<code>http</code>模块最核心的四个实例。看完本文，应该就能够对http模块有个整体的认识。</p>
+        <p>对于线上项目用来说，日志是非常重要的一环。log4js是使用得比较多的一个日志组件，经常跟Express一起配合使用。本文从入门实例开始，讲解log4js的使用，以及如何跟Express进行整合。</p>
+<h2 id="入门例子"><a href="#入门例子" class="headerlink" title="入门例子"></a>入门例子</h2><p>输出日志如下，包括日志打印时间、日志级别、日志分类、日志内容。</p>
+<pre><code class="javascript">// started.js
+var log4js = require(&#39;log4js&#39;);
+var logger = log4js.getLogger();
+logger.debug(&#39;hello world&#39;);
+
+// 输出：
+// [2017-02-28 21:28:22.853] [DEBUG] [default] - hello world
+</code></pre>
         
     </div>
     </div>
@@ -419,7 +535,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http-client"
+id="post-2020-05-stream"
 class="article article-type-post"
 >
 
@@ -430,13 +546,14 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-client.html">Node.js-http.client</a>
+        <a href="/article/2020/04/Node-js/2020-05-stream.html">Node.js-stream</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="ClientRequest概览"><a href="#ClientRequest概览" class="headerlink" title="ClientRequest概览"></a>ClientRequest概览</h2><p>当你调用 http.request(options) 时，会返回 ClientRequest实例，主要用来创建HTTP客户端请求。</p>
-<p>在前面的章节里，已经对http模块的的其他方面进行了不少介绍，如http.Server、http.ServerResponse、http.IncomingMessage。</p>
-<p>有了前面的基础，详细本文不难理解，本文更多的以例子为主。</p>
+        <p>类型：<br>自定义 ReadStream<br>自定义 WriteStream<br>自定义 DuplexStream<br>自定义 TransformStrem</p>
+<p>模式对比：<br>string/buffer<br>object mode</p>
+<p>缓存：(buffering、highWaterMark)</p>
+<p>两种视角：<br>stream使用<br>stream实现</p>
         
     </div>
     </div>
@@ -468,7 +585,7 @@ class="article article-type-post"
   
     
       <article
-id="post-2020-04-http-server"
+id="post-2020-05-node8-napi"
 class="article article-type-post"
 >
 
@@ -479,106 +596,12 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-server.html">Node.js-http.server</a>
+        <a href="/article/2020/04/Node-js/2020-05-node8-napi.html">Node.js-node8-napi</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h2 id="http服务端概览"><a href="#http服务端概览" class="headerlink" title="http服务端概览"></a>http服务端概览</h2>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-http-res"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-http-res.html">Node.js-http.res</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>http模块四剑客之一的<code>res</code>，应该都不陌生了。一个web服务程序，接受到来自客户端的http请求后，向客户端返回正确的响应内容，这就是<code>res</code>的职责。</p>
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2020-04-02T05:50:58.000Z" itemprop="datePublished">2020-04-02</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
-        </div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-2020-04-https"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/article/2020/04/Node-js/2020-04-https.html">Node.js-https</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <h2 id="模块概览"><a href="#模块概览" class="headerlink" title="模块概览"></a>模块概览</h2><p>这个模块的重要性，基本不用强调了。在网络安全问题日益严峻的今天，网站采用HTTPS是个必然的趋势。</p>
-<p>在nodejs中，提供了 https 这个模块来完成 HTTPS 相关功能。从官方文档来看，跟 http 模块用法非常相似。</p>
+        <h2 id="N-API简介"><a href="#N-API简介" class="headerlink" title="N-API简介"></a>N-API简介</h2><p>Node.js 8.0 在2017年6月份发布，升级的特性中，包含了N-API。编写过或者使用过 node扩展的同学，不少都遇到过升级node版本，node扩展编译失败的情况。因为node扩展严重依赖于V8暴露的API，而node不同版本依赖的V8版本可能不同，一旦升级node版本，原先运行正常的node扩展就编译失败了。</p>
+<p>这种情况对node生态圈无疑是不利的，N-API的引入正是试图改善这种情况的一种尝试。它跟底层JS引擎无关，只要N-API暴露的API足够稳定，那么node扩展的编写者就不用过分担忧node的升级问题。</p>
         
     </div>
     </div>
